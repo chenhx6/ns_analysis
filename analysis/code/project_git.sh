@@ -11,7 +11,9 @@ else
         "${project_git[@]}" symbolic-ref HEAD refs/heads/main
     fi
 fi
-"${project_git[@]}" config core.hooksPath "$project_root/.githooks"
+if [[ "$("${project_git[@]}" config --get core.hooksPath || true)" != "$project_root/.githooks" ]]; then
+    "${project_git[@]}" config core.hooksPath "$project_root/.githooks"
+fi
 if ! "${project_git[@]}" remote get-url origin >/dev/null 2>&1; then
     "${project_git[@]}" remote add origin https://gitee.com/chx6/ns_analysis.git
 fi
