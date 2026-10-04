@@ -24,3 +24,9 @@
 ## 远端状态
 
 首次配置时受限环境无法解析 `gitee.com`。用户要求重试后，通过获准的网络访问成功执行 `ls-remote --symref origin HEAD refs/heads/*`，确认远端当前无分支和提交，首次同步目标为 `main`。后续同步仍需先获取并核对远端历史，再正常推送。
+
+## 项目技能与工具扩展
+
+按用户指定读取七个仓库，完整安装 Ponytail、shuorenhua、humanizer、Nature 的全部技能单元及 Crawl4AI 全部 extras，并用 OMX 原生源码执行 project setup。技能总计 62 个入口：57 个上游技能、既有数据分析技能、4 个项目适配入口。OMX 原生角色、提示词、hooks、MCP 与四个原生组件已安装；Python、Chromium、Mermaid/Puppeteer 和 LibreOffice 保存在项目内。
+
+固定来源、许可证、恢复脚本和运行限制见 `analysis/third_party/INSTALL.md`。13 项安装及离线运行验收通过，证据在 `analysis/third_party/verification.json`。独立 Codex CLI 尚未登录，模型调用与真实 Team 运行不属于本次已通过的检查。

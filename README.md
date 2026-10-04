@@ -2,6 +2,10 @@
 
 本目录存放项目工作文件和处理后的数据。原始数据读取自同级的 `Ge/`、`CsI/`；同级 `software/` 属于他人，保持不操作。
 
+已安装项目内 Ponytail、中英文说人话、Nature 全量技能、Crawl4AI 全部 Python extras，以及 OMX 原生 CLI、角色、提示词和 hooks。详细版本、调用方式与恢复步骤见 [安装说明](analysis/third_party/INSTALL.md)。运行环境与浏览器保存在本地 `.runtime/`，源代码、完整技能和配置随仓库同步。
+
+This product includes software developed by UncleCode (https://x.com/unclecode) as part of the Crawl4AI project (https://github.com/unclecode/crawl4ai).
+
 | 路径 | 用途 | Git 同步 |
 | --- | --- | --- |
 | `../Ge/`、`../CsI/` | 只读原始数据 | 否 |
@@ -13,7 +17,7 @@
 | `.githooks/`、`.codex/` | Git hooks、项目配置（排除本地状态和凭据） | 是 |
 | `.project-git/` | `.git` 不可写时的本地 Git 元数据 | 否 |
 
-具体规则见 [AGENTS.md](AGENTS.md)，实验记录见 [analysis/record_analysis.md](analysis/record_analysis.md)。项目技能位于 [skills/chx-data-analysis/SKILL.md](skills/chx-data-analysis/SKILL.md)，在当前环境中由项目约定指引读取；这不等同于已安装到全局技能目录。
+具体规则见 [AGENTS.md](AGENTS.md)，实验记录见 [analysis/record_analysis.md](analysis/record_analysis.md)。项目技能的可读副本位于 `skills/`，原生发现入口为项目 `.agents/skills/`，OMX 兼容目录为 `.codex/skills/`。安装没有写入全局技能目录。
 
 ## Git 使用
 

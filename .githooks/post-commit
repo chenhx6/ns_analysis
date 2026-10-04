@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+project_root=$(git rev-parse --show-toplevel)
+python3 "$project_root/analysis/code/task_delivery.py" finalize

@@ -22,7 +22,7 @@ if [[ $# -eq 0 ]]; then
 fi
 # 某些数据盘不支持执行权限。用临时副本执行 hooks，源文件仍随项目版本化。
 project_hooks=$(mktemp -d "${TMPDIR:-/tmp}/chx-git-hooks.XXXXXXXX")
-trap 'rm -f -- "$project_hooks/pre-commit" "$project_hooks/pre-push"; rmdir -- "$project_hooks"' EXIT
-cp -- "$project_root/.githooks/pre-commit" "$project_root/.githooks/pre-push" "$project_hooks/"
-chmod 700 "$project_hooks/pre-commit" "$project_hooks/pre-push"
+trap 'rm -f -- "$project_hooks/pre-commit" "$project_hooks/pre-push" "$project_hooks/post-commit"; rmdir -- "$project_hooks"' EXIT
+cp -- "$project_root/.githooks/pre-commit" "$project_root/.githooks/pre-push" "$project_root/.githooks/post-commit" "$project_hooks/"
+chmod 700 "$project_hooks/pre-commit" "$project_hooks/pre-push" "$project_hooks/post-commit"
 "${project_git[@]}" -c core.hooksPath="$project_hooks" "$@"

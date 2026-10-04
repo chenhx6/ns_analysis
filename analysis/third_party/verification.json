@@ -1,0 +1,169 @@
+{
+  "status": "passed",
+  "scope": "Complete source installation and offline runtime verification",
+  "limitations": [
+    "Independent Codex CLI is not authenticated; no model API call or live Team run performed.",
+    "Host must load and trust project hooks in a new session.",
+    "External Nature providers and model weights require task-specific credentials/downloads."
+  ],
+  "checks": [
+    {
+      "name": "Complete upstream skill resources and native discovery copies",
+      "returncode": 0,
+      "output": [],
+      "upstream_skills": 57,
+      "native_discovered": 62
+    },
+    {
+      "name": "Local tool scripts compile with system Python",
+      "returncode": 0
+    },
+    {
+      "name": "Crawl4AI extras and Nature Python runtime",
+      "returncode": 0,
+      "command": [
+        "python3",
+        "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
+        "python",
+        "-c",
+        "import importlib.metadata as m\nimport crawl4ai, torch, sentence_transformers, selenium, pypdf, pymupdf, pypdfium2\nimport matplotlib, pandas, seaborn, statsmodels, openpyxl, reportlab, docx, pptx, mcp\nprint('Full Crawl4AI extras and Nature Python dependencies import successfully')\nprint('crawl4ai',m.version('crawl4ai'),'torch',torch.__version__)\n"
+      ],
+      "output": "Full Crawl4AI extras and Nature Python dependencies import successfully\ncrawl4ai 0.9.4 torch 2.9.0+cpu\n"
+    },
+    {
+      "name": "Two real Chromium crawler modes on local HTML",
+      "returncode": 0,
+      "command": [
+        "python3",
+        "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
+        "python",
+        "-c",
+        "import asyncio\nfrom crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode, UndetectedAdapter\nfrom crawl4ai.async_crawler_strategy import AsyncPlaywrightCrawlerStrategy\nasync def main():\n for undetected in [False,True]:\n  config=BrowserConfig(headless=True,verbose=False)\n  strategy=AsyncPlaywrightCrawlerStrategy(browser_config=config,browser_adapter=UndetectedAdapter()) if undetected else None\n  async with AsyncWebCrawler(config=config,crawler_strategy=strategy) as crawler:\n   result=await crawler.arun(url='raw:<html><head><title>Installation check</title></head><body><h1>CHX crawler ready</h1><p>Local verification.</p></body></html>',config=CrawlerRunConfig(cache_mode=CacheMode.BYPASS))\n   assert result.success,result.error_message\n   assert 'CHX crawler ready' in str(result.markdown),str(result.markdown)\n   print('Browser extraction OK:', 'patchright' if undetected else 'playwright')\nasyncio.run(main())\n"
+      ],
+      "output": "Browser extraction OK: playwright\nBrowser extraction OK: patchright\n[FETCH]... ↓ Raw HTML                                                                                             | ✓ | ⏱: 0.00s \n[SCRAPE].. ◆ Raw HTML                                                                                             | ✓ | ⏱: 0.01s \n[COMPLETE] ● Raw HTML                                                                                             | ✓ | ⏱: 0.01s \n[FETCH]... ↓ Raw HTML                                                                                             | ✓ | ⏱: 0.00s \n[SCRAPE].. ◆ Raw HTML                                                                                             | ✓ | ⏱: 0.00s \n[COMPLETE] ● Raw HTML                                                                                             | ✓ | ⏱: 0.00s \n"
+    },
+    {
+      "name": "OMX installation shape; CLI authentication checked separately",
+      "returncode": 0,
+      "command": [
+        "python3",
+        "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
+        "omx",
+        "doctor"
+      ],
+      "output": "oh-my-codex doctor\n==================\n\nResolved setup scope: project (from .omx/setup-scope.json)\nResolved setup MCP mode: compat (from .omx/setup-scope.json)\n\n  [OK] Codex CLI: installed (codex-cli 0.160.0)\n  [OK] Node.js: v24.21.0\n  [OK] Explore Harness: OMX_EXPLORE_BIN configured (/tmp/chx-runtime-1000-7c3dcfaa578c5882/omx-native/omx-explore-harness)\n  [OK] Codex home: /home/ys/data_401/data/chx_20260622/.codex\n  [OK] Config: config.toml has OMX entries\n  [OK] Native hooks: hooks.json includes OMX-managed coverage for all native hook events; valid foreign hooks will be preserved\n  [OK] Native hook dist smoke: installed dist/scripts/codex-native-hook.js parsed and accepted a minimal UserPromptSubmit payload\n  [OK] Explore routing: deprecated compatibility routing disabled in config.toml (recommended)\n  [OK] Lore commit guard: disabled by default\n  [OK] Prompts: 32 agent prompts installed\n  [OK] Skills: 62 skills installed\n  [OK] Spark routing: lanes: frontier=`gpt-6-astra`, standard=`gpt-6-astra`, spark=`gpt-6-astra` (source: built-in default); Spark-lane native agent(s) wired: explore -> `gpt-6-astra`. If Spark quota is still unused, the leader may not be delegating read-only lookups to the Spark lane, or the Codex usage view may lag.\n  [OK] AGENTS.md: found OMX contract in project root\n  [OK] State dir: /home/ys/data_401/data/chx_20260622/.omx/state\n  [!!] State root/session binding: src=cwd-default ptr=absent; runtime binding unavailable: inherited CODEX_SESSION_ID has no OMX session pointer; no runtime authority verified\n  [OK] Repo artifact ownership: repo-local .omx/.beads artifacts are writable by the current user\n  [XX] Credential provenance: no readable auth.json in the default Codex home; project-scope launches will run unauthenticated — log in with `codex login` or `omx auth`\n  [OK] MCP Servers: 6 servers configured; first-party OMX MCP compatibility is explicitly present\n  [OK] Prompt triage: config: enabled (default)\n\nResults: 17 passed, 1 warnings, 1 failed\n\nReview failed checks above. Follow the check-specific recovery guidance; inspect invalid or ambiguous hook documents manually because doctor will not modify them.\n"
+    },
+    {
+      "name": "Six MCP servers initialize and list tools",
+      "returncode": 0,
+      "command": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {Client} from './analysis/vendor/oh-my-codex/node_modules/@modelcontextprotocol/sdk/dist/esm/client/index.js';\nimport {StdioClientTransport} from './analysis/vendor/oh-my-codex/node_modules/@modelcontextprotocol/sdk/dist/esm/client/stdio.js';\nfor (const name of ['state','memory','code-intel','trace','wiki','hermes']) {\n const transport=new StdioClientTransport({command:process.execPath,args:[process.cwd()+'/analysis/vendor/oh-my-codex/dist/mcp/'+name+'-server.js'],env:{...process.env},stderr:'pipe'});\n const client=new Client({name:'chx-install-verification',version:'1.0.0'});\n try { await client.connect(transport); const tools=await client.listTools(); if(!tools.tools.length)throw Error('Empty tools: '+name); console.log(name+': '+tools.tools.length+' MCP tools'); }\n finally { await client.close(); }\n}\n"
+      ],
+      "output": "state: 3 MCP tools\nmemory: 10 MCP tools\ncode-intel: 9 MCP tools\ntrace: 2 MCP tools\nwiki: 8 MCP tools\nhermes: 11 MCP tools\n"
+    },
+    {
+      "name": "Ponytail SessionStart hook emits instructions with project state",
+      "returncode": 0,
+      "command": [
+        "node",
+        "/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail/hooks/ponytail-activate.js"
+      ],
+      "output": "{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"PONYTAIL MODE ACTIVE — level: full\\n\\n# Ponytail\\n\\nYou are a lazy senior developer. Lazy means efficient, not careless. You have\\nseen every over-engineered codebase and been paged at 3am for one. The best\\ncode is the code never written.\\n\\n## Persistence\\n\\nACTIVE EVERY RESPONSE. No drift back to over-building. Still active if\\nunsure. Off only: \\\"stop ponytail\\\" / \\\"normal mode\\\". Default: **full**.\\nSwitch: `/ponytail lite|full|ultra`.\\n\\n## The ladder\\n\\nStop at the first rung that holds:\\n\\n1. **Does this need to exist at all?** Speculative need = skip it, say so in one line. (YAGNI)\\n2. **Already in this codebase?** A helper, util, type, or pattern that already lives here → reuse it. Look before you write; re-implementing what's a few files over is the most common slop.\\n3. **Stdlib does it?** Use it.\\n4. **Native platform feature covers it?** `<input type=\\\"date\\\">` over a picker lib, CSS over JS, DB constraint over app code.\\n5. **Already-installed dependency solves it?** Use it. Never add a new one for what a few lines can do.\\n6. **Can it be one line?** One line.\\n7. **Only then:** the minimum code that works.\\n\\nThe ladder is a reflex, not a research project — but it runs *after* you\\nunderstand the problem, not instead of it. Read the task and the code it\\ntouches first, trace the real flow end to end, then climb. Two rungs work →\\ntake the higher one and move on. The first lazy solution that works is the\\nright one — once you actually know what the change has to touch.\\n\\n**Bug fix = root cause, not symptom.** A report names a symptom. Before you\\nedit, grep every caller of the function you're about to touch. The lazy fix IS\\nthe root-cause fix: one guard in the shared function is a smaller diff than a\\nguard in every caller — and patching only the path the ticket names leaves\\nevery sibling caller still broken. Fix it once, where all callers route through.\\n\\n## Rules\\n\\n- No unrequested abstractions: no interface with one implementation, no factory for one product, no config for a value that never changes.\\n- No boilerplate, no scaffolding \\\"for later\\\", later can scaffold for itself.\\n- Deletion over addition. Boring over clever, clever is what someone decodes at 3am.\\n- Fewest files possible. Shortest working diff wins — but only once you understand the problem. The smallest change in the wrong place isn't lazy, it's a second bug.\\n- Complex request? Ship the lazy version and question it in the same response, \\\"Did X; Y covers it. Need full X? Say so.\\\" Never stall on an answer you can default.\\n- Two stdlib options, same size? Take the one that's correct on edge cases. Lazy means writing less code, not picking the flimsier algorithm.\\n- Mark deliberate simplifications that cut a real corner with a known ceiling (global lock, O(n²) scan, naive heuristic) with a `ponytail:` comment naming the ceiling and upgrade path (`# ponytail: global lock, per-account locks if throughput matters`).\\n\\n## Output\\n\\nCode first. Then at most three short lines: what was skipped, when to add it.\\nNo essays, no feature tours, no design notes. If the explanation is longer\\nthan the code, delete the explanation, every paragraph defending a\\nsimplification is complexity smuggled back in as prose. Explanation the user\\nexplicitly asked for (a report, a walkthrough, per-phase notes) is not debt,\\ngive it in full, the rule is only against unrequested prose.\\n\\nPattern: `[code] → skipped: [X], add when [Y].`\\n\\n## Intensity\\n\\n| Level | What change |\\n|-------|------------|\\n| **full** | The ladder enforced. Stdlib and native first. Shortest diff, shortest explanation. Default. |\\n\\nExample: \\\"Add a cache for these API responses.\\\"\\n- full: \\\"`@lru_cache(maxsize=1000)` on the fetch function. Skipped custom cache class, add when lru_cache measurably falls short.\\\"\\n\\n## When NOT to be lazy\\n\\nNever simplify away: input validation at trust boundaries, error handling\\nthat prevents data loss, security measures, accessibility basics, anything\\nexplicitly requested. User insists on the full version → build it, no\\nre-arguing.\\n\\nNever lazy about understanding the problem. The ladder shortens the\\nsolution, never the reading. Trace the whole thing first — every file the\\nchange touches, the actual flow — before picking a rung. Laziness that skips\\ncomprehension to ship a small diff is the dangerous kind: it dresses up as\\nefficiency and ships a confident wrong fix. Read fully, then be lazy.\\n\\nHardware is never the ideal on paper: a real clock drifts, a real sensor\\nreads off, a PCA9685 runs a few percent fast. Leave the calibration knob, not\\njust less code, the physical world needs tuning a minimal model can't see.\\n\\nLazy code without its check is unfinished. Non-trivial logic (a branch, a\\nloop, a parser, a money/security path) leaves ONE runnable check behind, the\\nsmallest thing that fails if the logic breaks: an `assert`-based\\n`demo()`/`__main__` self-check or one small `test_*.py`. No frameworks, no\\nfixtures, no per-function suites unless asked. Trivial one-liners need no\\ntest, YAGNI applies to tests too.\\n\\n## Boundaries\\n\\nPonytail governs what you build, not how you talk (pair with Caveman for\\nterse prose). \\\"stop ponytail\\\" / \\\"normal mode\\\": revert. Level persists until\\nchanged or session end.\\n\\nThe shortest path to done is the right path.\\n\"}}"
+    },
+    {
+      "name": "Ultragoal creates durable plan artifacts in isolated fixture",
+      "returncode": 0,
+      "command": [
+        "node",
+        "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/cli/omx.js",
+        "ultragoal",
+        "create-goals",
+        "--brief",
+        "Offline plan installation check",
+        "--goal",
+        "First::Verify first fixture",
+        "--goal",
+        "Second::Verify second fixture",
+        "--json"
+      ],
+      "output": "{\n  \"ok\": true,\n  \"plan\": {\n    \"version\": 1,\n    \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n    \"updatedAt\": \"2026-10-04T20:11:01.194Z\",\n    \"briefPath\": \".omx/ultragoal/brief.md\",\n    \"goalsPath\": \".omx/ultragoal/goals.json\",\n    \"ledgerPath\": \".omx/ultragoal/ledger.jsonl\",\n    \"codexGoalMode\": \"aggregate\",\n    \"goals\": [\n      {\n        \"id\": \"G001-first\",\n        \"title\": \"First\",\n        \"objective\": \"Verify first fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      },\n      {\n        \"id\": \"G002-second\",\n        \"title\": \"Second\",\n        \"objective\": \"Verify second fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      }\n    ],\n    \"codexObjective\": \"Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.\"\n  },\n  \"summary\": {\n    \"total\": 2,\n    \"pending\": 2,\n    \"inProgress\": 0,\n    \"complete\": 0,\n    \"failed\": 0,\n    \"reviewBlocked\": 0,\n    \"historicalReviewBlocked\": 0,\n    \"needsUserDecision\": 0,\n    \"superseded\": 0,\n    \"steeringBlocked\": 0,\n    \"aggregateComplete\": false,\n    \"artifactComplete\": false\n  }\n}\n"
+    },
+    {
+      "name": "Ultragoal reads isolated durable plan",
+      "returncode": 0,
+      "command": [
+        "node",
+        "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/cli/omx.js",
+        "ultragoal",
+        "status",
+        "--json"
+      ],
+      "output": "{\n  \"plan\": {\n    \"version\": 1,\n    \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n    \"updatedAt\": \"2026-10-04T20:11:01.194Z\",\n    \"briefPath\": \".omx/ultragoal/brief.md\",\n    \"goalsPath\": \".omx/ultragoal/goals.json\",\n    \"ledgerPath\": \".omx/ultragoal/ledger.jsonl\",\n    \"codexGoalMode\": \"aggregate\",\n    \"goals\": [\n      {\n        \"id\": \"G001-first\",\n        \"title\": \"First\",\n        \"objective\": \"Verify first fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      },\n      {\n        \"id\": \"G002-second\",\n        \"title\": \"Second\",\n        \"objective\": \"Verify second fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      }\n    ],\n    \"codexObjective\": \"Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.\"\n  },\n  \"summary\": {\n    \"total\": 2,\n    \"pending\": 2,\n    \"inProgress\": 0,\n    \"complete\": 0,\n    \"failed\": 0,\n    \"reviewBlocked\": 0,\n    \"historicalReviewBlocked\": 0,\n    \"needsUserDecision\": 0,\n    \"superseded\": 0,\n    \"steeringBlocked\": 0,\n    \"aggregateComplete\": false,\n    \"artifactComplete\": false\n  },\n  \"reconciliation\": null\n}\n"
+    },
+    {
+      "name": "Image2PPT local doctor dependencies and rendering",
+      "returncode": 0,
+      "command": [
+        "python3",
+        "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
+        "python",
+        "/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/cli.py",
+        "doctor",
+        "--json"
+      ],
+      "output": "{\n  \"schema_version\": \"image2ppt-doctor-v1\",\n  \"ok\": true,\n  \"skill_root\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt\",\n  \"local_cli\": {\n    \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/cli.py\",\n    \"ready\": true,\n    \"python\": \"/tmp/chx-runtime-1000-7c3dcfaa578c5882/python/bin/python3.12\"\n  },\n  \"config_home\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt\",\n  \"config_file\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/config.yaml\",\n  \"config_scope\": \"project\",\n  \"config_exists\": false,\n  \"dependencies\": {\n    \"pypdfium2\": {\n      \"available\": true,\n      \"purpose\": \"PDF input normalization and rendered-slide rasterization\"\n    },\n    \"PIL\": {\n      \"available\": true,\n      \"purpose\": \"image normalization, assets, previews, and offline OCR geometry\"\n    },\n    \"openai\": {\n      \"available\": true,\n      \"purpose\": \"optional image backend\"\n    },\n    \"yaml\": {\n      \"available\": true,\n      \"purpose\": \"local configuration\"\n    },\n    \"numpy\": {\n      \"available\": true,\n      \"purpose\": \"offline ink metrics\"\n    },\n    \"requests\": {\n      \"available\": true,\n      \"purpose\": \"PaddleOCR HTTP client\"\n    }\n  },\n  \"internal_resources\": {\n    \"ready\": true,\n    \"files\": {\n      \"skill\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/SKILL.md\",\n        \"exists\": true\n      },\n      \"cli\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/cli.py\",\n        \"exists\": true\n      },\n      \"runtime_main\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/main.py\",\n        \"exists\": true\n      },\n      \"ocr_client\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/paddle_text_hints.py\",\n        \"exists\": true\n      },\n      \"offline_ocr\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/text_hints.py\",\n        \"exists\": true\n      },\n      \"builder\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/build_pptx_from_manifest.py\",\n        \"exists\": true\n      },\n      \"validator\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/validate_pptx.py\",\n        \"exists\": true\n      },\n      \"worker_prompt_base\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/prompts/page-worker-base.md\",\n        \"exists\": true\n      },\n      \"worker_prompt_addendum\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/prompts/page-worker.md\",\n        \"exists\": true\n      },\n      \"prompt_builder\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/build_page_worker_prompt.py\",\n        \"exists\": true\n      },\n      \"page_qa\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/run_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"final_qa\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/run_final_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"renderer\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/render_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"visual_review_evidence\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/visual_review_evidence.py\",\n        \"exists\": true\n      },\n      \"workflow\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/workflow.md\",\n        \"exists\": true\n      },\n      \"manifest_schema\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/manifest-schema.md\",\n        \"exists\": true\n      },\n      \"manifest_json_schema\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/schemas/page-manifest-v2.schema.json\",\n        \"exists\": true\n      },\n      \"decision_tree\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/page-decision-tree.md\",\n        \"exists\": true\n      },\n      \"cli_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/cli-helper.md\",\n        \"exists\": true\n      },\n      \"ocr_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/ocr-text-hints-contract.md\",\n        \"exists\": true\n      },\n      \"region_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/region-decomposition.md\",\n        \"exists\": true\n      },\n      \"object_routing\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/object-routing.md\",\n        \"exists\": true\n      },\n      \"arrow_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/manifest-arrow-extension.md\",\n        \"exists\": true\n      },\n      \"qa_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/qa-contract.md\",\n        \"exists\": true\n      },\n      \"dependency_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/runtime-dependencies.md\",\n        \"exists\": true\n      },\n      \"asset_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/assets-provenance-contract.md\",\n        \"exists\": true\n      }\n    }\n  },\n  \"rendering\": {\n    \"platform\": \"linux\",\n    \"powerpoint_com_candidate\": false,\n    \"powershell\": \"/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe\",\n    \"libreoffice\": \"/tmp/chx-runtime-1000-7c3dcfaa578c5882/libreoffice/project-bin/libreoffice\",\n    \"selection\": \"libreoffice\",\n    \"ready\": true\n  },\n  \"fonts\": {\n    \"ready\": true,\n    \"fontconfig\": \"/usr/bin/fc-match\",\n    \"matched\": \"DejaVu Sans|/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf\",\n    \"known_files\": [\n      \"/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc\",\n      \"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf\"\n    ]\n  },\n  \"image_processing\": {\n    \"pillow\": true,\n    \"imagemagick\": null,\n    \"ready\": true,\n    \"note\": \"Pillow is the primary processor; ImageMagick is used for optional formula/image conversion paths.\"\n  },\n  \"ocr\": {\n    \"selection\": \"builtin-ink\",\n    \"token\": \"unset\",\n    \"token_source\": \"unset\",\n    \"endpoint\": \"https://paddleocr.aistudio-app.com/api/v2/ocr/jobs\",\n    \"model\": \"PaddleOCR-VL-1.6\",\n    \"network_client_ready\": true,\n    \"network_probe_performed\": false,\n    \"fallback\": {\n      \"backend\": \"builtin-ink\",\n      \"ready\": true,\n      \"priority\": \"network-first-then-local\"\n    },\n    \"apply_url\": \"https://aistudio.baidu.com/account/accessToken\",\n    \"configure_command\": \"image2ppt config --paddle-ocr-token <token>\"\n  },\n  \"image_backend\": {\n    \"agent_builtin\": {\n      \"checked\": false,\n      \"ready\": null,\n      \"tool_name\": \"image_gen.imagegen\"\n    },\n    \"codex_oauth\": {\n      \"ready\": false,\n      \"auth_file\": \"/home/ys/.codex/auth.json\"\n    },\n    \"api_fallback\": {\n      \"ready\": false,\n      \"OPENAI_API_KEY\": \"unset\",\n      \"OPENAI_BASE_URL\": \"https://api.openai.com/v1\",\n      \"IMAGE2PPT_IMAGE_MODEL\": \"gpt-image-2\",\n      \"IMAGE2PPT_IMAGE_USER_AGENT\": \"<default>\"\n    },\n    \"preference\": \"auto\",\n    \"cli_fallback_ready\": false,\n    \"selection\": \"openai-compatible-api\"\n  },\n  \"checks_requested\": {\n    \"require_image_api\": false,\n    \"require_network_ocr_token\": false\n  },\n  \"next\": \"no action needed\"\n}\n"
+    },
+    {
+      "name": "Nature Mermaid renders an SVG using project Chromium",
+      "returncode": 0,
+      "command": [
+        "python3",
+        "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
+        "mermaid",
+        "-i",
+        "/home/ys/data_401/data/chx_20260622/.runtime/smoke/diagram.mmd",
+        "-o",
+        "/home/ys/data_401/data/chx_20260622/.runtime/smoke/diagram.svg"
+      ],
+      "output": "Generating single mermaid chart\n"
+    },
+    {
+      "name": "Independent task tag validation in temporary repositories",
+      "returncode": 0,
+      "evidence": "Annotated tag and idempotent finalize passed; tree, evidence, digest changes and failed checks rejected."
+    },
+    {
+      "name": "Four upstream native executable entrypoints launch",
+      "returncode": 0,
+      "details": [
+        {
+          "product": "omx-runtime",
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "output": "usage: omx-runtime <command> [options]\n\ncommands:\n  schema [--json]                     print the runtime contract summary\n  fs-rename-no-replace <from> <to>       atomically move without replacing destination\n  process-identity <pid>              print process birth identity as JSON\n  snapshot [--json] [--state-dir=DIR]  print a runtime snapshot\n  mux-contract                        print the mux boundary summary\n  exec <json> [--state-dir=DIR]       process a runtime command from JSON\n  lease-mutex <absolute-canonical-dir> <expected-dev> <expected-ino> <safe-leaf>  hold native lease mutex over stdin JSON protocol\n  init <state-dir>                    initialize a fresh state directory\n\n"
+        },
+        {
+          "product": "omx-explore-harness",
+          "exit_code": 1,
+          "expected_exit_code": 1,
+          "output": "[omx explore] Usage: omx-explore --cwd <dir> --prompt <text> --prompt-file <explore-prompt.md> --instructions-file <AGENTS.md> --model-spark <model> --model-fallback <model>\n"
+        },
+        {
+          "product": "omx-sparkshell",
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "output": "usage: omx-sparkshell <command> [args...]\n   or: omx-sparkshell --shell <shell-command>\n   or: omx-sparkshell --tmux-pane <pane-id> [--tail-lines <100-1000>]\n\nDirect command mode executes argv without shell metacharacter parsing.\nShell mode executes through bash -lc/sh -lc on POSIX and a native Windows shell on Windows.\nTmux pane mode captures a larger pane tail and applies the same raw-vs-summary behavior.\n\n"
+        },
+        {
+          "product": "omx-api",
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "output": "omx-api serve [--daemon] [--system --dry-run]|status|stop|generate text|generate image|smoke text\nNote: real-private backend mode is experimental and requires local bearer auth.\n"
+        }
+      ]
+    }
+  ]
+}

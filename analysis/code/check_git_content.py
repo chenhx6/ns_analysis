@@ -11,6 +11,8 @@ DATA_SUFFIXES = {
     ".arrow", ".zip", ".tar", ".gz", ".7z",
 }
 BUILD_SUFFIXES = {".pyc", ".o", ".so", ".a", ".exe"}
+SOURCE_SUFFIXES = {".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".md", ".go", ".rs", ".sh"}
+SOURCE_ENV_EXAMPLES = {"analysis/vendor/ponytail/.env.example"}
 LOCAL_DIRS = {
     "__pycache__", ".pytest_cache", ".ipynb_checkpoints", ".venv", "venv",
     "node_modules", "build", "sessions", "logs",
@@ -29,7 +31,9 @@ def permitted(path):
     )
     name = p.name.lower()
     private = (
-        name == ".env" or name.startswith((".env.", "credentials", "secrets", "config.local."))
+        name == ".env" or (name.startswith(".env.") and path not in SOURCE_ENV_EXAMPLES)
+        or name.startswith("config.local.")
+        or (name.startswith(("credentials", "secrets")) and p.suffix.lower() not in SOURCE_SUFFIXES)
         or name in {"auth.json", "history.jsonl"} or ".sqlite" in name
         or p.suffix.lower() in {".pem", ".key"}
     )

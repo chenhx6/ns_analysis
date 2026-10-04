@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "2026.02.28.1",
+  "skills": [
+    {
+      "name": "autopilot",
+      "category": "execution",
+      "status": "active",
+      "core": true,
+      "description": "Canonical autonomous orchestrator: deep-interview -> ralplan -> ultragoal."
+    },
+    {
+      "name": "ralph",
+      "category": "execution",
+      "status": "deprecated",
+      "core": false,
+      "description": "Removed in OMX 0.21; use ultragoal. One-release sunset stub."
+    },
+    {
+      "name": "ultrawork",
+      "category": "execution",
+      "status": "deprecated",
+      "core": false,
+      "description": "Removed in OMX 0.21; use team. One-release sunset stub."
+    },
+    {
+      "name": "team",
+      "category": "execution",
+      "status": "active",
+      "core": true
+    },
+    {
+      "name": "ultraqa",
+      "category": "execution",
+      "status": "active"
+    },
+    {
+      "name": "autoresearch",
+      "category": "execution",
+      "status": "active"
+    },
+    {
+      "name": "autoresearch-goal",
+      "category": "execution",
+      "status": "deprecated",
+      "core": false,
+      "description": "Removed in OMX 0.21; use autoresearch. One-release sunset stub."
+    },
+    {
+      "name": "performance-goal",
+      "category": "execution",
+      "status": "active",
+      "core": false
+    },
+    {
+      "name": "pipeline",
+      "category": "execution",
+      "status": "deprecated",
+      "core": false,
+      "description": "Removed in OMX 0.21; use plan and team directly. One-release sunset stub."
+    },
+    {
+      "name": "ultragoal",
+      "category": "execution",
+      "status": "active",
+      "core": true
+    },
+    {
+      "name": "plan",
+      "category": "planning",
+      "status": "active"
+    },
+    {
+      "name": "ralplan",
+      "category": "planning",
+      "status": "active",
+      "core": true,
+      "description": "Canonical Planner -> Architect -> Critic consensus stage for Autopilot and standalone planning."
+    },
+    {
+      "name": "deep-interview",
+      "category": "planning",
+      "status": "active"
+    },
+    {
+      "name": "best-practice-research",
+      "category": "planning",
+      "status": "active",
+      "core": false
+    },
+    {
+      "name": "analyze",
+      "category": "shortcut",
+      "status": "active"
+    },
+    {
+      "name": "ai-slop-cleaner",
+      "category": "shortcut",
+      "status": "active"
+    },
+    {
+      "name": "code-review",
+      "category": "shortcut",
+      "status": "active",
+      "canonical": "code-reviewer"
+    },
+    {
+      "name": "visual-ralph",
+      "category": "shortcut",
+      "status": "active",
+      "canonical": "designer"
+    },
+    {
+      "name": "design",
+      "category": "shortcut",
+      "status": "active",
+      "canonical": "designer"
+    },
+    {
+      "name": "git-master",
+      "category": "shortcut",
+      "status": "alias",
+      "canonical": "git-master"
+    },
+    {
+      "name": "ask",
+      "category": "shortcut",
+      "status": "active"
+    },
+    {
+      "name": "cancel",
+      "category": "utility",
+      "status": "active"
+    },
+    {
+      "name": "doctor",
+      "category": "utility",
+      "status": "active"
+    },
+    {
+      "name": "wiki",
+      "category": "utility",
+      "status": "active"
+    },
+    {
+      "name": "skill",
+      "category": "utility",
+      "status": "active"
+    },
+    {
+      "name": "hud",
+      "category": "utility",
+      "status": "active"
+    },
+    {
+      "name": "omx-setup",
+      "category": "utility",
+      "status": "active"
+    },
+    {
+      "name": "configure-notifications",
+      "category": "utility",
+      "status": "active",
+      "core": false,
+      "internalRequired": false
+    },
+    {
+      "name": "configure-discord",
+      "category": "utility",
+      "status": "merged",
+      "canonical": "configure-notifications",
+      "core": false,
+      "internalRequired": false
+    },
+    {
+      "name": "configure-telegram",
+      "category": "utility",
+      "status": "merged",
+      "canonical": "configure-notifications",
+      "core": false,
+      "internalRequired": false
+    },
+    {
+      "name": "configure-slack",
+      "category": "utility",
+      "status": "merged",
+      "canonical": "configure-notifications",
+      "core": false,
+      "internalRequired": false
+    },
+    {
+      "name": "configure-openclaw",
+      "category": "utility",
+      "status": "merged",
+      "canonical": "configure-notifications",
+      "core": false,
+      "internalRequired": false
+    },
+    {
+      "name": "worker",
+      "category": "utility",
+      "status": "internal",
+      "internalRequired": true
+    }
+  ],
+  "agents": [
+    {
+      "name": "explore",
+      "category": "build",
+      "status": "active"
+    },
+    {
+      "name": "analyst",
+      "category": "build",
+      "status": "active"
+    },
+    {
+      "name": "planner",
+      "category": "build",
+      "status": "active"
+    },
+    {
+      "name": "architect",
+      "category": "build",
+      "status": "active"
+    },
+    {
+      "name": "debugger",
+      "category": "build",
+      "status": "active"
+    },
+    {
+      "name": "executor",
+      "category": "build",
+      "status": "active"
+    },
+    {
+      "name": "team-executor",
+      "category": "build",
+      "status": "internal"
+    },
+    {
+      "name": "verifier",
+      "category": "build",
+      "status": "active"
+    },
+    {
+      "name": "style-reviewer",
+      "category": "review",
+      "status": "merged",
+      "canonical": "code-reviewer"
+    },
+    {
+      "name": "quality-reviewer",
+      "category": "review",
+      "status": "merged",
+      "canonical": "code-reviewer"
+    },
+    {
+      "name": "api-reviewer",
+      "category": "review",
+      "status": "merged",
+      "canonical": "code-reviewer"
+    },
+    {
+      "name": "security-reviewer",
+      "category": "review",
+      "status": "deprecated"
+    },
+    {
+      "name": "performance-reviewer",
+      "category": "review",
+      "status": "merged",
+      "canonical": "code-reviewer"
+    },
+    {
+      "name": "code-reviewer",
+      "category": "review",
+      "status": "active"
+    },
+    {
+      "name": "dependency-expert",
+      "category": "domain",
+      "status": "active"
+    },
+    {
+      "name": "test-engineer",
+      "category": "domain",
+      "status": "active"
+    },
+    {
+      "name": "quality-strategist",
+      "category": "domain",
+      "status": "merged",
+      "canonical": "verifier"
+    },
+    {
+      "name": "build-fixer",
+      "category": "domain",
+      "status": "deprecated"
+    },
+    {
+      "name": "designer",
+      "category": "domain",
+      "status": "active"
+    },
+    {
+      "name": "writer",
+      "category": "domain",
+      "status": "active"
+    },
+    {
+      "name": "qa-tester",
+      "category": "domain",
+      "status": "merged",
+      "canonical": "test-engineer"
+    },
+    {
+      "name": "git-master",
+      "category": "domain",
+      "status": "active"
+    },
+    {
+      "name": "code-simplifier",
+      "category": "domain",
+      "status": "internal"
+    },
+    {
+      "name": "researcher",
+      "category": "domain",
+      "status": "active"
+    },
+    {
+      "name": "product-manager",
+      "category": "product",
+      "status": "merged",
+      "canonical": "analyst"
+    },
+    {
+      "name": "ux-researcher",
+      "category": "product",
+      "status": "merged",
+      "canonical": "designer"
+    },
+    {
+      "name": "information-architect",
+      "category": "product",
+      "status": "merged",
+      "canonical": "designer"
+    },
+    {
+      "name": "product-analyst",
+      "category": "product",
+      "status": "merged",
+      "canonical": "analyst"
+    },
+    {
+      "name": "critic",
+      "category": "coordination",
+      "status": "active"
+    },
+    {
+      "name": "vision",
+      "category": "coordination",
+      "status": "active"
+    }
+  ]
+}

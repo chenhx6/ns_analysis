@@ -1,0 +1,94 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PLUGIN_DATA=\"/home/ys/data_401/data/chx_20260622/.omx/ponytail\" CLAUDE_CONFIG_DIR=\"/home/ys/data_401/data/chx_20260622/.omx/ponytail\" XDG_CONFIG_HOME=\"/home/ys/data_401/data/chx_20260622/.runtime/xdg-config\" CLAUDE_PLUGIN_ROOT=\"/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail\" node \"/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail/hooks/ponytail-activate.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "PLUGIN_DATA=\"/home/ys/data_401/data/chx_20260622/.omx/ponytail\" CLAUDE_CONFIG_DIR=\"/home/ys/data_401/data/chx_20260622/.omx/ponytail\" XDG_CONFIG_HOME=\"/home/ys/data_401/data/chx_20260622/.runtime/xdg-config\" CLAUDE_PLUGIN_ROOT=\"/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail\" node \"/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail/hooks/ponytail-mode-tracker.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js\""
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

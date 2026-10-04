@@ -1,0 +1,352 @@
+import { describe, it } from "node:test";
+import assert from "node:assert/strict";
+import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { runAuthHotswap, type HotswapLifecycle } from "../hotswap.js";
+import type { LaunchSessionBinding } from "../../hooks/session.js";
+
+function sessionPointerAbort(cwd: string): Error {
+  return Object.assign(new Error("selected pointer root is unavailable"), {
+    name: "SessionPointerLaunchAbort",
+    committed: false,
+    cwd,
+    code: "session_pointer_context_failure",
+    operation: "pointer-context-resolve",
+    attemptedRootSource: "cwd-default",
+    reason: "selected pointer root is unavailable",
+  });
+}
+
+function lifecycle(overrides: Partial<HotswapLifecycle> = {}): HotswapLifecycle {
+  return {
+    prepareCodexHomeForLaunch: async () => ({}),
+    preLaunch: async () => ({ binding: {} as LaunchSessionBinding, completion: { kind: "success" } }),
+    postLaunch: async () => {},
+    cleanupRuntimeCodexHome: async () => {},
+    normalizeCodexLaunchArgs: (args) => args,
+    injectModelInstructionsBypassArgs: (_cwd, args) => args,
+    sessionModelInstructionsPath: (cwd, sessionId) => join(cwd, `${sessionId}.md`),
+    resolveOmxRootForLaunch: () => undefined,
+    resolveNotifyTempContract: (args) => ({
+      contract: { active: false },
+      passthroughArgs: args,
+    }),
+    ...overrides,
+  };
+}
+
+async function writeAuthSlot(home: string, slot = "first"): Promise<string> {
+  const authDir = join(home, ".omx", "auth");
+  const slotPath = join(authDir, `${slot}.json`);
+  await mkdir(authDir, { recursive: true });
+  await writeFile(slotPath, '{"access_token":"slot-secret"}\n');
+  await writeFile(
+    join(authDir, "slots.json"),
+    JSON.stringify({
+      version: 1,
+      currentSlot: slot,
+      slots: [{ slot, createdAt: "now", updatedAt: "now" }],
+    }),
+  );
+  return slotPath;
+}
+
+describe("auth hotswap pointer abort lifecycle", () => {
+  it("redacts OAuth fields split across child stderr chunks", { skip: process.platform === "win32" }, async (t) => {
+    const home = await mkdtemp(join(tmpdir(), "omx-hotswap-stderr-"));
+    let output = "";
+    const capture = t.mock.method(process.stderr, "write", (chunk: string | Uint8Array) => {
+      output += String(chunk);
+      return true;
+    });
+    try {
+      await writeAuthSlot(home);
+      const bin = join(home, "bin");
+      await mkdir(bin);
+      const executable = join(bin, "codex");
+      await writeFile(executable, `#!${process.execPath}\nprocess.stderr.write('{"access_'); setTimeout(() => { process.stderr.write('token":"synthetic-secret"}\\n'); process.exitCode = 1; }, 100);\n`);
+      await chmod(executable, 0o755);
+      const status = await runAuthHotswap({
+        cwd: home, home, env: { PATH: bin }, argv: [], lifecycle: lifecycle(),
+      });
+      assert.equal(status, 1);
+      assert.match(output, /REDACTED/);
+      assert.doesNotMatch(output, /synthetic-secret/);
+    } finally {
+      capture.mock.restore();
+      await rm(home, { recursive: true, force: true });
+    }
+  });
+
+  it("still detects a quota line that follows an oversized stderr record", { skip: process.platform === "win32" }, async (t) => {
+    const cwd = await mkdtemp(join(tmpdir(), "omx-hotswap-oversized-quota-"));
+    const home = join(cwd, "home");
+    const runtimeHome = join(cwd, "runtime-codex-home");
+    const binDir = join(cwd, "bin");
+    const codexLog = join(cwd, "codex.log");
+    try {
+      await writeAuthSlot(home);
+      await writeFile(join(home, ".omx", "auth", "second.json"), '{"access_token":"second-secret"}\n');
+      await writeFile(
+        join(home, ".omx", "auth", "slots.json"),
+        JSON.stringify({
+          version: 1,
+          currentSlot: "first",
+          slots: [
+            { slot: "first", createdAt: "now", updatedAt: "now" },
+            { slot: "second", createdAt: "now", updatedAt: "now" },
+          ],
+        }),
+      );
+      await mkdir(binDir, { recursive: true });
+      // A verbose upstream payload overflows the redaction buffer before the
+      // quota marker. Suppressing the rest of stderr would hide the rotation
+      // signal and turn a recoverable quota exit into a plain failure.
+      await writeFile(
+        join(binDir, "codex"),
+        `#!/bin/sh\nprintf 'spawned\\n' >> ${JSON.stringify(codexLog)}\nawk 'BEGIN { while (i++ < 70000) printf "x" ; printf "\\n" }'  >&2\necho 'error: 429 quota exceeded' >&2\nexit 1\n`,
+      );
+      await chmod(join(binDir, "codex"), 0o755);
+      let captured = "";
+      const capture = t.mock.method(process.stderr, "write", (chunk: string | Uint8Array) => {
+        captured += String(chunk);
+        return true;
+      });
+
+      try {
+        await runAuthHotswap({
+          cwd,
+          home,
+          env: { CODEX_HOME: runtimeHome, PATH: `${binDir}:/usr/bin:/bin` },
+          argv: [],
+          lifecycle: lifecycle({
+            prepareCodexHomeForLaunch: async () => ({ codexHomeOverride: runtimeHome }),
+          }),
+        });
+      } finally {
+        capture.mock.restore();
+      }
+
+      assert.equal(await readFile(codexLog, "utf-8"), "spawned\n");
+      // Suppressing the rest of stderr would classify this as a plain failure,
+      // leaving the slot unmarked and skipping rotation entirely.
+      assert.match(captured, /quota detected/);
+      const metadata = JSON.parse(await readFile(join(home, ".omx", "auth", "slots.json"), "utf-8")) as {
+        slots: Array<{ slot: string; exhaustedAt?: string }>;
+      };
+      assert.ok(metadata.slots.find((slot) => slot.slot === "first")?.exhaustedAt);
+      assert.doesNotMatch(captured, /xxx/);
+    } finally {
+      await rm(cwd, { recursive: true, force: true });
+    }
+  });
+
+  it("skips the initial slot mutation and postLaunch for a typed pointer abort", async () => {
+    const cwd = await mkdtemp(join(tmpdir(), "omx-hotswap-pointer-abort-"));
+    const home = join(cwd, "home");
+    const runtimeHome = join(cwd, "runtime-codex-home");
+    const liveAuthPath = join(runtimeHome, "auth.json");
+    let postLaunchCalls = 0;
+    let cleanupCalls = 0;
+    try {
+      await writeAuthSlot(home);
+      await mkdir(runtimeHome, { recursive: true });
+      await writeFile(liveAuthPath, '{"access_token":"live-sentinel"}\n');
+
+      const status = await runAuthHotswap({
+        cwd,
+        home,
+        env: { CODEX_HOME: runtimeHome },
+        argv: [],
+        lifecycle: lifecycle({
+          prepareCodexHomeForLaunch: async () => ({
+            codexHomeOverride: runtimeHome,
+            runtimeCodexHomeForCleanup: runtimeHome,
+          }),
+          preLaunch: async () => {
+            throw sessionPointerAbort(cwd);
+          },
+          postLaunch: async () => {
+            postLaunchCalls += 1;
+          },
+          cleanupRuntimeCodexHome: async () => {
+            cleanupCalls += 1;
+          },
+        }),
+      });
+
+      assert.equal(status, 1);
+      assert.equal(postLaunchCalls, 0);
+      assert.equal(cleanupCalls, 1);
+      assert.equal(
+        await readFile(liveAuthPath, "utf-8"),
+        '{"access_token":"live-sentinel"}\n',
+      );
+    } finally {
+      await rm(cwd, { recursive: true, force: true });
+    }
+  });
+
+  it("does not mutate a slot or call postLaunch when preLaunch setup fails", async () => {
+    const cwd = await mkdtemp(join(tmpdir(), "omx-hotswap-setup-failure-"));
+    const home = join(cwd, "home");
+    const runtimeHome = join(cwd, "runtime-codex-home");
+    const liveAuthPath = join(runtimeHome, "auth.json");
+    let postLaunchCalls = 0;
+    try {
+      await writeAuthSlot(home);
+      await mkdir(runtimeHome, { recursive: true });
+      await writeFile(liveAuthPath, '{"access_token":"live-sentinel"}\n');
+      const status = await runAuthHotswap({
+        cwd,
+        home,
+        env: { CODEX_HOME: runtimeHome },
+        argv: [],
+        lifecycle: lifecycle({
+          prepareCodexHomeForLaunch: async () => ({ codexHomeOverride: runtimeHome }),
+          preLaunch: async () => { throw new Error("mandatory overlay failed"); },
+          postLaunch: async () => { postLaunchCalls += 1; },
+        }),
+      });
+      assert.equal(status, 1);
+      assert.equal(postLaunchCalls, 0);
+      assert.equal(await readFile(liveAuthPath, "utf-8"), '{"access_token":"live-sentinel"}\n');
+    } finally {
+      await rm(cwd, { recursive: true, force: true });
+    }
+  });
+
+  it("runs postLaunch and runtime cleanup after a successful preLaunch then initial useSlot failure", async () => {
+    const cwd = await mkdtemp(join(tmpdir(), "omx-hotswap-use-slot-failure-"));
+    const home = join(cwd, "home");
+    const runtimeHome = join(cwd, "runtime-codex-home");
+    let postLaunchCalls = 0;
+    let cleanupCalls = 0;
+    try {
+      const slotPath = await writeAuthSlot(home);
+
+      const status = await runAuthHotswap({
+        cwd,
+        home,
+        env: { CODEX_HOME: runtimeHome },
+        argv: [],
+        lifecycle: lifecycle({
+          prepareCodexHomeForLaunch: async () => ({
+            codexHomeOverride: runtimeHome,
+            runtimeCodexHomeForCleanup: runtimeHome,
+          }),
+          preLaunch: async () => {
+            await rm(slotPath);
+            return { binding: {} as LaunchSessionBinding, completion: { kind: "success" } };
+          },
+          postLaunch: async () => {
+            postLaunchCalls += 1;
+          },
+          cleanupRuntimeCodexHome: async () => {
+            cleanupCalls += 1;
+          },
+        }),
+      });
+
+      assert.equal(status, 1);
+      assert.equal(postLaunchCalls, 1);
+      assert.equal(cleanupCalls, 1);
+    } finally {
+      await rm(cwd, { recursive: true, force: true });
+    }
+  });
+
+  it("runs postLaunch and runtime cleanup after a later rotation useSlot failure", async () => {
+    const cwd = await mkdtemp(join(tmpdir(), "omx-hotswap-rotation-use-slot-failure-"));
+    const home = join(cwd, "home");
+    const runtimeHome = join(cwd, "runtime-codex-home");
+    const binDir = join(cwd, "bin");
+    const codexLog = join(cwd, "codex.log");
+    const secondSlotPath = join(home, ".omx", "auth", "second.json");
+    let postLaunchCalls = 0;
+    let cleanupCalls = 0;
+    try {
+      await writeAuthSlot(home);
+      await writeFile(secondSlotPath, '{"access_token":"second-secret"}\n');
+      await writeFile(
+        join(home, ".omx", "auth", "slots.json"),
+        JSON.stringify({
+          version: 1,
+          currentSlot: "first",
+          slots: [
+            { slot: "first", createdAt: "now", updatedAt: "now" },
+            { slot: "second", createdAt: "now", updatedAt: "now" },
+          ],
+        }),
+      );
+      await mkdir(binDir, { recursive: true });
+      await writeFile(
+        join(binDir, "codex"),
+        `#!/bin/sh\nprintf 'spawned\\n' >> ${JSON.stringify(codexLog)}\necho token_invalidated >&2\nexit 1\n`,
+      );
+      await chmod(join(binDir, "codex"), 0o755);
+
+      const status = await runAuthHotswap({
+        cwd,
+        home,
+        env: {
+          CODEX_HOME: runtimeHome,
+          PATH: `${binDir}:/usr/bin:/bin`,
+        },
+        argv: [],
+        lifecycle: lifecycle({
+          prepareCodexHomeForLaunch: async () => ({
+            codexHomeOverride: runtimeHome,
+            runtimeCodexHomeForCleanup: runtimeHome,
+          }),
+          preLaunch: async () => {
+            await rm(secondSlotPath);
+            return { binding: {} as LaunchSessionBinding, completion: { kind: "success" } };
+          },
+          postLaunch: async () => {
+            postLaunchCalls += 1;
+          },
+          cleanupRuntimeCodexHome: async () => {
+            cleanupCalls += 1;
+          },
+        }),
+      });
+
+      assert.equal(status, 1);
+      assert.equal(await readFile(codexLog, "utf-8"), "spawned\n");
+      assert.equal(postLaunchCalls, 1);
+      assert.equal(cleanupCalls, 1);
+    } finally {
+      await rm(cwd, { recursive: true, force: true });
+    }
+  });
+});
+
+describe("auth hotswap terminal lifecycle failures", () => {
+  it("returns nonzero when postLaunch finalization fails", async () => {
+    const cwd = await mkdtemp(join(tmpdir(), "omx-hotswap-terminal-failure-"));
+    const home = join(cwd, "home");
+    const runtimeHome = join(cwd, "runtime-codex-home");
+    const binDir = join(cwd, "bin");
+    try {
+      await writeAuthSlot(home);
+      await mkdir(binDir, { recursive: true });
+      await writeFile(join(binDir, "codex"), "#!/bin/sh\nexit 0\n");
+      await chmod(join(binDir, "codex"), 0o755);
+      const status = await runAuthHotswap({
+        cwd,
+        home,
+        env: { CODEX_HOME: runtimeHome, PATH: `${binDir}:/usr/bin:/bin` },
+        argv: [],
+        lifecycle: lifecycle({
+          prepareCodexHomeForLaunch: async () => ({ codexHomeOverride: runtimeHome }),
+          postLaunch: async () => { throw new Error("retained close failed"); },
+        }),
+      });
+      assert.equal(status, 1);
+    } finally {
+      await rm(cwd, { recursive: true, force: true });
+    }
+  });
+});

@@ -14,8 +14,16 @@
 # 本地配置、身份凭据及运行状态。
 **/.env
 **/.env.*
-**/credentials*
-**/secrets*
+**/credentials
+**/credentials.json
+**/credentials.toml
+**/credentials.yaml
+**/credentials.yml
+**/credentials.ini
+**/secrets.json
+**/secrets.toml
+**/secrets.yaml
+**/secrets.yml
 **/*.pem
 **/*.key
 **/auth.json
@@ -54,3 +62,28 @@
 **/*.exe
 **/*~
 /analysis/code/DecodeAndSortAll/decodeandsort
+.omx-state-locks/
+.omx-state-locks.identity.json
+.codex/*
+!.codex/agents/
+!.codex/agents/**
+!.codex/skills/
+!.codex/skills/**
+.codex/skills/.system/**
+!.codex/prompts/
+!.codex/prompts/**
+
+# 项目安装的持久配置；环境、会话与hook信任记录留在本地。
+!.codex/config.toml
+!.codex/hooks.json
+/.codex/hooks-trust.toml
+/.codex/.omx/
+/.codex/*.tmp
+/.codex/.ponytail*
+/.omx/
+
+# 上游开发测试输出以及 Python 包构建元数据。
+**/*.egg-info/
+**/target/
+**/coverage/
+/analysis/vendor/oh-my-codex/dist/
