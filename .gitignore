@@ -1,0 +1,56 @@
+# 根目录白名单：解码及处理中间数据默认留在本地。
+/*
+!/AGENTS.md
+!/README.md
+!/.gitignore
+!/analysis/
+!/skills/
+!/.githooks/
+!/.agents/
+/.agents/*
+!/.agents/skills/
+!/.codex/
+
+# 本地配置、身份凭据及运行状态。
+**/.env
+**/.env.*
+**/credentials*
+**/secrets*
+**/*.pem
+**/*.key
+**/auth.json
+**/config.local.*
+/.codex/**/sessions/
+/.codex/**/logs/
+/.codex/**/*.sqlite*
+/.codex/**/history.jsonl
+
+# 大型数据与数据容器；小型标定配置 .dat 允许跟踪。
+**/*.root
+**/*.bin
+**/*.h5
+**/*.hdf5
+**/*.npy
+**/*.npz
+**/*.parquet
+**/*.arrow
+**/*.zip
+**/*.tar
+**/*.gz
+**/*.7z
+
+# 编译产物和缓存。
+**/__pycache__/
+**/.pytest_cache/
+**/.ipynb_checkpoints/
+**/.venv/
+**/venv/
+**/node_modules/
+**/build/
+**/*.pyc
+**/*.o
+**/*.so
+**/*.a
+**/*.exe
+**/*~
+/analysis/code/DecodeAndSortAll/decodeandsort
