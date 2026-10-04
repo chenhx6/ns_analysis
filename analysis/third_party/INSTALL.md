@@ -26,6 +26,7 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 - `.agents/skills/`：Codex 当前的项目技能发现目录。
 - `.codex/skills/`、`.codex/agents/`、`.codex/prompts/`：OMX 原生项目安装目录。
 - `.codex/config.toml`、`.codex/hooks.json`：原生项目配置与 hooks。保留宿主信任流程，不迁移临时 setup 的 trust hash；Ponytail 的状态路径显式限定在项目内。
+- `.omx/setup-scope.json`、`.omx/hud-config.json`：版本化的项目安装范围和界面偏好；其他 `.omx/` 会话与运行状态留在本地。
 - `analysis/vendor/`：Ponytail、OMX、Crawl4AI 的固定源码，保留其目录结构和许可证。编译输出及依赖另行恢复。
 - `.runtime/`：项目独立 Python、包、浏览器、原生二进制、缓存及可选模型权重，不提交 Git。
 

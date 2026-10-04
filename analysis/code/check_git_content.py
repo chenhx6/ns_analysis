@@ -5,7 +5,7 @@ import sys
 from pathlib import PurePosixPath
 
 MAX_BYTES = 25 * 1024 * 1024
-ROOT_FILES = {"AGENTS.md", "README.md", ".gitignore"}
+ROOT_FILES = {"AGENTS.md", "README.md", ".gitignore", ".omx/setup-scope.json", ".omx/hud-config.json"}
 DATA_SUFFIXES = {
     ".root", ".bin", ".h5", ".hdf5", ".npy", ".npz", ".parquet",
     ".arrow", ".zip", ".tar", ".gz", ".7z",

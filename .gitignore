@@ -80,7 +80,10 @@
 /.codex/.omx/
 /.codex/*.tmp
 /.codex/.ponytail*
-/.omx/
+!/.omx/
+/.omx/*
+!/.omx/setup-scope.json
+!/.omx/hud-config.json
 
 # 上游开发测试输出以及 Python 包构建元数据。
 **/*.egg-info/
