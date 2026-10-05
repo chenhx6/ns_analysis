@@ -33,7 +33,7 @@
   },
   "skills": [
     {
-      "directory": "skills/ponytail",
+      "directory": ".agents/skills/ponytail",
       "source": "ponytail",
       "source_path": "skills/ponytail",
       "entry_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
@@ -43,7 +43,7 @@
       }
     },
     {
-      "directory": "skills/ponytail-audit",
+      "directory": ".agents/skills/ponytail-audit",
       "source": "ponytail",
       "source_path": "skills/ponytail-audit",
       "entry_sha256": "554b7ac9c78a6b1a5e6b2bf0ba67eedf092baf71e465d03e591d0cfeb7947774",
@@ -53,7 +53,7 @@
       }
     },
     {
-      "directory": "skills/ponytail-debt",
+      "directory": ".agents/skills/ponytail-debt",
       "source": "ponytail",
       "source_path": "skills/ponytail-debt",
       "entry_sha256": "d3611761039bdb2955e31856834feeec6ed5483a3fc64576e9a166f949a131d1",
@@ -63,7 +63,7 @@
       }
     },
     {
-      "directory": "skills/ponytail-gain",
+      "directory": ".agents/skills/ponytail-gain",
       "source": "ponytail",
       "source_path": "skills/ponytail-gain",
       "entry_sha256": "24e01d1c9715cb136ba1c4f1e52a95940c0193558b876828e537736480d6408b",
@@ -73,7 +73,7 @@
       }
     },
     {
-      "directory": "skills/ponytail-help",
+      "directory": ".agents/skills/ponytail-help",
       "source": "ponytail",
       "source_path": "skills/ponytail-help",
       "entry_sha256": "23d9baf1b9a9464b40ebe1b5b50752795210b934fc8e248e791496e4c9a39fd2",
@@ -83,7 +83,7 @@
       }
     },
     {
-      "directory": "skills/ponytail-review",
+      "directory": ".agents/skills/ponytail-review",
       "source": "ponytail",
       "source_path": "skills/ponytail-review",
       "entry_sha256": "7f8bfd0da3ba7c6fe0cd0de53e6f910adfef52166c6e99d7fa4de3360650b9b6",
@@ -93,7 +93,7 @@
       }
     },
     {
-      "directory": "skills/ai-slop-cleaner",
+      "directory": ".agents/skills/ai-slop-cleaner",
       "source": "oh-my-codex",
       "source_path": "skills/ai-slop-cleaner",
       "entry_sha256": "d81095f3480b4d15dc8607d85c9dd5c872fe0786e29561a3d101a117f104e77b",
@@ -103,7 +103,7 @@
       }
     },
     {
-      "directory": "skills/analyze",
+      "directory": ".agents/skills/analyze",
       "source": "oh-my-codex",
       "source_path": "skills/analyze",
       "entry_sha256": "1c29f556b4cd80eb92c625a3c29746586abd05ada191e1536aa39a2ac3a5aaea",
@@ -113,7 +113,7 @@
       }
     },
     {
-      "directory": "skills/ask",
+      "directory": ".agents/skills/ask",
       "source": "oh-my-codex",
       "source_path": "skills/ask",
       "entry_sha256": "5301bee75b021060a7021bb27782c904e4bebff1217e158a3107285e649c65ed",
@@ -123,7 +123,7 @@
       }
     },
     {
-      "directory": "skills/autopilot",
+      "directory": ".agents/skills/autopilot",
       "source": "oh-my-codex",
       "source_path": "skills/autopilot",
       "entry_sha256": "c26fc9f4742f6e9656df9f939d71d1cba20b2c26e3dc3057663403d41e47c583",
@@ -133,7 +133,7 @@
       }
     },
     {
-      "directory": "skills/autoresearch",
+      "directory": ".agents/skills/autoresearch",
       "source": "oh-my-codex",
       "source_path": "skills/autoresearch",
       "entry_sha256": "5620155f31222fc0b2b76fce133aa7a77ca7d6e89607c65495f9efbb48d53eb2",
@@ -143,7 +143,7 @@
       }
     },
     {
-      "directory": "skills/autoresearch-goal",
+      "directory": ".agents/skills/autoresearch-goal",
       "source": "oh-my-codex",
       "source_path": "skills/autoresearch-goal",
       "entry_sha256": "76fc1ce7144bcb22e27888be368d9cdebac96e9f1e1db3970c14ec594c5675dc",
@@ -153,7 +153,7 @@
       }
     },
     {
-      "directory": "skills/best-practice-research",
+      "directory": ".agents/skills/best-practice-research",
       "source": "oh-my-codex",
       "source_path": "skills/best-practice-research",
       "entry_sha256": "6f0525b364f03ea4ec991ceb1b77a5bf0674efc605bed5db5cb98ebfc09e7c5e",
@@ -163,7 +163,7 @@
       }
     },
     {
-      "directory": "skills/cancel",
+      "directory": ".agents/skills/cancel",
       "source": "oh-my-codex",
       "source_path": "skills/cancel",
       "entry_sha256": "661a728669c3d92f1dfa08b5f00c07143fc07eebcd068b00d0fae8a069b33340",
@@ -173,7 +173,7 @@
       }
     },
     {
-      "directory": "skills/code-review",
+      "directory": ".agents/skills/code-review",
       "source": "oh-my-codex",
       "source_path": "skills/code-review",
       "entry_sha256": "0ee041726093d160f42f7568b0581ca9b98ac95a687d764af4b3b0470d490b19",
@@ -183,7 +183,7 @@
       }
     },
     {
-      "directory": "skills/configure-notifications",
+      "directory": ".agents/skills/configure-notifications",
       "source": "oh-my-codex",
       "source_path": "skills/configure-notifications",
       "entry_sha256": "21c3b775b84b791fad1c686fe9e85b9aab66eab7a6cbef8b519509d5f6e9ee87",
@@ -193,7 +193,7 @@
       }
     },
     {
-      "directory": "skills/deep-interview",
+      "directory": ".agents/skills/deep-interview",
       "source": "oh-my-codex",
       "source_path": "skills/deep-interview",
       "entry_sha256": "383f8d66c6e882520e8338331b78af5d8cbcef59cf66f3138cca3ca226411bb1",
@@ -203,7 +203,7 @@
       }
     },
     {
-      "directory": "skills/design",
+      "directory": ".agents/skills/design",
       "source": "oh-my-codex",
       "source_path": "skills/design",
       "entry_sha256": "51f13a8616043a18fdeb099a3d1725394cbfb576e6ff54b19bf77a3c399b5d0a",
@@ -213,7 +213,7 @@
       }
     },
     {
-      "directory": "skills/doctor",
+      "directory": ".agents/skills/doctor",
       "source": "oh-my-codex",
       "source_path": "skills/doctor",
       "entry_sha256": "7c934251a6b56cdbcf0903f5cdc1420b53ee3515ebf9af046fc0350f27435dec",
@@ -223,7 +223,7 @@
       }
     },
     {
-      "directory": "skills/git-master",
+      "directory": ".agents/skills/git-master",
       "source": "oh-my-codex",
       "source_path": "skills/git-master",
       "entry_sha256": "d917dbd61c1476133a6fa2e5c3ff3fbd4d56a458fea71aa0594c16b8d998f2b7",
@@ -233,7 +233,7 @@
       }
     },
     {
-      "directory": "skills/hud",
+      "directory": ".agents/skills/hud",
       "source": "oh-my-codex",
       "source_path": "skills/hud",
       "entry_sha256": "a7d365daef2795f7b31ae748aa0991924e9cccfd8b1d4478a477b069e32d7294",
@@ -243,7 +243,7 @@
       }
     },
     {
-      "directory": "skills/omx-setup",
+      "directory": ".agents/skills/omx-setup",
       "source": "oh-my-codex",
       "source_path": "skills/omx-setup",
       "entry_sha256": "872383065b3a82a26e971881772a51c5add149f34e2d1d1a14a100e3497d2f83",
@@ -253,7 +253,7 @@
       }
     },
     {
-      "directory": "skills/performance-goal",
+      "directory": ".agents/skills/performance-goal",
       "source": "oh-my-codex",
       "source_path": "skills/performance-goal",
       "entry_sha256": "5adac796c4d807e4d30506a67dd9f39fc8812a0675536140e4566771e4806dfd",
@@ -263,7 +263,7 @@
       }
     },
     {
-      "directory": "skills/pipeline",
+      "directory": ".agents/skills/pipeline",
       "source": "oh-my-codex",
       "source_path": "skills/pipeline",
       "entry_sha256": "8e914d9bc8fefc13bd68f24970d91d2aeb499a19405d76f9198b05576f9017d5",
@@ -273,7 +273,7 @@
       }
     },
     {
-      "directory": "skills/plan",
+      "directory": ".agents/skills/plan",
       "source": "oh-my-codex",
       "source_path": "skills/plan",
       "entry_sha256": "4a2312fee52f4780338eccc217a9340300e03c8a3e8b0f8e8dde0a8239afd0b7",
@@ -283,7 +283,7 @@
       }
     },
     {
-      "directory": "skills/ralph",
+      "directory": ".agents/skills/ralph",
       "source": "oh-my-codex",
       "source_path": "skills/ralph",
       "entry_sha256": "1cc239daa9d1c034aa0cb4e4fd6246f1453128c57b3004963b63ba39083b58dd",
@@ -293,7 +293,7 @@
       }
     },
     {
-      "directory": "skills/ralplan",
+      "directory": ".agents/skills/ralplan",
       "source": "oh-my-codex",
       "source_path": "skills/ralplan",
       "entry_sha256": "1d17d7d478ad83946520f22e0b8bacdbdb214342edde58742fad9fba0e9227d5",
@@ -303,7 +303,7 @@
       }
     },
     {
-      "directory": "skills/skill",
+      "directory": ".agents/skills/skill",
       "source": "oh-my-codex",
       "source_path": "skills/skill",
       "entry_sha256": "bbd89ebc5adf8b478aa643dc6d086eb175e9899be20391a048be118803d65c07",
@@ -313,7 +313,7 @@
       }
     },
     {
-      "directory": "skills/team",
+      "directory": ".agents/skills/team",
       "source": "oh-my-codex",
       "source_path": "skills/team",
       "entry_sha256": "f41bbba31e19ffe9c662310eb8d9ae8635052842ecff9122711fc6fa97e9d737",
@@ -323,7 +323,7 @@
       }
     },
     {
-      "directory": "skills/ultragoal",
+      "directory": ".agents/skills/ultragoal",
       "source": "oh-my-codex",
       "source_path": "skills/ultragoal",
       "entry_sha256": "b9c194fb9ba4877c44add7e5c7df415341a91e5baddf24a1336ac49875804e46",
@@ -333,7 +333,7 @@
       }
     },
     {
-      "directory": "skills/ultraqa",
+      "directory": ".agents/skills/ultraqa",
       "source": "oh-my-codex",
       "source_path": "skills/ultraqa",
       "entry_sha256": "803754526f0e77b8de39e2b8aa3fde2a262479169d72d34ba17ff578832c1694",
@@ -343,7 +343,7 @@
       }
     },
     {
-      "directory": "skills/ultrawork",
+      "directory": ".agents/skills/ultrawork",
       "source": "oh-my-codex",
       "source_path": "skills/ultrawork",
       "entry_sha256": "42f490dc9e4e167a18817fc68d40a13b9e06379086f9db82b3c8a9f362047d3a",
@@ -354,7 +354,7 @@
       }
     },
     {
-      "directory": "skills/visual-ralph",
+      "directory": ".agents/skills/visual-ralph",
       "source": "oh-my-codex",
       "source_path": "skills/visual-ralph",
       "entry_sha256": "f18a5a68667877e50d752782aba270aa776eef107971aaea270d5c9b6da2e1bd",
@@ -364,7 +364,7 @@
       }
     },
     {
-      "directory": "skills/wiki",
+      "directory": ".agents/skills/wiki",
       "source": "oh-my-codex",
       "source_path": "skills/wiki",
       "entry_sha256": "94c4715d92451a6ae4281bc1690564a659ad68cb58b0938004a49b1079a14241",
@@ -374,7 +374,7 @@
       }
     },
     {
-      "directory": "skills/worker",
+      "directory": ".agents/skills/worker",
       "source": "oh-my-codex",
       "source_path": "skills/worker",
       "entry_sha256": "aa39e0088c9bbfced4121888cd64ee06f43bbefa2537c9ddbcef5ded35d4b84e",
@@ -384,7 +384,7 @@
       }
     },
     {
-      "directory": "skills/nature-academic-search",
+      "directory": ".agents/skills/nature-academic-search",
       "source": "nature-skills",
       "source_path": "skills/nature-academic-search",
       "entry_sha256": "3ed327e3e9c56cddfaa0e48ffb3503b1f9e27f917916013798ef57bf8131101a",
@@ -441,7 +441,7 @@
       }
     },
     {
-      "directory": "skills/nature-citation",
+      "directory": ".agents/skills/nature-citation",
       "source": "nature-skills",
       "source_path": "skills/nature-citation",
       "entry_sha256": "f0436639c2bcf966e8f8cdda6e06501b396bb32cc3b7cce57f67eb0cd7b5a44d",
@@ -465,7 +465,7 @@
       }
     },
     {
-      "directory": "skills/nature-data",
+      "directory": ".agents/skills/nature-data",
       "source": "nature-skills",
       "source_path": "skills/nature-data",
       "entry_sha256": "4ef9c383411b069265901e9f157cb4d73861f42f6ddd28611084005e67eafa43",
@@ -489,7 +489,7 @@
       }
     },
     {
-      "directory": "skills/nature-downloader",
+      "directory": ".agents/skills/nature-downloader",
       "source": "nature-skills",
       "source_path": "skills/nature-downloader",
       "entry_sha256": "0351f9069e77a4b027893592d295f3c511301bc7d2ec7d299ab49ee2c106be54",
@@ -564,7 +564,7 @@
       }
     },
     {
-      "directory": "skills/nature-experiment-log",
+      "directory": ".agents/skills/nature-experiment-log",
       "source": "nature-skills",
       "source_path": "skills/nature-experiment-log",
       "entry_sha256": "1f7fffcbc950d4f60fcb5ad9f2aabe82246ebbd83bf29621a0e90c9ff4ec4b8b",
@@ -584,7 +584,7 @@
       }
     },
     {
-      "directory": "skills/nature-figure",
+      "directory": ".agents/skills/nature-figure",
       "source": "nature-skills",
       "source_path": "skills/nature-figure",
       "entry_sha256": "46f2cf74d473604ff9ad884893bbe2360b3431fec631009fce5c487945acf652",
@@ -719,7 +719,7 @@
       }
     },
     {
-      "directory": "skills/nature-image2ppt",
+      "directory": ".agents/skills/nature-image2ppt",
       "source": "nature-skills",
       "source_path": "skills/nature-image2ppt",
       "entry_sha256": "0b49331f7b97e0751248c84506cada638f29ff44bb3023686f89a9f858748e9e",
@@ -814,7 +814,7 @@
       }
     },
     {
-      "directory": "skills/nature-literature-pipeline",
+      "directory": ".agents/skills/nature-literature-pipeline",
       "source": "nature-skills",
       "source_path": "skills/nature-literature-pipeline",
       "entry_sha256": "1dcaa692457ec9c2be409cb7777f834a2db833788b2e9b680baf0e961126b01a",
@@ -835,7 +835,7 @@
       }
     },
     {
-      "directory": "skills/nature-paper-card",
+      "directory": ".agents/skills/nature-paper-card",
       "source": "nature-skills",
       "source_path": "skills/nature-paper-card",
       "entry_sha256": "a71e3dbc446523e415ed4b896bed8ea60e0c598fb8655c587679d719648b68c9",
@@ -865,7 +865,7 @@
       }
     },
     {
-      "directory": "skills/nature-paper-to-patent",
+      "directory": ".agents/skills/nature-paper-to-patent",
       "source": "nature-skills",
       "source_path": "skills/nature-paper-to-patent",
       "entry_sha256": "b65243157addf3e4e38de4cb35136d95478c2c997bdd5600e6ae21f91f4d06f0",
@@ -941,7 +941,7 @@
       }
     },
     {
-      "directory": "skills/nature-paper2ppt",
+      "directory": ".agents/skills/nature-paper2ppt",
       "source": "nature-skills",
       "source_path": "skills/nature-paper2ppt",
       "entry_sha256": "a8d0fd14ca0863602cfc76305467d0f5a6ac2c104abedd7f7e86dfcf46bf04cf",
@@ -969,7 +969,7 @@
       }
     },
     {
-      "directory": "skills/nature-polishing",
+      "directory": ".agents/skills/nature-polishing",
       "source": "nature-skills",
       "source_path": "skills/nature-polishing",
       "entry_sha256": "9391b2a2487306cf2ed560377d4bc10c339fd2c220a79db278cb7f9d31e79023",
@@ -1011,7 +1011,7 @@
       }
     },
     {
-      "directory": "skills/nature-proposal-writer",
+      "directory": ".agents/skills/nature-proposal-writer",
       "source": "nature-skills",
       "source_path": "skills/nature-proposal-writer",
       "entry_sha256": "9be8ae52f909969592529414fb6f5bb54059c8cbe520e78b53d22b297cef5e4a",
@@ -1054,7 +1054,7 @@
       }
     },
     {
-      "directory": "skills/nature-reader",
+      "directory": ".agents/skills/nature-reader",
       "source": "nature-skills",
       "source_path": "skills/nature-reader",
       "entry_sha256": "999a5c1b116558133d0389ce6c1bbc3dc9cf5242d1be2870358789769d97a84e",
@@ -1083,7 +1083,7 @@
       }
     },
     {
-      "directory": "skills/nature-ref-verifier",
+      "directory": ".agents/skills/nature-ref-verifier",
       "source": "nature-skills",
       "source_path": "skills/nature-ref-verifier",
       "entry_sha256": "6a975074d7a1c62c00dd9e8c7367cd2af0ef9d573d6d6ce5ea12f70d9320a516",
@@ -1098,7 +1098,7 @@
       }
     },
     {
-      "directory": "skills/nature-response",
+      "directory": ".agents/skills/nature-response",
       "source": "nature-skills",
       "source_path": "skills/nature-response",
       "entry_sha256": "a8283db56e73879413311cbcde1db4c72dd4390bbe21ab2f62f1f968610b5de1",
@@ -1145,7 +1145,7 @@
       }
     },
     {
-      "directory": "skills/nature-reviewer",
+      "directory": ".agents/skills/nature-reviewer",
       "source": "nature-skills",
       "source_path": "skills/nature-reviewer",
       "entry_sha256": "8ca28cc8e8bda2b5254056940d2a696dc0d3cabcd5573cdec98ffc3cbd162610",
@@ -1175,7 +1175,7 @@
       }
     },
     {
-      "directory": "skills/nature-shared",
+      "directory": ".agents/skills/nature-shared",
       "source": "nature-skills",
       "source_path": "skills/nature-shared",
       "entry_sha256": "3d914e73f023cab4f247d82f906a948307de8a867fd6c33df999badf67c5d5f2",
@@ -1205,7 +1205,7 @@
       }
     },
     {
-      "directory": "skills/nature-statistics",
+      "directory": ".agents/skills/nature-statistics",
       "source": "nature-skills",
       "source_path": "skills/nature-statistics",
       "entry_sha256": "89d2a101fc45d7adf8ca327a6da4bda4a696d6364d7c36ead4f53413627a9b6f",
@@ -1225,7 +1225,7 @@
       }
     },
     {
-      "directory": "skills/nature-writing",
+      "directory": ".agents/skills/nature-writing",
       "source": "nature-skills",
       "source_path": "skills/nature-writing",
       "entry_sha256": "ce7c4d20329b96b03b0f0c0bb744411b1b4deaa7a7b69b90757705a83c195b12",
@@ -1311,7 +1311,7 @@
       }
     },
     {
-      "directory": "skills/shuorenhua",
+      "directory": ".agents/skills/shuorenhua",
       "source": "shuorenhua",
       "source_path": ".",
       "entry_sha256": "56a156045d2ac25ebf8210768b6c2608a42c37ac7ee4979d746cde7b026012db",
@@ -1425,7 +1425,7 @@
       }
     },
     {
-      "directory": "skills/humanizer",
+      "directory": ".agents/skills/humanizer",
       "source": "humanizer",
       "source_path": ".",
       "entry_sha256": "0612f1dfb1672b0ea9b97e139bf1f06cabe98d8b27424fe8ff01e1fb4cc99cad",
@@ -1484,20 +1484,20 @@
   },
   "adaptations": [
     {
-      "directory": "skills/crawl4ai",
+      "directory": ".agents/skills/crawl4ai",
       "entry_sha256": "7878457a681745226b7a28c0b424fccf0d7c78f9f9dea9a90963bfb7473608a6"
     },
     {
-      "directory": "skills/go-on",
-      "entry_sha256": "749198a0fab61a64ea3b1b7ad4438283cfc06e7597576e504eec4aae1b5d4111"
+      "directory": ".agents/skills/go-on",
+      "entry_sha256": "c527524c5b8168a887e4db50074a2dd646208cd39a2f2a08629e7b5de8ae3ae6"
     },
     {
-      "directory": "skills/evolution",
-      "entry_sha256": "e919965ca1d8ff9e8730ecb379b78cc2526e34e0f26275c198f233e0aeebddfc"
+      "directory": ".agents/skills/evolution",
+      "entry_sha256": "9e2d218a47a0c108452cd6739f2d6f6ec365d30f15721d285a4d0662cac32afa"
     },
     {
-      "directory": "skills/task-tag",
-      "entry_sha256": "2892289741a137200df1cd4fabf748449db51d675cb16e1a0bfb5c916b3596a3"
+      "directory": ".agents/skills/task-tag",
+      "entry_sha256": "41b1a830043a038d9e20b0f2d6cc5c8a371c52991bcf6a0171c17160ebf07164"
     }
   ],
   "libreoffice": {
@@ -1506,5 +1506,23 @@
     "sha256": "7f4d7b2e36921eec5122c655249a24cc88935ee357e8261fd3bccd15aa1f7b9f",
     "scope": "project-unpacked",
     "path": ".runtime/libreoffice"
-  }
+  },
+  "project_overrides": [
+    {
+      "directory": ".agents/skills/nature-shared",
+      "file": "agents/openai.yaml",
+      "upstream_sha256": "4bbf2e58b350269cf231f73ca12af1d097b9d64637023b037e238083151fbd67",
+      "installed_sha256": "6b6ee8567084db6a1f1b3715c6bd8c4afa6bb9fab55d10bc5f44a93d8ce53f38",
+      "reason": "User requests all relevant skills eligible for implicit invocation; shared package remains dependency-only"
+    },
+    {
+      "directory": ".agents/skills/ponytail",
+      "file": "SKILL.md",
+      "upstream_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+      "installed_sha256": "f211ec383435ae8707f14468d91a3a2f1d31d5dc88b5c2a05c14e4fc1ff6ef1e",
+      "reason": "User explicitly requests Ponytail for reports as well as code"
+    }
+  ],
+  "skill_maintenance_root": ".agents/skills",
+  "omx_skill_root": ".codex/skills"
 }

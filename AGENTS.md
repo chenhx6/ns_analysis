@@ -14,7 +14,7 @@
 - 运行大规模处理前，先确认输入格式、运行编号、通道映射和输出位置，并用有限样本验证。
 - 保存可复现所需的输入文件或运行编号、参数、筛选条件、命令及结果位置到 `analysis/` 的记录中。
 - 已有实验记录见 `analysis/record_analysis.md`；解码程序见 `analysis/code/DecodeAndSortAll/`。
-- 涉及本项目的数据分析时，读取 `skills/chx-data-analysis/SKILL.md`，遵循其中的数据格式和目录说明。
+- 涉及本项目的数据分析时，自动读取 `.agents/skills/chx-data-analysis/SKILL.md`，遵循其中的数据格式和目录说明。
 
 ## 版本管理
 
@@ -24,20 +24,42 @@
 - `.gitignore` 采用根目录白名单；新增项目基础文件或技能存放路径时同步更新白名单。
 - `.githooks/` 存放可版本化的 Git hooks。通过 `analysis/code/project_git.sh` 配置和使用仓库；提交和推送前检查跟踪范围及单文件大小（默认上限 25 MiB）。
 - 同步前检查差异；保留远端已有内容和历史，不强制推送。不把后续分析任务视为自动发布结果的授权；在用户要求同步时执行推送。
-- 当前受限环境中的 `.git`、`.agents`、`.codex` 被只读映射。Git 元数据保存在忽略的 `.project-git/`；项目原生 `.agents/skills/` 和 `.codex/` 已通过获准的项目安装写入实际文件系统。当前会话无法读取这些映射后的内容时使用 `skills/` 中的同版本副本；不得修改受保护目录权限规避限制。
+- Git 元数据使用本地忽略的 `.project-git/`。`.agents/skills/` 是项目技能维护源，`.codex/skills/` 是保留的 OMX 项目技能入口；修改技能时同步这两个有效目录。根 `skills/` 已废弃，不再生成备用副本。不得修改保护目录权限规避宿主限制。
 
 ## 项目工具与技能入口
 
 - 安装清单与来源版本：`analysis/third_party/sources.lock.json`；调用、恢复和外部依赖说明：`analysis/third_party/INSTALL.md`。上游固定源码位于 `analysis/vendor/`，其中的 AGENTS 是上游源码说明，不能覆盖本项目的数据边界。
-- 代码任务按需使用 Ponytail 的完整技能；中文公开文本改写使用 `skills/shuorenhua/SKILL.md`，英文改写使用 `skills/humanizer/SKILL.md`。代码、配置、数据和命令输出不套用写作改写规则。
+- 代码和报告自动应用 Ponytail 的精简原则；中文报告/公开文本自动使用 `.agents/skills/shuorenhua/SKILL.md`，英文文本自动使用 `.agents/skills/humanizer/SKILL.md`。代码、配置、数据和命令输出不套用写作改写规则。
 - 科研任务按需读取 Nature 对应技能和 `manifest.yaml`，保留 `nature-shared` 共享依赖。其 `core/` 简写按 manifest 解析，常见真实位置为 `static/core/`。输出仍按本项目目录约定存放。
 - 长期自主任务使用原生 OMX `autopilot`、`ultragoal` 等工作流。仅在用户明确要求目标模式且宿主允许时调用目标工具；宿主权限和已有暂停、取消指令始终适用。OMX 0.21 的 `ralph`、`pipeline`、`ultrawork` 等是迁移卡片，按其指引使用当前工作流。
-- 用户要求继续或 `go-on` 时读取 `skills/go-on/SKILL.md`，从已有检查点恢复；用户要求演进时读取 `skills/evolution/SKILL.md`。日常复盘记录在 `analysis/`，不把复盘视为任意安装授权。
+- 继续或恢复未完成任务时自动读取 `.agents/skills/go-on/SKILL.md`；发生能力缺口或用户要求演进时自动读取 `.agents/skills/evolution/SKILL.md`。日常复盘记录在 `analysis/`，能力评估按任务授权范围执行。
 - 使用原生角色进行有价值的并行工作；本会话实际提供的模型和并发上限优先于上游默认。对独立任务给出明确文件范围，并由主代理整合和验证。
 - OMX 的模板路径为 `analysis/vendor/oh-my-codex/templates/AGENTS.md`。通过 `python3 analysis/code/project_runtime.py omx <命令>` 启动，兼容数据盘执行限制；此入口不改变全局安装，也不自动更新上游。
-- 抓取网页时读取 `skills/crawl4ai/SKILL.md`，使用 `python3 analysis/code/project_runtime.py python <脚本>`。该 Python 与系统 PyROOT 的 Python 3.8 分开；既有 ROOT 分析仍可使用系统环境。
-- 已验证任务需要提交交付时读取 `skills/task-tag/SKILL.md`，准备验证证据和 Git tree，`post-commit` 自动生成本地 annotated tag。推送仍按用户的同步要求执行。
+- 抓取网页时自动读取 `.agents/skills/crawl4ai/SKILL.md`，使用 `python3 analysis/code/project_runtime.py python <脚本>`。该 Python 与系统 PyROOT 的 Python 3.8 分开；既有 ROOT 分析仍可使用系统环境。
+- 已验证任务进入版本交付时自动读取 `.agents/skills/task-tag/SKILL.md`，准备验证证据和 Git tree，`post-commit` 自动生成本地 annotated tag。推送按用户已授权的同步范围执行。
 - hooks 配置安装在项目 `.codex/hooks.json`；由宿主执行信任检查，不编辑信任数据库。技能和角色通常在新会话加载；CLI 模型任务还需本项目可用的 Codex 登录或相应 API 凭据。
+
+<!-- PROJECT:AUTO-SKILLS:START -->
+## 自动技能与 hooks 规则
+
+每次任务自动依据当前意图和已安装技能的 name/description 选择适用技能，先读取对应 SKILL.md 再执行；用户无需输入技能名。显式指令、范围和暂停/取消优先。自动调用只处理任务相关部分，不为了调用而扩展任务。
+
+| 任务内容 | 自动选择 |
+| --- | --- |
+| 写代码、修复、重构、安装与配置 | `ponytail`；清理时加 `ai-slop-cleaner`，冗余巡查加 `ponytail-audit` |
+| 写报告、总结、说明、README、技术文档 | `ponytail` 精简信息与结构；中文加 `shuorenhua`，英文加 `humanizer`；保留必要事实、方法和验证，不强制限制为三行 |
+| 科研报告、论文写作或润色 | 上述报告规则，加 `nature-writing` 或 `nature-polishing`；图表加 `nature-figure`，统计证据加 `nature-statistics`，数据声明加 `nature-data` |
+| 读论文、查文献、核引文、下载全文、汇报 PPT、审稿与回复、专利 | 按任务自动选相应 `nature-*`；共享定义由 `nature-shared` 随依赖自动加载，不启动独立共享包任务 |
+| 实验记录、Ge/CsI 分析、网页抓取 | 按任务使用 `nature-experiment-log`、`chx-data-analysis`、`crawl4ai` |
+| 规划、自主长期执行、检查点续作、并行、验证与审查 | 按任务阶段使用当前 OMX 工作流及 `go-on`；普通明确任务直接完成，原生目标工具只在宿主允许的明确目标授权下调用 |
+| 技能维护、重复失败或能力缺口、安装故障、版本交付 | 按任务使用 `skill`/系统 skill-creator、`evolution`、`doctor`、`git-master`、`task-tag` |
+
+其余技能按其适用范围自动选择。退役入口自动转到当前替代流程；worker 仅用于有效 Team 任务，cancel 仅响应实际取消意图。所有技能允许隐式选择，支持包按依赖加载。
+
+报告语言按用户要求或现有任务语言执行；中文科研报告使用 Nature 的证据/论证方法写中文，覆盖其默认英文输出。说人话/Humanizer 只清理可编辑的译文或新写文字，保留作为证据的原文、引用、公式、术语与单位。项目科研绘图默认 Python，已有 R 工作流或用户指定 R 时沿用 R；不为技能选择重复询问。
+
+SessionStart/UserPromptSubmit 自动注入本节，OMX/Ponytail 生命周期 hooks 按各自事件运行；Git 检查与标签 hooks 由项目 Git 入口自动运行。宿主仍负责 hook 信任与权限，不伪造信任、登录、目标完成或验证结果。自动选择不等于自动向他人发消息或发布超出用户授权范围的内容。
+<!-- PROJECT:AUTO-SKILLS:END -->
 
 <!-- OMX:AGENTS:START -->
 <!-- AUTONOMY DIRECTIVE — DO NOT REMOVE -->
@@ -125,7 +147,7 @@ Rules: max 6 concurrent child agents; child prompts remain under AGENTS.md autho
 <invocation_conventions>
 - `$name` — invoke a workflow skill.
 - `/skills` — browse available skills.
-- Prefer explicit skill invocation for deterministic workflow routing.
+- Select applicable skills automatically from task intent; explicit invocation overrides ordinary selection.
 </invocation_conventions>
 
 <model_routing>
@@ -153,7 +175,7 @@ Keyword routing is implemented primarily by native `UserPromptSubmit` hooks and 
 
 Fallback behavior when hook context is unavailable:
 - Explicit `$name` invocations run left-to-right and override implicit keywords.
-- Bare skill names do not activate skills by themselves; skill-name activation requires explicit `$skill` invocation. Natural-language routing phrases may still map to a workflow. Examples: `analyze` / `investigate` → `$analyze` for read-only deep analysis with ranked synthesis, explicit confidence, and concrete file references.
+- Natural-language intent and skill applicability activate workflows without a `$skill` requirement. Apply the project automatic skill rules above; explicit invocations take precedence. Examples: `analyze` / `investigate` → `$analyze` for read-only deep analysis with ranked synthesis, explicit confidence, and concrete file references.
 - Keep the detailed keyword list in `src/hooks/keyword-registry.ts`; do not duplicate it here.
 
 Runtime workflows such as `autopilot`, `ultraqa`, `team`, and `ultragoal` require OMX CLI runtime support. In Codex App, outside-tmux, or plain Codex sessions without OMX tmux runtime, explain that those workflows are not directly available there and continue with the nearest App-safe surface unless the user explicitly wants to launch OMX CLI from shell first.

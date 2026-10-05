@@ -16,21 +16,22 @@
 
 项目 Python 环境共固定 155 个包，另安装 Mermaid/Puppeteer 与官方 LibreOffice 25.8.7 解包版，用于 Nature 的本地图表和 Office 渲染。
 
-固定提交、uv 下载版本/校验值和原生组件摘要见 [sources.lock.json](sources.lock.json)。所有上游许可证在 `licenses/`。57 个上游技能保留原始入口；另有既有 `chx-data-analysis` 和 4 个项目适配入口：`go-on`、`evolution`、`task-tag`、`crawl4ai`。
+固定提交、uv 下载版本/校验值和原生组件摘要见 [sources.lock.json](sources.lock.json)。所有上游许可证在 `licenses/`。57 个上游技能保留来源记录；用户要求的 Ponytail 报告适用范围和隐式调用配置记录在 `project_overrides`，保留原始摘要与安装后的摘要。另有既有 `chx-data-analysis` 和 4 个项目适配入口：`go-on`、`evolution`、`task-tag`、`crawl4ai`。
 
 This product includes software developed by UncleCode (https://x.com/unclecode) as part of the Crawl4AI project (https://github.com/unclecode/crawl4ai).
 
 ## 存放与发现
 
-- `skills/`：版本化的完整技能副本，当前受限会话可以读取。
-- `.agents/skills/`：Codex 当前的项目技能发现目录。
+- `.agents/skills/`：Codex 当前的项目技能发现目录及项目维护源。
 - `.codex/skills/`、`.codex/agents/`、`.codex/prompts/`：OMX 原生项目安装目录。
 - `.codex/config.toml`、`.codex/hooks.json`：原生项目配置与 hooks。保留宿主信任流程，不迁移临时 setup 的 trust hash；Ponytail 的状态路径显式限定在项目内。
 - `.omx/setup-scope.json`、`.omx/hud-config.json`：版本化的项目安装范围和界面偏好；其他 `.omx/` 会话与运行状态留在本地。
 - `analysis/vendor/`：Ponytail、OMX、Crawl4AI 的固定源码，保留其目录结构和许可证。编译输出及依赖另行恢复。
 - `.runtime/`：项目独立 Python、包、浏览器、原生二进制、缓存及可选模型权重，不提交 Git。
 
-当前沙箱把 `.agents/`、`.codex/` 映射为只读目录；实际项目安装通过获准执行环境完成。不要用该沙箱中的空目录判断实际安装失败，也不要修改保护目录权限。技能/角色通常在新会话加载，hooks 由宿主按信任设置加载。
+根 `skills/` 曾用于安装时的读取兼容，现已核对没有独有内容并清理。所有维护和调用路径使用 `.agents/skills/`，修改技能时同步保留的 `.codex/skills/`；不再生成根目录副本。技能/角色通常在新会话加载，hooks 由宿主按信任设置加载。
+
+技能与 hooks 按任务自动触发，无需提示技能名。报告和代码都自动使用 Ponytail，中文报告结合说人话、英文结合 Humanizer；科研报告再选择适用的 Nature 技能。项目自动路由规则只定义在根 `AGENTS.md`，轻量的 SessionStart/UserPromptSubmit hook 读取同一规则并注入，避免另写一套匹配表。
 
 Nature 资源按各技能的 `manifest.yaml` 解析；某些 `core/` 路径是 `static/core/` 的简写。OMX 文档所指的根 `templates/AGENTS.md` 位于 `analysis/vendor/oh-my-codex/templates/AGENTS.md`。`nature-proposal-writer` 的调用名为 `researchwrite`，按上游保留。
 
@@ -45,13 +46,13 @@ python3 analysis/code/project_runtime.py omx ultragoal status
 python3 analysis/code/project_runtime.py python analysis/code/<your-script>.py
 
 # Image2PPT 的本地 runtime 检查
-python3 analysis/code/project_runtime.py python skills/nature-image2ppt/cli/image2ppt/cli.py doctor --json
+python3 analysis/code/project_runtime.py python .agents/skills/nature-image2ppt/cli/image2ppt/cli.py doctor --json
 
 # Mermaid 使用同一项目浏览器
 python3 analysis/code/project_runtime.py mermaid -i diagram.mmd -o diagram.svg
 ```
 
-自然语言任务按项目 AGENTS 路由到相应技能。可直接指定 `$ponytail`、`$shuorenhua`、`$humanizer`、`$nature-figure`、`$autopilot`、`$ultragoal`、`$team`、`$go-on`、`$evolution` 等。OMX 的 Ralph、Pipeline、Ultrawork 和旧 Goal 入口已退役，保留的卡片会指向当前实现。
+自然语言任务自动按项目 AGENTS 路由到相应技能；也可显式指定技能覆盖默认选择。OMX 的 Ralph、Pipeline、Ultrawork 和旧 Goal 入口已退役，保留的卡片会指向当前实现。
 
 数据盘不支持符号链接和可执行权限。依赖、Python 和浏览器保留项目内完整副本；运行时将必要的可执行文件复制到私有 `/tmp/chx-runtime-<uid>-<project-id>/` 缓存并恢复执行权限。这个临时缓存可重建，不是全局安装。Python 的可选 terminfo 资源因大小写冲突被省略；使用系统终端资源，不影响 Python 或浏览器运行。
 
@@ -80,7 +81,7 @@ Nature 的 OpenRouter、Scopus、图像服务等按所用工作流需要相应�
 
 ## 验证结果
 
-[verification.json](verification.json) 记录 13 项实际通过的检查：完整技能资源及原生发现副本、脚本语法、全部 Python 依赖导入、两种 Chromium 抓取、OMX 安装形态、六个 MCP 服务握手与工具列表、Ponytail hook 输出、隔离目标计划建立与恢复、Image2PPT doctor、Mermaid SVG 渲染，独立的标签证据保护测试，以及四个原生可执行组件的启动检查。未调用模型 API、启动真实 Team 模型任务或访问外部付费服务。
+[verification.json](verification.json) 记录 17 项实际通过的检查：完整技能资源、保留的 OMX 入口及自动选择策略、脚本语法、全部 Python 依赖导入、两种 Chromium 抓取、OMX 安装形态、六个 MCP 服务握手与工具列表、Ponytail hook 输出、隔离目标计划建立与恢复、Image2PPT doctor、Mermaid SVG 渲染，独立的标签证据保护测试，以及四个原生可执行组件的启动检查。未调用模型 API、启动真实 Team 模型任务或访问外部付费服务。
 
 ## 交付标签
 

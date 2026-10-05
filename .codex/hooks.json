@@ -18,6 +18,15 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/code/skill-routing-hook.mjs\"",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PreToolUse": [
@@ -54,6 +63,15 @@
           {
             "type": "command",
             "command": "PLUGIN_DATA=\"/home/ys/data_401/data/chx_20260622/.omx/ponytail\" CLAUDE_CONFIG_DIR=\"/home/ys/data_401/data/chx_20260622/.omx/ponytail\" XDG_CONFIG_HOME=\"/home/ys/data_401/data/chx_20260622/.runtime/xdg-config\" CLAUDE_PLUGIN_ROOT=\"/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail\" node \"/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail/hooks/ponytail-mode-tracker.js\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/code/skill-routing-hook.mjs\"",
             "timeout": 5
           }
         ]

@@ -7,7 +7,7 @@ description: 本项目任务经过验证并提交时自动建立本地 annotated
 
 将实际检查结果保存为 `analysis/` 下的 JSON：`status` 为 `passed`，`checks` 为非空数组，每项含检查名称和实际 `returncode`。失败、暂停或只安装了文件时不记录为通过。
 
-任务完成且用户要求版本交付时，先暂存已检查的任务文件和证据，再执行：
+任务完成并进入已授权版本交付时自动，先暂存已检查的任务文件和证据，再执行：
 
 ```bash
 python3 analysis/code/task_delivery.py prepare --task <task-name> --evidence analysis/<evidence-file>.json

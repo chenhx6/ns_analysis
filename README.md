@@ -13,11 +13,12 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 | `decode_data/`、`processed_data/` 等 | 解码文件和处理产生的中间数据 | 否 |
 | `analysis/` | 记录本、代码、配置、结果图及小型结果表 | 是，排除编译产物和大型数据 |
 | `AGENTS.md`、`README.md`、`.gitignore` | 项目约定及版本管理说明 | 是 |
-| `skills/`、`.agents/skills/` | 项目技能 | 是 |
+| `.agents/skills/` | 项目技能维护源 | 是 |
+| `.codex/skills/` | OMX 项目技能入口 | 是 |
 | `.githooks/`、`.codex/` | Git hooks、项目配置（排除本地状态和凭据） | 是 |
 | `.project-git/` | `.git` 不可写时的本地 Git 元数据 | 否 |
 
-具体规则见 [AGENTS.md](AGENTS.md)，实验记录见 [analysis/record_analysis.md](analysis/record_analysis.md)。项目技能的可读副本位于 `skills/`，原生发现入口为项目 `.agents/skills/`，OMX 兼容目录为 `.codex/skills/`。安装没有写入全局技能目录。
+具体规则见 [AGENTS.md](AGENTS.md)，实验记录见 [analysis/record_analysis.md](analysis/record_analysis.md)。技能维护源为 `.agents/skills/`，OMX 入口为 `.codex/skills/`；根 `skills/` 冗余副本已清理。技能与 hooks 按任务自动触发，报告和代码都应用 Ponytail，报告再配合语言和科研技能。安装没有写入全局技能目录。
 
 ## Git 使用
 
@@ -29,7 +30,7 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 bash analysis/code/project_git.sh status --short
 bash analysis/code/project_git.sh config user.name "你的姓名"
 bash analysis/code/project_git.sh config user.email "你的邮箱"
-bash analysis/code/project_git.sh add AGENTS.md README.md .gitignore skills .githooks analysis
+bash analysis/code/project_git.sh add AGENTS.md README.md .gitignore .agents/skills .codex .githooks analysis
 bash analysis/code/project_git.sh diff --cached --stat
 bash analysis/code/project_git.sh commit -m "Document analysis project conventions"
 bash analysis/code/project_git.sh fetch origin

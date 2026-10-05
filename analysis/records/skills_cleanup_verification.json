@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "scope": "root skill-copy cleanup and task-based automatic skill routing",
+  "checks": [
+    {
+      "name": "Root-copy pre-delete identity and recoverability gate",
+      "returncode": 0,
+      "files_removed": 963,
+      "logical_bytes_removed": 41779426
+    },
+    {
+      "name": "Preserved Codex and OMX resources, documented overrides and missing-resource regression",
+      "returncode": 0,
+      "skill_units_per_root": 62
+    },
+    {
+      "name": "Implicit invocation policies allow all project skills",
+      "returncode": 0
+    },
+    {
+      "name": "Routing hook startup/prompt payloads, out-of-scope and malformed-input gates",
+      "returncode": 0
+    },
+    {
+      "name": "Syntax checks and migrated live-path reference scan",
+      "returncode": 0
+    },
+    {
+      "name": "Five task-routing scenarios reviewed against real skill applicability",
+      "returncode": 0,
+      "method": "one read-only audit agent; a separate attempted reviewer was unavailable due to capacity"
+    },
+    {
+      "name": "Post-cleanup offline project runtime verification",
+      "returncode": 0,
+      "checks_passed": 17,
+      "report": "analysis/third_party/verification.json",
+      "report_sha256": "c2dbf88b7bd8b12d8573e651d4cfe21af411662775b42f0c67367cdaf5cc6648"
+    }
+  ],
+  "limits": [
+    "No model API call or host trust modification; hook registration needs normal host loading/trust.",
+    "Non-skill redundancy audited only; candidate source files were not deleted."
+  ]
+}

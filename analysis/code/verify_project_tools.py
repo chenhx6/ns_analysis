@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNNER = ROOT / "analysis/code/project_runtime.py"
@@ -24,24 +25,40 @@ def command(name, argv, code=None, validate=None, cwd=ROOT, env=None, expected=0
             "command": [str(value) for value in argv], "output": output[-18000:]}
 
 
+def check_skill_resources(snapshot, root=ROOT):
+    """Verify the maintained skills plus OMX's preserved reading surface."""
+    mismatches = []
+    overrides = {(item["directory"], item["file"]): item["installed_sha256"]
+                 for item in snapshot.get("project_overrides", [])}
+    for skill in snapshot["skills"]:
+        for relative, expected in skill["files_sha256"].items():
+            expected = overrides.get((skill["directory"], relative), expected)
+            for base in [root / skill["directory"], root / ".codex/skills" / Path(skill["directory"]).name]:
+                path = base / relative
+                if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                    mismatches.append(str(path.relative_to(root)))
+    for skill in snapshot["adaptations"]:
+        for base in [root / skill["directory"], root / ".codex/skills" / Path(skill["directory"]).name]:
+            path = base / "SKILL.md"
+            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != skill["entry_sha256"]:
+                mismatches.append(str(path.relative_to(root)))
+    return mismatches
+
+
 def main():
     checks = []
     snapshot = json.loads((ROOT / "analysis/third_party/sources.lock.json").read_text())
-    mismatches = []
-    for skill in snapshot["skills"]:
-        for relative, expected in skill["files_sha256"].items():
-            for base in [ROOT / skill["directory"], ROOT / ".agents/skills" / Path(skill["directory"]).name]:
-                path = base / relative
-                if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
-                    mismatches.append(str(path.relative_to(ROOT)))
-    for skill in snapshot["adaptations"]:
-        path = ROOT / skill["directory"] / "SKILL.md"
-        if hashlib.sha256(path.read_bytes()).hexdigest() != skill["entry_sha256"]:
-            mismatches.append(str(path.relative_to(ROOT)))
-    checks.append({"name": "Complete upstream skill resources and native discovery copies",
+    mismatches = check_skill_resources(snapshot)
+    checks.append({"name": "Complete skill resources and preserved OMX surface",
                    "returncode": int(bool(mismatches)), "output": mismatches,
                    "upstream_skills": len(snapshot["skills"]),
                    "native_discovered": len(list((ROOT / ".agents/skills").glob("*/SKILL.md")))})
+    explicit_only = [str(path.relative_to(ROOT))
+                     for base in [".agents/skills", ".codex/skills"]
+                     for path in (ROOT / base).glob("*/agents/openai.yaml")
+                     if (yaml.safe_load(path.read_text()) or {}).get("policy", {}).get("allow_implicit_invocation", True) is False]
+    checks.append({"name": "All project skill policies permit automatic selection",
+                   "returncode": int(bool(explicit_only)), "output": explicit_only})
     for file in ["project_runtime.py", "bootstrap_project_tools.py", "task_delivery.py", "check_git_content.py"]:
         compile((ROOT / "analysis/code" / file).read_text(), file, "exec")
     checks.append({"name": "Local tool scripts compile with system Python", "returncode": 0})
@@ -111,7 +128,7 @@ for (const name of ['state','memory','code-intel','trace','wiki','hermes']) {
         checks.append(command("Ultragoal reads isolated durable plan",
             ["node", str(cli), "ultragoal", "status", "--json"], cwd=Path(path),
             validate=lambda output: "First" in output and "Second" in output))
-    image2ppt = ROOT / "skills/nature-image2ppt/cli/image2ppt/cli.py"
+    image2ppt = ROOT / ".agents/skills/nature-image2ppt/cli/image2ppt/cli.py"
     checks.append(command("Image2PPT local doctor dependencies and rendering",
         ["python3", str(RUNNER), "python", str(image2ppt), "doctor", "--json"],
         validate=lambda output: json.loads(output).get("ok") is True))

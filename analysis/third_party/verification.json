@@ -8,19 +8,70 @@
   ],
   "checks": [
     {
-      "name": "Complete upstream skill resources and native discovery copies",
+      "name": "Complete skill resources and preserved OMX surface",
       "returncode": 0,
       "output": [],
       "upstream_skills": 57,
       "native_discovered": 62
     },
     {
+      "name": "All project skill policies permit automatic selection",
+      "returncode": 0,
+      "output": []
+    },
+    {
       "name": "Local tool scripts compile with system Python",
       "returncode": 0
     },
     {
+      "name": "Native executable entrypoint: omx-runtime",
+      "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
+      "command": [
+        "/tmp/chx-runtime-1000-7c3dcfaa578c5882/omx-native/omx-runtime",
+        "--help"
+      ],
+      "output": "usage: omx-runtime <command> [options]\n\ncommands:\n  schema [--json]                     print the runtime contract summary\n  fs-rename-no-replace <from> <to>       atomically move without replacing destination\n  process-identity <pid>              print process birth identity as JSON\n  snapshot [--json] [--state-dir=DIR]  print a runtime snapshot\n  mux-contract                        print the mux boundary summary\n  exec <json> [--state-dir=DIR]       process a runtime command from JSON\n  lease-mutex <absolute-canonical-dir> <expected-dev> <expected-ino> <safe-leaf>  hold native lease mutex over stdin JSON protocol\n  init <state-dir>                    initialize a fresh state directory\n\n"
+    },
+    {
+      "name": "Native executable entrypoint: omx-explore-harness",
+      "returncode": 0,
+      "observed_exit_code": 1,
+      "expected_exit_code": 1,
+      "command": [
+        "/tmp/chx-runtime-1000-7c3dcfaa578c5882/omx-native/omx-explore-harness",
+        "--help"
+      ],
+      "output": "[omx explore] Usage: omx-explore --cwd <dir> --prompt <text> --prompt-file <explore-prompt.md> --instructions-file <AGENTS.md> --model-spark <model> --model-fallback <model>\n"
+    },
+    {
+      "name": "Native executable entrypoint: omx-sparkshell",
+      "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
+      "command": [
+        "/tmp/chx-runtime-1000-7c3dcfaa578c5882/omx-native/omx-sparkshell",
+        "--help"
+      ],
+      "output": "usage: omx-sparkshell <command> [args...]\n   or: omx-sparkshell --shell <shell-command>\n   or: omx-sparkshell --tmux-pane <pane-id> [--tail-lines <100-1000>]\n\nDirect command mode executes argv without shell metacharacter parsing.\nShell mode executes through bash -lc/sh -lc on POSIX and a native Windows shell on Windows.\nTmux pane mode captures a larger pane tail and applies the same raw-vs-summary behavior.\n\n"
+    },
+    {
+      "name": "Native executable entrypoint: omx-api",
+      "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
+      "command": [
+        "/tmp/chx-runtime-1000-7c3dcfaa578c5882/omx-native/omx-api",
+        "--help"
+      ],
+      "output": "omx-api serve [--daemon] [--system --dry-run]|status|stop|generate text|generate image|smoke text\nNote: real-private backend mode is experimental and requires local bearer auth.\n"
+    },
+    {
       "name": "Crawl4AI extras and Nature Python runtime",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "python3",
         "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
@@ -33,6 +84,8 @@
     {
       "name": "Two real Chromium crawler modes on local HTML",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "python3",
         "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
@@ -45,6 +98,8 @@
     {
       "name": "OMX installation shape; CLI authentication checked separately",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "python3",
         "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
@@ -56,6 +111,8 @@
     {
       "name": "Six MCP servers initialize and list tools",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "node",
         "--input-type=module",
@@ -67,6 +124,8 @@
     {
       "name": "Ponytail SessionStart hook emits instructions with project state",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "node",
         "/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail/hooks/ponytail-activate.js"
@@ -76,6 +135,8 @@
     {
       "name": "Ultragoal creates durable plan artifacts in isolated fixture",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "node",
         "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/cli/omx.js",
@@ -89,11 +150,13 @@
         "Second::Verify second fixture",
         "--json"
       ],
-      "output": "{\n  \"ok\": true,\n  \"plan\": {\n    \"version\": 1,\n    \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n    \"updatedAt\": \"2026-10-04T20:11:01.194Z\",\n    \"briefPath\": \".omx/ultragoal/brief.md\",\n    \"goalsPath\": \".omx/ultragoal/goals.json\",\n    \"ledgerPath\": \".omx/ultragoal/ledger.jsonl\",\n    \"codexGoalMode\": \"aggregate\",\n    \"goals\": [\n      {\n        \"id\": \"G001-first\",\n        \"title\": \"First\",\n        \"objective\": \"Verify first fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      },\n      {\n        \"id\": \"G002-second\",\n        \"title\": \"Second\",\n        \"objective\": \"Verify second fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      }\n    ],\n    \"codexObjective\": \"Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.\"\n  },\n  \"summary\": {\n    \"total\": 2,\n    \"pending\": 2,\n    \"inProgress\": 0,\n    \"complete\": 0,\n    \"failed\": 0,\n    \"reviewBlocked\": 0,\n    \"historicalReviewBlocked\": 0,\n    \"needsUserDecision\": 0,\n    \"superseded\": 0,\n    \"steeringBlocked\": 0,\n    \"aggregateComplete\": false,\n    \"artifactComplete\": false\n  }\n}\n"
+      "output": "{\n  \"ok\": true,\n  \"plan\": {\n    \"version\": 1,\n    \"createdAt\": \"2026-10-05T07:19:21.079Z\",\n    \"updatedAt\": \"2026-10-05T07:19:21.079Z\",\n    \"briefPath\": \".omx/ultragoal/brief.md\",\n    \"goalsPath\": \".omx/ultragoal/goals.json\",\n    \"ledgerPath\": \".omx/ultragoal/ledger.jsonl\",\n    \"codexGoalMode\": \"aggregate\",\n    \"goals\": [\n      {\n        \"id\": \"G001-first\",\n        \"title\": \"First\",\n        \"objective\": \"Verify first fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-05T07:19:21.079Z\",\n        \"updatedAt\": \"2026-10-05T07:19:21.079Z\"\n      },\n      {\n        \"id\": \"G002-second\",\n        \"title\": \"Second\",\n        \"objective\": \"Verify second fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-05T07:19:21.079Z\",\n        \"updatedAt\": \"2026-10-05T07:19:21.079Z\"\n      }\n    ],\n    \"codexObjective\": \"Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.\"\n  },\n  \"summary\": {\n    \"total\": 2,\n    \"pending\": 2,\n    \"inProgress\": 0,\n    \"complete\": 0,\n    \"failed\": 0,\n    \"reviewBlocked\": 0,\n    \"historicalReviewBlocked\": 0,\n    \"needsUserDecision\": 0,\n    \"superseded\": 0,\n    \"steeringBlocked\": 0,\n    \"aggregateComplete\": false,\n    \"artifactComplete\": false\n  }\n}\n"
     },
     {
       "name": "Ultragoal reads isolated durable plan",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "node",
         "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/cli/omx.js",
@@ -101,24 +164,28 @@
         "status",
         "--json"
       ],
-      "output": "{\n  \"plan\": {\n    \"version\": 1,\n    \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n    \"updatedAt\": \"2026-10-04T20:11:01.194Z\",\n    \"briefPath\": \".omx/ultragoal/brief.md\",\n    \"goalsPath\": \".omx/ultragoal/goals.json\",\n    \"ledgerPath\": \".omx/ultragoal/ledger.jsonl\",\n    \"codexGoalMode\": \"aggregate\",\n    \"goals\": [\n      {\n        \"id\": \"G001-first\",\n        \"title\": \"First\",\n        \"objective\": \"Verify first fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      },\n      {\n        \"id\": \"G002-second\",\n        \"title\": \"Second\",\n        \"objective\": \"Verify second fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-04T20:11:01.194Z\",\n        \"updatedAt\": \"2026-10-04T20:11:01.194Z\"\n      }\n    ],\n    \"codexObjective\": \"Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.\"\n  },\n  \"summary\": {\n    \"total\": 2,\n    \"pending\": 2,\n    \"inProgress\": 0,\n    \"complete\": 0,\n    \"failed\": 0,\n    \"reviewBlocked\": 0,\n    \"historicalReviewBlocked\": 0,\n    \"needsUserDecision\": 0,\n    \"superseded\": 0,\n    \"steeringBlocked\": 0,\n    \"aggregateComplete\": false,\n    \"artifactComplete\": false\n  },\n  \"reconciliation\": null\n}\n"
+      "output": "{\n  \"plan\": {\n    \"version\": 1,\n    \"createdAt\": \"2026-10-05T07:19:21.079Z\",\n    \"updatedAt\": \"2026-10-05T07:19:21.079Z\",\n    \"briefPath\": \".omx/ultragoal/brief.md\",\n    \"goalsPath\": \".omx/ultragoal/goals.json\",\n    \"ledgerPath\": \".omx/ultragoal/ledger.jsonl\",\n    \"codexGoalMode\": \"aggregate\",\n    \"goals\": [\n      {\n        \"id\": \"G001-first\",\n        \"title\": \"First\",\n        \"objective\": \"Verify first fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-05T07:19:21.079Z\",\n        \"updatedAt\": \"2026-10-05T07:19:21.079Z\"\n      },\n      {\n        \"id\": \"G002-second\",\n        \"title\": \"Second\",\n        \"objective\": \"Verify second fixture\",\n        \"status\": \"pending\",\n        \"attempt\": 0,\n        \"createdAt\": \"2026-10-05T07:19:21.079Z\",\n        \"updatedAt\": \"2026-10-05T07:19:21.079Z\"\n      }\n    ],\n    \"codexObjective\": \"Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.\"\n  },\n  \"summary\": {\n    \"total\": 2,\n    \"pending\": 2,\n    \"inProgress\": 0,\n    \"complete\": 0,\n    \"failed\": 0,\n    \"reviewBlocked\": 0,\n    \"historicalReviewBlocked\": 0,\n    \"needsUserDecision\": 0,\n    \"superseded\": 0,\n    \"steeringBlocked\": 0,\n    \"aggregateComplete\": false,\n    \"artifactComplete\": false\n  },\n  \"reconciliation\": null\n}\n"
     },
     {
       "name": "Image2PPT local doctor dependencies and rendering",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "python3",
         "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
         "python",
-        "/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/cli.py",
+        "/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/cli.py",
         "doctor",
         "--json"
       ],
-      "output": "{\n  \"schema_version\": \"image2ppt-doctor-v1\",\n  \"ok\": true,\n  \"skill_root\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt\",\n  \"local_cli\": {\n    \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/cli.py\",\n    \"ready\": true,\n    \"python\": \"/tmp/chx-runtime-1000-7c3dcfaa578c5882/python/bin/python3.12\"\n  },\n  \"config_home\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt\",\n  \"config_file\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/config.yaml\",\n  \"config_scope\": \"project\",\n  \"config_exists\": false,\n  \"dependencies\": {\n    \"pypdfium2\": {\n      \"available\": true,\n      \"purpose\": \"PDF input normalization and rendered-slide rasterization\"\n    },\n    \"PIL\": {\n      \"available\": true,\n      \"purpose\": \"image normalization, assets, previews, and offline OCR geometry\"\n    },\n    \"openai\": {\n      \"available\": true,\n      \"purpose\": \"optional image backend\"\n    },\n    \"yaml\": {\n      \"available\": true,\n      \"purpose\": \"local configuration\"\n    },\n    \"numpy\": {\n      \"available\": true,\n      \"purpose\": \"offline ink metrics\"\n    },\n    \"requests\": {\n      \"available\": true,\n      \"purpose\": \"PaddleOCR HTTP client\"\n    }\n  },\n  \"internal_resources\": {\n    \"ready\": true,\n    \"files\": {\n      \"skill\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/SKILL.md\",\n        \"exists\": true\n      },\n      \"cli\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/cli.py\",\n        \"exists\": true\n      },\n      \"runtime_main\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/main.py\",\n        \"exists\": true\n      },\n      \"ocr_client\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/paddle_text_hints.py\",\n        \"exists\": true\n      },\n      \"offline_ocr\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/text_hints.py\",\n        \"exists\": true\n      },\n      \"builder\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/build_pptx_from_manifest.py\",\n        \"exists\": true\n      },\n      \"validator\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/cli/image2ppt/runtime/validate_pptx.py\",\n        \"exists\": true\n      },\n      \"worker_prompt_base\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/prompts/page-worker-base.md\",\n        \"exists\": true\n      },\n      \"worker_prompt_addendum\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/prompts/page-worker.md\",\n        \"exists\": true\n      },\n      \"prompt_builder\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/build_page_worker_prompt.py\",\n        \"exists\": true\n      },\n      \"page_qa\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/run_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"final_qa\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/run_final_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"renderer\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/render_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"visual_review_evidence\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/scripts/visual_review_evidence.py\",\n        \"exists\": true\n      },\n      \"workflow\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/workflow.md\",\n        \"exists\": true\n      },\n      \"manifest_schema\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/manifest-schema.md\",\n        \"exists\": true\n      },\n      \"manifest_json_schema\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/schemas/page-manifest-v2.schema.json\",\n        \"exists\": true\n      },\n      \"decision_tree\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/page-decision-tree.md\",\n        \"exists\": true\n      },\n      \"cli_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/cli-helper.md\",\n        \"exists\": true\n      },\n      \"ocr_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/ocr-text-hints-contract.md\",\n        \"exists\": true\n      },\n      \"region_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/region-decomposition.md\",\n        \"exists\": true\n      },\n      \"object_routing\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/object-routing.md\",\n        \"exists\": true\n      },\n      \"arrow_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/manifest-arrow-extension.md\",\n        \"exists\": true\n      },\n      \"qa_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/qa-contract.md\",\n        \"exists\": true\n      },\n      \"dependency_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/runtime-dependencies.md\",\n        \"exists\": true\n      },\n      \"asset_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/skills/nature-image2ppt/references/assets-provenance-contract.md\",\n        \"exists\": true\n      }\n    }\n  },\n  \"rendering\": {\n    \"platform\": \"linux\",\n    \"powerpoint_com_candidate\": false,\n    \"powershell\": \"/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe\",\n    \"libreoffice\": \"/tmp/chx-runtime-1000-7c3dcfaa578c5882/libreoffice/project-bin/libreoffice\",\n    \"selection\": \"libreoffice\",\n    \"ready\": true\n  },\n  \"fonts\": {\n    \"ready\": true,\n    \"fontconfig\": \"/usr/bin/fc-match\",\n    \"matched\": \"DejaVu Sans|/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf\",\n    \"known_files\": [\n      \"/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc\",\n      \"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf\"\n    ]\n  },\n  \"image_processing\": {\n    \"pillow\": true,\n    \"imagemagick\": null,\n    \"ready\": true,\n    \"note\": \"Pillow is the primary processor; ImageMagick is used for optional formula/image conversion paths.\"\n  },\n  \"ocr\": {\n    \"selection\": \"builtin-ink\",\n    \"token\": \"unset\",\n    \"token_source\": \"unset\",\n    \"endpoint\": \"https://paddleocr.aistudio-app.com/api/v2/ocr/jobs\",\n    \"model\": \"PaddleOCR-VL-1.6\",\n    \"network_client_ready\": true,\n    \"network_probe_performed\": false,\n    \"fallback\": {\n      \"backend\": \"builtin-ink\",\n      \"ready\": true,\n      \"priority\": \"network-first-then-local\"\n    },\n    \"apply_url\": \"https://aistudio.baidu.com/account/accessToken\",\n    \"configure_command\": \"image2ppt config --paddle-ocr-token <token>\"\n  },\n  \"image_backend\": {\n    \"agent_builtin\": {\n      \"checked\": false,\n      \"ready\": null,\n      \"tool_name\": \"image_gen.imagegen\"\n    },\n    \"codex_oauth\": {\n      \"ready\": false,\n      \"auth_file\": \"/home/ys/.codex/auth.json\"\n    },\n    \"api_fallback\": {\n      \"ready\": false,\n      \"OPENAI_API_KEY\": \"unset\",\n      \"OPENAI_BASE_URL\": \"https://api.openai.com/v1\",\n      \"IMAGE2PPT_IMAGE_MODEL\": \"gpt-image-2\",\n      \"IMAGE2PPT_IMAGE_USER_AGENT\": \"<default>\"\n    },\n    \"preference\": \"auto\",\n    \"cli_fallback_ready\": false,\n    \"selection\": \"openai-compatible-api\"\n  },\n  \"checks_requested\": {\n    \"require_image_api\": false,\n    \"require_network_ocr_token\": false\n  },\n  \"next\": \"no action needed\"\n}\n"
+      "output": "{\n  \"schema_version\": \"image2ppt-doctor-v1\",\n  \"ok\": true,\n  \"skill_root\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt\",\n  \"local_cli\": {\n    \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/cli.py\",\n    \"ready\": true,\n    \"python\": \"/tmp/chx-runtime-1000-7c3dcfaa578c5882/python/bin/python3.12\"\n  },\n  \"config_home\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt\",\n  \"config_file\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/config.yaml\",\n  \"config_scope\": \"project\",\n  \"config_exists\": false,\n  \"dependencies\": {\n    \"pypdfium2\": {\n      \"available\": true,\n      \"purpose\": \"PDF input normalization and rendered-slide rasterization\"\n    },\n    \"PIL\": {\n      \"available\": true,\n      \"purpose\": \"image normalization, assets, previews, and offline OCR geometry\"\n    },\n    \"openai\": {\n      \"available\": true,\n      \"purpose\": \"optional image backend\"\n    },\n    \"yaml\": {\n      \"available\": true,\n      \"purpose\": \"local configuration\"\n    },\n    \"numpy\": {\n      \"available\": true,\n      \"purpose\": \"offline ink metrics\"\n    },\n    \"requests\": {\n      \"available\": true,\n      \"purpose\": \"PaddleOCR HTTP client\"\n    }\n  },\n  \"internal_resources\": {\n    \"ready\": true,\n    \"files\": {\n      \"skill\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/SKILL.md\",\n        \"exists\": true\n      },\n      \"cli\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/cli.py\",\n        \"exists\": true\n      },\n      \"runtime_main\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/runtime/main.py\",\n        \"exists\": true\n      },\n      \"ocr_client\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/runtime/paddle_text_hints.py\",\n        \"exists\": true\n      },\n      \"offline_ocr\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/runtime/text_hints.py\",\n        \"exists\": true\n      },\n      \"builder\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/runtime/build_pptx_from_manifest.py\",\n        \"exists\": true\n      },\n      \"validator\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/cli/image2ppt/runtime/validate_pptx.py\",\n        \"exists\": true\n      },\n      \"worker_prompt_base\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/prompts/page-worker-base.md\",\n        \"exists\": true\n      },\n      \"worker_prompt_addendum\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/prompts/page-worker.md\",\n        \"exists\": true\n      },\n      \"prompt_builder\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/scripts/build_page_worker_prompt.py\",\n        \"exists\": true\n      },\n      \"page_qa\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/scripts/run_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"final_qa\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/scripts/run_final_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"renderer\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/scripts/render_image2ppt_qa.py\",\n        \"exists\": true\n      },\n      \"visual_review_evidence\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/scripts/visual_review_evidence.py\",\n        \"exists\": true\n      },\n      \"workflow\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/workflow.md\",\n        \"exists\": true\n      },\n      \"manifest_schema\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/manifest-schema.md\",\n        \"exists\": true\n      },\n      \"manifest_json_schema\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/schemas/page-manifest-v2.schema.json\",\n        \"exists\": true\n      },\n      \"decision_tree\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/page-decision-tree.md\",\n        \"exists\": true\n      },\n      \"cli_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/cli-helper.md\",\n        \"exists\": true\n      },\n      \"ocr_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/ocr-text-hints-contract.md\",\n        \"exists\": true\n      },\n      \"region_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/region-decomposition.md\",\n        \"exists\": true\n      },\n      \"object_routing\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/object-routing.md\",\n        \"exists\": true\n      },\n      \"arrow_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/manifest-arrow-extension.md\",\n        \"exists\": true\n      },\n      \"qa_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/qa-contract.md\",\n        \"exists\": true\n      },\n      \"dependency_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/runtime-dependencies.md\",\n        \"exists\": true\n      },\n      \"asset_contract\": {\n        \"path\": \"/home/ys/data_401/data/chx_20260622/.agents/skills/nature-image2ppt/references/assets-provenance-contract.md\",\n        \"exists\": true\n      }\n    }\n  },\n  \"rendering\": {\n    \"platform\": \"linux\",\n    \"powerpoint_com_candidate\": false,\n    \"powershell\": \"/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe\",\n    \"libreoffice\": \"/tmp/chx-runtime-1000-7c3dcfaa578c5882/libreoffice/project-bin/libreoffice\",\n    \"selection\": \"libreoffice\",\n    \"ready\": true\n  },\n  \"fonts\": {\n    \"ready\": true,\n    \"fontconfig\": \"/usr/bin/fc-match\",\n    \"matched\": \"DejaVu Sans|/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf\",\n    \"known_files\": [\n      \"/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc\",\n      \"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf\"\n    ]\n  },\n  \"image_processing\": {\n    \"pillow\": true,\n    \"imagemagick\": null,\n    \"ready\": true,\n    \"note\": \"Pillow is the primary processor; ImageMagick is used for optional formula/image conversion paths.\"\n  },\n  \"ocr\": {\n    \"selection\": \"builtin-ink\",\n    \"token\": \"unset\",\n    \"token_source\": \"unset\",\n    \"endpoint\": \"https://paddleocr.aistudio-app.com/api/v2/ocr/jobs\",\n    \"model\": \"PaddleOCR-VL-1.6\",\n    \"network_client_ready\": true,\n    \"network_probe_performed\": false,\n    \"fallback\": {\n      \"backend\": \"builtin-ink\",\n      \"ready\": true,\n      \"priority\": \"network-first-then-local\"\n    },\n    \"apply_url\": \"https://aistudio.baidu.com/account/accessToken\",\n    \"configure_command\": \"image2ppt config --paddle-ocr-token <token>\"\n  },\n  \"image_backend\": {\n    \"agent_builtin\": {\n      \"checked\": false,\n      \"ready\": null,\n      \"tool_name\": \"image_gen.imagegen\"\n    },\n    \"codex_oauth\": {\n      \"ready\": false,\n      \"auth_file\": \"/home/ys/.codex/auth.json\"\n    },\n    \"api_fallback\": {\n      \"ready\": false,\n      \"OPENAI_API_KEY\": \"unset\",\n      \"OPENAI_BASE_URL\": \"https://api.openai.com/v1\",\n      \"IMAGE2PPT_IMAGE_MODEL\": \"gpt-image-2\",\n      \"IMAGE2PPT_IMAGE_USER_AGENT\": \"<default>\"\n    },\n    \"preference\": \"auto\",\n    \"cli_fallback_ready\": false,\n    \"selection\": \"openai-compatible-api\"\n  },\n  \"checks_requested\": {\n    \"require_image_api\": false,\n    \"require_network_ocr_token\": false\n  },\n  \"next\": \"no action needed\"\n}\n"
     },
     {
       "name": "Nature Mermaid renders an SVG using project Chromium",
       "returncode": 0,
+      "observed_exit_code": 0,
+      "expected_exit_code": 0,
       "command": [
         "python3",
         "/home/ys/data_401/data/chx_20260622/analysis/code/project_runtime.py",
@@ -134,36 +201,6 @@
       "name": "Independent task tag validation in temporary repositories",
       "returncode": 0,
       "evidence": "Annotated tag and idempotent finalize passed; tree, evidence, digest changes and failed checks rejected."
-    },
-    {
-      "name": "Four upstream native executable entrypoints launch",
-      "returncode": 0,
-      "details": [
-        {
-          "product": "omx-runtime",
-          "exit_code": 0,
-          "expected_exit_code": 0,
-          "output": "usage: omx-runtime <command> [options]\n\ncommands:\n  schema [--json]                     print the runtime contract summary\n  fs-rename-no-replace <from> <to>       atomically move without replacing destination\n  process-identity <pid>              print process birth identity as JSON\n  snapshot [--json] [--state-dir=DIR]  print a runtime snapshot\n  mux-contract                        print the mux boundary summary\n  exec <json> [--state-dir=DIR]       process a runtime command from JSON\n  lease-mutex <absolute-canonical-dir> <expected-dev> <expected-ino> <safe-leaf>  hold native lease mutex over stdin JSON protocol\n  init <state-dir>                    initialize a fresh state directory\n\n"
-        },
-        {
-          "product": "omx-explore-harness",
-          "exit_code": 1,
-          "expected_exit_code": 1,
-          "output": "[omx explore] Usage: omx-explore --cwd <dir> --prompt <text> --prompt-file <explore-prompt.md> --instructions-file <AGENTS.md> --model-spark <model> --model-fallback <model>\n"
-        },
-        {
-          "product": "omx-sparkshell",
-          "exit_code": 0,
-          "expected_exit_code": 0,
-          "output": "usage: omx-sparkshell <command> [args...]\n   or: omx-sparkshell --shell <shell-command>\n   or: omx-sparkshell --tmux-pane <pane-id> [--tail-lines <100-1000>]\n\nDirect command mode executes argv without shell metacharacter parsing.\nShell mode executes through bash -lc/sh -lc on POSIX and a native Windows shell on Windows.\nTmux pane mode captures a larger pane tail and applies the same raw-vs-summary behavior.\n\n"
-        },
-        {
-          "product": "omx-api",
-          "exit_code": 0,
-          "expected_exit_code": 0,
-          "output": "omx-api serve [--daemon] [--system --dry-run]|status|stop|generate text|generate image|smoke text\nNote: real-private backend mode is experimental and requires local bearer auth.\n"
-        }
-      ]
     }
   ]
 }

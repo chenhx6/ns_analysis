@@ -26,7 +26,7 @@ def git(*args):
 def permitted(path):
     p = PurePosixPath(path)
     allowed = (
-        path in ROOT_FILES or p.parts[0] in {"analysis", "skills", ".githooks", ".codex"}
+        path in ROOT_FILES or p.parts[0] in {"analysis", ".githooks", ".codex"}
         or path.startswith(".agents/skills/")
     )
     name = p.name.lower()
