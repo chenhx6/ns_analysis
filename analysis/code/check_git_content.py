@@ -57,6 +57,14 @@ def index_entries():
 
 def push_entries():
     commits = set()
+    remote = None
+    if "--remote" in sys.argv:
+        position = sys.argv.index("--remote") + 1
+        if position >= len(sys.argv):
+            raise ValueError("--remote requires the target remote name")
+        candidate = sys.argv[position]
+        if candidate in git("remote").decode().splitlines():
+            remote = candidate
     for line in sys.stdin:
         _local_ref, local_oid, _remote_ref, remote_oid = line.split()
         if set(local_oid) == {"0"}:
@@ -66,6 +74,10 @@ def push_entries():
             # An unknown remote object needs fetching before history can be checked.
             git("cat-file", "-e", remote_oid + "^{commit}")
             args.append("^" + remote_oid)
+        if remote:
+            # New tags also reach old commits. Inspect only history not already
+            # published to this target, using the refs fetched before delivery.
+            args.extend(["--not", "--remotes=" + remote])
         commits.update(git(*args).decode().splitlines())
     for commit in sorted(commits):
         for record in git("ls-tree", "-r", "-z", commit).split(b"\0"):

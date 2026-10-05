@@ -36,6 +36,11 @@
       "checks_passed": 17,
       "report": "analysis/third_party/verification.json",
       "report_sha256": "c2dbf88b7bd8b12d8573e651d4cfe21af411662775b42f0c67367cdaf5cc6648"
+    },
+    {
+      "name": "Pre-push annotated-tag history regression",
+      "returncode": 0,
+      "evidence": "Accepts already published old layout; rejects unpublished data even after latest-tree removal and rejects newly introduced root skills copies."
     }
   ],
   "limits": [
