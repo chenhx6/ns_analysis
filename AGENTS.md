@@ -14,6 +14,8 @@
 - 运行大规模处理前，先确认输入格式、运行编号、通道映射和输出位置，并用有限样本验证。
 - 保存可复现所需的输入文件或运行编号、参数、筛选条件、命令及结果位置到 `analysis/` 的记录中。
 - 已有实验记录见 `analysis/record_analysis.md`；解码程序见 `analysis/code/DecodeAndSortAll/`。
+- `DecodeAndSortAll/crate.dat`、`test.cc` 是原开发者的调试文件，保留；`run.sh` 是原项目自动调度脚本的底本，保留。静态搜索没有调用者或旧参数不构成删除这些源文件的依据。
+- `decodeandsort` 单进程串行处理；批量加速在脚本层按 run 划分任务，限制同时后台运行的进程数。当前启用 Crate0（Ge）和 Crate1（CsI），两个命令行参数是两个 crate 的 run 编号，批处理起止区间由调度脚本展开。并行任务须使用不同输出文件，原始数据只读。
 - 涉及本项目的数据分析时，自动读取 `.agents/skills/chx-data-analysis/SKILL.md`，遵循其中的数据格式和目录说明。
 
 ## 版本管理

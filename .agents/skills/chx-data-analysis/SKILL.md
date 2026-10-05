@@ -10,9 +10,15 @@ description: 在 chx_20260622 项目中读取 Ge、CsI 探测器数据并编写�
 ## 已知数据入口
 
 - 原始数据：`../Ge/<run>/data_R<run>_M<module>.bin`、`../CsI/<run>/data_R<run>_M<module>.bin`；实际运行目录可能还含配置和日志。
-- 已解码波形：`decode_data/data_C2_<first-run>_<last-run>_wave.root`。
+- 已解码波形：当前启用两个 crate 时为 `decode_data/data_C2_<Ge-run>_<CsI-run>_wave.root`；两个编号表示各 crate 的运行编号。
 - 解码实现及硬件映射：`analysis/code/DecodeAndSortAll/`，读取 `UserDefine.hh`、`r2root.cc` 和相关 `crate*.dat` 核实含义。
 - 实验设置、探测器位置及采集卡变更：`analysis/record_analysis.md` 和其引用的图片。建立跨运行或跨探测器分析前先查看。
+
+## 原项目调试文件与批量解码
+
+保留 `analysis/code/DecodeAndSortAll/crate.dat`、`test.cc` 两个原开发者调试文件，以及 `run.sh` 自动运行脚本底本。不能仅依据静态无引用或旧命令判定它们可删除。
+
+`decodeandsort` 单进程串行处理；批量并发由脚本按 run 区间展开并限制后台进程数。当前命令行参数分别是 Crate0（Ge）和 Crate1（CsI）的 run 编号，通常同一 run 传入两次；不是起止区间。实际调度需适配底本中的程序名和编号、检查原始输入、记录任务日志，并确保每个进程输出文件独占。输出采用 RECREATE，重复调度相同参数可能覆盖已有 ROOT 文件。
 
 ## ROOT 数据
 

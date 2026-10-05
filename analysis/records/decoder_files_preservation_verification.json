@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "scope": "Documentation correction for original decoder debug files and scheduling template",
+  "checks": [
+    {
+      "name": "Three original decoder source files preserved byte-for-byte",
+      "returncode": 0,
+      "sha256": {
+        "analysis/code/DecodeAndSortAll/crate.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+        "analysis/code/DecodeAndSortAll/test.cc": "8a4c32ca3221e2b79e8a7754444b08e620e7559c7cc53ee3be514955a6d6ac21",
+        "analysis/code/DecodeAndSortAll/run.sh": "debb2c3507f3d08bf9003edb271e03644d572ef9737bc0b28500467004e29739"
+      }
+    },
+    {
+      "name": "Data-analysis skill roots contain the same corrected documentation",
+      "returncode": 0
+    },
+    {
+      "name": "Per-crate arguments and output naming checked in main.cc, UserDefine.hh and r2root.cc",
+      "returncode": 0
+    }
+  ],
+  "execution": "No decoding or raw-data operation performed"
+}
