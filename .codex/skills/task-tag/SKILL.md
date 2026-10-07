@@ -1,6 +1,6 @@
 ---
 name: task-tag
-description: 项目文件更改完成后自动调用：检查与验证、commit、push 到指定 Gitee 仓库，并为已验证交付 tree 创建 annotated tag；Stop 检查督促完成未同步工作。
+description: 项目文件更改完成后自动验证、commit、push；交付标签用作者与简短任务命名，以中文说明依据、改动和真实成果；Stop 检查督促完成同步。
 ---
 
 # 自动提交、推送与交付标签
@@ -12,12 +12,14 @@ description: 项目文件更改完成后自动调用：检查与验证、commit�
 3. 使用可查看的同步程序：
 
 ```bash
-python3 analysis/scripts/project_sync.py sync --task <task-name> --message "<English imperative description>" --evidence analysis/<task>/reports/<verification>.json
+python3 analysis/scripts/project_sync.py sync --task "<简短中文任务>" --message "<English imperative description>" --result "<真实成果>" --basis "<修改依据>" --evidence analysis/<task>/reports/<verification>.json
 ```
 
 程序检查 origin 指向 `https://gitee.com/chx6/ns_analysis.git`、读取最新远端引用、检查候选文件和暂存对象，复用 `task_delivery.py prepare` 与 post-commit 绑定已验证 Git tree。必要的逻辑提交可先分组，最终交付提交准备总体证据和标签。
 
-4. 正常推送当前分支及指向本次交付 HEAD 的明确 `t-*` 标签，不强推、不推所有标签。核对远端分支 hash 等于本地 HEAD，工作区／索引干净。推送收据在本地忽略的 `.omx/delivery/sync_receipt.json`，不因写完成收据递归产生提交。
+4. 标签名称为 `<Git作者>-<简短中文任务>`；说明明确修改者、执行协作、基于什么、改动、真实成果和验证结论。没有历史执行记录时注明未记录，不猜测。名称与说明不写 SHA256、提交编号或精确时间；校验信息留在内部元数据。同名任务在不同提交使用 `-2` 等短序号，不能覆盖旧标签。
+
+5. 正常推送当前分支及准确标签收据中的本次标签，不强推、不推所有标签。核对远端分支 hash 等于本地 HEAD，工作区／索引干净。推送收据在本地忽略的 `.omx/delivery/sync_receipt.json`，不因写完成收据递归产生提交。
 
 Stop hook 只检查本地 Git 状态，发现未提交／未推送工作时请求继续完成；不在 hook 中隐藏联网。重复停止避免无限循环。认证、网络或宿主审批失败时保留已完成提交并如实报告、继续可行恢复，不能伪称已推送；不能修改信任记录或权限绕过宿主。
 

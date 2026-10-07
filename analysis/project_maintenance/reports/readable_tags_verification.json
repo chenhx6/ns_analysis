@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Actual Chinese tag, outcome annotation, short repeated-task suffix, historical rename and push tests",
+      "command": [
+        "python3",
+        "analysis/scripts/test_project_sync.py"
+      ],
+      "returncode": 0,
+      "output": "Prepared verified task delivery for the staged tree\n[main (root-commit) 25dfcc6] Verify local automatic delivery\n 9 files changed, 411 insertions(+)\n create mode 100644 .githooks/post-commit\n create mode 100644 .githooks/pre-commit\n create mode 100644 .githooks/pre-push\n create mode 100644 .gitignore\n create mode 100644 analysis/check.json\n create mode 100644 analysis/example.md\n create mode 100644 analysis/scripts/check_git_content.py\n create mode 100644 analysis/scripts/project_git.sh\n create mode 100644 analysis/scripts/task_delivery.py\n{\"status\": \"pushed\", \"head\": \"25dfcc6d9689db5b46f456194feb1ec0d6574bb3\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-ig4cxakm/remote.git\", \"tags\": [\"Sync-fixture-验证交付\"]}\n{\"status\": \"replaced\", \"tags\": [\"Sync-fixture-迁移历史标签\"]}\nPrepared verified task delivery for the staged tree\n[main 13bf480] Verify updated automatic delivery\n 1 file changed, 1 insertion(+), 1 deletion(-)\n{\"status\": \"pushed\", \"head\": \"13bf480758b3cc96caeaac470b2e385c5ede8261\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-ig4cxakm/remote.git\", \"tags\": [\"Sync-fixture-验证交付-2\"]}\n{\"status\": \"pushed\", \"head\": \"8f8c0b00fc822ff2cd3a3970b411c0827733ff74\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-ig4cxakm/remote.git\", \"tags\": []}\nPASS: actual local commit/push/tag, clean/dirty/unpushed/foreign/replayed Stop, remote destination and size boundaries\n"
+    },
+    {
+      "name": "Six historical tag targets preserved; readable annotations and local old-name removal; skill mirrors and syntax",
+      "returncode": 0
+    }
+  ],
+  "readable_tags": [
+    "chx6-安装项目技能与运行环境",
+    "chx6-清理重复技能并启用自动调用",
+    "chx6-修正交付标签的推送检查",
+    "chx6-保留解码调试文件并说明并行调度",
+    "chx6-启用验证后的自动提交与推送",
+    "chx6-记录自动交付的验证与同步结果"
+  ],
+  "notes": [
+    "Remote tag replacement was confirmed by migrate_delivery_tags.py; original tag objects retained in private backup refs.",
+    "Git internal commit/evidence identity checks remain; readable tag names and annotations omit machine hashes."
+  ]
+}

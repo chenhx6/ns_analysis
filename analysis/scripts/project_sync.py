@@ -40,7 +40,7 @@ def candidates():
     return paths
 
 
-def sync(task, message, evidence):
+def sync(task, message, evidence, result=None, basis='用户任务与现有项目内容', executor='Codex'):
     if text('remote', 'get-url', '--push', '--all', 'origin').splitlines() != [REMOTE]:
         raise ValueError('origin push destination differs from the authorized project remote')
     if text('remote', 'get-url', '--all', 'origin').splitlines() != [REMOTE]:
@@ -63,20 +63,26 @@ def sync(task, message, evidence):
         # Preserve valid renderer spacing, CSV CRLF and user Markdown hard breaks.
         git('diff', '--cached', '--check', '--', '*.py', '*.sh', '*.js', '*.mjs', '*.json', '*.toml', '*.yaml', '*.yml')
         # Run the same object-level policy used by pre-commit, before tree preparation.
-        result = subprocess.run([sys.executable, str(ROOT/'analysis/scripts/check_git_content.py')],
+        policy_check = subprocess.run([sys.executable, str(ROOT/'analysis/scripts/check_git_content.py')],
                                 cwd=ROOT, env=dict(os.environ, GIT_DIR=str(task_delivery.git_command()[1].split('=',1)[1]),
                                                   GIT_WORK_TREE=str(ROOT)), timeout=60)
-        if result.returncode:
+        if policy_check.returncode:
             raise ValueError('Staged object validation failed')
-        task_delivery.prepare(task, evidence)
-        result = git('commit', '-m', message)
-        print(result.stdout.decode('utf-8'), end='')
+        if not result:
+            raise ValueError('Provide --result with the real achieved outcome for a readable delivery tag')
+        task_delivery.prepare(task, evidence, result, basis, executor)
+        commit_output = git('commit', '-m', message)
+        print(commit_output.stdout.decode('utf-8'), end='')
         committed = True
         if task_delivery.PENDING.exists():
             raise ValueError('Post-commit delivery tag did not finalize; inspect the hook before pushing')
     head = text('rev-parse', 'HEAD')
-    tags = [name for name in text('tag', '--points-at', head).splitlines()
-            if name.startswith('t-') and name.endswith('-' + head[:7])]
+    tag_receipt = task_delivery.PENDING.parent/'tag_receipt.json'
+    delivery = json.loads(tag_receipt.read_text()) if tag_receipt.exists() else {}
+    tags = [delivery['tag']] if delivery.get('head') == head else []
+    if tags and (text('rev-parse', 'refs/tags/'+tags[0]+'^{}') != head
+                 or text('cat-file', '-t', 'refs/tags/'+tags[0]) != 'tag'):
+        raise ValueError('Delivery tag receipt does not match the current annotated tag')
     if committed and not tags:
         raise ValueError('Verified commit has no delivery tag; refusing incomplete delivery')
     git('push', '--set-upstream', 'origin', 'HEAD:refs/heads/' + branch,
@@ -124,6 +130,9 @@ def main():
     command.add_argument('--task', required=True)
     command.add_argument('--message', required=True)
     command.add_argument('--evidence', required=True)
+    command.add_argument('--result')
+    command.add_argument('--basis', default='用户任务与现有项目内容')
+    command.add_argument('--executor', default='Codex')
     sub.add_parser('hook')
     args = parser.parse_args()
     if args.action == 'hook':
@@ -132,7 +141,7 @@ def main():
             raise ValueError('Hook input exceeds 1 MiB')
         print(json.dumps(stop_status(json.loads(raw or '{}')), ensure_ascii=False))
     else:
-        sync(args.task, args.message, args.evidence)
+        sync(args.task, args.message, args.evidence, args.result, args.basis, args.executor)
 
 
 if __name__ == '__main__':

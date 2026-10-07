@@ -55,7 +55,8 @@
 - `.gitignore` 采用根目录白名单；新增项目基础文件或技能存放路径时同步更新白名单。
 - `.githooks/` 存放可版本化的 Git hooks。通过 `analysis/scripts/project_git.sh` 配置和使用仓库；提交和推送前检查跟踪范围及单文件大小（默认上限 25 MiB）。`decode_data/DecodeAndSortAll/` 仅跟踪明确允许的官方源码及配置，解码数据和编译产物仍不提交。
 - 每次项目文件更改完成并验证后自动 commit 和 push 到 `https://gitee.com/chx6/ns_analysis.git`，无需再次确认，包括规范、技能、hooks、计划、代码、记录和小型结果。提交前检查差异、跟踪范围及大小，获取远端历史；保留远端内容，不强制推送，不推所有标签。
-- 自动交付使用 `analysis/scripts/project_sync.py sync --task <任务> --message "<提交说明>" --evidence analysis/<任务>/reports/<验证>.json`。复用 `task-tag` 的已验证 Git tree 和 annotated tag；推送后核对远端分支 hash，保持工作区／索引干净。Stop hook 检查待提交／待推送状态并请求继续，重复停止避免死循环；认证、网络或宿主审批阻碍需如实报告，不能伪称已推送。
+- 自动交付使用 `analysis/scripts/project_sync.py sync --task "<简短中文任务>" --message "<提交说明>" --result "<真实成果>" --basis "<修改依据>" --evidence analysis/<任务>/reports/<验证>.json`。复用已验证 Git tree；推送后核对真实远端，保持工作区／索引干净。Stop 检查督促同步；真实阻碍需如实报告。
+- 标签主要供用户阅读：名称为 `<Git作者>-<简短中文任务>`，说明填写修改者、执行协作、依据、改动、真实成果及验证结论。名称／说明不写 SHA256、提交编号或精确时间；内部验证仍保留。历史未知执行者标“未记录”，不能猜测；同名任务使用短序号，不覆盖旧标签。
 - Git 元数据使用本地忽略的 `.project-git/`。`.agents/skills/` 是项目技能维护源，`.codex/skills/` 是保留的 OMX 项目技能入口；修改技能时同步这两个有效目录。根 `skills/` 已废弃，不再生成备用副本。不得修改保护目录权限规避宿主限制。
 
 ## 项目工具与技能入口
@@ -83,7 +84,7 @@
 | 写代码、修复、重构、安装与配置 | `ponytail`；清理时加 `ai-slop-cleaner`，冗余巡查加 `ponytail-audit` |
 | 写报告、总结、说明、README、技术文档 | `ponytail` 精简信息与结构；中文加 `shuorenhua`，英文加 `humanizer`；保留必要事实、方法和验证，不强制限制为三行 |
 | 所有绘图、图表修改与导出 | `python-svg-qa`：Python 生成、仅 SVG、导出后实际视觉审查；科研图再按需使用 `nature-figure` |
-| 所有项目文件更改任务完成 | `task-tag`：验证后自动 commit、push 指定 Gitee 仓库及本次交付标签，核对真实远端状态 |
+| 所有项目文件更改任务完成 | `task-tag`：验证后自动 commit/push；标签以作者与中文任务命名，说明依据、改动和真实成果，核对远端状态 |
 | 科研报告、论文写作或润色 | 上述报告规则，加 `nature-writing` 或 `nature-polishing`；图表加 `nature-figure`，统计证据加 `nature-statistics`，数据声明加 `nature-data` |
 | 读论文、查文献、核引文、下载全文、汇报 PPT、审稿与回复、专利 | 按任务自动选相应 `nature-*`；共享定义由 `nature-shared` 随依赖自动加载，不启动独立共享包任务 |
 | 实验记录、Ge/CsI 分析、网页抓取 | 按任务使用 `nature-experiment-log`、`chx-data-analysis`、`crawl4ai` |

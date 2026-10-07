@@ -44,10 +44,12 @@ bash analysis/scripts/project_git.sh fetch origin
 用户已授权今后文件更改完成并验证后自动提交、推送到本项目 Gitee 仓库，包括代码、规范、技能、计划和小型结果。`task-tag` 技能自动执行，Stop hook 检查是否仍有未提交／未推送工作；推送成功以真实远端 hash 为准，阻碍如实报告。
 
 ```bash
-python3 analysis/scripts/project_sync.py sync --task <task-name> --message "<Description>" --evidence analysis/<task>/reports/<verification>.json
+python3 analysis/scripts/project_sync.py sync --task "<简短中文任务>" --message "<Description>" --result "<真实成果>" --basis "<修改依据>" --evidence analysis/<task>/reports/<verification>.json
 ```
 
 该程序复用版本化 hooks 和已验证交付标签，禁止数据／凭据／大文件进入提交，不强推。推送收据保存在本地忽略目录，避免保存收据本身再次触发提交。
+
+标签供人阅读：例如 `chx6-启用验证后的自动提交与推送`。展开说明可看到修改者、执行协作、依据、改动、成果和验证结论；同名任务用短序号区分，名称／说明不填时间戳、提交编号或 SHA256。
 
 hooks 会拒绝白名单外的文件、数据文件、凭据文件、符号链接和超过 25 MiB 的文件。pre-push 同时检查拟推送的新提交，避免仅从当前版本删除大型文件却仍将其历史上传。需要同步新的目录类型时，明确调整 `.gitignore` 和检查脚本中的规则。
 
