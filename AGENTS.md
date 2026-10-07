@@ -1,5 +1,34 @@
 # chx_20260622 项目约定
 
+## 任务计划与自主执行
+
+- 今后接到任务，先在 `analysis/plans/` 编写 Markdown 执行计划，再执行。2026-10-07 用户补充授权：范围明确的非危害操作可直接连续完成，无需额外确认；仍先保存计划，不因任务简单跳过。原始数据只读、危害系统和大规模删除等边界继续适用，宿主强制权限审批不能绕过。
+- 编写计划前只做必要的只读检查。计划落盘后，在任务范围内实施安全操作；不把这项授权扩大为发布结果、提交或推送的授权。
+- 每项任务使用 `YYYY-MM-DD-任务简名.md`，参考 `analysis/plans/_template.md`。计划写明目标与范围、输入及依据、预计新建或修改的文件及用途、执行步骤与关键参数、统计方法、预计结果、验证标准和待确认事项。与任务无关的项写“不适用”及原因，不凑内容。
+- 统计方法按任务说明分析单位、筛选条件、模型或检验、适用假设和不确定性处理；尚未确定的方法或参数标明“待确认”，不编造。预计结果说明交付文件、图表或指标，并区分待检验假设与已知事实，不预设显著性或具体数值。
+- 计划保留状态、实际用户授权记录、已完成步骤、关键决策、结果位置和下一步。执行中及时更新；方法、输入范围或交付内容有实质变化时先修订计划，涉及危害、不可逆操作或超出已授权任务范围时再确认。
+- 上下文压缩或会话恢复后，先读取对应计划再继续；不得仅凭聊天摘要、计划状态或本地记录推定用户已授权执行。确认记录必须如实对应用户指令。
+
+## analysis 目录组织
+
+- `analysis/` 按任务组织：任务程序和小型数据表放在 `analysis/<任务名>/`，图表放在该任务的 `figures/`，说明和验证记录放在 `reports/`；只有确需多个程序文件时才增加代码子目录。
+- 当前 run.log 任务使用 `analysis/run_log/`。新任务不再把程序、小表、图和报告分散到全局 `code/`、`results/`、`analysis_figure/` 和 `records/`。
+- 通用项目脚本存放于 `analysis/scripts/`；原 `analysis/code/` 已按计划迁移，入口、hooks 和引用同步使用新路径。
+- `analysis/plans/` 是集中计划目录；`analysis/vendor/`、`analysis/third_party/` 保留其公共依赖用途。大型数据仍放项目根目录的专用数据目录，不能因为按任务整理而搬入 `analysis/`。
+
+## 可审查的程序与数据来源
+
+- 编写计划前可以只读检查文件，核实格式和方法。计划落盘后，执行层先在对应的 `analysis/<任务名>/` 保存用户可查看的显式程序文件，再运行；通用工具放 `analysis/scripts/`。解析、筛选、统计、数据导出和绘图逻辑均保留在程序中，不只存在于临时命令、交互会话或聊天描述里。
+- 计划列出程序路径、输入输出和拟运行命令；交付提供程序链接、实际命令及验证记录。结果中的数据必须由程序读取真实输入并计算，不能由 AI 猜测、补造或凭印象摘录；缺失项保留缺失及原因，推断或估计须按已确认的方法明确标注。
+
+## 绘图约定
+
+- 以后本项目的图表统一使用 Python 绘制，预览和最终导出均由 Python 代码生成；不自动改用 R 或其他绘图后端。
+- 不调用 AI 图像生成或编辑工具制作图片。数据图必须由可追溯的输入数据和 Python 绘图代码生成，防止图像错误表达数据关系；示意图同样使用 Python 绘制，并注明其示意性质。
+- 今后生成的图表仅保存 SVG，不额外保存 PNG、PDF、TIFF 等副本。既有实验原始照片、截图作为来源材料保留，不因新导出约定删除或伪装为新图表。
+- 绘图计划写明数据来源、坐标轴、单位、筛选及变换、颜色或标记含义、输出文件和核对办法；交付时保留代码和绘图所用的数据表。
+- 每次绘图或修改图表后都要查看最终 SVG 的实际渲染，检查文字／图例堆叠、字符裁切、字体缺字、坐标轴、单位和数据关系，并记录审查结果；仅检查源码或程序退出码不能代替视觉审查。看不到渲染结果时如实报告未完成，不能宣称已审查通过。
+
 ## 数据边界
 
 - 项目根目录为 `/home/ys/data_401/data/chx_20260622`。
@@ -13,7 +42,7 @@
 - 编写处理程序时，明确区分只读输入路径和项目内输出路径；清理操作只能针对本项目内明确生成的文件。
 - 运行大规模处理前，先确认输入格式、运行编号、通道映射和输出位置，并用有限样本验证。
 - 保存可复现所需的输入文件或运行编号、参数、筛选条件、命令及结果位置到 `analysis/` 的记录中。
-- 已有实验记录见 `analysis/record_analysis.md`；解码程序见 `analysis/code/DecodeAndSortAll/`。
+- 已有实验记录见 `analysis/experiment_log/record_analysis.md`；官方解码程序位于用户移动后的 `decode_data/DecodeAndSortAll/`。
 - `DecodeAndSortAll/crate.dat`、`test.cc` 是原开发者的调试文件，保留；`run.sh` 是原项目自动调度脚本的底本，保留。静态搜索没有调用者或旧参数不构成删除这些源文件的依据。
 - `decodeandsort` 单进程串行处理；批量加速在脚本层按 run 划分任务，限制同时后台运行的进程数。当前启用 Crate0（Ge）和 Crate1（CsI），两个命令行参数是两个 crate 的 run 编号，批处理起止区间由调度脚本展开。并行任务须使用不同输出文件，原始数据只读。
 - 涉及本项目的数据分析时，自动读取 `.agents/skills/chx-data-analysis/SKILL.md`，遵循其中的数据格式和目录说明。
@@ -24,7 +53,7 @@
 - 跟踪项目约定、技能、hooks、必要配置，以及 `analysis/` 下的代码、记录和小型结果。
 - 原始数据、中间数据、解码数据、编译产物、缓存和凭据不提交到 Git；不使用 Git LFS 上传这些数据。
 - `.gitignore` 采用根目录白名单；新增项目基础文件或技能存放路径时同步更新白名单。
-- `.githooks/` 存放可版本化的 Git hooks。通过 `analysis/code/project_git.sh` 配置和使用仓库；提交和推送前检查跟踪范围及单文件大小（默认上限 25 MiB）。
+- `.githooks/` 存放可版本化的 Git hooks。通过 `analysis/scripts/project_git.sh` 配置和使用仓库；提交和推送前检查跟踪范围及单文件大小（默认上限 25 MiB）。`decode_data/DecodeAndSortAll/` 仅跟踪明确允许的官方源码及配置，解码数据和编译产物仍不提交。
 - 同步前检查差异；保留远端已有内容和历史，不强制推送。不把后续分析任务视为自动发布结果的授权；在用户要求同步时执行推送。
 - Git 元数据使用本地忽略的 `.project-git/`。`.agents/skills/` 是项目技能维护源，`.codex/skills/` 是保留的 OMX 项目技能入口；修改技能时同步这两个有效目录。根 `skills/` 已废弃，不再生成备用副本。不得修改保护目录权限规避宿主限制。
 
@@ -36,8 +65,8 @@
 - 长期自主任务使用原生 OMX `autopilot`、`ultragoal` 等工作流。仅在用户明确要求目标模式且宿主允许时调用目标工具；宿主权限和已有暂停、取消指令始终适用。OMX 0.21 的 `ralph`、`pipeline`、`ultrawork` 等是迁移卡片，按其指引使用当前工作流。
 - 继续或恢复未完成任务时自动读取 `.agents/skills/go-on/SKILL.md`；发生能力缺口或用户要求演进时自动读取 `.agents/skills/evolution/SKILL.md`。日常复盘记录在 `analysis/`，能力评估按任务授权范围执行。
 - 使用原生角色进行有价值的并行工作；本会话实际提供的模型和并发上限优先于上游默认。对独立任务给出明确文件范围，并由主代理整合和验证。
-- OMX 的模板路径为 `analysis/vendor/oh-my-codex/templates/AGENTS.md`。通过 `python3 analysis/code/project_runtime.py omx <命令>` 启动，兼容数据盘执行限制；此入口不改变全局安装，也不自动更新上游。
-- 抓取网页时自动读取 `.agents/skills/crawl4ai/SKILL.md`，使用 `python3 analysis/code/project_runtime.py python <脚本>`。该 Python 与系统 PyROOT 的 Python 3.8 分开；既有 ROOT 分析仍可使用系统环境。
+- OMX 的模板路径为 `analysis/vendor/oh-my-codex/templates/AGENTS.md`。通过 `python3 analysis/scripts/project_runtime.py omx <命令>` 启动，兼容数据盘执行限制；此入口不改变全局安装，也不自动更新上游。
+- 抓取网页时自动读取 `.agents/skills/crawl4ai/SKILL.md`，使用 `python3 analysis/scripts/project_runtime.py python <脚本>`。该 Python 与系统 PyROOT 的 Python 3.8 分开；既有 ROOT 分析仍可使用系统环境。
 - 已验证任务进入版本交付时自动读取 `.agents/skills/task-tag/SKILL.md`，准备验证证据和 Git tree，`post-commit` 自动生成本地 annotated tag。推送按用户已授权的同步范围执行。
 - hooks 配置安装在项目 `.codex/hooks.json`；由宿主执行信任检查，不编辑信任数据库。技能和角色通常在新会话加载；CLI 模型任务还需本项目可用的 Codex 登录或相应 API 凭据。
 
@@ -46,10 +75,13 @@
 
 每次任务自动依据当前意图和已安装技能的 name/description 选择适用技能，先读取对应 SKILL.md 再执行；用户无需输入技能名。显式指令、范围和暂停/取消优先。自动调用只处理任务相关部分，不为了调用而扩展任务。
 
+所有任务先在 `analysis/plans/` 写计划，再直接连续执行范围明确的非危害操作，无需额外用户确认；原始数据只读和宿主权限边界保持适用，不扩展为提交、推送或对外发布授权。任务程序、数据表、`figures/` 和 `reports/` 按 `analysis/<任务名>/` 集中存放；通用工具入口统一为 `analysis/scripts/`。
+
 | 任务内容 | 自动选择 |
 | --- | --- |
 | 写代码、修复、重构、安装与配置 | `ponytail`；清理时加 `ai-slop-cleaner`，冗余巡查加 `ponytail-audit` |
 | 写报告、总结、说明、README、技术文档 | `ponytail` 精简信息与结构；中文加 `shuorenhua`，英文加 `humanizer`；保留必要事实、方法和验证，不强制限制为三行 |
+| 所有绘图、图表修改与导出 | `python-svg-qa`：Python 生成、仅 SVG、导出后实际视觉审查；科研图再按需使用 `nature-figure` |
 | 科研报告、论文写作或润色 | 上述报告规则，加 `nature-writing` 或 `nature-polishing`；图表加 `nature-figure`，统计证据加 `nature-statistics`，数据声明加 `nature-data` |
 | 读论文、查文献、核引文、下载全文、汇报 PPT、审稿与回复、专利 | 按任务自动选相应 `nature-*`；共享定义由 `nature-shared` 随依赖自动加载，不启动独立共享包任务 |
 | 实验记录、Ge/CsI 分析、网页抓取 | 按任务使用 `nature-experiment-log`、`chx-data-analysis`、`crawl4ai` |
@@ -58,7 +90,7 @@
 
 其余技能按其适用范围自动选择。退役入口自动转到当前替代流程；worker 仅用于有效 Team 任务，cancel 仅响应实际取消意图。所有技能允许隐式选择，支持包按依赖加载。
 
-报告语言按用户要求或现有任务语言执行；中文科研报告使用 Nature 的证据/论证方法写中文，覆盖其默认英文输出。说人话/Humanizer 只清理可编辑的译文或新写文字，保留作为证据的原文、引用、公式、术语与单位。项目科研绘图默认 Python，已有 R 工作流或用户指定 R 时沿用 R；不为技能选择重复询问。
+报告语言按用户要求或现有任务语言执行；中文科研报告使用 Nature 的证据/论证方法写中文，覆盖其默认英文输出。说人话/Humanizer 只清理可编辑的译文或新写文字，保留作为证据的原文、引用、公式、术语与单位。项目绘图统一使用 Python，仅保存 SVG，禁止 AI 生成或编辑图片；绘图后必须实际查看最终 SVG 并检查重叠、裁切、缺字和数据关系，不为技能选择重复询问绘图后端。
 
 SessionStart/UserPromptSubmit 自动注入本节，OMX/Ponytail 生命周期 hooks 按各自事件运行；Git 检查与标签 hooks 由项目 Git 入口自动运行。宿主仍负责 hook 信任与权限，不伪造信任、登录、目标完成或验证结果。自动选择不等于自动向他人发消息或发布超出用户授权范围的内容。
 <!-- PROJECT:AUTO-SKILLS:END -->

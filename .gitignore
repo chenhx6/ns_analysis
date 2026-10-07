@@ -60,7 +60,7 @@
 **/*.a
 **/*.exe
 **/*~
-/analysis/code/DecodeAndSortAll/decodeandsort
+/decode_data/DecodeAndSortAll/decodeandsort
 .omx-state-locks/
 .omx-state-locks.identity.json
 .codex/*
@@ -89,3 +89,23 @@
 **/target/
 **/coverage/
 /analysis/vendor/oh-my-codex/dist/
+
+# 官方解码源码保留用户移动位置；同目录其他文件默认忽略。
+!/decode_data/
+/decode_data/*
+!/decode_data/DecodeAndSortAll/
+/decode_data/DecodeAndSortAll/*
+!/decode_data/DecodeAndSortAll/Makefile
+!/decode_data/DecodeAndSortAll/UserDefine.hh
+!/decode_data/DecodeAndSortAll/crate.dat
+!/decode_data/DecodeAndSortAll/crate0.dat
+!/decode_data/DecodeAndSortAll/crate1.dat
+!/decode_data/DecodeAndSortAll/crate2.dat
+!/decode_data/DecodeAndSortAll/crate3.dat
+!/decode_data/DecodeAndSortAll/decoder.cc
+!/decode_data/DecodeAndSortAll/decoder.hh
+!/decode_data/DecodeAndSortAll/main.cc
+!/decode_data/DecodeAndSortAll/r2root.cc
+!/decode_data/DecodeAndSortAll/r2root.hh
+!/decode_data/DecodeAndSortAll/run.sh
+!/decode_data/DecodeAndSortAll/test.cc

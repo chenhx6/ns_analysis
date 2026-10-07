@@ -10,8 +10,8 @@ description: 本项目任务经过验证并提交时自动建立本地 annotated
 任务完成并进入已授权版本交付时自动，先暂存已检查的任务文件和证据，再执行：
 
 ```bash
-python3 analysis/code/task_delivery.py prepare --task <task-name> --evidence analysis/<evidence-file>.json
-bash analysis/code/project_git.sh commit -m "<task-description>"
+python3 analysis/scripts/task_delivery.py prepare --task <task-name> --evidence analysis/<evidence-file>.json
+bash analysis/scripts/project_git.sh commit -m "<task-description>"
 ```
 
 `post-commit` 会核对准备时的 Git tree、当前 HEAD、工作区和证据摘要，自动创建 `t-<task>-<UTC>-<commit>` annotated tag。证据或代码发生变化时标签创建延期，应先重新验证。普通未准备的提交不产生标签。

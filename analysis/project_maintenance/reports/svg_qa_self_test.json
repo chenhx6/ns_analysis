@@ -1,0 +1,25 @@
+{
+  "self_test": "pass",
+  "cases": [
+    {
+      "case": "clear",
+      "expected": "pass",
+      "actual": "pass"
+    },
+    {
+      "case": "overlap",
+      "expected": "review_required",
+      "actual": "review_required"
+    },
+    {
+      "case": "edge",
+      "expected": "fix_required",
+      "actual": "fix_required"
+    },
+    {
+      "case": "outline",
+      "expected": "not_auditable",
+      "actual": "not_auditable"
+    }
+  ]
+}

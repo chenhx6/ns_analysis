@@ -23,7 +23,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/code/skill-routing-hook.mjs\"",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/scripts/skill-routing-hook.mjs\"",
             "timeout": 5
           }
         ]
@@ -71,7 +71,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/code/skill-routing-hook.mjs\"",
+            "command": "\"/usr/bin/node\" \"/home/ys/data_401/data/chx_20260622/analysis/scripts/skill-routing-hook.mjs\"",
             "timeout": 5
           }
         ]

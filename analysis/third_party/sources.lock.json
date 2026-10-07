@@ -1485,11 +1485,11 @@
   "adaptations": [
     {
       "directory": ".agents/skills/crawl4ai",
-      "entry_sha256": "7878457a681745226b7a28c0b424fccf0d7c78f9f9dea9a90963bfb7473608a6"
+      "entry_sha256": "9ffd25ea4f0723bae4c6cda1e6680f26ef00061639bf9598a4416aa48b30096c"
     },
     {
       "directory": ".agents/skills/go-on",
-      "entry_sha256": "c527524c5b8168a887e4db50074a2dd646208cd39a2f2a08629e7b5de8ae3ae6"
+      "entry_sha256": "1db6a36497add66b6ecaae2ff9799c09d07425b1fd397d089c1d623f6b6b7998"
     },
     {
       "directory": ".agents/skills/evolution",
@@ -1497,7 +1497,21 @@
     },
     {
       "directory": ".agents/skills/task-tag",
-      "entry_sha256": "41b1a830043a038d9e20b0f2d6cc5c8a371c52991bcf6a0171c17160ebf07164"
+      "entry_sha256": "14013540bff0958e198b0c8cae76c749b2ab8acc63063c186d5d19764d9ddae6"
+    },
+    {
+      "directory": ".agents/skills/chx-data-analysis",
+      "entry_sha256": "5e97e001155b936abf784537989aa01c7d55856e53eba94b1bc8cc7ea3409272"
+    },
+    {
+      "directory": ".agents/skills/python-svg-qa",
+      "entry_sha256": "d1160f67c9e134da17e89dd5451c280d54af5175b1f3ae7b0ef675934b1f8ef9",
+      "source": "project",
+      "files_sha256": {
+        "SKILL.md": "d1160f67c9e134da17e89dd5451c280d54af5175b1f3ae7b0ef675934b1f8ef9",
+        "scripts/audit_svg.py": "af20953a178d549e46b1053fc951a944571d165e1a7fbfed4828b0b6dc89ac84"
+      },
+      "basis": "Project Python/SVG conventions and installed Nature figure QA principles; locally authored helper"
     }
   ],
   "libreoffice": {

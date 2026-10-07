@@ -1,0 +1,134 @@
+{
+  "moves": [
+    {
+      "old": "analysis/code/project_git.sh",
+      "new": "analysis/scripts/project_git.sh",
+      "sha256": "0226dbde130b6301c813901c4267b255115d945db54d3d63d1e8eb9fd6598f47"
+    },
+    {
+      "old": "analysis/code/project_runtime.py",
+      "new": "analysis/scripts/project_runtime.py",
+      "sha256": "26ae28bac1995c845ef931ff9883aa76cb2c1c17262bfd6d8aecfd695ccc8816"
+    },
+    {
+      "old": "analysis/code/check_git_content.py",
+      "new": "analysis/scripts/check_git_content.py",
+      "sha256": "a67fcfc49bbe7b436748c3d712d4a103b0f184a3b3284c6c9ae87b779b872db7"
+    },
+    {
+      "old": "analysis/code/task_delivery.py",
+      "new": "analysis/scripts/task_delivery.py",
+      "sha256": "3e85928dc239a11fde9275c54fb8c56af4a9037a560d0b8fbdd8b50039d6408d"
+    },
+    {
+      "old": "analysis/code/bootstrap_project_tools.py",
+      "new": "analysis/scripts/bootstrap_project_tools.py",
+      "sha256": "a9752f0b9a490d9cbbdc5f7596269276e7da615bb9fa939b3edf5f6453202b0f"
+    },
+    {
+      "old": "analysis/code/verify_project_tools.py",
+      "new": "analysis/scripts/verify_project_tools.py",
+      "sha256": "f403d00b54ea12101171b2a342b787bdfe220dd000237fa3229d2f750108eb70"
+    },
+    {
+      "old": "analysis/code/skill-routing-hook.mjs",
+      "new": "analysis/scripts/skill-routing-hook.mjs",
+      "sha256": "eddc8d717a39976e7439f9948670bee8f5348b892ff06a1027074fed744e5312"
+    },
+    {
+      "old": "analysis/records/redundancy_audit.md",
+      "new": "analysis/project_maintenance/reports/redundancy_audit.md",
+      "sha256": "a1d597fc8539fe274cc1725010f8f715d198b44a227a1cb65a73a97cc3d9f0bf"
+    },
+    {
+      "old": "analysis/records/skills_cleanup.md",
+      "new": "analysis/project_maintenance/reports/skills_cleanup.md",
+      "sha256": "9eb64913b31de3c0a79c954a783b1f8d3baa15f4578f5c4ec49b4ff96bf51fb7"
+    },
+    {
+      "old": "analysis/records/skills_cleanup_verification.json",
+      "new": "analysis/project_maintenance/reports/skills_cleanup_verification.json",
+      "sha256": "3c84c9f5e44f456e144619f73170a6958f0a871bf0c72b378b7a6746bebaa029"
+    },
+    {
+      "old": "analysis/records/decoder_files_preservation_verification.json",
+      "new": "analysis/project_maintenance/reports/decoder_files_preservation_verification.json",
+      "sha256": "70f42e213a32055dd976d3515f203921130497f0f61cb21fcc2b9e1ef8d84626"
+    },
+    {
+      "old": "analysis/project_setup.md",
+      "new": "analysis/project_maintenance/reports/project_setup.md",
+      "sha256": "2df40741ac7cdc214d4d43435fde15399eea650de19900493a792c696c77505d"
+    },
+    {
+      "old": "analysis/record_analysis.md",
+      "new": "analysis/experiment_log/record_analysis.md",
+      "sha256": "ca630b817d73378f5f93b98dc73b2f445b2034a8668f9ddc2be18de3fdbdde77"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/19F+116Sn.png",
+      "new": "analysis/experiment_log/figures/19F+116Sn.png",
+      "sha256": "ae2d098fdd29d77a1657f7139888efafc0a80a7d585dca4761113de1f2a13087"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/CsI map.png",
+      "new": "analysis/experiment_log/figures/CsI map.png",
+      "sha256": "1c18ce44360185fe4960ae49601cfcbcc44759063e74123d32ff5dd0f796e40b"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/CsI 采集卡.png",
+      "new": "analysis/experiment_log/figures/CsI 采集卡.png",
+      "sha256": "2d8cdb54f050009103cff0f4e67559b6d5bc628a864b38d444d7d0c03eed9da9"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/CsI中途更换采集卡.png",
+      "new": "analysis/experiment_log/figures/CsI中途更换采集卡.png",
+      "sha256": "75e4facc3db278196f6befbfa48e298021b055b56eebffe5d0deedc72065ab63"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/Ge map.png",
+      "new": "analysis/experiment_log/figures/Ge map.png",
+      "sha256": "290c31d3d92c8d53d4d8ffe97546b0cee8b0afdb1c77154a68c8e2591f7ffaa1"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/Ge采集卡.png",
+      "new": "analysis/experiment_log/figures/Ge采集卡.png",
+      "sha256": "08c2d092dfb5ed3d300c9b19c3d391498ca411895aca3e820829eeba1ed01a3a"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/experiment_finish.png",
+      "new": "analysis/experiment_log/figures/experiment_finish.png",
+      "sha256": "2df612a82b64adb18f0cbe154f00fb5a07af903146494fdd8d9206465ec7ff8e"
+    },
+    {
+      "old": "analysis/analysis_figure/record_analysis/experiment_start.png",
+      "new": "analysis/experiment_log/figures/experiment_start.png",
+      "sha256": "81cbc2270c08c902a715b15410175e1bb08d648560c8e6bc8c3e941b13ff91b2"
+    }
+  ],
+  "decoder_sha256": {
+    "Makefile": "6de2db49d1a9028714734e61af4c1d9f6f5da12bbf7f9b7f2584fad40758bdbe",
+    "UserDefine.hh": "9cfa2977c020c18fc3a46504a99d18136dc9a2b8da9f682dbae503957930d581",
+    "crate.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+    "crate0.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+    "crate1.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+    "crate2.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+    "crate3.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+    "decoder.cc": "212d5df8801d5e3e0645d47800a6bc0a07045931f5e61a37c9be10d0287fb0b2",
+    "decoder.hh": "06f756ff2f9e14a95c95f6a4697cf71fcb3f146d0a24080070bfaba198b5fd55",
+    "main.cc": "20c1cf79e343617c538fed60da8aa7797e893c06371b5d1a62351026f43109db",
+    "r2root.cc": "124b3f0e8ef675212669a9cc949a8c0255aff5c448c8aec75c4dd63286361521",
+    "r2root.hh": "933847596b80baa4493cbf79f2244e0f5e9a35545e58111fad56c30c1a65e2d0",
+    "run.sh": "debb2c3507f3d08bf9003edb271e03644d572ef9737bc0b28500467004e29739",
+    "test.cc": "8a4c32ca3221e2b79e8a7754444b08e620e7559c7cc53ee3be514955a6d6ac21"
+  },
+  "config_sha256": "21d1794d768e2524ade4991dac1da3e2ee7881418b944e8365c3a6961879521c",
+  "experiment_text": "# work log\n\n## 实验信息\n\n### 反应道\n\n1. 19F + 116Sn ：$0.9mg/cm^{2}\\ ^{116}Sn + 5.5mg/cm^2 Au$ @ 85MeV 1p3n\n   ![img](./analysis_figure/record_analysis/19F+116Sn.png)\n\n### 实验设置\n\n#### 探测器放置\n\n##### Ge\n\n1. Ge map\n\n![img](<./analysis_figure/record_analysis/Ge map.png>)\n2. Ge 采集卡频率\n\n![img](./analysis_figure/record_analysis/Ge采集卡.png)\n\n##### CsI\n\n1. CsI map\n\n![img](<./analysis_figure/record_analysis/CsI map.png>)\n2. CsI 采集卡频率\n\n![img](<./analysis_figure/record_analysis/CsI 采集卡.png>)\n\n### Important information\n\n#### start -> finish\n\n1. Start time: 20250607-1738-**run6015**\n\n   ![](./analysis_figure/record_analysis/experiment_start.png) \n\n2. finish time: 20250609-1344-**run6079**\n\n   ![](./analysis_figure/record_analysis/experiment_finish.png)\n\n3. invalid file: 6021, \n\n#### Events\n\n1.  ==Unexpected events.==  20260607-1916. Bad detectors were CsI(Ti), specially for \n   1. cid=1, mod= 0, ch=10, 11, 12, 13, 14, 15.\n   2. cid=1, mod=1, ch=12, 13, 14, 15.\n   3. cid=1, mod=6, all channels.\n2.  ==Normal events.==  20250607-1946: Filling LN to HPGe.\n3.  ==Normal events.==  20250607-2100: Filling LN to HPGe.\n4. ==Unexpected events.==  Removed cid=1, mod=1, ch=14, 15.\n5. ==Unexpected events.== (cid, mod, ch)=(1, 1, 14), (1, 1, 15), (1, 3, 1), (1, 3, 2), (1, 3, 4) had problems. Those are CsI. \n6.   \n7. ==Unexpected events.== charge module: 20250608-1419- Module 8 was changed to module 9 in crate_1 of CsI from **run6052**.\n\n![img](./analysis_figure/record_analysis/CsI中途更换采集卡.png)\n\n2. \n",
+  "git_status_before": " M .codex/config.toml\n M AGENTS.md\n D analysis/code/DecodeAndSortAll/Makefile\n D analysis/code/DecodeAndSortAll/UserDefine.hh\n D analysis/code/DecodeAndSortAll/crate.dat\n D analysis/code/DecodeAndSortAll/crate0.dat\n D analysis/code/DecodeAndSortAll/crate1.dat\n D analysis/code/DecodeAndSortAll/crate2.dat\n D analysis/code/DecodeAndSortAll/crate3.dat\n D analysis/code/DecodeAndSortAll/decoder.cc\n D analysis/code/DecodeAndSortAll/decoder.hh\n D analysis/code/DecodeAndSortAll/main.cc\n D analysis/code/DecodeAndSortAll/r2root.cc\n D analysis/code/DecodeAndSortAll/r2root.hh\n D analysis/code/DecodeAndSortAll/run.sh\n D analysis/code/DecodeAndSortAll/test.cc\n M analysis/record_analysis.md\n?? analysis/plans/\n?? analysis/project_maintenance/\n?? analysis/run_log/\n?? analysis/scripts/\n",
+  "checks": [
+    {
+      "name": "Pre-migration Git, hook event/project boundaries and file policy",
+      "returncode": 0
+    }
+  ]
+}

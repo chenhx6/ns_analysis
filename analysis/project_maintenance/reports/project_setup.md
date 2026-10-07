@@ -11,7 +11,7 @@
 ## 本地配置
 
 - 当前环境的 `.git`、`.agents`、`.codex` 不可写，Git 元数据使用 `.project-git/`。不修改受保护目录权限。
-- 使用 `bash analysis/code/project_git.sh <git 参数>` 操作本地仓库；脚本兼容 Git 2.25，并处理数据盘不能保留可执行权限的问题。
+- 使用 `bash analysis/scripts/project_git.sh <git 参数>` 操作本地仓库；脚本兼容 Git 2.25，并处理数据盘不能保留可执行权限的问题。
 - 提交邮箱为用户提供的 `2272149417@qq.com`；作者名采用目标远端账号 `chx6`。
 - `.gitignore` 使用根目录白名单；`.githooks/` 的提交与推送检查默认限制单文件为 25 MiB。
 

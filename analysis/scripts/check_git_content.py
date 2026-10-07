@@ -12,6 +12,7 @@ DATA_SUFFIXES = {
 }
 BUILD_SUFFIXES = {".pyc", ".o", ".so", ".a", ".exe"}
 SOURCE_SUFFIXES = {".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".md", ".go", ".rs", ".sh"}
+DECODER_SOURCE_FILES = {'decode_data/DecodeAndSortAll/test.cc', 'decode_data/DecodeAndSortAll/run.sh', 'decode_data/DecodeAndSortAll/decoder.hh', 'decode_data/DecodeAndSortAll/decoder.cc', 'decode_data/DecodeAndSortAll/crate1.dat', 'decode_data/DecodeAndSortAll/crate0.dat', 'decode_data/DecodeAndSortAll/crate3.dat', 'decode_data/DecodeAndSortAll/r2root.cc', 'decode_data/DecodeAndSortAll/Makefile', 'decode_data/DecodeAndSortAll/UserDefine.hh', 'decode_data/DecodeAndSortAll/main.cc', 'decode_data/DecodeAndSortAll/crate2.dat', 'decode_data/DecodeAndSortAll/crate.dat', 'decode_data/DecodeAndSortAll/r2root.hh'}
 SOURCE_ENV_EXAMPLES = {"analysis/vendor/ponytail/.env.example"}
 LOCAL_DIRS = {
     "__pycache__", ".pytest_cache", ".ipynb_checkpoints", ".venv", "venv",
@@ -28,6 +29,7 @@ def permitted(path):
     allowed = (
         path in ROOT_FILES or p.parts[0] in {"analysis", ".githooks", ".codex"}
         or path.startswith(".agents/skills/")
+        or path in DECODER_SOURCE_FILES
     )
     name = p.name.lower()
     private = (
@@ -40,7 +42,7 @@ def permitted(path):
     generated = (
         p.suffix.lower() in DATA_SUFFIXES | BUILD_SUFFIXES
         or any(part in LOCAL_DIRS for part in p.parts)
-        or path == "analysis/code/DecodeAndSortAll/decodeandsort" or name.endswith("~")
+        or path == "decode_data/DecodeAndSortAll/decodeandsort" or name.endswith("~")
     )
     return allowed and not private and not generated
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Restore project tools without global installs, symlinks or data-directory writes.
 
-Run with the system Python: python3 analysis/code/bootstrap_project_tools.py.
+Run with the system Python: python3 analysis/scripts/bootstrap_project_tools.py.
 Large executable files live in .runtime; /tmp supplies an executable filesystem.
 OMX configuration is already versioned, so this script never runs omx setup.
 """
@@ -303,7 +303,7 @@ def main():
         if not args.node_only:
             restore_python(env, temp)
             restore_libreoffice(env, temp)
-    stage("Restore complete. Launch tools through analysis/code/project_runtime.py")
+    stage("Restore complete. Launch tools through analysis/scripts/project_runtime.py")
 
 
 if __name__ == "__main__":

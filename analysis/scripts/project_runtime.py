@@ -72,7 +72,7 @@ def python_environment():
 
 def main():
     if len(sys.argv) < 2:
-        raise RuntimeError("Usage: python3 analysis/code/project_runtime.py python|omx|mermaid [args]")
+        raise RuntimeError("Usage: python3 analysis/scripts/project_runtime.py python|omx|mermaid [args]")
     mode, args = sys.argv[1], sys.argv[2:]
     if mode == "python":
         python, env = python_environment()

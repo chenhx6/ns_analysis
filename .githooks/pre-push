@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
 project_root=$(git rev-parse --show-toplevel)
-exec python3 "$project_root/analysis/code/check_git_content.py" --push --remote "${1:-}"
+exec python3 "$project_root/analysis/scripts/check_git_content.py" --push --remote "${1:-}"

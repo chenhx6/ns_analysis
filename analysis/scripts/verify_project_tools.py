@@ -11,7 +11,7 @@ import tempfile
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-RUNNER = ROOT / "analysis/code/project_runtime.py"
+RUNNER = ROOT / "analysis/scripts/project_runtime.py"
 REPORT = ROOT / "analysis/third_party/verification.json"
 
 
@@ -39,9 +39,11 @@ def check_skill_resources(snapshot, root=ROOT):
                     mismatches.append(str(path.relative_to(root)))
     for skill in snapshot["adaptations"]:
         for base in [root / skill["directory"], root / ".codex/skills" / Path(skill["directory"]).name]:
-            path = base / "SKILL.md"
-            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != skill["entry_sha256"]:
-                mismatches.append(str(path.relative_to(root)))
+            resources = skill.get("files_sha256", {"SKILL.md": skill["entry_sha256"]})
+            for relative, expected in resources.items():
+                path = base / relative
+                if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                    mismatches.append(str(path.relative_to(root)))
     return mismatches
 
 
@@ -60,7 +62,7 @@ def main():
     checks.append({"name": "All project skill policies permit automatic selection",
                    "returncode": int(bool(explicit_only)), "output": explicit_only})
     for file in ["project_runtime.py", "bootstrap_project_tools.py", "task_delivery.py", "check_git_content.py"]:
-        compile((ROOT / "analysis/code" / file).read_text(), file, "exec")
+        compile((ROOT / "analysis/scripts" / file).read_text(), file, "exec")
     checks.append({"name": "Local tool scripts compile with system Python", "returncode": 0})
     spec = importlib.util.spec_from_file_location("project_runtime", RUNNER)
     runtime = importlib.util.module_from_spec(spec)

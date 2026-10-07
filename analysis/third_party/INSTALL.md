@@ -39,17 +39,17 @@ Nature 资源按各技能的 `manifest.yaml` 解析；某些 `core/` 路径是 `
 
 ```bash
 # OMX 使用本项目配置和原生组件
-python3 analysis/code/project_runtime.py omx doctor
-python3 analysis/code/project_runtime.py omx ultragoal status
+python3 analysis/scripts/project_runtime.py omx doctor
+python3 analysis/scripts/project_runtime.py omx ultragoal status
 
 # 使用项目 Python；与系统 Python 3.8 / PyROOT 分开
-python3 analysis/code/project_runtime.py python analysis/code/<your-script>.py
+python3 analysis/scripts/project_runtime.py python analysis/<task>/<your-script>.py
 
 # Image2PPT 的本地 runtime 检查
-python3 analysis/code/project_runtime.py python .agents/skills/nature-image2ppt/cli/image2ppt/cli.py doctor --json
+python3 analysis/scripts/project_runtime.py python .agents/skills/nature-image2ppt/cli/image2ppt/cli.py doctor --json
 
 # Mermaid 使用同一项目浏览器
-python3 analysis/code/project_runtime.py mermaid -i diagram.mmd -o diagram.svg
+python3 analysis/scripts/project_runtime.py mermaid -i diagram.mmd -o diagram.svg
 ```
 
 自然语言任务自动按项目 AGENTS 路由到相应技能；也可显式指定技能覆盖默认选择。OMX 的 Ralph、Pipeline、Ultrawork 和旧 Goal 入口已退役，保留的卡片会指向当前实现。
@@ -61,10 +61,10 @@ python3 analysis/code/project_runtime.py mermaid -i diagram.mmd -o diagram.svg
 克隆本仓库后，技能和配置立即存在，运行依赖可按固定版本恢复：
 
 ```bash
-python3 analysis/code/bootstrap_project_tools.py
+python3 analysis/scripts/bootstrap_project_tools.py
 # 仅恢复一类依赖
-python3 analysis/code/bootstrap_project_tools.py --node-only
-python3 analysis/code/bootstrap_project_tools.py --python-only
+python3 analysis/scripts/bootstrap_project_tools.py --node-only
+python3 analysis/scripts/bootstrap_project_tools.py --python-only
 ```
 
 此恢复脚本只写项目 `.runtime/`、OMX 本地 `node_modules`/编译目录和临时目录。它不重新生成或覆盖项目约定与原生配置。Node 使用原生 `package-lock.json` 和 `nature-node/` 锁文件，Python 使用 `python.requirements.lock`，uv/LibreOffice archive 验证固定 SHA256，OMX 原生下载通过官方 manifest 验证。当前固定环境为 Linux x86_64；迁移系统时需重新选择平台构建。

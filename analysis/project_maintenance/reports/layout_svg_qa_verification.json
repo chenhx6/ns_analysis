@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Pre-migration Git, hook event/project boundaries and file policy",
+      "returncode": 0
+    },
+    {
+      "name": "Migrated files, historical evidence, source images, experiment content, decoder and user config preserved",
+      "returncode": 0
+    },
+    {
+      "name": "Post-migration Git, hook boundaries, source allowlist, data exclusions and program syntax",
+      "returncode": 0
+    },
+    {
+      "name": "Skill mirrors and source-lock fingerprints; SVG automatic routing and safe autonomy injection",
+      "returncode": 0
+    },
+    {
+      "name": "Actual Chromium SVG self-test covers clear, overlap, clipping and not-auditable cases; output boundary assertions passed",
+      "returncode": 0
+    },
+    {
+      "name": "Final SVGs match actual automated and completed visual review fingerprints",
+      "returncode": 0
+    }
+  ],
+  "limitations": [
+    "No commit, push, installation restore or model API call performed"
+  ]
+}
