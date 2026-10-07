@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "All numeric source directories represented exactly once",
+      "returncode": 0
+    },
+    {
+      "name": "CSV timestamps and rounded minutes independently match raw logs",
+      "returncode": 0
+    },
+    {
+      "name": "Input log fingerprints still match extraction report",
+      "returncode": 0
+    }
+  ],
+  "csv_rows": 212,
+  "valid_durations": 209,
+  "status_counts": {
+    "normal": 209,
+    "unknown": 3
+  },
+  "sum_duration_min": 8894.7,
+  "csv_sha256": "5f1cf0c01ed9f1b5561bd0467097723cb8de036d3ba5e048042a326d38565746",
+  "command": [
+    "/tmp/chx-runtime-1000-7c3dcfaa578c5882/python/bin/python3.12",
+    "analysis/run_log/test_run_log.py",
+    "--csv",
+    "analysis/run_log/runs.csv",
+    "--report",
+    "analysis/run_log/reports/data_verification.json"
+  ]
+}

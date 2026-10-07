@@ -1,0 +1,265 @@
+# Ge run.log 运行时间统计
+
+
+## 每日甘特图
+
+- [gantt_2025-06-07.svg](../figures/gantt_2025-06-07.svg)
+- [gantt_2025-06-08.svg](../figures/gantt_2025-06-08.svg)
+- [gantt_2025-06-09.svg](../figures/gantt_2025-06-09.svg)
+- [gantt_2025-06-10.svg](../figures/gantt_2025-06-10.svg)
+- [gantt_2025-06-11.svg](../figures/gantt_2025-06-11.svg)
+- [gantt_2025-06-12.svg](../figures/gantt_2025-06-12.svg)
+- [gantt_2025-06-13.svg](../figures/gantt_2025-06-13.svg)
+- [gantt_2025-06-14.svg](../figures/gantt_2025-06-14.svg)
+- [gantt_2025-06-15.svg](../figures/gantt_2025-06-15.svg)
+
+## 来源与复现
+
+- 只读输入：`/home/ys/data_401/data/Ge`；仅直属数字目录，排除 test/。
+- 输出目录：`/home/ys/data_401/data/chx_20260622/analysis/run_log`。
+- 实际工作目录：`/home/ys/data_401/data/chx_20260622`。
+- 实际命令：`/tmp/chx-runtime-1000-7c3dcfaa578c5882/python/bin/python3.12 analysis/run_log/run_log.py --input-dir /home/ys/data_401/data/Ge --output-dir analysis/run_log`。
+- 程序 SHA-256：`b56dc89326ec6a80539ea139fa8b2b8e16be8788539f75ce24e0c38436d91cf6`。
+- 时间保留采集机墙钟值；日志无时区，不换算时区。
+
+## 描述性统计
+
+- run 数：212。
+- 结束状态：normal=209, abnormal=0, unknown=3。
+- 可计算时长：209 个 run；合计 8894.700000 分钟。
+- 合计为各 run 时长之和，重叠会重复计入，不能视为实际覆盖时长。
+- 每个 run 一行；缺失时长为空，真实零时长为 0；CSV 分钟保留 6 位小数。
+- normal 仅表示唯一且非负的 Start/Stop 结束记录，不表示物理数据有效。
+- 未确认异常结束标志，因此不依据任意 error 字串分类 abnormal。
+- unknown 保留缺失、歧义或时间顺序问题，不推断实际结束方式。
+- 不读取实验记录、二进制数据或日志内的模块哈希作为判断依据。
+
+## SVG 与审查
+
+- 9 张每日 SVG，全部依据重新读取的 runs.csv 绘制。
+- 跨日按午夜拆分，恰在午夜结束不生成次日零长度条；未知时长仅画可定位标记。
+- 图中蓝色为正常结束记录，橙色为明确异常，灰色为未知；不代表数据有效性。
+- 最终 SVG 已完成独立的自动几何检查和逐图实际视觉审查；证据见 [figure_qa.json](figure_qa.json)，CSV 对原始日志核验见 [data_verification.json](data_verification.json)。仅凭程序退出成功不能代替视觉审查。
+
+## 无法计算时长的记录
+
+- run6027：Start line 9; Stop missing
+- run6080：Start line 9; Stop missing
+- run6228：Start line 9; Stop missing
+
+## 输入日志 SHA-256
+
+仅对实际读取的 run.log 字节计算指纹，不核验二进制文件。
+
+- `/home/ys/data_401/data/Ge/6015/run.log`：`e034d6ef976e27f378e818a10c6aa30fe493c1d1554dd83cf1c596b9d6043adc`
+- `/home/ys/data_401/data/Ge/6016/run.log`：`aeaeb6f5feb5a90cfd84d923e692ef8d4bd5bc4f86ffb95d93fd09a0a1b92ea0`
+- `/home/ys/data_401/data/Ge/6018/run.log`：`5c40a861665c4c6e45ca6ddf91a9b8936ca73e79e07caa5e9e6aad73f5bec411`
+- `/home/ys/data_401/data/Ge/6019/run.log`：`67f3f881bc6a267ffa84617a2da44f26aa31933fdddbeaf0f846fb49537e24b9`
+- `/home/ys/data_401/data/Ge/6020/run.log`：`7a0d08bc969e6cacca5b52683f32ac15000b3b8e2d7cf243f2befcf35d31e821`
+- `/home/ys/data_401/data/Ge/6021/run.log`：`7502675c590f8cec4dbd92719bbd0c5554aee5435c3320b38709b9fe49271aa6`
+- `/home/ys/data_401/data/Ge/6022/run.log`：`8ec9fea5ab90269938cb94b60be52e952dd58ae6428212c035c0722ecb5603c9`
+- `/home/ys/data_401/data/Ge/6023/run.log`：`1b65ef8475e84f93f014e8a4175bbb615f20057f53cb9195adaca22b33fdad4f`
+- `/home/ys/data_401/data/Ge/6024/run.log`：`49d5ec537ab7cfd4814f3ff92ed6381f4425a73c8e71e0b9e5f24e37469e6f9f`
+- `/home/ys/data_401/data/Ge/6025/run.log`：`5c6b6fd9e14aaa35a8288eee1311065f322ef865b82752dc6033077bdd88f234`
+- `/home/ys/data_401/data/Ge/6026/run.log`：`d83e98d4aa56b97d9a3dfa54a7f2eb7a29f10f57bc667cabf96bd8c6d56ff1b8`
+- `/home/ys/data_401/data/Ge/6027/run.log`：`f130cd2612c7e08abc212ddf5e1ceb2e1e9283197676e915699c2c3f159924b1`
+- `/home/ys/data_401/data/Ge/6028/run.log`：`583abd15622956a6567490f5d30d9eb0155c0fb39e8e459b2e2e046b0d24176e`
+- `/home/ys/data_401/data/Ge/6030/run.log`：`0772f940fb4a6b75b0e6cded8894d0eddccb1f54b1c7bdd839f0656e8b1104fd`
+- `/home/ys/data_401/data/Ge/6031/run.log`：`0d9a8b50b2e65cf8e7ab2fb787e821038d7b8a503540d5b5d702742e19eb1eaa`
+- `/home/ys/data_401/data/Ge/6032/run.log`：`d6327fb9f586273aa07d4dc12db4a62da390cf681438c2d17db8f753d5a64fac`
+- `/home/ys/data_401/data/Ge/6033/run.log`：`3aadf487a8b3f08bfda987ed032fa1ce0f8f80f7df1964223a90167777a051a4`
+- `/home/ys/data_401/data/Ge/6034/run.log`：`3ef3ca6822270d3a2954c1c1ca1ee1545cd70b46b2567b48d91585c9700c889d`
+- `/home/ys/data_401/data/Ge/6035/run.log`：`63a62b0ef55307d5fcb027131831dcd3583b53465cd045da315560f38ead6fa4`
+- `/home/ys/data_401/data/Ge/6036/run.log`：`396c3ce7faeab04cd38adf26a84e14edf9a7770517f0834e76ec9dd69946c8fa`
+- `/home/ys/data_401/data/Ge/6037/run.log`：`64e3037cc3c905d311986ab0f29db07618241fa2a3107fd0e63bf559dc2b239a`
+- `/home/ys/data_401/data/Ge/6038/run.log`：`92eb4db316ddd4d2bb7e29148b9967b533453d454e95dc30b5d25dce56aaae2f`
+- `/home/ys/data_401/data/Ge/6039/run.log`：`829ec6d7c217e15513a5593a3b06c19a70e1218488e5ca83617e1676fdf2d628`
+- `/home/ys/data_401/data/Ge/6040/run.log`：`fc5cb784693001cd5ac67c5a59eb6f3b67e793dd9646b7e7f8d6b1cb808c7666`
+- `/home/ys/data_401/data/Ge/6041/run.log`：`a6302dac7d0b04f2261159e3b9662dc1c66a3708da86bcdf95c5335316a1470d`
+- `/home/ys/data_401/data/Ge/6042/run.log`：`cca37249cf32b8e25bed2645fbd146415749bea9099f3b03475172af5e38d25b`
+- `/home/ys/data_401/data/Ge/6043/run.log`：`4932881a3704c63e18010fe8294a5e2d30ae34849c5d74010ee44f9464164436`
+- `/home/ys/data_401/data/Ge/6044/run.log`：`af077a93897937313a3a10690340f0e2dfed73dbe6d4eab01d73441cb6e3e07b`
+- `/home/ys/data_401/data/Ge/6045/run.log`：`1990ac82a79827335f7dc352da4b40a59cc19f6247d7be0e1e1dcdd8bd94435c`
+- `/home/ys/data_401/data/Ge/6046/run.log`：`a42723caf6b105efda8c3ae3801255c4373335405f642c8e9f9a9d644ff12a5b`
+- `/home/ys/data_401/data/Ge/6047/run.log`：`c1014b0b15f518cf88e7c5c6d7c08f542dda160b49a640972833f2301d9ac197`
+- `/home/ys/data_401/data/Ge/6048/run.log`：`58f9c50fe16bffa33e397a94598218473c8d356912c3f5fc8da7277ef24121a7`
+- `/home/ys/data_401/data/Ge/6049/run.log`：`a888e7bc0ca4595fdcd2fec3897225e513bb57ee2f9bfc922c781e76cc007fec`
+- `/home/ys/data_401/data/Ge/6050/run.log`：`9dfb17bc419b3c55ea128bf04d1c700d029b1507a0a61463c441fa806b67964c`
+- `/home/ys/data_401/data/Ge/6051/run.log`：`769171423a6ead924b3f21308a20b3b28dae062dbdad9a0ddb73a7a9c3782973`
+- `/home/ys/data_401/data/Ge/6052/run.log`：`1b265ebfc1cff74bd9026dad80ead06ff1c9d97e763f63faf20e621923aa480f`
+- `/home/ys/data_401/data/Ge/6053/run.log`：`b6d5651c46c6b2683aeb362ccb6529b356a4b5b0b5c703f520a63c4ac187247b`
+- `/home/ys/data_401/data/Ge/6054/run.log`：`3e95ceada8504b3e019c504356a3a7303e1bb177fd45e7661d5302efcdd48f4c`
+- `/home/ys/data_401/data/Ge/6055/run.log`：`701b9dead64dbe12f7c4397b62eaa5c721dc7737ff9d0cf1861bb787f56fce5d`
+- `/home/ys/data_401/data/Ge/6056/run.log`：`a9ad34bfd51c06e78754a6413b18046cd28a418fdce7d6d86c5a4fd31da231e6`
+- `/home/ys/data_401/data/Ge/6057/run.log`：`b01fc772e4952df9d94d91482b00d75d59297f92f586a57756413d062b9849d2`
+- `/home/ys/data_401/data/Ge/6058/run.log`：`34cef3e06fc7023bf2f091bc66a629b8694c52c5e0e83922318d63a90411ced3`
+- `/home/ys/data_401/data/Ge/6059/run.log`：`2d0d682ed7b8f8de0c7b917dae15e64e8ca31ede072743a56ba7d32099d66adc`
+- `/home/ys/data_401/data/Ge/6060/run.log`：`35e49abdd5faf9c757c887cb74868d3ab986169a989c633044c9179695d7ffad`
+- `/home/ys/data_401/data/Ge/6061/run.log`：`f8589a24faf221566fb25bfb2c302d053a902f24c57ea19b8a04b5de1f170f90`
+- `/home/ys/data_401/data/Ge/6062/run.log`：`3663a0ecc82a14446f295c7d1306c953a89cb53425a2f93bd550071aa277f9b5`
+- `/home/ys/data_401/data/Ge/6063/run.log`：`18812cb8178ae9dc9cff3fb8add4085a8c4861e8d86d4864515908faa449bfc9`
+- `/home/ys/data_401/data/Ge/6064/run.log`：`1684c32ce1fbaa99a6b2916f972f40cd57b4ff9c5cebabbc31e14b89fcdf236e`
+- `/home/ys/data_401/data/Ge/6065/run.log`：`863781f85b8e3c811e15d66250fe154fc8ea6c8748b149f5b07128b2b37cd6ec`
+- `/home/ys/data_401/data/Ge/6066/run.log`：`8b076aee9d51fdcc1e4548b51085041840839970c7b2cfc6fa91858197bb1780`
+- `/home/ys/data_401/data/Ge/6067/run.log`：`032c81d12ec8004db495ef6beafedfa92f6b7f4a8c4f10a715119962f4dfffdd`
+- `/home/ys/data_401/data/Ge/6068/run.log`：`445651458d40b2eadfd5c032aa03b6983da76323dcb4c274fe7c8883f9861462`
+- `/home/ys/data_401/data/Ge/6069/run.log`：`aa4aecb83f8aa970d9df4a734e88bd9e052a2303f88c00d398e169317f3ffd61`
+- `/home/ys/data_401/data/Ge/6070/run.log`：`dc3155240d74b1149e629023cf5170470e7fd7a33b9eadd4cbd54f52b5fe8789`
+- `/home/ys/data_401/data/Ge/6071/run.log`：`f598fef9599c31f22ce9460066ff250d78d56c1bac8c3174663335dc729136ec`
+- `/home/ys/data_401/data/Ge/6072/run.log`：`5d2880c55571230726c04af01a4c33fd906b6600ec5be1744e18446fddeea39e`
+- `/home/ys/data_401/data/Ge/6073/run.log`：`0395d1b8f09f174b4a82004f34080552c729de095064c9a78521f30d882beb09`
+- `/home/ys/data_401/data/Ge/6074/run.log`：`73016def1937dcef3c9c4dae99b924759a7d3931cdfb74f6b053ef41a4b5b40e`
+- `/home/ys/data_401/data/Ge/6075/run.log`：`0068c788fac80ac826667ee5bc1c4b19302791e9d9b69a3af3ef53ab0253696d`
+- `/home/ys/data_401/data/Ge/6076/run.log`：`08fdbab9adab378766481532650ce4c9aa871bdd2ccca604afce5acaa30b19ba`
+- `/home/ys/data_401/data/Ge/6077/run.log`：`4b64cdbb3c5c34e86460c88f9f627cb4426b95e2900710e5d6f660b2efed6add`
+- `/home/ys/data_401/data/Ge/6078/run.log`：`0d6c83ad031f21b83bd762885d8ef289d7f464e72877152f24dd254f3ff8eb63`
+- `/home/ys/data_401/data/Ge/6079/run.log`：`edcd037a62e4c6bcd0913af3c23b6b05869bde9e74d8a14dc698f93d1a7064a5`
+- `/home/ys/data_401/data/Ge/6080/run.log`：`593956a2e9d96e42fdc48aecc86e8865e9338da8b4759d77cbaa9defb599593b`
+- `/home/ys/data_401/data/Ge/6081/run.log`：`0b749b0e81168be9259ea2c585d167a89ed57a4e3898bd586f3e42ee039ca514`
+- `/home/ys/data_401/data/Ge/6082/run.log`：`fd12aedf4ed91f1ba2067e6e049eabb3e4fc5a10d26273d3f67ca0bb965d61b4`
+- `/home/ys/data_401/data/Ge/6083/run.log`：`2011f1646ad19ac61ab37432fb024be917b3fe4384fae8911f8196ca368f6685`
+- `/home/ys/data_401/data/Ge/6084/run.log`：`cc698abdcfce0d33855d5a1b3f82aca4db30b3697ce16b401a83cae8379b4a28`
+- `/home/ys/data_401/data/Ge/6085/run.log`：`b19715247e7269664119fe1203351cbdaae0eb76967b5e4439d300c87fa37153`
+- `/home/ys/data_401/data/Ge/6086/run.log`：`555175d91f5380cab813fd7c9c147f3042768d7f94a28009e081d5e8e814c5c9`
+- `/home/ys/data_401/data/Ge/6087/run.log`：`8bfcea1bf58fbf643557011a672984e10b589eadc92fe0c1f9a2b2a82acb4fa7`
+- `/home/ys/data_401/data/Ge/6088/run.log`：`44507a7479cfc3d3c1805f016013af9ebdff3e1811b2b37599f79eb708e55575`
+- `/home/ys/data_401/data/Ge/6089/run.log`：`834139ce8e17398cef21b420fce7b9bc7aa4cb7d5581f396b0272dcd56f75ce0`
+- `/home/ys/data_401/data/Ge/6090/run.log`：`9b07c98379d20d37ccdadfa0263296ebab9973205fe06c2095962d3e96eb2369`
+- `/home/ys/data_401/data/Ge/6091/run.log`：`60f4924faf7d438cca310437924dd41f71d4ebf9672f4329571222e386ccff6f`
+- `/home/ys/data_401/data/Ge/6092/run.log`：`0daff888ff294ce53a745f2848268baec582713b5ec6d093ed54f2652e1d0847`
+- `/home/ys/data_401/data/Ge/6093/run.log`：`9969c4bb7dd030559ce7c60673c4e89746df1422213e78f90f6bfbdcf64ce47a`
+- `/home/ys/data_401/data/Ge/6094/run.log`：`c3832fcdd5b6368dd541a40bcc0f3a8b83d523580ca9dfb5a115edcad80b488a`
+- `/home/ys/data_401/data/Ge/6095/run.log`：`41be808577058f649309cb29e3bf20d7b8ec519da1a91769ae0eb0b41f84348b`
+- `/home/ys/data_401/data/Ge/6096/run.log`：`72a57a622de3c399ff8c47256a622b978e5d30a1d03917059ced5f0e6819c2f5`
+- `/home/ys/data_401/data/Ge/6097/run.log`：`71b7616f1d962482b557772420ccded58ddcad16b1b1c5a1ed87f417aa3559a1`
+- `/home/ys/data_401/data/Ge/6098/run.log`：`6142e603f8358e737b36ed54c755766f63d1bb51babdbf26a04a0a52ec2c19b2`
+- `/home/ys/data_401/data/Ge/6099/run.log`：`25b1cd72060a79f637e38cab1fb54a8dd210a3fd5935b2e35089c15461741d5f`
+- `/home/ys/data_401/data/Ge/6100/run.log`：`112a1b52fe50e07486f2aeaf3736862d4d22f236efdd6087655319b4cebb5fb7`
+- `/home/ys/data_401/data/Ge/6101/run.log`：`db5618457c5f4050dca33c5bd0654239628666dfa84daafb98e7192c29adb92a`
+- `/home/ys/data_401/data/Ge/6102/run.log`：`16590eeebec3edb5899c8226382608c69e20cb7661fd44be02e32357e384f5fe`
+- `/home/ys/data_401/data/Ge/6103/run.log`：`cb331485927ed663dca0a5c4262b94c1d64b0d4e56c19648b58b035712fff111`
+- `/home/ys/data_401/data/Ge/6104/run.log`：`e44e3fff4d88414e268b8e5e04767db7cc7e34d844a12c2c3d35b4ffc7306e96`
+- `/home/ys/data_401/data/Ge/6105/run.log`：`1a39e6b4bc49c333627a516b0147ef97a7fe48ca7488beb4585038bdbf39c018`
+- `/home/ys/data_401/data/Ge/6106/run.log`：`5db2ec71510fd76c625c4edb6a2ea95666262453a6a8e698d368b9844649c692`
+- `/home/ys/data_401/data/Ge/6107/run.log`：`a88e7f80dd767d691eebba37766f960cc397d857f7667abc701e9d819e0c31d8`
+- `/home/ys/data_401/data/Ge/6108/run.log`：`f120aa7264c1ffb82f8b4eac292f8316685c13f2877b316613554b5d15af1b1c`
+- `/home/ys/data_401/data/Ge/6109/run.log`：`bbe1fbf490a09065606a30bf5b31c4855ee6260f54f763c021f92bec0bf1d765`
+- `/home/ys/data_401/data/Ge/6110/run.log`：`577a15da897976d70fe4e10973be85b17921fc6f3f3b0eb2b8143fb8290e6725`
+- `/home/ys/data_401/data/Ge/6112/run.log`：`1af6ae5dcc4fcc7da207ca1d4b35d8baaa061380e316f6f173190de10f22b65f`
+- `/home/ys/data_401/data/Ge/6113/run.log`：`273bba8e17569b53b68da862eb013444e679d6976429fd2e8163ace8dd2dc7df`
+- `/home/ys/data_401/data/Ge/6114/run.log`：`393d9d41a8a1e820822c4819046e8c1fb494c89b748f74d5dbffc7dea33d4f5c`
+- `/home/ys/data_401/data/Ge/6115/run.log`：`a14bc6ca743cfa82f06ffc045c87c24f299a8b629cb9fede61f416aeace0fce3`
+- `/home/ys/data_401/data/Ge/6116/run.log`：`eec0d56cbb9d42b0301aa958ac9b11e4bc6fc5eea8bbecda2527c2a54e41ec46`
+- `/home/ys/data_401/data/Ge/6117/run.log`：`02657430b674589b710721398d070f61e2fd736ecfebb5baed5e4270823451dd`
+- `/home/ys/data_401/data/Ge/6118/run.log`：`62abaa1b86a3e4f1091d784d46f3f0d46a185979948189d8840027c7c19a55d3`
+- `/home/ys/data_401/data/Ge/6119/run.log`：`f7b33c335dc3fa71aca909998193edf32fe4908f4bdba123b4da16c90924aac9`
+- `/home/ys/data_401/data/Ge/6120/run.log`：`1ec336baaf91c35f86298a551b4a88acedf9e2baf78748e84166caf8f33dacee`
+- `/home/ys/data_401/data/Ge/6121/run.log`：`b79e3dd89d67cb0cc6cfde462c513b197d94dd67d521590e95596d70bfda4a05`
+- `/home/ys/data_401/data/Ge/6122/run.log`：`da0a9b3d36a7e191884431c52bd8565f205f51e090f0ccc3a32151fe526d0656`
+- `/home/ys/data_401/data/Ge/6123/run.log`：`767cffda9e35095bc54056db8599bb8bf95ffdfd339d51ca7c83299ad0f400ae`
+- `/home/ys/data_401/data/Ge/6124/run.log`：`cee128af9d706c8f6ae1e23420121c875cbe777d2da9e462ed86db3e0fa080fe`
+- `/home/ys/data_401/data/Ge/6125/run.log`：`f33988de097d92e0ca2d99d677ed0ec8e4cb8173b1a5967b5dfa6f57f5c17a5a`
+- `/home/ys/data_401/data/Ge/6126/run.log`：`e1a40daa672f389f6b170b8b4dadc18b4faee522f80af1e10d1d305f84a3c434`
+- `/home/ys/data_401/data/Ge/6127/run.log`：`46a3ff1a15fc4278c2e09c6223bcf5c43e4fdc189f82fa26361201da50f6913d`
+- `/home/ys/data_401/data/Ge/6128/run.log`：`440411320beb14b3797c7aa3df06ffae3f4d9eff2e6715be85d92608fc6df753`
+- `/home/ys/data_401/data/Ge/6129/run.log`：`84c8b11f519298535820fb5daa91cc65aa837b8c14e24dd90f2bdf43c098af10`
+- `/home/ys/data_401/data/Ge/6130/run.log`：`8f394bb16b35f1fa79c8a22cc2169a403f775f691dc17009ddadfcf111381a42`
+- `/home/ys/data_401/data/Ge/6131/run.log`：`2ee145b0bd345797b3604cc51c17bd5e2622274ac991fd1b94169c90f0c36152`
+- `/home/ys/data_401/data/Ge/6132/run.log`：`73ad7891f19402c58d474a7530329e0c098cc8caeab6dba31f4bc69e31ff17bf`
+- `/home/ys/data_401/data/Ge/6133/run.log`：`84cb59d63db61d50d38958955f560021820ec3c870ac6a21dfab914962e8c997`
+- `/home/ys/data_401/data/Ge/6134/run.log`：`d11f0f42942bd46fe75e4ec3d3921c51e2aa25af9e3ca8ee78f9ffde4c11e56a`
+- `/home/ys/data_401/data/Ge/6135/run.log`：`266121658707b3a8f4ed2a7e3ab4540dd77d7e81331eb2419a22bdcf9d6ab049`
+- `/home/ys/data_401/data/Ge/6136/run.log`：`0f881f4a9cc2c560dd4d454914bc1bd8e19f4e7883fca9b2579742f99554c243`
+- `/home/ys/data_401/data/Ge/6137/run.log`：`969f529d8d3a268a7889d585f9a3cd110e8c197153f11d58f840fcb94d62714e`
+- `/home/ys/data_401/data/Ge/6138/run.log`：`c8c1997e8568fbcf330c747f147bfe933f03d7ad5521ccd086d5a719396aae8d`
+- `/home/ys/data_401/data/Ge/6139/run.log`：`bbcaae4a151c82f1ca713bafda6dc56709d97435ef6d359123a3c9ddd779dc0d`
+- `/home/ys/data_401/data/Ge/6140/run.log`：`f81721c620dd090e07c345634daa3d8c444f5550feb7368ae5e3bad298777ffa`
+- `/home/ys/data_401/data/Ge/6141/run.log`：`0dfcc8d93599dcd99921f49e356280bd019cb7fa637bf7acdd934c93dbd59913`
+- `/home/ys/data_401/data/Ge/6142/run.log`：`57f00f21c7bffda798d356f661b9c16adc85893c7eef3e6c88e0e6661894026f`
+- `/home/ys/data_401/data/Ge/6143/run.log`：`977058763f44c78c56ccd7cbfecf4c04492b9536a60d44d42478170a68aec39e`
+- `/home/ys/data_401/data/Ge/6144/run.log`：`91d1e26294ada34dc5edcfa756daa02cd41eb5fd8af78983dd5d167898ef3220`
+- `/home/ys/data_401/data/Ge/6145/run.log`：`b5880e7b5dbeb51aaa5ff636d1ca00810db8a621adbf610e25790f3b092f3940`
+- `/home/ys/data_401/data/Ge/6146/run.log`：`da17ccc5018a523bed9f16eb1b0842bcafc653b21b35049d7d1014e3f21fc1b9`
+- `/home/ys/data_401/data/Ge/6147/run.log`：`8753d72c07fe198b61b880f08474333759c391b0b4273d9d789a3c9b25bb2de7`
+- `/home/ys/data_401/data/Ge/6148/run.log`：`741cd92a3d341f025f476ee6698cbe9a763de007a828c75175ecbcd79655ef45`
+- `/home/ys/data_401/data/Ge/6149/run.log`：`35578efe39d655d50c4a6f00249a023eeffe41e7b07fe537aec7bf7ee71a360e`
+- `/home/ys/data_401/data/Ge/6150/run.log`：`bef20e33ca271af4ab9c84d2aced0f3ed698facb99f66a630a0e83b0f14e620d`
+- `/home/ys/data_401/data/Ge/6151/run.log`：`9659bf22ab5391266d0b436619d39145cd6b65c06a4cb43a1a803fee8c4a9203`
+- `/home/ys/data_401/data/Ge/6152/run.log`：`99f7510032362a9e929d15be618f4c865632945625b766d6315a2bcae7464450`
+- `/home/ys/data_401/data/Ge/6153/run.log`：`eedce5e93aeec2e4d50249494089e62dff34b5e797081a8f1759317942116e89`
+- `/home/ys/data_401/data/Ge/6154/run.log`：`2efa93cf2ae30327226e98304f63e98ed2ed6c9d74566c19d3dddb9fb9ad6bd9`
+- `/home/ys/data_401/data/Ge/6155/run.log`：`2c80839cb05d762b0a4aa11ec62c6331dfc33fb9eca1450c302e93042236c374`
+- `/home/ys/data_401/data/Ge/6156/run.log`：`0c2a7d4226bfc9bcc5fe63b578101496dcaa9b5a966e90c92512f577dacb26d0`
+- `/home/ys/data_401/data/Ge/6157/run.log`：`d410376bcd25d6f2c53cea79a5a092113774e68f0cfa781854a4e0bb83e885f4`
+- `/home/ys/data_401/data/Ge/6158/run.log`：`c5141608ce4132bcb13bb64bcc42d0dabeffd1a47ed654965779085dd7b5f169`
+- `/home/ys/data_401/data/Ge/6159/run.log`：`02e0ab779cbbe669e4a47621c6748c32d13f0541ebd8316ed49ae8418ff4d11f`
+- `/home/ys/data_401/data/Ge/6160/run.log`：`5a59d33be77dce2baee43b4d5427b62086cbd16ff48983728016ee10f03667b7`
+- `/home/ys/data_401/data/Ge/6161/run.log`：`38922407776f96fc70664d0d394f486502ad26459037d65edca97bd60e0bd451`
+- `/home/ys/data_401/data/Ge/6162/run.log`：`21836d76fc4743cce31d33a62e3ea119708e9fb61ce0a9085a9d1f803f77a4e0`
+- `/home/ys/data_401/data/Ge/6163/run.log`：`22d37fd5ab9178dcf941ecb8370c719b8bec0e2d16aab4060916b4fd3075032d`
+- `/home/ys/data_401/data/Ge/6164/run.log`：`4368a9e95734ca1cb22716c138bef7cc0bb8dd61388eb0f0e7305d0c65f328b6`
+- `/home/ys/data_401/data/Ge/6165/run.log`：`5cf22dfe32960cc65e58a7f99dde01cdae7a079eb8fd94f2a2f46042ccae9790`
+- `/home/ys/data_401/data/Ge/6166/run.log`：`629283568dbe9b63ec2557ee41792608fc3925a36a423437a776c396de3e6cb8`
+- `/home/ys/data_401/data/Ge/6167/run.log`：`97fccac7c354b3b855b3a9f56260fc7080d797bef004d057fbdbffe035d99f32`
+- `/home/ys/data_401/data/Ge/6168/run.log`：`918300a9f75213a70e50b1f3fdaad24de9d02462a6f7a434bea142272eaa005e`
+- `/home/ys/data_401/data/Ge/6169/run.log`：`87bc980f3ac1af2d0152bfa18ab52480de3366b152e8d3463cc064bf5bf9374f`
+- `/home/ys/data_401/data/Ge/6170/run.log`：`ea93276124476c95ed4e3f910be7016c06d2493865bb3c409b5b5e9156e06c79`
+- `/home/ys/data_401/data/Ge/6171/run.log`：`43974567b8473aba4a35e26157d0e640e79539ca09bee8c893ca70c4b04a99f9`
+- `/home/ys/data_401/data/Ge/6172/run.log`：`c399758766955c75618a36153d265a47ea57fab8f29c710807bc413ce1c2b5b9`
+- `/home/ys/data_401/data/Ge/6173/run.log`：`b38b92a4581e60339386d8d2c3ad75110f59e8148fc7edc333c51f67d2937d04`
+- `/home/ys/data_401/data/Ge/6174/run.log`：`aa508103413d8c0b54f2f047e606e3c1ed495d325d446d6d7c543131a665d745`
+- `/home/ys/data_401/data/Ge/6175/run.log`：`9cca4419fa3b406aa8caa9b75e74467aa3b896ed1aec883f2013cef8ddbaf020`
+- `/home/ys/data_401/data/Ge/6176/run.log`：`3353e7b6ea06dab8a2d7303d7f6f937bb775584ded1887c43bebe6d6ced94891`
+- `/home/ys/data_401/data/Ge/6177/run.log`：`db4dab997750682144eeb0ae1d6bf96178477b2a02d3664603c755f9bec4424a`
+- `/home/ys/data_401/data/Ge/6178/run.log`：`81c1b8d8e483755f100a2e81c3202919913b818e036b8a02fe7d214678d4e6f9`
+- `/home/ys/data_401/data/Ge/6179/run.log`：`cf42ee5fe5d3982f9c861aa254002913d3389c927817e724ac566f7068dceafc`
+- `/home/ys/data_401/data/Ge/6180/run.log`：`14984230a4b9f4a5baaaddea497baf95d5a07bd7618175d7db261314e25d21f9`
+- `/home/ys/data_401/data/Ge/6181/run.log`：`aa5f5f59a3016b6fdfce5c36a3d6ba0d4bdc6e05ce8d554330329394f61f55dd`
+- `/home/ys/data_401/data/Ge/6182/run.log`：`4f09c0eee2f5964553a7f45e3187125032930739490c9babec63476f1b6d0c2d`
+- `/home/ys/data_401/data/Ge/6183/run.log`：`79828d14c5381a08e6b19496a146c8fd859de968ef29c4b3ec026e5021f26f9b`
+- `/home/ys/data_401/data/Ge/6184/run.log`：`906269587851aac25c37f902588424fc86c8b2ab60ee657f6f6b1109e4ef2665`
+- `/home/ys/data_401/data/Ge/6185/run.log`：`057b4012168c9cca9d0cff09e07eb6b9c32b84c348fb07411a505ef9bdf06e40`
+- `/home/ys/data_401/data/Ge/6186/run.log`：`642d797e728f6ac404e20693315537d3228b11ffd060f29e502142b19803af12`
+- `/home/ys/data_401/data/Ge/6187/run.log`：`a98fd852a59440ddf973d14b8024a000232de1ae099f0bfe58c57ff48dacb167`
+- `/home/ys/data_401/data/Ge/6188/run.log`：`47f32f5322a6908673564cb29e0368b5880c188a71e8c763289a3fbe4ae72acb`
+- `/home/ys/data_401/data/Ge/6189/run.log`：`94daf18a17e50ae320f2ee95b2af527dd3549c8c692c24c387e9fb9eb80eb360`
+- `/home/ys/data_401/data/Ge/6190/run.log`：`fc76477080f4d0c474d7b393fb73f596d92089b80788306f741365f61847fa3c`
+- `/home/ys/data_401/data/Ge/6191/run.log`：`176171338d9fc81c33d3a60a8c87f46f0e66bfe0a1d6fc8cc8489b4014679374`
+- `/home/ys/data_401/data/Ge/6192/run.log`：`68c9ad5df7451d980d672a84ce8d33e466f51c0c2524035a8b1a14243a026b58`
+- `/home/ys/data_401/data/Ge/6193/run.log`：`e9ee11b3431b6d9eb37525581206c4edae802bef225eec8c068c18f7802707a3`
+- `/home/ys/data_401/data/Ge/6194/run.log`：`8a398abff006006327c8ce86956544ff8afd9322ef2df348c3cdd526427866de`
+- `/home/ys/data_401/data/Ge/6195/run.log`：`7ab2ffb29e42ee79bf5a1def102b633926e33783992fe3cf823d5bbcfb40bb33`
+- `/home/ys/data_401/data/Ge/6196/run.log`：`403d4770b5732a3f46ee5dff0306b4df661867959ef03db93e6875936f8cf72c`
+- `/home/ys/data_401/data/Ge/6197/run.log`：`ff1bdfe48e847e7e9ace4b8a135450cbbe57dac82407a75359ba73320d3f22d8`
+- `/home/ys/data_401/data/Ge/6198/run.log`：`5b31ac6709938c5dd9908cf06829da0b13666e797f0aa41f277a5da018303728`
+- `/home/ys/data_401/data/Ge/6199/run.log`：`dedfde2c7e7cb600cfb942918d26e8a0bdb5957239535b840ef81af758340d11`
+- `/home/ys/data_401/data/Ge/6200/run.log`：`7df9afe7e0a7d6602ba2c730db7ea05fb965c5301f068826350d6d04eb7d8503`
+- `/home/ys/data_401/data/Ge/6201/run.log`：`4891c7fd224162e55e5ea6f7a438723d15ea295019a2e38b3680b95aa9e1cd3a`
+- `/home/ys/data_401/data/Ge/6202/run.log`：`2f35efba3e19e07648c3c5dc94f178ec56ca22c9232f5f3138f0c7763f6fdb69`
+- `/home/ys/data_401/data/Ge/6203/run.log`：`f79eddd5a0e765c7df1f231580130f4f2b5f4471c2b61e0d151ba1fb05f6b16c`
+- `/home/ys/data_401/data/Ge/6204/run.log`：`cb3c574fc110a824c805d7232e14970313f6170dc803fae931fd5e7fcaf22318`
+- `/home/ys/data_401/data/Ge/6205/run.log`：`9b7a81a278857c762cdc108ff39a8b780351dab58fff968a80a12cf54ee47f80`
+- `/home/ys/data_401/data/Ge/6206/run.log`：`9ddaef7159f3117d6b66f451301455ce11d41be1d586a7d7d5593634bcf4b7ab`
+- `/home/ys/data_401/data/Ge/6207/run.log`：`4c44fc8d3a2cc35c8f93fb70f554aeae34d3ee1eeccd7483eb8823ada2735d9d`
+- `/home/ys/data_401/data/Ge/6208/run.log`：`849200ca87bfdf54d69bc8ef5224569068cbcb0fc350db789d96539c07c8efbe`
+- `/home/ys/data_401/data/Ge/6209/run.log`：`0b546fe9b0f628a7c05b179791eada85d86be9465bbed556042758bcba4989f9`
+- `/home/ys/data_401/data/Ge/6210/run.log`：`baf2e97574a7c6733d0ac635dce818577b8bd386d06025e0378fb0b6dace283d`
+- `/home/ys/data_401/data/Ge/6211/run.log`：`f50a1b3033c18716b35728f9c14d1b365728b26364b17162244bfe8100a4b6f6`
+- `/home/ys/data_401/data/Ge/6212/run.log`：`d35bb095b55fff6b24a5cfd7a52ea3c09c9d8e9bd0cb62f42f4365b1c91f6100`
+- `/home/ys/data_401/data/Ge/6213/run.log`：`94f6ac7149ad718f0cbe4a67b18d39831dc4eaab2f2a87d35a46d8e7f11ac213`
+- `/home/ys/data_401/data/Ge/6216/run.log`：`dddb2922867626569c0893d3f76c9e893f7bc7290a0768ac81ac5843808b3b06`
+- `/home/ys/data_401/data/Ge/6217/run.log`：`0184f91b6d33ce8ccc3a8a5d7735b718fdf47e6d56ce6827c6044e4c962934ac`
+- `/home/ys/data_401/data/Ge/6218/run.log`：`e2918ab800ae6705f14c12021397a0ebf56eefd10c76b4dee328b943d6185891`
+- `/home/ys/data_401/data/Ge/6219/run.log`：`8daa2d81d87c14366fbb615cc26f6607304b5a2188eb1d8cacf8fdd71e9d5f6a`
+- `/home/ys/data_401/data/Ge/6220/run.log`：`294042429239fd1f909e5c8b5b9d1936f2e25a024bc09718cf152bd657711d6b`
+- `/home/ys/data_401/data/Ge/6221/run.log`：`e4eb11ee8066703468493333c75aacae2528640c3d8c5c1534aae8ab15bfa0ad`
+- `/home/ys/data_401/data/Ge/6222/run.log`：`61bad10b33abb90cb157726c5a6493263b83b552bacc373181b13603ccdf8702`
+- `/home/ys/data_401/data/Ge/6223/run.log`：`176dbc4765e41937daba8c8b76aa650a838295dd455c0968ecde0556883ec407`
+- `/home/ys/data_401/data/Ge/6224/run.log`：`fe2410c81a097629706d33286478effabdbfba5428b3500c7ed77b084992b816`
+- `/home/ys/data_401/data/Ge/6225/run.log`：`35378de8f412edfca814e0a5385f3c19a39dc14ac52e584e070178bcd2c3808e`
+- `/home/ys/data_401/data/Ge/6226/run.log`：`025e559ae6bcd51ec07eb2b6f152b4a814d8620fea69feee3022bbe413158d5d`
+- `/home/ys/data_401/data/Ge/6227/run.log`：`bcff9132f97e24f41986f2bcf79925d0b2e4f44c30f7f8800c045ac508d6abc3`
+- `/home/ys/data_401/data/Ge/6228/run.log`：`d6687a3b1e1742c9d9fcacca545d540e7f14007b64d96c5f64b2228a9b864f41`
+- `/home/ys/data_401/data/Ge/6229/run.log`：`45f32b90a2aa920e07e06a3c409f0b77a8e854f90714f49c399f239f6dbacef6`
+- `/home/ys/data_401/data/Ge/6230/run.log`：`dc57903cfbf003ca7e6e09cbefe368e51957eed9d9b566f3af2c5a4fb6fe89f9`
+- `/home/ys/data_401/data/Ge/6231/run.log`：`b482dde3f8f237a126f5ffea0c7a8da24b104ce820984a183627a5d2c642a6b2`
