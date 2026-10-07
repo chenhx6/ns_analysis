@@ -106,6 +106,15 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/python3\" \"/home/ys/data_401/data/chx_20260622/analysis/scripts/project_sync.py\" hook",
+            "timeout": 15
+          }
+        ]
       }
     ]
   }

@@ -1497,7 +1497,8 @@
     },
     {
       "directory": ".agents/skills/task-tag",
-      "entry_sha256": "14013540bff0958e198b0c8cae76c749b2ab8acc63063c186d5d19764d9ddae6"
+      "entry_sha256": "352da8f2ce3b10074236689717f639165b95ef377ddae14652d7102b5d4f190d",
+      "project_extension": "User authorizes automatic verified commits and pushes; native Stop checks pending delivery"
     },
     {
       "directory": ".agents/skills/chx-data-analysis",

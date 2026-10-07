@@ -39,8 +39,15 @@ bash analysis/scripts/project_git.sh commit -m "Document analysis project conven
 bash analysis/scripts/project_git.sh fetch origin
 ```
 
-首次推送前，检查远端默认分支和已有提交。远端为空时可执行 `bash analysis/scripts/project_git.sh push -u origin main`；远端已有历史时先合并项目文件到对应历史，解决冲突，再正常推送。不要强制推送。上述脚本不自动提交、合并或推送。
+首次推送前，检查远端默认分支和已有提交。远端为空时可执行 `bash analysis/scripts/project_git.sh push -u origin main`；远端已有历史时先合并项目文件到对应历史，解决冲突，再正常推送。不要强制推送。低层 Git 入口只执行所给命令；任务完成后的自动交付使用下述流程。
 
+用户已授权今后文件更改完成并验证后自动提交、推送到本项目 Gitee 仓库，包括代码、规范、技能、计划和小型结果。`task-tag` 技能自动执行，Stop hook 检查是否仍有未提交／未推送工作；推送成功以真实远端 hash 为准，阻碍如实报告。
+
+```bash
+python3 analysis/scripts/project_sync.py sync --task <task-name> --message "<Description>" --evidence analysis/<task>/reports/<verification>.json
+```
+
+该程序复用版本化 hooks 和已验证交付标签，禁止数据／凭据／大文件进入提交，不强推。推送收据保存在本地忽略目录，避免保存收据本身再次触发提交。
 
 hooks 会拒绝白名单外的文件、数据文件、凭据文件、符号链接和超过 25 MiB 的文件。pre-push 同时检查拟推送的新提交，避免仅从当前版本删除大型文件却仍将其历史上传。需要同步新的目录类型时，明确调整 `.gitignore` 和检查脚本中的规则。
 

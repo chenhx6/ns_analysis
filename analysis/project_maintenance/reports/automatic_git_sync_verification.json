@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Isolated actual commit/push/tag and Stop/security regression",
+      "command": [
+        "python3",
+        "analysis/scripts/test_project_sync.py"
+      ],
+      "returncode": 0,
+      "output": "Prepared verified task delivery for the staged tree\n[main (root-commit) 936ec1f] Verify local automatic delivery\n 9 files changed, 381 insertions(+)\n create mode 100644 .githooks/post-commit\n create mode 100644 .githooks/pre-commit\n create mode 100644 .githooks/pre-push\n create mode 100644 .gitignore\n create mode 100644 analysis/check.json\n create mode 100644 analysis/example.md\n create mode 100644 analysis/scripts/check_git_content.py\n create mode 100644 analysis/scripts/project_git.sh\n create mode 100644 analysis/scripts/task_delivery.py\n{\"status\": \"pushed\", \"head\": \"936ec1fdfdc079f6c35c6539c0a03368665fc007\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-axosiyxb/remote.git\", \"tags\": [\"t-fixture-20261007070142-936ec1f\"]}\nPrepared verified task delivery for the staged tree\n[main cc4ea9f] Verify updated automatic delivery\n 1 file changed, 1 insertion(+), 1 deletion(-)\n{\"status\": \"pushed\", \"head\": \"cc4ea9f9718ea10e235705db41d08b49bcd73d81\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-axosiyxb/remote.git\", \"tags\": [\"t-fixture-update-20261007070142-cc4ea9f\"]}\n{\"status\": \"pushed\", \"head\": \"5b6ebe1eab374d10da656de6e725a1f6e4a32840\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-axosiyxb/remote.git\", \"tags\": []}\nPASS: actual local commit/push/tag, clean/dirty/unpushed/foreign/replayed Stop, remote destination and size boundaries\n"
+    },
+    {
+      "name": "Run log parsing and boundary regression",
+      "command": [
+        "python3",
+        "analysis/run_log/test_run_log.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: parsing, ambiguity, missing/invalid/negative/zero times, daily clipping, input selection, paths, overwrite safety\n"
+    },
+    {
+      "name": "Independent CSV versus current raw logs",
+      "command": [
+        "python3",
+        "analysis/run_log/test_run_log.py",
+        "--csv",
+        "analysis/run_log/runs.csv"
+      ],
+      "returncode": 0,
+      "output": "{\"status\": \"passed\", \"checks\": [{\"name\": \"All numeric source directories represented exactly once\", \"returncode\": 0}, {\"name\": \"CSV timestamps and rounded minutes independently match raw logs\", \"returncode\": 0}, {\"name\": \"Input log fingerprints still match extraction report\", \"returncode\": 0}], \"csv_rows\": 212, \"valid_durations\": 209, \"status_counts\": {\"normal\": 209, \"unknown\": 3}, \"sum_duration_min\": 8894.7, \"csv_sha256\": \"5f1cf0c01ed9f1b5561bd0467097723cb8de036d3ba5e048042a326d38565746\", \"command\": [\"/usr/bin/python3\", \"analysis/run_log/test_run_log.py\", \"--csv\", \"analysis/run_log/runs.csv\"]}\n"
+    },
+    {
+      "name": "Diff whitespace validation",
+      "command": [
+        "bash",
+        "analysis/scripts/project_git.sh",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "Program syntax, skill mirrors/fingerprints, scripts-only layout, actual Stop CLI and unchanged reviewed SVGs",
+      "returncode": 0
+    }
+  ],
+  "current_experiment_record_sha256": "8458d491de5bd979ebc138ea3dddeced51a2bc0d3a10cee767dbebe4e659f5a9",
+  "experiment_record_updated_after_migration": true,
+  "notes": [
+    "User additions to experiment record preserved; original migration baseline remains historical evidence.",
+    "Hook command tested directly; actual native hook loading/trust remains host responsibility.",
+    "Formal remote delivery is checked separately by project_sync.py."
+  ]
+}
