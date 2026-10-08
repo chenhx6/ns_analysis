@@ -1,7 +1,7 @@
 # 第一阶段处理计划：寻找 time offset
 
 - 开始日期：2026-10-08（Asia/Shanghai）；跨日续作沿用本文件。
-- 当前状态：已精简为单C++／ROOT方案；用户2026-10-09明确继续精简计划、暂不实现，科学处理未启动。
+- 当前状态：一套C++／ROOT程序，配套cc和hh；用户2026-10-09明确继续规划、暂不实现，科学处理未启动。
 - 用户授权：前轮要求保存计划／长期决策并只读了解旧event流程；本轮用户已将本文件移至 `analysis/plans/process/`，要求Git同步、增加sr、解释配置值并完善双峰策略和语言建议。只执行设计文档及必要的项目入口更新，不扩大为立即标定或下一阶段解码。
 - 已接受条件：[初始约定](../../../decisions/20261008-time-offset.md)、[方法修订](../../../decisions/20261008-time-offset-method.md)及[单程序／ROOT回查](../../../decisions/20261009-time-offset-program.md)。用户最新明确本任务一个编译C++程序完成读取、填谱、ROOT拟合与导出，不再拆Python分析／绘图，不导出SVG；具体分组、取样及峰定位仍由真实谱决定。
 
@@ -15,16 +15,27 @@
 
 ## 时间换算与符号
 
-逐条记录使用 `t_ns = tick_ns(sr) * ts`，`Delta t = t_reference - t_channel`，先以64位整数换算。sr表示MHz采样率，不能直接用ADC采样周期 `1000/sr` 替代时间戳步长。换算保持与现有decoder一致，其他采样率明确记为未支持，不默认为10ns。
+记第i条hit的采样率为s_i（sr，MHz），时间戳为ts_i；先用64位整数换算。以下公式均以ns为时间单位，参考r的地址固定为(0,2,5)：
+
+$$
+t_i=q(s_i)\,ts_i,\qquad
+\Delta t_{ri}=t_r-t_i,\qquad
+(\mathrm{cid},\mathrm{sid},\mathrm{ch})_{\mathrm{ref}}=(0,2,5).
+$$
+
+不能直接用ADC采样周期1000/sr替代时间戳步长。换算保持与现有decoder一致，其他采样率明确记为未支持，不默认为10ns。
 
 时间戳步长的源码依据是 `r2root.cc:427–435`：
 
-| sr（MHz） | tick_ns | 当前情况 |
-| --- | --- | --- |
-| 100 | 10 | 部分CsI模块 |
-| 250 | 8 | HPGe/CLOVER及部分CsI模块；参考通道属于此组 |
-| 500 | 10 | cid0/sid8的LaBr3；不是2ns时间戳步长 |
-| 125 | 8 | 源码支持；本次尚未观测，不作为已存在模块 |
+$$
+q(s)=
+\begin{cases}
+8\,\mathrm{ns}, & s\in\{125,250\}\,\mathrm{MHz},\\
+10\,\mathrm{ns}, & s\in\{100,500\}\,\mathrm{MHz}.
+\end{cases}
+$$
+
+参考通道为250MHz；cid0/sid8的500MHz LaBr3时间戳步长为10ns。125MHz仅源码支持、当前未观测；函数外的采样率按未支持处理。
 
 小型模块／slot表作为身份与sr回查信息，不再替代逐hit的sr字段。一个通道出现多个sr时先记录分布及能否选择一致配置，不猜测异常成因；已发现的sid1条目直接cut。后续配置必须与实际decoder的采样率设置相符，但本轮不调整原程序。
 
@@ -33,7 +44,17 @@
 - `crate_value_ns`（整数配置值）是实际写入 `crate0/1.dat` 第3列的整数ns，类型为有符号16位。
 - `effective_ns`（实际生效值）是decoder真正加到通道时间的ns：`tick_ns * trunc(crate_value_ns / tick_ns)`；负数同样向零截断。
 - 默认直接选择可生效的 `o=tick_ns*整数` 写入，因此这两列相等。保留两列用来回查取整或人工改配置，不先把mu随意取整后交给decoder截断。
-- `residual_ns = selected_mu_ns - effective_ns`；多峰时必须说明selected_mu采用主峰还是加权中心，同时保留各峰位置。
+- residual_ns是所选中心减去实际生效修正；多峰时必须说明采用主峰还是加权中心，同时保留各峰位置。
+
+以v表示crate文件第三列的整数配置值，q表示目标通道tick，e表示实际生效修正；trunc向零截断：
+
+$$
+e=q\,\operatorname{trunc}\!\left(\frac{v}{q}\right),\qquad
+\Delta t_{ri}^{\,\mathrm{corr}}=\Delta t_{ri}-e,\qquad
+\epsilon=\mu_{\mathrm{selected}}-e.
+$$
+
+默认选v=o且o为q的整数倍，因此e=o；参考通道v=e=0。
 
 例：mu=22ns、tick=8ns，填22ns只生效16ns，残差+6ns；选择填24ns则生效24ns，残差−2ns。负例：填−22ns只生效−16ns。以上为源码语义示例，不是实测offset。
 
@@ -52,6 +73,36 @@
 取样建议：每个比较样本先取一段连续时间数据；用于主标定的文件再取不参与峰定位的独立时间块核对。统计不足才扩大读取量，必要时读完整标量树；不独立随机抽 hit，也不强制全部 run 全量拟合。停束／衰变文件可以补充核对 gamma 相对时间，不因计数来源而先验禁止使用。
 
 ## 候选配对、直方图和峰定位
+
+记alpha为目标通道地址，g为run组，R_g为合法参考hit，T_alpha,g为合法目标hit；u表示输入ROOT对应的run身份，ell表示连续采集段。合法hit满足cid属于0／1、sid>=2、ch在0–15且sr可换算；参考自身不作为待校准目标。只在同一run／连续段内配对，组谱再累加各run的结果：
+
+$$
+\mathcal P_{\alpha,g}=
+\left\{(r,i)\ \middle|\
+r\in\mathcal R_g,\ i\in\mathcal T_{\alpha,g},\
+u_r=u_i,\ \ell_r=\ell_i,\
+-1999\,\mathrm{ns}\le\Delta t_{ri}\le1999\,\mathrm{ns}
+\right\}.
+$$
+
+记b为bin宽、a_b为左边界、n_b为bin数；在同一候选对上填两种谱。指示函数只在条件成立时为1：
+
+$$
+H_{\alpha,g,j}^{(b)}
+=\sum_{(r,i)\in\mathcal P_{\alpha,g}}
+\mathbf 1\!\left\{
+a_b+jb\le\Delta t_{ri}<a_b+(j+1)b
+\right\},\qquad j=0,\ldots,n_b-1.
+$$
+
+$$
+\begin{aligned}
+b=2\,\mathrm{ns}:&\quad a_b=-1999\,\mathrm{ns},\ n_b=1999,\\
+b=24\,\mathrm{ns}:&\quad a_b=-2004\,\mathrm{ns},\ n_b=167.
+\end{aligned}
+$$
+
+切换输入文件／不连续采集段时清空配对缓存；同文件连续读取块之间保留。不同run不能因时间戳数值相近而交叉配对。以下步骤说明配对、缓存和拟合实现口径：
 
 1. 按每条hit的sr换算整数ns；在参考hit附近保留 `-1999 <= Delta t <= 1999 ns` 的所有目标hit对。以滑动时间缓存配对，不照搬旧程序首hit固定锚点建事件的边界；参考通道自身不作为需校准目标。读取块之间保留缓存；选定标定片段的两端多读取至少1999ns，只统计片内参考hit，避免漏配或重复。
 2. 在相同候选对上分别直接填两种 ROOT 直方图，不仅选最近邻，不使用下一阶段的100–300 ns符合窗预先筛掉未知偏移。
@@ -78,17 +129,74 @@
 
 “比较±100／±200／±300ns”的操作含义：同一份谱分别试用候选offset o，得到 `Delta_corrected=Delta-o`；对每个o统计 `|Delta_corrected|<100、200、300ns` 的净符合计数。同一半宽下比较不同offset，以检查双峰保留和稳定性；不同半宽只用于观察敏感性，不能因宽门原始计数更多就认定offset更优。例：两个候选o=200ns、240ns，在h=200ns下，分别统计原Delta位于(0,400)ns、(40,440)ns的净计数；例子不是实测数值。此回查不改变初始±1999ns搜索窗或2／24ns分箱。
 
-所比较的是当前未作粒子鉴别样本的总体符合保留；不能据此证明对后续粒子鉴别后131Ce事件最优。为后续回查保存各峰位置、净面积、所选方法和各半宽门内净计数。不在本阶段拟合CsI波形或确认双峰物理成因。
+窗口回查用2ns细谱定义门内净计数；o是已经量化、能实际生效的修正，h是半宽：
+
+$$
+C(o,h)=
+\sum_j(H_j-B_j)\,
+\mathbf 1\!\left\{|x_j-o|<h\right\},\qquad
+h\in\{100,200,300\}\,\mathrm{ns}.
+$$
+
+同一h下比较候选o；不同h仅用于观察敏感性。所比较的是当前未作粒子鉴别样本的总体符合保留；不能据此证明对后续粒子鉴别后131Ce事件最优。为后续回查保存各峰位置、净面积、所选方法和各半宽门内净计数。不在本阶段拟合CsI波形或确认双峰物理成因。
 
 ### 双峰计数加权offset的具体计算（2026-10-09说明）
 
-设两峰中心为mu1、mu2，各峰扣背景后的净计数为N1、N2。权重是整峰面积，不是最高bin计数。计数法在分开的峰区Rk内用 `Nk=sum(H_i-B_i)`、`mu_k=sum(t_i*(H_i-B_i))/Nk`；保留扣背景负涨落。峰区应包含足够的峰尾并记录边界，不能把任意窗口内的所有背景当作信号。
+设两峰中心为mu1、mu2，扣背景净计数为N1、N2；权重是整峰面积，不是最高bin计数。H_j是选定谱的每bin计数，B_j是该bin估计背景，x_j是bin中心／可达时间值；在不重叠的峰区R_k中：
 
-峰重叠时，使用分解后的拟合分量面积，避免同一bin的计数重复计入两峰。如果拟合分量为 `A_k*exp[-(t-mu_k)^2/(2*sigma_k^2)]`，完整峰面积与 `A_k*sigma_k` 成正比，因此不能只用峰高Ak加权；有限峰区使用该区域内分量积分，权重口径保持一致。两峰净计数应均为可信的正数；分量／净面积不可辨时不生成可靠加权offset。
+$$
+N_k=\sum_{j\in R_k}(H_j-B_j),\qquad
+\mu_k=\frac{\sum_{j\in R_k}x_j(H_j-B_j)}{N_k},\qquad k=1,2.
+$$
 
-1. 加权中心：`mu_weighted=(N1*mu1+N2*mu2)/(N1+N2)`，单位ns。
-2. 候选生效修正：`o=q*round(mu_weighted/q)`，q是目标通道的8或10ns tick；这表示取最近的可实现时钟倍数。若正好等距，保留两相邻倍数按相同半宽下的门内净计数及稳定性回查，不依赖不同语言默认round的差异。
-3. 将o写入crate第三列，则配置值与实际生效值均为o；修正后整体重心为 `mu_weighted-o`。参考通道保持零。
+保留扣背景负涨落，峰区包含足够峰尾并记录边界；不把任意窗口内的背景当作信号。
+
+峰重叠时使用ROOT拟合分量面积，避免重复计数。下式为24ns谱上可选的连续近似模型，K=1或2；并非已决定所有谱必须高斯。B(t)为背景计数密度，A_k为峰密度高度（counts/ns），mu_k和sigma_k单位ns。拟合预测必须对应每bin计数lambda_j：
+
+$$
+g_k(t)=A_k\exp\!\left[-\frac{(t-\mu_k)^2}{2\sigma_k^2}\right],\qquad
+f(t)=B(t)+\sum_{k=1}^{K}g_k(t),\qquad
+K\in\{1,2\},\quad A_k>0,\ \sigma_k>0.
+$$
+
+$$
+\lambda_j=\int_{a_b+jb}^{a_b+(j+1)b}f(t)\,\mathrm dt,\qquad
+N_k=\int_{\mathcal R}g_k(t)\,\mathrm dt.
+$$
+
+R为记录明确的共同计数区域；完整高斯面积配合拟合中心mu_k使用：
+
+$$
+N_k^{\mathrm{full}}=\sqrt{2\pi}\,A_k\sigma_k.
+$$
+
+若用有限R的面积，整体重心计算必须同时使用该区域的一阶矩：
+
+$$
+\overline t_{k,\mathcal R}=
+\frac{\int_{\mathcal R}t\,g_k(t)\,\mathrm dt}
+{\int_{\mathcal R}g_k(t)\,\mathrm dt}.
+$$
+
+下文统一以N_k、mu_k表示同口径计数与中心：完整拟合分布用完整面积和拟合中心；有限峰区用该区域面积和区域重心。若只用有限区域面积加权完整高斯中心，应另标为“面积加权峰位候选”，不能称该区域真实重心。
+
+不能只按峰高A_k加权。若实际ROOT函数以counts/bin定义峰高，曲线积分须除以bin宽才是计数；不能混用密度和每bin计数。背景形态、峰区及拟合目标函数待真实谱确认；2ns细谱若需要拟合，须按可达格点处理。两峰净计数应均为可信正数；分量／面积不可辨时不生成可靠加权offset。
+
+先求净计数加权中心，再选目标通道能生效的时钟倍数：
+
+$$
+\mu_{\mathrm w}=
+\frac{N_1\mu_1+N_2\mu_2}{N_1+N_2},\qquad
+o_{\mathrm w}=q\,\operatorname{round}\!\left(\frac{\mu_{\mathrm w}}{q}\right).
+$$
+
+q是目标通道8或10ns tick；round表示最近时钟倍数，等距时保留两相邻值按同半宽计数和稳定性回查，不能依赖不同语言默认round差异。将o_w写入crate第三列，配置值与生效值相等，参考保持零。整体重心残差为：
+
+$$
+\epsilon_{\mathrm w}=\mu_{\mathrm w}-o_{\mathrm w}.
+$$
+
+主峰候选同样为o_main=q*round(mu_main/q)，并与加权候选进行回查。
 
 纯算术示例，非实测：mu1=80ns、N1=4000；mu2=160ns、N2=1000。加权中心 `(4000*80+1000*160)/5000=96ns`。目标若为100MHz通道，q=10ns，则候选o=100ns；修正后两峰中心为−20ns、+60ns，整体重心为−4ns。若q=8ns，96ns本身即可生效。
 
@@ -96,7 +204,7 @@
 
 ## 已接受的语言与代码风格
 
-本任务统一使用一个编译的C++/ROOT程序，完成五分支读取、ns换算、配对、直方图、ROOT拟合、候选修正评估、CSV和多组crate配置导出。源码与ROOT读写组织参考DecodeAndSortAll，保持直接可读；普通函数即可，不拆多个处理层或绑定框架。
+本任务统一使用一套编译的C++/ROOT程序，完成五分支读取、ns换算、配对、直方图、ROOT拟合、候选修正评估、CSV和多组crate配置导出。按用户最新要求配套time_offset.hh和time_offset.cc，参考DecodeAndSortAll的声明／实现组织，保持直接可读；不拆多个处理层或绑定框架。
 
 使用现有g++和root-config独立编译标定程序，不改原decoder。其余项目工作仍可用Python，但本任务不需要Python分析／绘图程序，也不导出图片；直方图及拟合结果保存ROOT供打开回查。
 
@@ -104,7 +212,8 @@
 
 交付收拢为一套程序与结果，命名不作繁琐拆分：
 
-- `time_offset/time_offset.cc`：一个完整可编译C++源码，完成读数据、配对、2／24ns填谱、ROOT拟合及导出；先保存源码再执行。
+- `time_offset/time_offset.hh`：数据结构、ROOT字段类型、参数和处理接口／类声明，便于用户集中审查。
+- `time_offset/time_offset.cc`：包含上述头文件，定义构造／处理等实现和程序入口，完成读数据、配对、2／24ns填谱、ROOT拟合及导出；两文件构成一套可执行程序，先保存再运行。
 - `time_offset/time_offset.root`：各组／来源run／目标通道的原时间谱、拟合函数与结果、必要的修正回查及参数；直接用ROOT打开查看。
 - `time_offset/offsets.csv`：offset、来源／run范围、sr／tick、所选方法、crate值／生效值／残差、拟合状态及必要峰信息；不预先强制分成channel_map和run_groups两张表。
 - 多组 `crate0.dat`、`crate1.dat`：保存在各组目录，保留完整原格式；参考通道为零，未确定项在CSV／说明中标明。
@@ -137,4 +246,4 @@ g++ -O2 time_offset/time_offset.cc -o time_offset/time_offset $(root-config --cf
 - 已完成：用户计划位置、五分支、时间约定、分段及双峰策略落盘；2026-10-09收拢为单C++程序并取消Python分析／绘图和SVG交付要求。
 - 未执行：科学程序编写、候选对统计、直方图生产、峰位计算、配置生成／回填、批量decode及矩阵。
 - 下一步：在继续讨论时更新本计划；进入第一阶段执行时先保存科学程序，用一个代表样本验证配对、分箱和mu回填符号，再按实际谱完善分组。当前不自动启动该步骤。
-- 第一阶段最终验收：C++程序可编译并完成读数据、填谱、ROOT拟合及导出；ROOT对象可打开回查，bin宽／单位／参考／符号和结果核对正确，参数／来源／组范围明确，参考offset为零、生效修正及未确定项如实记录。按用户要求不导出SVG，不设SVG视觉审查门槛；实际谱形观察与数值／结构检查分别记录。原始数据只读，原decoder源码／编译文件不改。
+- 第一阶段最终验收：配套cc和hh可编译为一个程序并完成读数据、填谱、ROOT拟合及导出；实现与计划中的LaTeX公式逐项对应。ROOT对象可打开回查，bin宽／单位／参考／符号和结果核对正确，参数／来源／组范围明确，参考offset为零、生效修正及未确定项如实记录。按用户要求不导出SVG，不设SVG视觉审查门槛；实际谱形观察与数值／结构检查分别记录。原始数据只读，原decoder源码／编译文件不改。

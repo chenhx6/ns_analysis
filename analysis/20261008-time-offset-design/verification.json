@@ -1,16 +1,21 @@
 {
   "status": "passed",
-  "task": "single compiled ROOT time-offset program design",
+  "task": "cc hh structure and rendered algorithm formulas",
   "checks": [
+    {
+      "name": "latex-render",
+      "returncode": 0,
+      "output": "KaTeX 0.16.47: 14 display blocks rendered as HTML and MathML\n"
+    },
     {
       "name": "links",
       "returncode": 0,
-      "output": "Updated plan and decision links passed\n"
+      "output": "Plan and decision links passed\n"
     },
     {
       "name": "diff",
       "returncode": 0,
-      "output": " AGENTS.md                                      |  3 ++-\n analysis/plans/process/20261008-time-offset.md | 36 +++++++++++++-------------\n decisions/20261008-time-offset-method.md       |  1 +\n 3 files changed, 21 insertions(+), 19 deletions(-)\n"
+      "output": ""
     },
     {
       "name": "protected",
@@ -38,26 +43,28 @@
     "unchanged": true
   },
   "scientific_processing_started": false,
-  "design": {
-    "source": "time_offset/time_offset.cc",
-    "functions": [
-      "read decoded ROOT",
-      "select and convert ns",
-      "fill 2ns and 24ns histograms",
-      "ROOT fits",
-      "offset CSV and grouped crate export"
-    ],
-    "inspection": "ROOT histograms, fit functions and results; no SVG export",
-    "python_analysis_scripts": false,
-    "unimplemented": true
+  "review": {
+    "role": "critic",
+    "verdict": "OKAY",
+    "scope": "formula signs, units, same-run pairing and matching peak-area/center definitions",
+    "limitation": "Planning only, no numerical calibration performed"
+  },
+  "source_layout": [
+    "time_offset/time_offset.hh",
+    "time_offset/time_offset.cc"
+  ],
+  "math": {
+    "display_blocks": 14,
+    "renderer": "KaTeX 0.16.47",
+    "output": "HTML and MathML generated with strict parsing; no graphical screenshot claimed",
+    "same_run_and_segment_pairing": true,
+    "finite_region_moments_consistent": true
   },
   "delivery_scope": [
     "AGENTS.md",
     "analysis/plans/process/20261008-time-offset.md",
     "analysis/plans/2026-10-08-time-offset-design.md",
-    "decisions/20261008-time-offset-method.md",
     "decisions/20261009-time-offset-program.md",
     "analysis/20261008-time-offset-design/verification.json"
-  ],
-  "scope_confirmation": "User answered: continue simplifying the plan; do not implement yet"
+  ]
 }

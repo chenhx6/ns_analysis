@@ -7,7 +7,9 @@
 
 ## 程序与结果
 
-一个显式C++源码 `time_offset/time_offset.cc`，独立编译为time_offset工具；组织与ROOT读写风格参考DecodeAndSortAll。读取、筛选、ns换算、候选配对、两种直方图、ROOT峰拟合、候选offset评估、CSV和多组crate配置导出均在该程序完成，不另建Python分析／绘图程序或通用框架。
+一套C++程序，按用户后续明确要求配套 `time_offset/time_offset.hh` 和 `time_offset/time_offset.cc`：hh放数据结构、ROOT字段类型、参数及处理接口／类声明，cc放实现和入口；组织与ROOT读写风格参考DecodeAndSortAll，独立编译为一个time_offset工具。读取、筛选、ns换算、候选配对、两种直方图、ROOT峰拟合、候选offset评估、CSV和多组crate配置导出均在该程序完成，不另建Python分析／绘图程序或通用框架。“一个程序”不再解释为“只有一个cc文件”。
+
+用户同时要求处理计划使用可渲染LaTeX公式，列明算法符号、单位和代码对应口径，方便审查。使用Markdown数学块，不把公式放进代码围栏；包含时间换算、配对／分箱、候选拟合与面积、加权offset、整数修正及门内计数。
 
 必要交付只有源码、保存直方图／拟合函数与结果的ROOT文件、offset CSV、多个run组的crate0/1.dat、必要的Markdown说明。run范围、sr／tick、来源及处理参数优先随CSV／ROOT保存，不预先强制拆成多张映射表。ROOT和编译产物留本地，不提交数据或可执行文件。
 
