@@ -1,0 +1,230 @@
+{
+  "status": "passed",
+  "scope": "Diagnostic collection only; hook success is not certified",
+  "checks": [
+    {
+      "name": "Registered hook interpreters and entrypoints exist",
+      "returncode": 0
+    },
+    {
+      "name": "Read-only Git prerequisites completed",
+      "returncode": 0
+    },
+    {
+      "name": "Greeting completion delay extracted from actual transcript",
+      "returncode": 0
+    }
+  ],
+  "hooks": [
+    {
+      "event": "SessionStart",
+      "group": 0,
+      "handler": 0,
+      "timeout_seconds": null,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "SessionStart",
+      "group": 1,
+      "handler": 0,
+      "timeout_seconds": 5,
+      "executable": "node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail/hooks/ponytail-activate.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "SessionStart",
+      "group": 2,
+      "handler": 0,
+      "timeout_seconds": 5,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/scripts/skill-routing-hook.mjs",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "PreToolUse",
+      "group": 0,
+      "handler": 0,
+      "timeout_seconds": null,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "PostToolUse",
+      "group": 0,
+      "handler": 0,
+      "timeout_seconds": null,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "UserPromptSubmit",
+      "group": 0,
+      "handler": 0,
+      "timeout_seconds": null,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "UserPromptSubmit",
+      "group": 1,
+      "handler": 0,
+      "timeout_seconds": 5,
+      "executable": "node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/ponytail/hooks/ponytail-mode-tracker.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "UserPromptSubmit",
+      "group": 2,
+      "handler": 0,
+      "timeout_seconds": 5,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/scripts/skill-routing-hook.mjs",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "PreCompact",
+      "group": 0,
+      "handler": 0,
+      "timeout_seconds": null,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "PostCompact",
+      "group": 0,
+      "handler": 0,
+      "timeout_seconds": null,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "Stop",
+      "group": 0,
+      "handler": 0,
+      "timeout_seconds": 30,
+      "executable": "/usr/bin/node",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "event": "Stop",
+      "group": 1,
+      "handler": 0,
+      "timeout_seconds": 15,
+      "executable": "/usr/bin/python3",
+      "interpreter_available": true,
+      "scripts": [
+        {
+          "path": "/home/ys/data_401/data/chx_20260622/analysis/scripts/project_sync.py",
+          "exists": true
+        }
+      ]
+    }
+  ],
+  "git_timings": [
+    {
+      "arguments": [
+        "status",
+        "--porcelain"
+      ],
+      "seconds": 0.164,
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "seconds": 0.002,
+      "returncode": 0
+    },
+    {
+      "arguments": [
+        "rev-parse",
+        "@{upstream}"
+      ],
+      "seconds": 0.002,
+      "returncode": 0
+    }
+  ],
+  "greeting_completion_interval": {
+    "source": "/home/ys/.codex/sessions/2026/10/08/rollout-2026-10-08T09-31-56-01a11923-76c4-7580-be51-7465ae946493.jsonl",
+    "last_token_count": {
+      "timestamp": "2026-10-08T01:32:56.771Z",
+      "line": 17
+    },
+    "task_complete": {
+      "timestamp": "2026-10-08T01:33:11.778Z",
+      "line": 18
+    },
+    "seconds": 15.007
+  },
+  "limits": [
+    "No hook replay or trust/configuration change",
+    "Timing is a current probe, not historical stderr"
+  ]
+}

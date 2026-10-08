@@ -57,10 +57,9 @@ startup_timeout_sec = 5
 
 
 # OMX TUI StatusLine (Codex CLI v0.101.0+)
-[tui]
+# [tui]
 # omx:managed-status-line
 # status_line = ["model-with-reasoning", "git-branch", "context-remaining", "total-input-tokens", "total-output-tokens", "five-hour-limit", "weekly-limit"]
-screen_reader_detection_done = true
-status_line = ["model-with-reasoning", "current-dir", "thread-name", "git-branch","branch-changes","run-state","permissions","approval-mode","context-used","context-window-size","used-tokens","fast-mode"]
+# screen_reader_detection_done = true
 # ============================================================
 # End oh-my-codex
