@@ -19,7 +19,7 @@
 
 | 路径 | 操作 | 用途 |
 | --- | --- | --- |
-| `analysis/plans/2026-10-08-hook失败排查.md` | 新建/更新 | 范围、进度及授权 |
+| `analysis/plans/2026-10-08-hook-failure-diagnosis.md` | 新建/更新 | 范围、进度及授权；按用户新要求采用英文名 |
 | `analysis/hook_failure/inspect_hooks.py` | 新建 | 显式只读诊断和验证程序 |
 | `analysis/hook_failure/reports/verification.json` | 新建 | 精简、脱敏的诊断证据与验证结论 |
 | `analysis/hook_failure/reports/diagnosis.md` | 新建 | 根因、影响和限制 |
@@ -55,6 +55,8 @@
 - 关键决策：仅诊断，不修改 hook 配置或信任设置。日志仅支持 Stop 超时的中等置信度假设；当前 Git 探测约 0.17 秒，未重现故障。首次 transcript 字段匹配失败，按实际 response_item/token_count 格式纠正后通过。
 - 实际运行命令：`python3 analysis/hook_failure/inspect_hooks.py --transcript /home/ys/.codex/sessions/2026/10/08/rollout-2026-10-08T09-31-56-01a11923-76c4-7580-be51-7465ae946493.jsonl`。
 - 结果位置：`analysis/hook_failure/reports/diagnosis.md`、`verification.json`；当前会话结束阶段 15.007 秒，与同步 Stop hook 的 15 秒配置对应。
-- 当前阻碍：历史失败状态、命令退出码和 stderr 未持久化；已向用户询问失败事件，尚无回复。它限制根因确认，不影响诊断记录交付。
+- 当前限制：历史失败状态、命令退出码和 stderr 未持久化；用户已确认最近一次发生在回复结束后，以前启动时也曾出现。它支持 Stop 阶段关联，仍不足以认定具体失败项。
 - 版本交付：使用 task-tag 及 `project_sync.py sync --task "Hook排查"`，验证范围为本次诊断程序/记录；一并保留既有本地状态栏配置改动（仅注释/移除显示设置，未添加执行命令，执行者未记录），不归为 hook 修复。同步成功以 `.omx/delivery/sync_receipt.json` 和实际远端核对为准。
 - 下一步：交付诊断结论；若获得失败条目的事件及错误详情，再针对该证据继续定位。
+
+- 后续记录：Hook 排查已核对远端同步，收据标签为 `chx6-Hook排查`；2026-10-08 按用户英文文件命名要求迁移本计划路径，原排查结论保持不变。

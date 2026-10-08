@@ -23,6 +23,8 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 
 新任务先在 `analysis/plans/` 写计划，随后在明确任务范围内连续执行非危害操作，无需额外确认；原始数据与宿主权限边界继续适用。绘图统一使用 Python，保留可查看的程序和来源数据表，只保存 SVG，并实际查看最终渲染以检查重叠、裁切、缺字和数据关系。
 
+新建文件和文件夹使用英文 ASCII 命名，计划采用 `YYYY-MM-DD-short-task-name.md`，内容可写中文。`analysis/experiment_log/record_analysis.md` 是用户实时编辑的记录本；保留其编辑，按既有授权例行同步，普通差异不另行展开审查或反复追问。
+
 ## Git 使用
 
 目标远端：`https://gitee.com/chx6/ns_analysis.git`。

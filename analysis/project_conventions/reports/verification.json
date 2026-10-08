@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "English naming convention in rules, README and template",
+      "returncode": 0
+    },
+    {
+      "name": "User-authored live notebook convention recorded",
+      "returncode": 0
+    },
+    {
+      "name": "This session's plans use English filenames",
+      "returncode": 0
+    },
+    {
+      "name": "Unnecessary notebook review files removed",
+      "returncode": 0
+    }
+  ]
+}
