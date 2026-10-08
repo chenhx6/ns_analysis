@@ -41,4 +41,5 @@
 - 结果位置：本计划及 `analysis/project_conventions/reports/verification.json`；实际推送以 `.omx/delivery/sync_receipt.json` 为准。
 - 已执行：规则、README、模板已更新；本会话两份计划已迁移；无关记录审查程序/副本已删除；`python3 analysis/project_conventions/verify_conventions.py` 实际通过。
 - 网络记录：首次推送命令等待 60 秒超时；只读核对远端 main 已有并行 Git 诊断提交，但没有本次交付标签，尚不能声称本任务已推送。同步程序改为保留隔离克隆及失败提交，供正常重试；不增加隐藏网络行为或强推。
+- 重试与诊断：第二次 push 仍等待 60 秒超时，但待推送提交保留在隔离克隆。独立代码审查无交付问题；debugger 离线验证 pre-push 1.068 秒退出 0，发现隔离克隆未继承主仓库既有 credential.helper，且环境有交互 ASKPASS。补齐已存在的认证助手配置，并仅对本次同步关闭交互 ASKPASS；认证内容不写入交付文件、不输出。此为现有 Git 配置兼容修复，无需安装工具或扩展任务。
 - 下一步：通过限定文件的隔离克隆完成正常同步和快进整合，不强推、不改写用户记录本。

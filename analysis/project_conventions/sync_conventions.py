@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Deliver this task in an isolated clone, preserving concurrent working edits."""
 from pathlib import Path
+import os
 import shutil
 import subprocess
 import sys
@@ -30,7 +31,7 @@ def main():
     subprocess.run(git + ["remote", "set-url", "origin", "https://gitee.com/chx6/ns_analysis.git"], check=True)
     subprocess.run(git + ["fetch", "origin"], check=True)
     subprocess.run(git + ["merge", "--ff-only", "origin/main"], check=True)
-    for key in ["user.name", "user.email"]:
+    for key in ["user.name", "user.email", "credential.helper"]:
         value = subprocess.check_output(primary + ["config", "--get", key], cwd=ROOT, text=True).strip()
         subprocess.run(git + ["config", key, value], check=True)
     for name in FILES:
@@ -47,7 +48,8 @@ def main():
         "--result", "记下英文文件目录命名和用户实时记录本约定，迁移本会话计划英文路径，移除多余专项审查文件",
         "--basis", "用户明确要求英文命名，并说明record_analysis.md由本人实时编辑、无需过于关注",
         "--evidence", "analysis/project_conventions/reports/verification.json",
-    ], cwd=clone, check=True)
+    ], cwd=clone, check=True, env=dict(os.environ, GIT_TERMINAL_PROMPT="0",
+                                     GIT_ASKPASS="/bin/false", SSH_ASKPASS="/bin/false"))
     receipt = clone / ".omx/delivery/sync_receipt.json"
     destination = ROOT / ".omx/delivery/conventions_sync_receipt.json"
     destination.parent.mkdir(parents=True, exist_ok=True)
