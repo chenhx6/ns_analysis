@@ -11,11 +11,11 @@
 
 ## 科学处理计划与长期决策
 
-- 2026-10-08 用户明确：直接科学数据处理的计划放项目内 `plans/process/`，讨论期间同步保存参数、方法、阶段边界和恢复检查点；本次时间对齐计划为 `plans/process/20261008-time-offset.md`。不在系统根目录创建 `/plans`。常规项目维护仍先保存 `analysis/plans/` 执行计划。
+- 2026-10-08 用户最新明确：科学数据处理计划放 `analysis/plans/process/`，讨论期间同步保存参数、方法、阶段边界和恢复检查点；本次为 `analysis/plans/process/20261008-time-offset.md`，用户已移动，沿用新位置，不另建项目根plans目录。常规项目维护仍先保存 `analysis/plans/` 执行计划。
 - 类 ADR 的长期记录使用项目一级 `decisions/`，文件名 `YYYYMMDD-topic.md`，保存用户确定的实验背景、分析目标、约定、理由和适用范围；代理建议、假设和已测事实分别标明。实质改变时新建记录并说明替代关系，普通进度更新处理计划。
-- 开始或恢复相关科学任务时，先读取 `decisions/` 中适用且未被替代的记录和 `plans/process/` 对应计划，再核对最新用户指令。当前时间对齐条件以 `decisions/20261008-time-offset.md` 为准；不得因旧对话建议重新引入 CFD、吸收片分段或异常根因调查。文档状态不代替实际授权。
+- 开始或恢复相关科学任务时，先读取 `decisions/` 中适用且未被替代的记录和 `analysis/plans/process/` 对应计划，再核对最新用户指令。时间对齐读取 `decisions/20261008-time-offset.md` 和替代其部分条款的 `decisions/20261008-time-offset-method.md`；不得因旧建议重新引入CFD、吸收片分段或异常根因调查。文档状态不代替实际授权。
 - `decode_data/`、`time_offset/`、`run_log/` 为项目一级直接数据处理目录；任务程序、报告、小表、标定配置和回查数据按该任务目录集中保存。`analysis/` 主要用于间接处理、通用工具和项目维护，已有实验记录本留在原位置。此处用户明确的科学任务位置优先于下文及技能的 `analysis/` 默认目录；不批量迁移既有文件。
-- `time_offset/` 的第一阶段只用 `ts,cid,sid,ch`，参考 `(cid,sid,ch)=(0,2,5)`，保留 `cid in {0,1}`、`sid>=2`，使用 `Delta t=t_reference-t_channel`、窗口 `[-1999,1999] ns` 和 `2/24 ns` 分箱。其他条件、run分组和下一阶段边界从上述决策／处理计划读取，不凭记忆改参数。
+- `time_offset/` 第一阶段读取 `ts,cid,sid,ch,sr`，参考 `(cid,sid,ch)=(0,2,5)`，保留 `cid in {0,1}`、`sid>=2`，使用 `Delta t=t_reference-t_channel`、搜索窗 `[-1999,1999] ns` 和 `2/24 ns` 分箱。100–300ns后续符合窗为半宽；cid1双峰已由用户确认为同run同通道。峰选择、语言建议、run分组及后续阶段边界从上述决策／计划读取，不凭记忆改参数。
 - 原始 Ge/CsI 和他人的 software 目录继续禁止写入；仅在用户指定范围内只读参考其源程序。本轮允许读取 `/home/ys/data_401/data/software/event/`，不运行或改动。原 decoder、编译文件和原 crate 配置本轮不改；后续至少3路并发解码另按处理计划安排。
 
 ## analysis 目录组织

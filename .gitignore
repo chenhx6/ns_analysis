@@ -6,11 +6,6 @@
 !/analysis/
 
 # 直接科学处理：决策／计划只收 Markdown，时间对齐只收可复现的小型产物。
-!/plans/
-/plans/*
-!/plans/process/
-/plans/process/*
-!/plans/process/*.md
 !/decisions/
 /decisions/*
 !/decisions/*.md

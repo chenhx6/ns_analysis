@@ -1,8 +1,8 @@
 # 时间对齐与直接数据处理约定
 
 - 日期：2026-10-08（Asia/Shanghai）
-- 状态：已接受的用户约定；具体 offset 和最终配置分组尚未测量
-- 依据：本次对话用户第 1–15 项说明。本文保存用户明确的长期条件；代理提出的具体处理方法见 [处理计划](../plans/process/20261008-time-offset.md)，不能混作用户已确认的实验事实。
+- 状态：初始约定记录；计划目录及四分支条款已由[本轮修订](20261008-time-offset-method.md)替代，其他未被修改条件继续适用。具体offset及最终分组尚未测量。
+- 依据：前轮用户第1–15项说明。本文保留初始条件和修改历史；当前方法见 [处理计划](../analysis/plans/process/20261008-time-offset.md)，不能将代理建议混作已确认实验事实。
 - 更新规则：新指令优先；长期决策实质改变时新建 `YYYYMMDD-topic.md`，说明替代本文哪些条款；未被替代的条款继续适用。普通进度只更新处理计划。
 
 ## 实验背景和目标
@@ -20,9 +20,9 @@
 | --- | --- |
 | 目标编号范围 | run 6015–6079；准备适用的多组配置，不要求一套配置覆盖全部 run |
 | 输入 | 本项目 `decode_data/` 已解码 ROOT；用户确认现有全部 ROOT 解码时 `crate0/1.dat` 的 offset 均为零 |
-| 分支 | 只读 `ts,cid,sid,ch`，不使用 `sr`、CFD、能量、质量标志或波形作为第一阶段输入分支 |
+| 分支 | 初始为四分支；已被本轮五分支 `ts,cid,sid,ch,sr` 替代。CFD、能量、质量标志和波形仍不用于第一阶段 |
 | 无效地址 | 保留 `cid in {0,1}` 且 `sid>=2`；不存在的 crate、过小 sid 直接 cut，不开展异常成因调查 |
-| 时间定义 | `t_ns = ts * tick_ns`；tick 来自采样率／模块映射，不需要读取 `sr` 分支 |
+| 时间定义 | 本轮修订为 `t_ns=ts*tick_ns(sr)`；以逐条sr换算，不沿用原“不读sr”的限制 |
 | 时间差 | `Delta t = t_reference - t_channel` |
 | 搜索窗 | `-1999 <= Delta t <= 1999 ns` |
 | 直方图 | 同一批候选对生成 `2 ns/bin` 和 `24 ns/bin` 两种谱 |
@@ -37,10 +37,10 @@ CFD、DAQ 定时设置以及采集软件本阶段均不调整。按用户说明�
 
 ## 目录与长期恢复
 
-- 项目根为 `/home/ys/data_401/data/chx_20260622`。对话中的 `/plans/process/` 指项目内 `plans/process/`；`chx_20220622` 按当前实际工作区路径解释，不创建另一个项目。
+- 项目根为 `/home/ys/data_401/data/chx_20260622`。初次根plans/process解释已由本轮用户移动修订，当前科学计划为 `analysis/plans/process/`；`chx_20220622` 按实际工作区解释，不创建另一个项目。
 - `decode_data/`、`time_offset/`、`run_log/` 是项目一级的直接数据处理目录。`run_log/` 已由用户移动，沿用，不迁回 `analysis/`。
 - `time_offset/` 放本任务显式 C++／Python 程序、Markdown 报告、CSV offset／映射／分组信息、分组 crate 配置、ROOT 直方图回查及必要复现信息。不为标定复制整套大型事件树。
-- `plans/process/` 保存科学处理计划和当前执行检查点；本任务文件为 `20261008-time-offset.md`，讨论期间同步更新。
+- 当前 `analysis/plans/process/` 保存科学处理计划和检查点；本任务文件为 `20261008-time-offset.md`，讨论期间同步更新，根旧路径已弃用。
 - `decisions/` 为类 ADR 的长期事实、设计选择与理由目录，文件名统一 `YYYYMMDD-topic.md`。恢复时先读相关决策，再读处理计划，并核对最新用户指令；文档状态不能代替执行授权。
 - `analysis/` 用于间接处理、通用脚本、项目更改和维护验证；常规维护计划仍放 `analysis/plans/`。已有实验记录本留在原处。
 - 原始 Ge/CsI 数据继续只读；科学绘图由 Python 生成、只导出 SVG。ROOT 直方图是可回查数据对象，不是 PNG/PDF 等图像副本；大型数据不提交 Git。

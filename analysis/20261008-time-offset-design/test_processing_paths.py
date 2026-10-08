@@ -10,7 +10,8 @@ from check_git_content import permitted
 
 def check():
     accepted = [
-        "decisions/20261008-time-offset.md", "plans/process/20261008-time-offset.md",
+        "decisions/20261008-time-offset.md", "decisions/20261008-time-offset-method.md",
+        "analysis/plans/process/20261008-time-offset.md",
         "time_offset/find_time_offset.cpp", "time_offset/plot_time_offset.py",
         "time_offset/report.md", "time_offset/offsets.csv", "time_offset/channel_map.csv",
         "time_offset/configs/group_01/crate0.dat", "time_offset/configs/group_01/crate1.dat",
