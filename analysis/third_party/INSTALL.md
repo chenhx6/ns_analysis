@@ -33,7 +33,7 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 
 技能与 hooks 按任务自动触发，无需提示技能名。报告和代码都自动使用 Ponytail，中文报告结合说人话、英文结合 Humanizer；科研报告再选择适用的 Nature 技能。项目自动路由规则只定义在根 `AGENTS.md`，轻量的 SessionStart/UserPromptSubmit hook 读取同一规则并注入，避免另写一套匹配表。
 
-项目新增的 `python-svg-qa` 为所有绘图执行 SVG 最终渲染审查。用户另已持续授权：文件变更完成并验证后自动 commit/push；扩展的 `task-tag` 技能调用 `analysis/scripts/project_sync.py`，Stop hook 只读取本地状态督促交付，不在 hook 中隐藏联网。受限网络／认证失败需记录真实阻碍；宿主仍负责新增 hook 的加载和信任。
+项目新增的 `python-svg-qa` 为所有绘图执行 SVG 最终渲染审查。用户另已持续授权：文件变更完成并验证后自动 commit/push；扩展的 `task-tag` 技能调用 `analysis/scripts/project_sync.py`。并行员工通过 `analysis/scripts/session_coordinator.py` 建立独立普通克隆，提交本地 outbox，由控制端串行整合与重新验收；使用已安装 Git、Python 标准库和 bubblewrap，没有新增外部编排依赖。SessionStart 分配工作区和上下文，Stop 只跟进当前员工，均不隐藏联网或改变宿主 cwd/沙箱。控制端验收需真实可用的 namespace 权限；当前 App 外层限制需真实宿主审批，不使用无沙箱回退。安装模板为 `analysis/scripts/install_project_sync.py`，技能双入口与指纹同步，详细使用和恢复见 `analysis/session_coordination/reports/usage.md`。受限网络／认证失败需记录真实阻碍；宿主仍负责新增 hook 的加载和信任。
 
 Nature 资源按各技能的 `manifest.yaml` 解析；某些 `core/` 路径是 `static/core/` 的简写。OMX 文档所指的根 `templates/AGENTS.md` 位于 `analysis/vendor/oh-my-codex/templates/AGENTS.md`。`nature-proposal-writer` 的调用名为 `researchwrite`，按上游保留。
 

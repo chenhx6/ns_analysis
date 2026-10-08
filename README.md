@@ -27,6 +27,15 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 
 ## Git 使用
 
+并行任务先为每名员工建立独立目录；同一任务用相同 `--task`、不同 `--employee` 和文件范围：
+
+```bash
+python3 analysis/scripts/session_coordinator.py create --task spectrum --employee fit --scope analysis/spectrum/fit/ --scope analysis/plans/2026-10-08-spectrum-fit.md
+python3 analysis/scripts/session_coordinator.py launch --employee fit
+```
+
+CLI 启动器限定员工工作区，自动收集本地提交并串行整合；App 中在 create 返回的 `workspace` 新开 session，再从管理 session 执行 `session_coordinator.py collect --employee fit`。同文件合并冲突保留双方成果和独立恢复目录，其他任务继续交付；员工编号没有固定数量上限，实际并发仍受机器与宿主限制。完整交接、验收、数据位置和恢复方法见 [员工协作说明](analysis/session_coordination/reports/usage.md)。已打开的 App 会话不能靠 hook 自动切换 cwd/沙箱。
+
 目标远端：`https://gitee.com/chx6/ns_analysis.git`。
 
 通过 `bash analysis/scripts/project_git.sh` 调用，优先使用有效的 `.git` 仓库；`.git` 不可写时使用项目内的 `.project-git/`。它设置版本化 hooks，并将 Git 命令传给所选仓库。尚无仓库时先初始化本地 `main` 分支。数据盘可能不支持执行权限，脚本会在临时目录中复制并执行 hooks，命令结束后清理副本；在当前数据盘上使用此脚本执行 Git 操作。提交前需要设置真实的作者姓名和邮箱。
@@ -43,7 +52,7 @@ bash analysis/scripts/project_git.sh fetch origin
 
 首次推送前，检查远端默认分支和已有提交。远端为空时可执行 `bash analysis/scripts/project_git.sh push -u origin main`；远端已有历史时先合并项目文件到对应历史，解决冲突，再正常推送。不要强制推送。低层 Git 入口只执行所给命令；任务完成后的自动交付使用下述流程。
 
-用户已授权今后文件更改完成并验证后自动提交、推送到本项目 Gitee 仓库，包括代码、规范、技能、计划和小型结果。`task-tag` 技能自动执行，Stop hook 检查是否仍有未提交／未推送工作；推送成功以真实远端 hash 为准，阻碍如实报告。
+用户已授权今后文件更改完成并验证后自动提交、推送到本项目 Gitee 仓库，包括代码、规范、技能、计划和小型结果。`task-tag` 技能自动执行；员工提交需附 `--check "<验收命令>"`，管理目录例行交付附 `--files <明确文件列表>`。Stop 只跟进当前员工，不因其他任务或实时记录本改动反复阻止管理 session。推送成功以真实远端核对为准，阻碍如实报告。
 
 ```bash
 python3 analysis/scripts/project_sync.py sync --task "<简短中文任务>" --message "<Description>" --result "<真实成果>" --basis "<修改依据>" --evidence analysis/<task>/reports/<verification>.json

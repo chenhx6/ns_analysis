@@ -11,6 +11,12 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNTIME = ROOT / ".runtime"
+INSTALL_ROOT = ROOT
+employee_marker = ROOT / '.omx/employee.json'
+if employee_marker.is_file():
+    # Installed tools are shared read-only; caches and process cwd stay in the employee checkout.
+    INSTALL_ROOT = Path(json.loads(employee_marker.read_text())['project']).resolve()
+INSTALL_RUNTIME = INSTALL_ROOT / '.runtime'
 
 
 def executable_copy(source, label):
@@ -37,14 +43,14 @@ def executable_copy(source, label):
 
 
 def python_environment():
-    distributions = sorted((RUNTIME / "python").glob("cpython-*"))
+    distributions = sorted((INSTALL_RUNTIME / "python").glob("cpython-*"))
     if not distributions:
         raise RuntimeError("Project Python is missing; see analysis/third_party/INSTALL.md")
     distribution = executable_copy(distributions[-1], "python")
     python = distribution / "bin/python3.12"
     env = os.environ.copy()
     env.update({
-        "PYTHONPATH": str(RUNTIME / "site-packages"),
+        "PYTHONPATH": str(INSTALL_RUNTIME / "site-packages"),
         "PYTHONNOUSERSITE": "1",
         "CRAWL4_AI_BASE_DIRECTORY": str(RUNTIME / "crawl4ai"),
         "XDG_CACHE_HOME": str(RUNTIME / "xdg-cache"),
@@ -55,10 +61,10 @@ def python_environment():
             "PYTHONPYCACHEPREFIX": str(RUNTIME / "pycache"),
             "PLAYWRIGHT_HOST_PLATFORM_OVERRIDE": "ubuntu22.04-x64",
     })
-    if (RUNTIME / "browsers").is_dir():
-        env["PLAYWRIGHT_BROWSERS_PATH"] = str(executable_copy(RUNTIME / "browsers", "browsers"))
-    if (RUNTIME / "libreoffice").is_dir():
-        office = executable_copy(RUNTIME / "libreoffice", "libreoffice")
+    if (INSTALL_RUNTIME / "browsers").is_dir():
+        env["PLAYWRIGHT_BROWSERS_PATH"] = str(executable_copy(INSTALL_RUNTIME / "browsers", "browsers"))
+    if (INSTALL_RUNTIME / "libreoffice").is_dir():
+        office = executable_copy(INSTALL_RUNTIME / "libreoffice", "libreoffice")
         launcher_dir = office / "project-bin"
         launcher_dir.mkdir(exist_ok=True)
         for name in ["soffice", "libreoffice"]:
@@ -85,10 +91,14 @@ def main():
             "XDG_CONFIG_HOME": str(RUNTIME / "xdg-config"),
             "OMX_AUTO_UPDATE": "0",
         })
-        if not (ROOT / ".git/HEAD").is_file():
+        for name in ['GIT_DIR', 'GIT_WORK_TREE', 'GIT_INDEX_FILE', 'GIT_COMMON_DIR',
+                     'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES', 'GIT_PREFIX']:
+            env.pop(name, None)
+        probe = subprocess.run(['git', '-C', str(ROOT), 'rev-parse', '--git-dir'], env=env, capture_output=True)
+        if probe.returncode:
             env["GIT_DIR"] = str(ROOT / ".project-git")
             env["GIT_WORK_TREE"] = str(ROOT)
-        native = RUNTIME / "omx-native-bin"
+        native = INSTALL_RUNTIME / "omx-native-bin"
         if native.is_dir():
             executable = executable_copy(native, "omx-native")
             for product, key in {
@@ -105,13 +115,13 @@ def main():
         os.chdir(ROOT)
         os.execvpe("node", ["node", str(cli), *args], env)
     if mode == "mermaid":
-        browsers = executable_copy(RUNTIME / "browsers", "browsers")
+        browsers = executable_copy(INSTALL_RUNTIME / "browsers", "browsers")
         chrome = sorted(browsers.glob("chromium-*/chrome-linux64/chrome"))
         if not chrome:
             raise RuntimeError("Project Chromium is missing")
         config = RUNTIME / "mermaid-puppeteer.json"
         config.write_text(json.dumps({"executablePath": str(chrome[-1]), "args": ["--no-sandbox"]}))
-        cli = RUNTIME / "nature-node/node_modules/@mermaid-js/mermaid-cli/src/cli.js"
+        cli = INSTALL_RUNTIME / "nature-node/node_modules/@mermaid-js/mermaid-cli/src/cli.js"
         env = os.environ.copy()
         env["PUPPETEER_CACHE_DIR"] = str(RUNTIME / "puppeteer")
         env["XDG_CACHE_HOME"] = str(RUNTIME / "xdg-cache")

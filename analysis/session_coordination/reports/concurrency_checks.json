@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Real 18-group process/Git/bubblewrap regression",
+      "command": ["python3", "analysis/session_coordination/test_coordination.py"],
+      "returncode": 0,
+      "groups": [
+        "check_isolation",
+        "check_claims",
+        "check_parallel_delivery",
+        "check_conflict",
+        "check_pushed_recovery",
+        "check_merged_validation",
+        "check_boundaries",
+        "check_workspace_escape",
+        "check_outbox_tampering",
+        "check_employee_sandbox",
+        "check_session_registration",
+        "check_conflict_resolution",
+        "check_candidate_metadata",
+        "check_clean_ahead_update",
+        "check_second_pending_submit",
+        "check_root_sync_scope",
+        "check_evidence_parent_symlink",
+        "check_lock"
+      ],
+      "host_boundary": "Approved real namespace execution; default outer sandbox blocks",
+      "execution_evidence": {
+        "tool_session_id": 10346,
+        "initial_output_chunk": "95b9df",
+        "completion_output_chunk": "c36384",
+        "observed_result": "All 18 named groups printed PASS; process exited with code 0",
+        "scope": "Disposable /tmp fixtures, real forked processes, local bare Git remotes and actual bubblewrap; no production remote access"
+      }
+    }
+  ],
+  "sources_sha256": {
+    "analysis/session_coordination/test_coordination.py": "3fd78eec9d510476148ff1343e8c0af461c36f65309418ae75098dfa480c58bb",
+    "analysis/scripts/session_coordinator.py": "010ef05c21b6f8d44aec04f4d42c052e376b6b5d3e05df0cf4a27a0cdb48605d",
+    "analysis/scripts/project_sync.py": "befdb883e7cfecdaf27d61806bbcad3bac260d73c7ec34c5379e3025b9548888",
+    "analysis/scripts/project_git.sh": "e56a9bca04a8e2cfa735863add075446238cbfc71f021bb6b2fc36345e30ad32",
+    "analysis/scripts/task_delivery.py": "2b24d2db14347c2fa80c77c7f82942e83c154f6d5c6918e41ba303be7d1c74d9",
+    "analysis/scripts/check_git_content.py": "7d2e3f0ef66c8439f3912528d182ee227e36239fd1f507627c411890f31bb0aa",
+    ".githooks/pre-commit": "ada13f9537b678bbfc640111be82588728ab7f86fb0146c3b886138934cd0f2f",
+    ".githooks/post-commit": "a4417bc9818655cb3e72dbb540c44f9a2e9fd6da1ec845b1aed9e985af909561",
+    ".githooks/pre-push": "bcfd6c8dfc555059df195eeb20753f039f098ea0dfd79e1b98d4a5d13d5ebd39",
+    ".gitignore": "091ff35893d448e885b87fc9c26b0e1fff1b1e11cfd9ebf4db97f232c2b2ac14"
+  }
+}

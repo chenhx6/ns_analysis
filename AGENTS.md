@@ -51,6 +51,11 @@
 
 ## 版本管理
 
+- 2026-10-08 并行实施约定：每个员工/session 在任务开始前使用 `analysis/scripts/session_coordinator.py create` 建立独立普通 Git 克隆，再用 `launch` 或该目录的新 App session 工作；主目录作为管理及串行整合入口。一个任务可有多个员工，但每名员工有独立目录、索引、分支和文件范围；同任务的范围重叠先显式交接。session ID/登记信息仅用于协调，不代替真实权限、授权或物理隔离。
+- 员工用 `project_sync.py sync --check "<可重复验收命令>"` 冻结本地提交与 outbox；由启动器或管理 session 的 `session_coordinator.py collect` 串行整合。员工不得直接推送主分支。控制端重新核对冻结提交、在候选目录专用真实沙箱验收，并使用可信 Git 检查/hooks。合并冲突保留双方提交和独立冲突目录，释放整合锁；其他员工继续工作。无可用沙箱、网络/认证或宿主审批失败时保留状态，用 `integrate --submission <id>` 恢复，不降级为扩大权限执行。
+- Stop 仅跟进当前员工的未交付工作，不因其他员工或实时记录本的未提交内容阻塞管理 session。根目录维护及记录本例行同步使用 `--files <明确文件列表>`，避免收集其他任务改动。根工作区有重叠编辑时保留编辑并记刷新待处理；员工成果的真实远端交付与根目录刷新分开记录。
+- 隔离适用于经上述入口创建的新工作区；SessionStart 上下文不能重绑定已打开的宿主 cwd/沙箱，hook 也不构成所有工具的完整写入边界。既有 App session 用新员工目录或官方 Hand off/Worktree 功能重新隔离，不伪称已自动迁移。CLI 启动器使用 workspace-write，不把主目录或其他员工目录追加为可写范围。
+
 - 远端仓库：`https://gitee.com/chx6/ns_analysis.git`。
 - 跟踪项目约定、技能、hooks、必要配置，以及 `analysis/` 下的代码、记录和小型结果。
 - 原始数据、中间数据、解码数据、编译产物、缓存和凭据不提交到 Git；不使用 Git LFS 上传这些数据。

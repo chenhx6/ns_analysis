@@ -38,10 +38,10 @@ def main():
         assert not (ROOT/'analysis/code').exists()
         hook_config = json.loads((ROOT/'.codex/hooks.json').read_text())
         hook = next(item['command'] for group in hook_config['hooks']['Stop'] for item in group['hooks']
-                    if 'project_sync.py' in item['command'])
-        response = subprocess.run(shlex.split(hook), cwd=ROOT, input=json.dumps({'hook_event_name':'Stop','cwd':str(ROOT)}),
+                    if 'session_coordinator.py' in item['command'])
+        response = subprocess.run(shlex.split(hook), cwd=ROOT, input=json.dumps({'hook_event_name':'Stop','cwd':str(ROOT),'session_id':'verification-unregistered'}),
                                   text=True, capture_output=True, timeout=30)
-        assert response.returncode == 0 and json.loads(response.stdout)['decision'] == 'block'
+        assert response.returncode == 0 and json.loads(response.stdout) == {}
         qa = json.loads((ROOT/'analysis/run_log/reports/figure_qa.json').read_text())
         for item in qa['reports']:
             assert sha(Path(item['svg'])) == item['sha256']

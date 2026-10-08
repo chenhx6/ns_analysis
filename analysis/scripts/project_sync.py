@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Commit and push verified project changes; enforce delivery at native Stop."""
 import argparse
+from contextlib import contextmanager
+import fcntl
+import time
 import json
 import os
 from pathlib import Path
@@ -10,12 +13,16 @@ import sys
 from check_git_content import MAX_BYTES, permitted
 import task_delivery
 
-ROOT = Path(__file__).resolve().parents[2]
+CONTROL_ROOT = Path(__file__).resolve().parents[2]
+ROOT = CONTROL_ROOT
 REMOTE = 'https://gitee.com/chx6/ns_analysis.git'
+TRUSTED_INTEGRATION = False
 
 
 def git(*args, check=True):
-    result = subprocess.run(['bash', str(ROOT/'analysis/scripts/project_git.sh'), *args],
+    control = CONTROL_ROOT if TRUSTED_INTEGRATION or (ROOT/'.omx/integration.json').exists() else ROOT
+    route = ['--workspace', str(ROOT)] if control != ROOT else []
+    result = subprocess.run(['bash', str(control/'analysis/scripts/project_git.sh'), *route, *args],
                             cwd=ROOT, env=dict(os.environ, GIT_TERMINAL_PROMPT='0'),
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
     if check and result.returncode:
@@ -27,9 +34,22 @@ def text(*args):
     return git(*args).stdout.decode('utf-8').strip()
 
 
-def candidates():
+def candidates(files=None):
     raw = git('ls-files', '-z', '--modified', '--deleted', '--others', '--exclude-standard').stdout
+    raw += git('diff', '--cached', '--no-renames', '--name-only', '-z').stdout
     paths = sorted(set(p.decode('utf-8', 'surrogateescape') for p in raw.split(b'\0') if p))
+    if files is not None:
+        selected = set(files)
+        for name in selected:
+            if not name or Path(name).is_absolute() or '..' in Path(name).parts or Path(name).as_posix() != name:
+                raise ValueError('Use explicit normalized project-relative file paths')
+            if (ROOT/name).is_dir():
+                raise ValueError('Delivery --files must name files, not directories')
+        staged = set(p.decode('utf-8', 'surrogateescape') for p in
+                     git('diff', '--cached', '--no-renames', '--name-only', '-z').stdout.split(b'\0') if p)
+        if staged - selected:
+            raise ValueError('Staged files outside selected delivery scope: ' + ', '.join(sorted(staged-selected)))
+        paths = [name for name in paths if name in selected]
     for name in paths:
         path = ROOT/name
         if not permitted(name) or path.is_symlink():
@@ -40,7 +60,43 @@ def candidates():
     return paths
 
 
-def sync(task, message, evidence, result=None, basis='用户任务与现有项目内容', executor='Codex'):
+@contextmanager
+def sync_lock(timeout=10):
+    # Root integration and legacy delivery serialize on the same stable inode.
+    local = (ROOT/'.omx/integration.json').exists() or not (ROOT/'.project-git').is_dir()
+    path = ROOT / ('.omx/delivery/sync.lock' if local else '.omx/coordination/integration.lock')
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('a') as stream:
+        deadline = time.monotonic() + timeout
+        while True:
+            try:
+                fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                break
+            except BlockingIOError:
+                if time.monotonic() >= deadline:
+                    raise RuntimeError('Project delivery is busy; retry after the active transaction completes')
+                time.sleep(0.05)
+        try:
+            yield
+        finally:
+            fcntl.flock(stream, fcntl.LOCK_UN)
+
+
+def sync(task, message, evidence, result=None, basis='用户任务与现有项目内容', executor='Codex', files=None, checks=None):
+    if not TRUSTED_INTEGRATION and (ROOT/'.omx/employee.json').exists():
+        if not checks:
+            raise ValueError('Employee delivery requires repeatable --check commands for the merged candidate')
+        if files is not None:
+            raise ValueError('Employee delivery scope comes from the registered task, not --files')
+        import session_coordinator
+        return session_coordinator.submit(ROOT, task, message, evidence, result, basis, executor, checks=checks)
+    if not TRUSTED_INTEGRATION and (ROOT/'.project-git/HEAD').is_file() and files is None:
+        raise ValueError('Shared control-root delivery requires explicit --files; never collect other sessions automatically')
+    with sync_lock():
+        return _sync(task, message, evidence, result, basis, executor, files)
+
+
+def _sync(task, message, evidence, result, basis, executor, files):
     if text('remote', 'get-url', '--push', '--all', 'origin').splitlines() != [REMOTE]:
         raise ValueError('origin push destination differs from the authorized project remote')
     if text('remote', 'get-url', '--all', 'origin').splitlines() != [REMOTE]:
@@ -52,10 +108,10 @@ def sync(task, message, evidence, result=None, basis='用户任务与现有项�
     if git('rev-parse', '--verify', remote_ref, check=False).returncode == 0:
         if git('merge-base', '--is-ancestor', remote_ref, 'HEAD', check=False).returncode:
             raise ValueError('Remote history needs integration before delivery; refusing force push')
-    paths = candidates()
+    paths = candidates(files)
     committed = False
     if paths:
-        git('add', '--', *paths)
+        git('add', '--', *[':(literal)' + name for name in paths])
     staged = git('diff', '--cached', '--quiet', check=False)
     if staged.returncode not in (0, 1):
         raise RuntimeError('Unable to inspect staged changes: ' + staged.stderr.decode('utf-8', 'replace'))
@@ -63,14 +119,15 @@ def sync(task, message, evidence, result=None, basis='用户任务与现有项�
         # Preserve valid renderer spacing, CSV CRLF and user Markdown hard breaks.
         git('diff', '--cached', '--check', '--', '*.py', '*.sh', '*.js', '*.mjs', '*.json', '*.toml', '*.yaml', '*.yml')
         # Run the same object-level policy used by pre-commit, before tree preparation.
-        policy_check = subprocess.run([sys.executable, str(ROOT/'analysis/scripts/check_git_content.py')],
-                                cwd=ROOT, env=dict(os.environ, GIT_DIR=str(task_delivery.git_command()[1].split('=',1)[1]),
+        control = CONTROL_ROOT if TRUSTED_INTEGRATION or (ROOT/'.omx/integration.json').exists() else ROOT
+        policy_check = subprocess.run([sys.executable, str(control/'analysis/scripts/check_git_content.py')],
+                                cwd=ROOT, env=dict(task_delivery.git_environment(), GIT_DIR=str(task_delivery.git_command()[1].split('=',1)[1]),
                                                   GIT_WORK_TREE=str(ROOT)), timeout=60)
         if policy_check.returncode:
             raise ValueError('Staged object validation failed')
         if not result:
             raise ValueError('Provide --result with the real achieved outcome for a readable delivery tag')
-        task_delivery.prepare(task, evidence, result, basis, executor)
+        task_delivery.prepare(task, evidence, result, basis, executor, files=files)
         commit_output = git('commit', '-m', message)
         print(commit_output.stdout.decode('utf-8'), end='')
         committed = True
@@ -90,12 +147,11 @@ def sync(task, message, evidence, result=None, basis='用户任务与现有项�
     remote_head = text('ls-remote', '--heads', 'origin', 'refs/heads/' + branch).split()
     if not remote_head or remote_head[0] != head:
         raise ValueError('Remote branch does not match local HEAD after push')
-    if text('status', '--porcelain'):
+    if text('status', '--porcelain', *(['--', *[':(literal)' + name for name in files]] if files is not None else [])):
         raise ValueError('Files changed during delivery; another verified sync is required')
     receipt = {'status': 'pushed', 'head': head, 'branch': branch, 'remote': REMOTE, 'tags': tags}
     path = ROOT/'.omx/delivery/sync_receipt.json'
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2)+'\n')
+    task_delivery.atomic_json(path, receipt)
     print(json.dumps(receipt, ensure_ascii=False))
     return receipt
 
@@ -105,6 +161,11 @@ def stop_status(payload):
         return {}
     cwd = Path(payload.get('cwd', str(ROOT))).resolve()
     if cwd != ROOT and ROOT not in cwd.parents:
+        return {}
+    if (ROOT/'.omx/employee.json').exists():
+        import session_coordinator
+        return session_coordinator.stop_status(payload, ROOT)
+    if (ROOT/'.omx/integration.json').exists() or payload.get('session_id'):
         return {}
     try:
         dirty = bool(text('status', '--porcelain'))
@@ -133,6 +194,8 @@ def main():
     command.add_argument('--result')
     command.add_argument('--basis', default='用户任务与现有项目内容')
     command.add_argument('--executor', default='Codex')
+    command.add_argument('--files', nargs='+', help='Explicit files for delivery from a shared root')
+    command.add_argument('--check', action='append', default=[], help='Repeatable merged-candidate check command')
     sub.add_parser('hook')
     args = parser.parse_args()
     if args.action == 'hook':
@@ -141,7 +204,7 @@ def main():
             raise ValueError('Hook input exceeds 1 MiB')
         print(json.dumps(stop_status(json.loads(raw or '{}')), ensure_ascii=False))
     else:
-        sync(args.task, args.message, args.evidence, args.result, args.basis, args.executor)
+        sync(args.task, args.message, args.evidence, args.result, args.basis, args.executor, files=args.files, checks=args.check)
 
 
 if __name__ == '__main__':

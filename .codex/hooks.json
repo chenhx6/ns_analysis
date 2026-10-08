@@ -27,6 +27,15 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/usr/bin/python3\" \"/home/ys/data_401/data/chx_20260622/analysis/scripts/session_coordinator.py\" hook",
+            "timeout": 15
+          }
+        ]
       }
     ],
     "PreToolUse": [
@@ -111,7 +120,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"/usr/bin/python3\" \"/home/ys/data_401/data/chx_20260622/analysis/scripts/project_sync.py\" hook",
+            "command": "\"/usr/bin/python3\" \"/home/ys/data_401/data/chx_20260622/analysis/scripts/session_coordinator.py\" hook",
             "timeout": 15
           }
         ]
