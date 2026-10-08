@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Staged whitespace validation",
+      "command": "git diff --cached --check",
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "Existing object scope, size and credential-filename exclusions",
+      "command": "GIT_DIR=/tmp/chx-notebook-sync.jEsdhpmZ/checkout/.git GIT_WORK_TREE=/tmp/chx-notebook-sync.jEsdhpmZ/checkout python3 analysis/scripts/check_git_content.py",
+      "returncode": 0,
+      "output": ""
+    }
+  ],
+  "scope": "Preserve the existing live notebook bytes; routine Git object safety only",
+  "excluded": "No experiment-content review, rewrite, image checks or new specialist verification program",
+  "input": "analysis/experiment_log/record_analysis.md",
+  "verification_program": "analysis/scripts/check_git_content.py",
+  "delivery": "Use the existing project_sync.py with the fixed authorized remote and normal hooks"
+}
