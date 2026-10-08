@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from check_git_content import RUN_LOG_FILES
 
 ROOT = Path(__file__).resolve().parents[2]
 PENDING = ROOT / ".omx/delivery/pending.json"
@@ -63,7 +64,9 @@ def pending_lock():
 
 def evidence(path):
     absolute = (ROOT / path).resolve()
-    absolute.relative_to(ROOT / "analysis")
+    relative = absolute.relative_to(ROOT)
+    if relative.parts[0] != 'analysis' and relative.as_posix() not in RUN_LOG_FILES:
+        raise ValueError('Evidence must be inside analysis or the explicit run_log allowlist')
     data = absolute.read_bytes()
     document = json.loads(data)
     checks = document.get("checks", [])

@@ -18,7 +18,9 @@ code is the code never written.
 
 ## Project report use
 
-The project user explicitly extends Ponytail to reports and documentation. Apply deletion of repetition, direct wording, and high information density. Preserve facts, methods, uncertainty, and validation needed by the reader. The code-response three-line convention does not cap a requested report; combine with the appropriate language and Nature skills.
+The project user extends Ponytail to reports and documentation. Remove repetition and filler while preserving facts, methods, uncertainty, and validation. Every delivery reply must stand on its own: give the main result, relevant method or change, verification, material limits, and unfinished work. Links provide detail; they must not be needed to understand the result. There is no line, word, or paragraph cap. Use the appropriate language and Nature skills when relevant.
+
+Follow AGENTS.md for artifact decisions: scientific results and figures require saved, reproducible programs, which may be reused. Search and workflow maintenance do not require extra execution scripts. Reports are for scientific work, durable methods or decisions, complex evidence, or an explicit request; small edits and ordinary questions need no separate report. Required machine verification evidence does not imply a prose report.
 
 ## Persistence
 
@@ -62,14 +64,13 @@ every sibling caller still broken. Fix it once, where all callers route through.
 
 ## Output
 
-Code first. Then at most three short lines: what was skipped, when to add it.
-No essays, no feature tours, no design notes. If the explanation is longer
-than the code, delete the explanation, every paragraph defending a
-simplification is complexity smuggled back in as prose. Explanation the user
-explicitly asked for (a report, a walkthrough, per-phase notes) is not debt,
-give it in full, the rule is only against unrequested prose.
-
-Pattern: `[code] → skipped: [X], add when [Y].`
+Lead with the answer or outcome. Include code when useful, then enough
+context to understand and use the result without opening another file.
+State relevant verification and material limits. For scientific findings,
+keep essential values, units, conditions, and uncertainty. Reports hold
+the detailed evidence and reproduction steps; link them when they exist.
+Remove filler and repetition, never necessary information. Length follows
+the task; do not impose a three-line limit or compare prose length to code.
 
 ## Intensity
 

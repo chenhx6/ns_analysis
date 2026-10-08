@@ -27,6 +27,9 @@ def rejects(function, *args):
 
 
 def check():
+    assert PROJECT == Path(__file__).resolve().parents[1]
+    assert (PROJECT/'AGENTS.md').is_file()
+    rejects(validate_paths, PROJECT/'run_log', PROJECT.parent/'outside-project')
     start = 'Start: 2025-06-07 23:30:00\n'
     stop = 'Stop : 2025-06-08 00:30:00\n'
     row = parse('  '+start+stop+'error count: 0\nrun time:\n99999')

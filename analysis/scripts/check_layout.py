@@ -215,12 +215,13 @@ def verify():
         assert test['self_test'] == 'pass' and len(test['cases']) == 4
         assert all(item['actual'] == item['expected'] for item in test['cases'])
         checks.append({'name': 'Actual Chromium SVG self-test covers clear, overlap, clipping and not-auditable cases; output boundary assertions passed', 'returncode': 0})
-    qa_path = ROOT/'analysis/run_log/reports/figure_qa.json'
+    qa_path = ROOT/'run_log/reports/figure_qa.json'
     if qa_path.exists():
         qa = json.loads(qa_path.read_text())
         assert qa['status'] == 'passed' and qa['reports']
         for item in qa['reports']:
-            assert sha(Path(item['svg'])) == item['sha256']
+            # Map the preserved historical audit to the user's new location.
+            assert sha(ROOT/'run_log/figures'/Path(item['svg']).name) == item['sha256']
             assert item['auto_result'] == 'pass' and item['visual_review'] == 'passed'
         checks.append({'name': 'Final SVGs match actual automated and completed visual review fingerprints', 'returncode': 0})
     report = {"status": "passed", "checks": checks, "limitations": ["No commit, push, installation restore or model API call performed"]}

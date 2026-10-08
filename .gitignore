@@ -109,3 +109,27 @@
 !/decode_data/DecodeAndSortAll/r2root.hh
 !/decode_data/DecodeAndSortAll/run.sh
 !/decode_data/DecodeAndSortAll/test.cc
+
+# 用户移动的 run.log 任务：仅明确程序与既有小型成果，其他输入和处理数据忽略。
+!/run_log/
+/run_log/*
+!/run_log/run_log.py
+!/run_log/test_run_log.py
+!/run_log/runs.csv
+!/run_log/reports/
+/run_log/reports/*
+!/run_log/reports/run_log.md
+!/run_log/reports/data_verification.json
+!/run_log/reports/figure_qa.json
+!/run_log/reports/svg_audit.json
+!/run_log/figures/
+/run_log/figures/*
+!/run_log/figures/gantt_2025-06-07.svg
+!/run_log/figures/gantt_2025-06-08.svg
+!/run_log/figures/gantt_2025-06-09.svg
+!/run_log/figures/gantt_2025-06-10.svg
+!/run_log/figures/gantt_2025-06-11.svg
+!/run_log/figures/gantt_2025-06-12.svg
+!/run_log/figures/gantt_2025-06-13.svg
+!/run_log/figures/gantt_2025-06-14.svg
+!/run_log/figures/gantt_2025-06-15.svg

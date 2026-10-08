@@ -19,8 +19,8 @@ def main():
     checks = []
     commands = [
         ('Isolated actual commit/push/tag and Stop/security regression', ['python3','analysis/scripts/test_project_sync.py']),
-        ('Run log parsing and boundary regression', ['python3','analysis/run_log/test_run_log.py']),
-        ('Independent CSV versus current raw logs', ['python3','analysis/run_log/test_run_log.py','--csv','analysis/run_log/runs.csv']),
+        ('Run log parsing and boundary regression', ['python3','run_log/test_run_log.py']),
+        ('Independent CSV versus current raw logs', ['python3','run_log/test_run_log.py','--csv','run_log/runs.csv']),
         ('Diff whitespace validation', ['bash','analysis/scripts/project_git.sh','diff','--check']),
     ]
     for name, argv in commands:
@@ -42,9 +42,10 @@ def main():
         response = subprocess.run(shlex.split(hook), cwd=ROOT, input=json.dumps({'hook_event_name':'Stop','cwd':str(ROOT),'session_id':'verification-unregistered'}),
                                   text=True, capture_output=True, timeout=30)
         assert response.returncode == 0 and json.loads(response.stdout) == {}
-        qa = json.loads((ROOT/'analysis/run_log/reports/figure_qa.json').read_text())
+        qa = json.loads((ROOT/'run_log/reports/figure_qa.json').read_text())
         for item in qa['reports']:
-            assert sha(Path(item['svg'])) == item['sha256']
+            # Historical audit paths remain evidence of the original execution.
+            assert sha(ROOT/'run_log/figures'/Path(item['svg']).name) == item['sha256']
             assert item['auto_result'] == 'pass' and item['visual_review'] == 'passed'
         checks.append({'name':'Program syntax, skill mirrors/fingerprints, scripts-only layout, actual Stop CLI and unchanged reviewed SVGs', 'returncode':0})
     except Exception as exc:

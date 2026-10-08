@@ -1497,8 +1497,8 @@
     },
     {
       "directory": ".agents/skills/task-tag",
-      "entry_sha256": "e08f30cafb31118af582a2620c964d8878fd84e2fd2cdac4fec850338469ddba",
-      "project_extension": "Isolated employee outboxes, serialized validated integration, explicit shared-root file scope and employee-only Stop"
+      "entry_sha256": "ef2460e037983b205aaaf1a58cf73d687ea21b762f41d80f15dc3c4dc2c0d40f",
+      "project_extension": "Isolated employee delivery with explicit scope; verification evidence independent of prose reports"
     },
     {
       "directory": ".agents/skills/chx-data-analysis",
@@ -1534,8 +1534,8 @@
       "directory": ".agents/skills/ponytail",
       "file": "SKILL.md",
       "upstream_sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
-      "installed_sha256": "f211ec383435ae8707f14468d91a3a2f1d31d5dc88b5c2a05c14e4fc1ff6ef1e",
-      "reason": "User explicitly requests Ponytail for reports as well as code"
+      "installed_sha256": "edb8ea0c6395bde3f67ad6e019d9374b1ad1091445fdd729e778be5a1c6abe92",
+      "reason": "User requires self-contained concise replies and conditional program/report retention; hooks read the maintained project skill"
     }
   ],
   "skill_maintenance_root": ".agents/skills",

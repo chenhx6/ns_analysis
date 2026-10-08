@@ -14,6 +14,11 @@ BUILD_SUFFIXES = {".pyc", ".o", ".so", ".a", ".exe"}
 SOURCE_SUFFIXES = {".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".md", ".go", ".rs", ".sh"}
 DECODER_SOURCE_FILES = {'decode_data/DecodeAndSortAll/test.cc', 'decode_data/DecodeAndSortAll/run.sh', 'decode_data/DecodeAndSortAll/decoder.hh', 'decode_data/DecodeAndSortAll/decoder.cc', 'decode_data/DecodeAndSortAll/crate1.dat', 'decode_data/DecodeAndSortAll/crate0.dat', 'decode_data/DecodeAndSortAll/crate3.dat', 'decode_data/DecodeAndSortAll/r2root.cc', 'decode_data/DecodeAndSortAll/Makefile', 'decode_data/DecodeAndSortAll/UserDefine.hh', 'decode_data/DecodeAndSortAll/main.cc', 'decode_data/DecodeAndSortAll/crate2.dat', 'decode_data/DecodeAndSortAll/crate.dat', 'decode_data/DecodeAndSortAll/r2root.hh'}
 SOURCE_ENV_EXAMPLES = {"analysis/vendor/ponytail/.env.example"}
+RUN_LOG_FILES = {
+    'run_log/run_log.py', 'run_log/test_run_log.py', 'run_log/runs.csv',
+    'run_log/reports/run_log.md', 'run_log/reports/data_verification.json',
+    'run_log/reports/figure_qa.json', 'run_log/reports/svg_audit.json',
+} | {'run_log/figures/gantt_2025-06-{:02d}.svg'.format(day) for day in range(7, 16)}
 LOCAL_DIRS = {
     "__pycache__", ".pytest_cache", ".ipynb_checkpoints", ".venv", "venv",
     "node_modules", "build", "sessions", "logs",
@@ -30,6 +35,7 @@ def permitted(path):
         path in ROOT_FILES or p.parts[0] in {"analysis", ".githooks", ".codex"}
         or path.startswith(".agents/skills/")
         or path in DECODER_SOURCE_FILES
+        or path in RUN_LOG_FILES
     )
     name = p.name.lower()
     private = (

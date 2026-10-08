@@ -1,0 +1,116 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Skill mirrors and installed provenance hashes",
+      "returncode": 0
+    },
+    {
+      "name": "Scientific reproduction retained; optional scripts/reports and dated directories documented",
+      "returncode": 0
+    },
+    {
+      "name": "Installer repeatability; generated delivery guidance preserves report exemption",
+      "returncode": 0
+    },
+    {
+      "name": "Actual configured SessionStart emits project skill for lite/full/ultra without old hard limits",
+      "returncode": 0
+    },
+    {
+      "name": "Actual configured UserPromptSubmit preserves mode changes, ordinary silence and deactivation",
+      "returncode": 0
+    },
+    {
+      "name": "Both routing events emit scientific safeguards, exemptions, full summaries and run_log exception",
+      "returncode": 0
+    },
+    {
+      "name": "Missing project skill fails visibly instead of injecting stale upstream rules",
+      "returncode": 0
+    },
+    {
+      "name": "Delivery validator accepts analysis and allowed run_log evidence; rejects failed checks and escapes",
+      "returncode": 0
+    },
+    {
+      "name": "Git ignore, trusted content policy and employee scope agree on exact run_log allowlist",
+      "returncode": 0
+    },
+    {
+      "name": "All relocated SVGs preserve historical visual-audit fingerprints",
+      "returncode": 0,
+      "figures": 9
+    },
+    {
+      "name": "Run-log parser, real project root and output boundary regression",
+      "returncode": 0,
+      "output": "PASS: parsing, ambiguity, missing/invalid/negative/zero times, daily clipping, input selection, paths, overwrite safety"
+    },
+    {
+      "name": "Changed Python and JavaScript syntax checks",
+      "returncode": 0
+    },
+    {
+      "name": "Existing regression: analysis/scripts/test_project_sync.py",
+      "returncode": 0,
+      "command": [
+        "/usr/bin/python3",
+        "analysis/scripts/test_project_sync.py"
+      ],
+      "output": "Prepared verified task delivery for the staged tree\n[main (root-commit) fbce7f8] Verify local automatic delivery\n 9 files changed, 534 insertions(+)\n create mode 100644 .githooks/post-commit\n create mode 100644 .githooks/pre-commit\n create mode 100644 .githooks/pre-push\n create mode 100644 .gitignore\n create mode 100644 analysis/check.json\n create mode 100644 analysis/example.md\n create mode 100644 analysis/scripts/check_git_content.py\n create mode 100644 analysis/scripts/project_git.sh\n create mode 100644 analysis/scripts/task_delivery.py\n{\"status\": \"pushed\", \"head\": \"fbce7f89e4e460f1f31e3c9934535588fb62fe06\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-1fbd2_b_/remote.git\", \"tags\": [\"Sync-fixture-验证交付\"]}\n{\"status\": \"replaced\", \"tags\": [\"Sync-fixture-迁移历史标签\"]}\nPrepared verified task delivery for the staged tree\n[main e0aaa86] Verify updated automatic delivery\n 1 file changed, 1 insertion(+), 1 deletion(-)\n{\"status\": \"pushed\", \"head\": \"e0aaa86682718ae921380475b2c3cf9d47af790e\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-1fbd2_b_/remote.git\", \"tags\": [\"Sync-fixture-验证交付-2\"]}\n{\"status\": \"pushed\", \"head\": \"822f853abbb46a72eb2f96959cee42f12f955de4\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-1fbd2_b_/remote.git\", \"tags\": []}\nPrepared verified task delivery for the staged tree\nPrepared verified task delivery for the staged tree\nPrepared verified task delivery for the staged tree\n[main 2da79cc] Selected only\n 1 file changed, 1 insertion(+), 1 deletion(-)\n{\"status\": \"pushed\", \"head\": \"2da79cc44be69923862f28ac41184df219137ab8\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-1fbd2_b_/remote.git\", \"tags\": [\"Sync-fixture-选定交付\"]}\nPrepared verified task delivery for the staged tree\n[main 5193b5b] Use control scripts\n 1 file changed, 1 insertion(+), 1 deletion(-)\n{\"status\": \"pushed\", \"head\": \"5193b5bca27f4072446d3c853d23aed1201ff5b0\", \"branch\": \"main\", \"remote\": \"/tmp/chx-sync-check-1fbd2_b_/remote.git\", \"tags\": [\"Sync-fixture-可信交付\"]}\nPASS: process lock/exited-owner recovery, pending isolation, selected-files isolation, Git environment isolation, native Stop; actual local commit/push/tag, clean/dirty/unpushed/foreign/replayed Stop, remote destination and size boundaries\n"
+    },
+    {
+      "name": "Existing regression: analysis/session_coordination/test_coordination.py",
+      "returncode": 0,
+      "command": [
+        "/usr/bin/python3",
+        "analysis/session_coordination/test_coordination.py"
+      ],
+      "output": "PASS: check_isolation\nPASS: check_claims\nPrepared verified task delivery for the staged tree\n[main dcebecf] Deliver alice\n{\"status\": \"pushed\", \"head\": \"dcebecfcdc402bb03ee4476d858e4337dd336958\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-mml5ttax/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main c311d92] Deliver bob\n{\"status\": \"pushed\", \"head\": \"c311d92c00af3fa138ffe647b03a20aea5e5900d\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-mml5ttax/remote.git\", \"tags\": [\"Coordination-fixture-bob\"]}\nPASS: check_parallel_delivery\nPrepared verified task delivery for the staged tree\n[main e9e85ec] Deliver alice\n{\"status\": \"pushed\", \"head\": \"e9e85ec6242b9d74a9eaa2d4c6b33925cfcc6c1c\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-7c1djapk/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main d9c0772] Deliver carol\n{\"status\": \"pushed\", \"head\": \"d9c0772e1773fd2eeea2375910ecca1229439d3e\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-7c1djapk/remote.git\", \"tags\": [\"Coordination-fixture-carol\"]}\nPASS: check_conflict\nPrepared verified task delivery for the staged tree\n[main 6398e0d] Deliver alice\n{\"status\": \"pushed\", \"head\": \"6398e0d6623ed4edd0efe448305ba164d0a461f6\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-2c6aj8tu/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_pushed_recovery\nPrepared verified task delivery for the staged tree\n[main dd715af] Deliver alice\n{\"status\": \"pushed\", \"head\": \"dd715af382173269093608f25c833ee0cb4a6a6e\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-67zmpwj5/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_merged_validation\nPASS: check_boundaries\nPASS: check_workspace_escape\nPASS: check_outbox_tampering\nPrepared verified task delivery for the staged tree\n[main eaef42a] Fixture\n{\"status\": \"pushed\", \"head\": \"eaef42a3dbc74939cba17ca055b0af02e112caf0\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-imr9z1up/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_employee_sandbox\nPASS: check_session_registration\nPrepared verified task delivery for the staged tree\n[main 986efd4] Deliver alice\n{\"status\": \"pushed\", \"head\": \"986efd4ec8841c280aea0fbb7ff42e99327b5c5f\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-u0pe6_es/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main df10286] Deliver bob\n{\"status\": \"pushed\", \"head\": \"df102864aaf8a40cdaa3f7df56e9701718f352f4\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-u0pe6_es/remote.git\", \"tags\": [\"Coordination-fixture-bob\"]}\nPASS: check_conflict_resolution\nPASS: check_candidate_metadata\nPASS: check_clean_ahead_update\nPASS: check_second_pending_submit\nPASS: check_root_sync_scope\nPASS: check_evidence_parent_symlink\nPASS: check_lock\n"
+    },
+    {
+      "name": "Existing regression: analysis/wsl_codex_entry/test_entry.py",
+      "returncode": 0,
+      "checks": [
+        {
+          "name": "Other projects preserve exact argv and cwd without employee registration",
+          "returncode": 0
+        },
+        {
+          "name": "Read-only help/version and explicit CLI management do not allocate workers",
+          "returncode": 0
+        },
+        {
+          "name": "Two normal codex launches create distinct physical workspaces and preserve options",
+          "returncode": 0
+        },
+        {
+          "name": "Explicit teammates and registered resume reuse the correct employee workspace",
+          "returncode": 0
+        },
+        {
+          "name": "Write-boundary escapes, remote/profile overrides and unbound resume are rejected",
+          "returncode": 0
+        },
+        {
+          "name": "A second managed launcher cannot acquire an employee already running",
+          "returncode": 0
+        },
+        {
+          "name": "Bash installation preserves existing bytes and is idempotent and syntactically valid",
+          "returncode": 0
+        },
+        {
+          "name": "Sourced codex Bash function invokes the original executable without recursion",
+          "returncode": 0
+        }
+      ],
+      "output": "PASS: eight real-process Bash/CLI routing checks, without model invocation"
+    }
+  ],
+  "limitations": [
+    "Hooks executed as real subprocesses with installed configuration in temporary fixtures; host reload/trust not asserted.",
+    "No model-generated reply quality guarantee, new rendering review, raw-data reanalysis or remote push in this check."
+  ]
+}

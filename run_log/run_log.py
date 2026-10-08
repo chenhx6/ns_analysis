@@ -10,7 +10,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 
-PROJECT = Path(__file__).resolve().parents[2]
+PROJECT = Path(__file__).resolve().parents[1]
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 FIELDS = ['run_id', 'start_time', 'end_time', 'duration_min',
           'end_status', 'status_reason', 'log_path']
@@ -210,7 +210,7 @@ def write_report(rows, fingerprints, source, output, command, days):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--input-dir', type=Path, default=PROJECT.parent / 'Ge')
-    parser.add_argument('--output-dir', type=Path, default=PROJECT / 'analysis/run_log')
+    parser.add_argument('--output-dir', type=Path, default=PROJECT / 'run_log')
     parser.add_argument('--runs', nargs='+', help='Optional exact run directory names for sample validation')
     args = parser.parse_args(argv)
     source, output = validate_paths(args.input_dir, args.output_dir)

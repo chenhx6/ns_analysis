@@ -17,13 +17,13 @@ import uuid
 
 import project_sync
 import task_delivery
-from check_git_content import MAX_BYTES, DECODER_SOURCE_FILES, permitted
+from check_git_content import MAX_BYTES, DECODER_SOURCE_FILES, RUN_LOG_FILES, permitted
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG_FILES = {'.codex/hooks.json', '.codex/config.toml'}
 DEFAULT_SCOPES = ['analysis/', 'AGENTS.md', 'README.md', '.gitignore', '.agents/skills/',
                   '.codex/skills/', '.codex/agents/', '.codex/prompts/', '.githooks/',
-                  'decode_data/DecodeAndSortAll/']
+                  'decode_data/DecodeAndSortAll/', 'run_log/']
 
 
 def identifier(value):
@@ -39,7 +39,7 @@ def relative(value):
     allowed = permitted(str(path))
     if value.endswith('/'):
         allowed = permitted(str(path) + '/scope.md') or any(
-            name.startswith(str(path) + '/') for name in DECODER_SOURCE_FILES)
+            name.startswith(str(path) + '/') for name in DECODER_SOURCE_FILES | RUN_LOG_FILES)
     if str(path) != value.rstrip('/') or not allowed or str(path) in CONFIG_FILES:
         raise ValueError('Path outside employee source scope: ' + value)
     return str(path) + ('/' if value.endswith('/') else '')
