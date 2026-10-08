@@ -1,16 +1,16 @@
 {
   "status": "passed",
-  "task": "explain double-peak count-weighted offset",
+  "task": "single compiled ROOT time-offset program design",
   "checks": [
     {
       "name": "links",
       "returncode": 0,
-      "output": "Updated processing-plan links passed\n"
+      "output": "Updated plan and decision links passed\n"
     },
     {
       "name": "diff",
       "returncode": 0,
-      "output": ""
+      "output": " AGENTS.md                                      |  3 ++-\n analysis/plans/process/20261008-time-offset.md | 36 +++++++++++++-------------\n decisions/20261008-time-offset-method.md       |  1 +\n 3 files changed, 21 insertions(+), 19 deletions(-)\n"
     },
     {
       "name": "protected",
@@ -38,15 +38,26 @@
     "unchanged": true
   },
   "scientific_processing_started": false,
-  "method": {
-    "center": "(N1*mu1 + N2*mu2)/(N1+N2)",
-    "weights": "Positive, credible background-subtracted peak areas",
-    "effective_offset": "Nearest target-channel tick multiple; compare both candidates at ties",
-    "example": "mu1=80ns,N1=4000,mu2=160ns,N2=1000 -> weighted center96ns -> offset100ns for tick10ns; illustrative only"
+  "design": {
+    "source": "time_offset/time_offset.cc",
+    "functions": [
+      "read decoded ROOT",
+      "select and convert ns",
+      "fill 2ns and 24ns histograms",
+      "ROOT fits",
+      "offset CSV and grouped crate export"
+    ],
+    "inspection": "ROOT histograms, fit functions and results; no SVG export",
+    "python_analysis_scripts": false,
+    "unimplemented": true
   },
   "delivery_scope": [
+    "AGENTS.md",
     "analysis/plans/process/20261008-time-offset.md",
     "analysis/plans/2026-10-08-time-offset-design.md",
+    "decisions/20261008-time-offset-method.md",
+    "decisions/20261009-time-offset-program.md",
     "analysis/20261008-time-offset-design/verification.json"
-  ]
+  ],
+  "scope_confirmation": "User answered: continue simplifying the plan; do not implement yet"
 }

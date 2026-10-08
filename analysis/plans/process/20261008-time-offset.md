@@ -1,9 +1,9 @@
 # 第一阶段处理计划：寻找 time offset
 
 - 开始日期：2026-10-08（Asia/Shanghai）；跨日续作沿用本文件。
-- 当前状态：持续完善策略；科学处理尚未启动。
+- 当前状态：已精简为单C++／ROOT方案；用户2026-10-09明确继续精简计划、暂不实现，科学处理未启动。
 - 用户授权：前轮要求保存计划／长期决策并只读了解旧event流程；本轮用户已将本文件移至 `analysis/plans/process/`，要求Git同步、增加sr、解释配置值并完善双峰策略和语言建议。只执行设计文档及必要的项目入口更新，不扩大为立即标定或下一阶段解码。
-- 已接受条件：[初始约定](../../../decisions/20261008-time-offset.md)及[方法修订](../../../decisions/20261008-time-offset-method.md)；后者替代原根plans路径和四分支限制。用户最新确定编译C++为主、其余Python，C++写法参考DecodeAndSortAll；具体分组、取样及峰定位仍由真实谱决定。
+- 已接受条件：[初始约定](../../../decisions/20261008-time-offset.md)、[方法修订](../../../decisions/20261008-time-offset-method.md)及[单程序／ROOT回查](../../../decisions/20261009-time-offset-program.md)。用户最新明确本任务一个编译C++程序完成读取、填谱、ROOT拟合与导出，不再拆Python分析／绘图，不导出SVG；具体分组、取样及峰定位仍由真实谱决定。
 
 ## 目标与输入
 
@@ -96,27 +96,27 @@
 
 ## 已接受的语言与代码风格
 
-用户已确认使用编译的C++/ROOT处理主数据，其余工作使用Python：C++负责大量标量读取、ns换算、候选配对、直方图及未来矩阵；Python负责小直方图拟合／峰候选比较、CSV和crate配置输出、报告和SVG。C++程序组织、变量及ROOT读取写法参考DecodeAndSortAll，保持可读和统一，独立编译本任务工具。
+本任务统一使用一个编译的C++/ROOT程序，完成五分支读取、ns换算、配对、直方图、ROOT拟合、候选修正评估、CSV和多组crate配置导出。源码与ROOT读写组织参考DecodeAndSortAll，保持直接可读；普通函数即可，不拆多个处理层或绑定框架。
 
-已核实g++、root-config和系统PyROOT可用。绘图继续走现有项目Python入口；系统PyROOT与项目Python环境分开，优先复用已有ROOT拟合能力，通过小表衔接绘图，不为讨论安装新依赖、绑定框架或重编原decoder。语言分工现为用户已接受条件。
+使用现有g++和root-config独立编译标定程序，不改原decoder。其余项目工作仍可用Python，但本任务不需要Python分析／绘图程序，也不导出图片；直方图及拟合结果保存ROOT供打开回查。
 
 ## 预计程序、产物与命令
 
-第一阶段执行时先保存可审查程序，再运行。当前只规划，不创建以下科学程序或结果：
+交付收拢为一套程序与结果，命名不作繁琐拆分：
 
-| 预计路径 | 用途 |
-| --- | --- |
-| `time_offset/find_time_offset.cpp` | ROOT五分支流式读取、ns换算、配对、两种分箱和ROOT回查；不修改原decoder |
-| `time_offset/analyze_time_offset.py` | 小直方图峰分析、候选比较、CSV和crate配置输出；优先复用PyROOT拟合 |
-| `time_offset/plot_time_offset.py` | 从分析导出的小型绘图表用项目Python生成SVG，完成最终渲染审查 |
-| `time_offset/channel_map.csv` | run／crate／slot／module及观察到的sr、tick_ns回查 |
-| `time_offset/offsets.csv` | group、cid、sid、ch、sr、tick_ns、所选mu及方法、crate值、生效值、残差、各峰位置／净面积、各半宽净计数、状态及来源run |
-| `time_offset/run_groups.csv` | run闭区间、配置组、crate0/1配置路径；最终区间无重叠、覆盖目标且缺失项明确 |
-| `time_offset/time_offset.root` | 每组／来源run／目标通道的2ns和24ns谱、计数与修正后回查 |
-| `time_offset/configs/group_*/crate0.dat`、`crate1.dat` | 按组保存完整五列格式，未涉及列沿用原配置；参考通道offset为零 |
-| `time_offset/report.md`、`figures/*.svg` | 方法、选段依据、实际命令、峰位和回查；不额外导出PNG/PDF |
+- `time_offset/time_offset.cc`：一个完整可编译C++源码，完成读数据、配对、2／24ns填谱、ROOT拟合及导出；先保存源码再执行。
+- `time_offset/time_offset.root`：各组／来源run／目标通道的原时间谱、拟合函数与结果、必要的修正回查及参数；直接用ROOT打开查看。
+- `time_offset/offsets.csv`：offset、来源／run范围、sr／tick、所选方法、crate值／生效值／残差、拟合状态及必要峰信息；不预先强制分成channel_map和run_groups两张表。
+- 多组 `crate0.dat`、`crate1.dat`：保存在各组目录，保留完整原格式；参考通道为零，未确定项在CSV／说明中标明。
+- `time_offset/report.md`：必要的方法、组适用范围、实际命令、验证与未确定项，不另建绘图报告或figures目录。
 
-编译与实际运行命令待程序接口确定后补入本计划，不能把未存在的CLI写为已执行。将来独立编译的是本任务标定工具，不是现有 `DecodeAndSortAll/decodeandsort`。ROOT直方图留本地；小型程序、报告、CSV及配置按白名单交付。
+预计编译命令（源码尚未实现，不是已运行记录）：
+
+```bash
+g++ -O2 time_offset/time_offset.cc -o time_offset/time_offset $(root-config --cflags --libs)
+```
+
+具体运行参数在单程序接口确定后补入；不提前搭建复杂调度或配置体系。独立编译本任务工具，原decodeandsort不改。ROOT与可执行文件留本地；源码、必要Markdown、CSV和crate配置按现有规则交付。
 
 ## 已阅读的旧 event 流程
 
@@ -134,7 +134,7 @@
 
 ## 恢复与完成检查点
 
-- 已完成：沿用用户移至analysis/plans/process的计划；五分支修订、14文件sr元数据核查；配置值／生效值解释；用户确认同run同通道双峰及窗口半宽；双峰／平台候选策略和语言建议落盘。
+- 已完成：用户计划位置、五分支、时间约定、分段及双峰策略落盘；2026-10-09收拢为单C++程序并取消Python分析／绘图和SVG交付要求。
 - 未执行：科学程序编写、候选对统计、直方图生产、峰位计算、配置生成／回填、批量decode及矩阵。
 - 下一步：在继续讨论时更新本计划；进入第一阶段执行时先保存科学程序，用一个代表样本验证配对、分箱和mu回填符号，再按实际谱完善分组。当前不自动启动该步骤。
-- 第一阶段最终验收：结果由保存程序产生，参数和来源明确，参考offset为零，实际生效修正如实记录，各组范围及未确定项可回查，Python SVG实际视觉审查完成；无原始数据写入，无decoder源码／编译修改。
+- 第一阶段最终验收：C++程序可编译并完成读数据、填谱、ROOT拟合及导出；ROOT对象可打开回查，bin宽／单位／参考／符号和结果核对正确，参数／来源／组范围明确，参考offset为零、生效修正及未确定项如实记录。按用户要求不导出SVG，不设SVG视觉审查门槛；实际谱形观察与数值／结构检查分别记录。原始数据只读，原decoder源码／编译文件不改。
