@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "task": "time-offset design persistence",
+  "review": {
+    "verdict": "OKAY",
+    "role": "critic",
+    "scope": "User-instruction consistency, time sign, tick quantization, bin geometry and stage boundaries",
+    "limitation": "Strategy review only; no numerical time-offset calibration was run"
+  },
+  "checks": [
+    {
+      "name": "path-policy",
+      "returncode": 0,
+      "output": "Processing path checks passed: 11 allowed, 15 excluded\n"
+    },
+    {
+      "name": "document-links",
+      "returncode": 0,
+      "output": "Decision/process document links and ASCII paths passed\nModified Python syntax passed\n"
+    },
+    {
+      "name": "diff-check",
+      "returncode": 0,
+      "output": "24\t0\t.gitignore\n9\t0\tAGENTS.md\n4\t0\tanalysis/scripts/check_git_content.py\n"
+    },
+    {
+      "name": "preserved-inputs",
+      "returncode": 0,
+      "output": "{\"analysis/experiment_log/record_analysis.md\": \"40a1382ba3fd76887c29686193b31b27d8feccdc9d6dcb9848a68107be1a141b\", \"decode_data/DecodeAndSortAll/UserDefine.hh\": \"9cfa2977c020c18fc3a46504a99d18136dc9a2b8da9f682dbae503957930d581\", \"decode_data/DecodeAndSortAll/crate0.dat\": \"467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3\", \"decode_data/DecodeAndSortAll/crate1.dat\": \"467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3\", \"decode_data/DecodeAndSortAll/decodeandsort\": \"c3c1cf70c0e4ca6191d39ddec76feb9094329203851a80f6dd1ef3b55c890638\", \"decode_data/DecodeAndSortAll/decoder.cc\": \"212d5df8801d5e3e0645d47800a6bc0a07045931f5e61a37c9be10d0287fb0b2\", \"decode_data/DecodeAndSortAll/r2root.cc\": \"124b3f0e8ef675212669a9cc949a8c0255aff5c448c8aec75c4dd63286361521\"}\n"
+    }
+  ],
+  "protected_files": {
+    "before": {
+      "analysis/experiment_log/record_analysis.md": "40a1382ba3fd76887c29686193b31b27d8feccdc9d6dcb9848a68107be1a141b",
+      "decode_data/DecodeAndSortAll/UserDefine.hh": "9cfa2977c020c18fc3a46504a99d18136dc9a2b8da9f682dbae503957930d581",
+      "decode_data/DecodeAndSortAll/crate0.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+      "decode_data/DecodeAndSortAll/crate1.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+      "decode_data/DecodeAndSortAll/decodeandsort": "c3c1cf70c0e4ca6191d39ddec76feb9094329203851a80f6dd1ef3b55c890638",
+      "decode_data/DecodeAndSortAll/decoder.cc": "212d5df8801d5e3e0645d47800a6bc0a07045931f5e61a37c9be10d0287fb0b2",
+      "decode_data/DecodeAndSortAll/r2root.cc": "124b3f0e8ef675212669a9cc949a8c0255aff5c448c8aec75c4dd63286361521"
+    },
+    "after": {
+      "analysis/experiment_log/record_analysis.md": "40a1382ba3fd76887c29686193b31b27d8feccdc9d6dcb9848a68107be1a141b",
+      "decode_data/DecodeAndSortAll/UserDefine.hh": "9cfa2977c020c18fc3a46504a99d18136dc9a2b8da9f682dbae503957930d581",
+      "decode_data/DecodeAndSortAll/crate0.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+      "decode_data/DecodeAndSortAll/crate1.dat": "467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3",
+      "decode_data/DecodeAndSortAll/decodeandsort": "c3c1cf70c0e4ca6191d39ddec76feb9094329203851a80f6dd1ef3b55c890638",
+      "decode_data/DecodeAndSortAll/decoder.cc": "212d5df8801d5e3e0645d47800a6bc0a07045931f5e61a37c9be10d0287fb0b2",
+      "decode_data/DecodeAndSortAll/r2root.cc": "124b3f0e8ef675212669a9cc949a8c0255aff5c448c8aec75c4dd63286361521"
+    },
+    "unchanged": true
+  },
+  "scientific_processing_started": false,
+  "parameters": {
+    "reference": {
+      "cid": 0,
+      "sid": 2,
+      "ch": 5
+    },
+    "branches": [
+      "ts",
+      "cid",
+      "sid",
+      "ch"
+    ],
+    "delta_t": "t_reference - t_channel",
+    "window_ns": [
+      -1999,
+      1999
+    ],
+    "bin_width_ns": [
+      2,
+      24
+    ],
+    "cfd": false,
+    "existing_root_offsets_zero": "User-confirmed"
+  },
+  "external_reference": {
+    "path": "/home/ys/data_401/data/software/event",
+    "source_inspection_only": true,
+    "executed": false
+  },
+  "delivery_scope": [
+    "AGENTS.md",
+    ".gitignore",
+    "analysis/scripts/check_git_content.py",
+    "analysis/plans/2026-10-08-time-offset-design.md",
+    "analysis/20261008-time-offset-design/test_processing_paths.py",
+    "analysis/20261008-time-offset-design/verification.json",
+    "decisions/20261008-time-offset.md",
+    "plans/process/20261008-time-offset.md"
+  ]
+}

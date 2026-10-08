@@ -14,6 +14,7 @@ BUILD_SUFFIXES = {".pyc", ".o", ".so", ".a", ".exe"}
 SOURCE_SUFFIXES = {".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".md", ".go", ".rs", ".sh"}
 DECODER_SOURCE_FILES = {'decode_data/DecodeAndSortAll/test.cc', 'decode_data/DecodeAndSortAll/run.sh', 'decode_data/DecodeAndSortAll/decoder.hh', 'decode_data/DecodeAndSortAll/decoder.cc', 'decode_data/DecodeAndSortAll/crate1.dat', 'decode_data/DecodeAndSortAll/crate0.dat', 'decode_data/DecodeAndSortAll/crate3.dat', 'decode_data/DecodeAndSortAll/r2root.cc', 'decode_data/DecodeAndSortAll/Makefile', 'decode_data/DecodeAndSortAll/UserDefine.hh', 'decode_data/DecodeAndSortAll/main.cc', 'decode_data/DecodeAndSortAll/crate2.dat', 'decode_data/DecodeAndSortAll/crate.dat', 'decode_data/DecodeAndSortAll/r2root.hh'}
 SOURCE_ENV_EXAMPLES = {"analysis/vendor/ponytail/.env.example"}
+TIME_OFFSET_SUFFIXES = {".py", ".cc", ".cpp", ".hh", ".h", ".md", ".csv", ".json", ".dat", ".svg"}
 RUN_LOG_FILES = {
     'run_log/run_log.py', 'run_log/test_run_log.py', 'run_log/runs.csv',
     'run_log/reports/run_log.md', 'run_log/reports/data_verification.json',
@@ -36,6 +37,9 @@ def permitted(path):
         or path.startswith(".agents/skills/")
         or path in DECODER_SOURCE_FILES
         or path in RUN_LOG_FILES
+        or (p.parts[0] == "time_offset" and p.suffix.lower() in TIME_OFFSET_SUFFIXES)
+        or (len(p.parts) == 2 and p.parts[0] == "decisions" and p.suffix == ".md")
+        or (len(p.parts) == 3 and p.parts[:2] == ("plans", "process") and p.suffix == ".md")
     )
     name = p.name.lower()
     private = (
