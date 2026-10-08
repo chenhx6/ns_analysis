@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Real Bash/CLI subprocess routing",
+      "command": [
+        "python3",
+        "analysis/wsl_codex_entry/test_entry.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: eight real-process Bash/CLI routing checks, without model invocation\nchx employee: cli-a24fbf06d4d64787\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/cli-a24fbf06d4d64787\nchx employee: cli-2d25e8badb074b84\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/cli-2d25e8badb074b84\nchx employee: cli-9f9447f227d84b26\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/cli-9f9447f227d84b26\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\nchx employee: two\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/two\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-dfpxyw58/project/.omx/coordination/workspaces/one\n"
+    },
+    {
+      "name": "Full 18-group process/Git/bubblewrap regression with the changed launcher",
+      "command": [
+        "python3",
+        "analysis/session_coordination/test_coordination.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: check_isolation\nPASS: check_claims\nPrepared verified task delivery for the staged tree\n[main 31c6a07] Deliver alice\n{\"status\": \"pushed\", \"head\": \"31c6a07acc0b5e70f66df48b05c4c811eed9d70c\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-c_8buxfo/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main 57dc8e2] Deliver bob\n{\"status\": \"pushed\", \"head\": \"57dc8e2ee97a92ee32cd5f30145361c7ef94e3fe\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-c_8buxfo/remote.git\", \"tags\": [\"Coordination-fixture-bob\"]}\nPASS: check_parallel_delivery\nPrepared verified task delivery for the staged tree\n[main 3d8dcd0] Deliver alice\n{\"status\": \"pushed\", \"head\": \"3d8dcd0370537a1df8c96d257c497549497e1119\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-21r8956e/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main c69b43e] Deliver carol\n{\"status\": \"pushed\", \"head\": \"c69b43ea5426735b722bdf5a6640be969b90eecd\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-21r8956e/remote.git\", \"tags\": [\"Coordination-fixture-carol\"]}\nPASS: check_conflict\nPrepared verified task delivery for the staged tree\n[main e94eb0b] Deliver alice\n{\"status\": \"pushed\", \"head\": \"e94eb0b07fb9a68d2a623de6b9a38373acf43ef6\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-tkuski5y/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_pushed_recovery\nPrepared verified task delivery for the staged tree\n[main 72fff1a] Deliver alice\n{\"status\": \"pushed\", \"head\": \"72fff1aeff840a37ae05bfeda9fb5a3a98f02ca0\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-m5rmlhls/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_merged_validation\nPASS: check_boundaries\nPASS: check_workspace_escape\nPASS: check_outbox_tampering\nPrepared verified task delivery for the staged tree\n[main d396490] Fixture\n{\"status\": \"pushed\", \"head\": \"d396490e44edbca6b620b19c9d478f86ef8951fc\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-2_amb5fk/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_employee_sandbox\nPASS: check_session_registration\nPrepared verified task delivery for the staged tree\n[main 6e09483] Deliver alice\n{\"status\": \"pushed\", \"head\": \"6e0948324a74e46bac5d3e93398383801fa6f86e\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-pik8aoxy/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main 4341c16] Deliver bob\n{\"status\": \"pushed\", \"head\": \"4341c16e94636ee9be628337a0130fed2edb5f3d\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-pik8aoxy/remote.git\", \"tags\": [\"Coordination-fixture-bob\"]}\nPASS: check_conflict_resolution\nPASS: check_candidate_metadata\nPASS: check_clean_ahead_update\nPASS: check_second_pending_submit\nPASS: check_root_sync_scope\nPASS: check_evidence_parent_symlink\nPASS: check_lock\n"
+    },
+    {
+      "name": "Existing delivery regression, source fingerprints and installed lifecycle integration",
+      "command": [
+        "python3",
+        "analysis/session_coordination/verify.py"
+      ],
+      "returncode": 0,
+      "output": "{\"status\": \"passed\", \"checks\": [\"Full 18-group process/Git/bubblewrap regression with the changed launcher\", \"Existing actual Git delivery, lock, explicit-file and trusted-hook regression\", \"Source syntax, tested source fingerprints, installed skill mirrors and direct lifecycle hook JSON\", \"Four actual official fetched pages retain final URLs and failed-search limits\"]}\n"
+    }
+  ],
+  "sources_sha256": {
+    "analysis/scripts/codex_entry.py": "021d015d53b8da04baef63de7fd4750623918e47c0c8f2e11f15f86ff2102637",
+    "analysis/scripts/codex_shell.sh": "a429b45f7368acd16fb73313edd0f99a8a58765fd178e63914716b6ad89c17c1",
+    "analysis/scripts/session_coordinator.py": "19d557a17880c2f9da2dd4c55a6b24b4d13e606c403ffeefe2dcaf2e9698570d",
+    "analysis/wsl_codex_entry/test_entry.py": "0ef0e44b71b362889f0c9efedd15f435dd53e8d48fec38433f01bec8dbe47d28",
+    "analysis/wsl_codex_entry/verify.py": "07c25564671f8d8871662e2b58e1bd7be4b1883d78c6e5734abab2bdf529738b"
+  },
+  "limits": [
+    "Fake CLI verifies actual cwd/argv dispatch without model login or paid invocation.",
+    "Employee boundary uses original CLI workspace-write; shell functions do not grant permissions.",
+    "Personal Bash integration is installed and checked separately with real host permission."
+  ]
+}

@@ -29,6 +29,8 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 
 并行任务先为每名员工建立独立目录；同一任务用相同 `--task`、不同 `--employee` 和文件范围：
 
+WSL/Bash 已提供普通命令入口；个人 `.bashrc` 加载项目 `codex_shell.sh` 后，新交互终端在本项目直接输入 `codex`，会在启动前创建独立员工目录并调用真实 CLI，不必每次输入 Python 命令。多人同任务可使用 `codex --chx-task <任务ID> --chx-employee <员工ID> --chx-scope <源码范围>`；恢复用 `codex --chx-employee <已有ID> resume --last`。项目外、帮助和版本照常转发，边界越界参数明确拒绝。具体参数与既有终端生效方式见 [WSL 命令说明](analysis/wsl_codex_entry/reports/usage.md)。
+
 ```bash
 python3 analysis/scripts/session_coordinator.py create --task spectrum --employee fit --scope analysis/spectrum/fit/ --scope analysis/plans/2026-10-08-spectrum-fit.md
 python3 analysis/scripts/session_coordinator.py launch --employee fit

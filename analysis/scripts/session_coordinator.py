@@ -21,6 +21,9 @@ from check_git_content import MAX_BYTES, DECODER_SOURCE_FILES, permitted
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG_FILES = {'.codex/hooks.json', '.codex/config.toml'}
+DEFAULT_SCOPES = ['analysis/', 'AGENTS.md', 'README.md', '.gitignore', '.agents/skills/',
+                  '.codex/skills/', '.codex/agents/', '.codex/prompts/', '.githooks/',
+                  'decode_data/DecodeAndSortAll/']
 
 
 def identifier(value):
@@ -720,10 +723,8 @@ def hook(payload):
         bound = state['sessions'].get(session)
         if not bound and event == 'SessionStart':
             employee = 'session-' + hashlib.sha256(session.encode()).hexdigest()[:16]
-            scopes = ['analysis/', 'AGENTS.md', 'README.md', '.gitignore', '.agents/skills/',
-                      '.codex/skills/', '.codex/agents/', '.codex/prompts/', '.githooks/',
-                      'decode_data/DecodeAndSortAll/']
-            record = create(ROOT, employee, employee, scopes, title='新 session 独立任务（可通过 assign 细分）')
+            record = create(ROOT, employee, employee, DEFAULT_SCOPES,
+                            title='新 session 独立任务（可通过 assign 细分）')
             with transaction(ROOT) as state:
                 state['sessions'][session] = record['employee']
             bound = record['employee']
@@ -757,17 +758,21 @@ def hook(payload):
                                    'additionalContext': context}}
 
 
-def launch(project, employee, prompt=None):
+def launch(project, employee, prompt=None, cli_args=None, executable=None):
     employee = identifier(employee)
     record = read_state(project)['employees'][employee]
     workspace = Path(record['workspace'])
     member(workspace)
-    binary = shutil.which('codex')
+    binary = executable or shutil.which('codex')
     if not binary:
         raise RuntimeError('Codex CLI is unavailable; open a new App session in ' + str(workspace))
     with lock(workspace / '.omx/launch.lock', timeout=0):
         args = [binary, '-C', str(workspace), '--sandbox', 'workspace-write']
-        if prompt:
+        if cli_args is not None:
+            if prompt is not None:
+                raise ValueError('Use either original CLI arguments or the launch prompt')
+            args = [binary, '-C', str(workspace), '--sandbox', 'workspace-write', *cli_args]
+        elif prompt:
             args = [binary, 'exec', '-C', str(workspace), '--sandbox', 'workspace-write', prompt]
         process = subprocess.Popen(args, cwd=workspace, env=environment())
         last_error = None

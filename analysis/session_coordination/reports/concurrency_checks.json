@@ -2,9 +2,13 @@
   "status": "passed",
   "checks": [
     {
-      "name": "Real 18-group process/Git/bubblewrap regression",
-      "command": ["python3", "analysis/session_coordination/test_coordination.py"],
+      "name": "Full 18-group process/Git/bubblewrap regression with the changed launcher",
+      "command": [
+        "python3",
+        "analysis/session_coordination/test_coordination.py"
+      ],
       "returncode": 0,
+      "output": "PASS: check_isolation\nPASS: check_claims\nPrepared verified task delivery for the staged tree\n[main 31c6a07] Deliver alice\n{\"status\": \"pushed\", \"head\": \"31c6a07acc0b5e70f66df48b05c4c811eed9d70c\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-c_8buxfo/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main 57dc8e2] Deliver bob\n{\"status\": \"pushed\", \"head\": \"57dc8e2ee97a92ee32cd5f30145361c7ef94e3fe\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-c_8buxfo/remote.git\", \"tags\": [\"Coordination-fixture-bob\"]}\nPASS: check_parallel_delivery\nPrepared verified task delivery for the staged tree\n[main 3d8dcd0] Deliver alice\n{\"status\": \"pushed\", \"head\": \"3d8dcd0370537a1df8c96d257c497549497e1119\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-21r8956e/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main c69b43e] Deliver carol\n{\"status\": \"pushed\", \"head\": \"c69b43ea5426735b722bdf5a6640be969b90eecd\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-21r8956e/remote.git\", \"tags\": [\"Coordination-fixture-carol\"]}\nPASS: check_conflict\nPrepared verified task delivery for the staged tree\n[main e94eb0b] Deliver alice\n{\"status\": \"pushed\", \"head\": \"e94eb0b07fb9a68d2a623de6b9a38373acf43ef6\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-tkuski5y/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_pushed_recovery\nPrepared verified task delivery for the staged tree\n[main 72fff1a] Deliver alice\n{\"status\": \"pushed\", \"head\": \"72fff1aeff840a37ae05bfeda9fb5a3a98f02ca0\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-m5rmlhls/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_merged_validation\nPASS: check_boundaries\nPASS: check_workspace_escape\nPASS: check_outbox_tampering\nPrepared verified task delivery for the staged tree\n[main d396490] Fixture\n{\"status\": \"pushed\", \"head\": \"d396490e44edbca6b620b19c9d478f86ef8951fc\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-2_amb5fk/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPASS: check_employee_sandbox\nPASS: check_session_registration\nPrepared verified task delivery for the staged tree\n[main 6e09483] Deliver alice\n{\"status\": \"pushed\", \"head\": \"6e0948324a74e46bac5d3e93398383801fa6f86e\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-pik8aoxy/remote.git\", \"tags\": [\"Coordination-fixture-alice\"]}\nPrepared verified task delivery for the staged tree\n[main 4341c16] Deliver bob\n{\"status\": \"pushed\", \"head\": \"4341c16e94636ee9be628337a0130fed2edb5f3d\", \"branch\": \"main\", \"remote\": \"/tmp/chx-coordination-pik8aoxy/remote.git\", \"tags\": [\"Coordination-fixture-bob\"]}\nPASS: check_conflict_resolution\nPASS: check_candidate_metadata\nPASS: check_clean_ahead_update\nPASS: check_second_pending_submit\nPASS: check_root_sync_scope\nPASS: check_evidence_parent_symlink\nPASS: check_lock\n",
       "groups": [
         "check_isolation",
         "check_claims",
@@ -25,19 +29,12 @@
         "check_evidence_parent_symlink",
         "check_lock"
       ],
-      "host_boundary": "Approved real namespace execution; default outer sandbox blocks",
-      "execution_evidence": {
-        "tool_session_id": 10346,
-        "initial_output_chunk": "95b9df",
-        "completion_output_chunk": "c36384",
-        "observed_result": "All 18 named groups printed PASS; process exited with code 0",
-        "scope": "Disposable /tmp fixtures, real forked processes, local bare Git remotes and actual bubblewrap; no production remote access"
-      }
+      "host_boundary": "Real approved namespace execution; restricted outer tools may block it"
     }
   ],
   "sources_sha256": {
     "analysis/session_coordination/test_coordination.py": "3fd78eec9d510476148ff1343e8c0af461c36f65309418ae75098dfa480c58bb",
-    "analysis/scripts/session_coordinator.py": "010ef05c21b6f8d44aec04f4d42c052e376b6b5d3e05df0cf4a27a0cdb48605d",
+    "analysis/scripts/session_coordinator.py": "19d557a17880c2f9da2dd4c55a6b24b4d13e606c403ffeefe2dcaf2e9698570d",
     "analysis/scripts/project_sync.py": "befdb883e7cfecdaf27d61806bbcad3bac260d73c7ec34c5379e3025b9548888",
     "analysis/scripts/project_git.sh": "e56a9bca04a8e2cfa735863add075446238cbfc71f021bb6b2fc36345e30ad32",
     "analysis/scripts/task_delivery.py": "2b24d2db14347c2fa80c77c7f82942e83c154f6d5c6918e41ba303be7d1c74d9",

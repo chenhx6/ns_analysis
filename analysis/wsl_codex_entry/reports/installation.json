@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Personal Bash original bytes retained, one marked source, verified private WSL backup",
+      "returncode": 0
+    },
+    {
+      "name": "Actual new interactive Bash resolves codex as function and original CLI version succeeds",
+      "command": [
+        "bash",
+        "-ic",
+        "type -t codex; codex --version"
+      ],
+      "returncode": 0,
+      "output": "function\ncodex-cli 0.161.0"
+    }
+  ],
+  "bashrc": "/home/ys/.bashrc",
+  "source": "/home/ys/data_401/data/chx_20260622/analysis/scripts/codex_shell.sh",
+  "installation_note": "The data-disk backup did not preserve chmod permissions; the original bytes were migrated to verified 0700/0600 on the Bash filesystem and only the exact task-created old copy was removed.",
+  "limits": [
+    "Existing terminal processes do not reload rc automatically",
+    "No model or login invocation was performed"
+  ]
+}

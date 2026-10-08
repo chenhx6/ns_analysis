@@ -4,6 +4,8 @@
 
 ## 开始工作
 
+用户实际使用 Ubuntu 20.04 的 WSL 与 Codex CLI，习惯普通 `codex` 命令。Bash 的项目 source 函数已提供自动入口：新交互终端在本项目 `codex` 自动创建员工并进入其目录；同任务分组和已有员工恢复使用 `--chx-task`、`--chx-employee` 和 `--chx-scope`。详见 [WSL 普通命令接入](../../wsl_codex_entry/reports/usage.md)。下面的显式 Python 入口仍可用于管理或未加载该函数的 shell。
+
 项目的 SessionStart hook 会按原生 session ID 自动分配员工目录，重复启动复用同一员工。它提供工作区路径和操作要求，不能改变已经打开的宿主 cwd 或沙箱。主目录打开的会话需对所有工具显式使用分配目录；要获得宿主对应的窄写权限，用下面的 CLI 入口，或在分配目录新开 App 聊天。hook 是否实际加载仍受宿主的信任检查控制，不修改信任数据库。
 
 可在管理目录明确安排员工；`--scope` 可以是文件，也可以是带 `/` 的目录，计划文件也要纳入范围：
