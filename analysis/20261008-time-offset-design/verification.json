@@ -1,19 +1,19 @@
 {
   "status": "passed",
-  "task": "confirm compiled C++ and explain time-window comparison",
+  "task": "explain double-peak count-weighted offset",
   "checks": [
     {
-      "name": "document-links",
+      "name": "links",
       "returncode": 0,
-      "output": "Decision and plan links passed\n"
+      "output": "Updated processing-plan links passed\n"
     },
     {
-      "name": "diff-check",
+      "name": "diff",
       "returncode": 0,
       "output": ""
     },
     {
-      "name": "protected-decoder",
+      "name": "protected",
       "returncode": 0,
       "output": "{\"decode_data/DecodeAndSortAll/UserDefine.hh\": \"9cfa2977c020c18fc3a46504a99d18136dc9a2b8da9f682dbae503957930d581\", \"decode_data/DecodeAndSortAll/crate0.dat\": \"467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3\", \"decode_data/DecodeAndSortAll/crate1.dat\": \"467c0d2341a2e08604390cbb78c25d3525836db4df5688278835df66a7705af3\", \"decode_data/DecodeAndSortAll/decodeandsort\": \"c3c1cf70c0e4ca6191d39ddec76feb9094329203851a80f6dd1ef3b55c890638\", \"decode_data/DecodeAndSortAll/decoder.cc\": \"212d5df8801d5e3e0645d47800a6bc0a07045931f5e61a37c9be10d0287fb0b2\", \"decode_data/DecodeAndSortAll/r2root.cc\": \"124b3f0e8ef675212669a9cc949a8c0255aff5c448c8aec75c4dd63286361521\"}\n"
     }
@@ -38,20 +38,13 @@
     "unchanged": true
   },
   "scientific_processing_started": false,
-  "confirmed_language": "Compiled C++/ROOT for main data processing; existing DecodeAndSortAll style; Python for remaining work",
-  "window_comparison": {
-    "half_width_ns": [
-      100,
-      200,
-      300
-    ],
-    "corrected_delta": "delta - effective_offset",
-    "compare": "Different offsets at the same half width; use background-subtracted counts",
-    "example": "For h=200ns, offsets 200ns and 240ns correspond to original delta intervals (0,400)ns and (40,440)ns; illustrative only"
+  "method": {
+    "center": "(N1*mu1 + N2*mu2)/(N1+N2)",
+    "weights": "Positive, credible background-subtracted peak areas",
+    "effective_offset": "Nearest target-channel tick multiple; compare both candidates at ties",
+    "example": "mu1=80ns,N1=4000,mu2=160ns,N2=1000 -> weighted center96ns -> offset100ns for tick10ns; illustrative only"
   },
   "delivery_scope": [
-    "AGENTS.md",
-    "decisions/20261008-time-offset-method.md",
     "analysis/plans/process/20261008-time-offset.md",
     "analysis/plans/2026-10-08-time-offset-design.md",
     "analysis/20261008-time-offset-design/verification.json"
