@@ -19,7 +19,7 @@ python3 analysis/scripts/session_coordinator.py launch --employee fit
 
 CLI 启动器在员工目录运行 `codex -C <workspace> --sandbox workspace-write`，不追加主目录或其他员工目录的写权限；同时控制端父进程收集 outbox。相同员工的两个受管理启动器会争用运行锁，第二个明确报忙，不会同时启动两个写入者。App 手动开在员工目录时，在管理 session 执行 `collect` 收集成果。
 
-克隆只包含已提交源码和小型结果，不复制主目录的未提交编辑、原始/中间数据或凭据。工具安装源码只读复用，运行缓存留在员工目录。生成的 `.codex/config.toml`、`.codex/hooks.json` 属于本地启动配置，员工不将它们提交；这些配置的规范维护在管理目录进行。
+克隆只包含已提交源码和小型结果，不复制主目录的未提交编辑、原始/中间数据或凭据。忽略的 OMX dist/node_modules 直接使用主安装绝对路径，员工配置和 runtime 不创建符号链接，也不复制整套依赖；状态、缓存和 cwd 留在员工目录。生成的 `.codex/config.toml`、`.codex/hooks.json` 属于本地启动配置，员工不将它们提交；这些配置的规范维护在管理目录进行。
 
 ## 提交与汇合
 

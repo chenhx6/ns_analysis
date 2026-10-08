@@ -181,18 +181,17 @@ def clone(project, destination):
 
 def employee_config(project, workspace):
     """Instance local configuration; share installed code read-only, keep state local."""
+    assets = ['analysis/vendor/oh-my-codex/dist', 'analysis/vendor/oh-my-codex/node_modules']
     for name in CONFIG_FILES:
         path = workspace / name
         if path.is_file():
             original = git(workspace, 'show', 'HEAD:' + name).stdout.decode('utf-8')
-            path.write_text(original.replace(str(project), str(workspace)))
+            configured = original.replace(str(project), str(workspace))
+            for asset in assets:
+                configured = configured.replace(str(workspace / asset), str(project / asset))
+            path.write_text(configured)
             # Local launch configuration is generated, not an employee source edit.
             git(workspace, 'update-index', '--skip-worktree', '--', name)
-    for name in ['analysis/vendor/oh-my-codex/dist', 'analysis/vendor/oh-my-codex/node_modules']:
-        source, target = project / name, workspace / name
-        if source.is_dir() and not target.exists():
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.symlink_to(source, target_is_directory=True)
     (workspace / '.runtime').mkdir(exist_ok=True)
 
 
@@ -220,7 +219,7 @@ def create(project, task, employee, scopes, title=''):
         state['tasks'].setdefault(task, {'task': task, 'title': title or task, 'members': []})
         if employee not in state['tasks'][task]['members']:
             state['tasks'][task]['members'].append(employee)
-        record = {'employee': employee, 'task': task, 'scopes': scopes, 'project': str(project),
+        record = old or {'employee': employee, 'task': task, 'scopes': scopes, 'project': str(project),
                   'workspace': str(workspace), 'base': text(project, 'rev-parse', 'HEAD'),
                   'status': 'creating', 'delivered_head': None, 'submissions': []}
         state['employees'][employee] = record

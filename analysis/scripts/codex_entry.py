@@ -25,7 +25,8 @@ SAFE_WORKER_CONFIG = {'model', 'model_reasoning_effort', 'model_reasoning_summar
                       'model_verbosity', 'model_provider', 'preferred_auth_method'}
 VALUE_OPTIONS = {'-m', '--model', '-p', '--profile', '-a', '--ask-for-approval', '-c', '--config',
                  '-i', '--image', '-o', '--output-last-message', '--color', '--output-schema',
-                 '--local-provider', '--thread-source', '--cyber-access-program', '--remote-auth-token-env'}
+                 '--local-provider', '--thread-source', '--cyber-access-program', '--remote-auth-token-env',
+                 '-C', '--cd', '-s', '--sandbox', '--add-dir', '--remote', '--enable', '--disable'}
 
 
 def split_arguments(args):
@@ -225,6 +226,10 @@ def route(args, executable, cwd=None):
     readonly = any(value in {'-h', '--help', '-V', '--version'} for value in option_args)
     command = first_positional(native)
     non_agent = command in NON_AGENT
+    if (inside and resume_command(native) and
+            not any([selected['employee'], selected['task'], selected['scopes']])):
+        # Native history is a core CLI feature; do not force old sessions into a new employee.
+        return subprocess.run([str(binary), *native], cwd=cwd).returncode
     if not inside or readonly or non_agent:
         if any([selected['employee'], selected['task'], selected['scopes']]):
             raise ValueError('Employee selectors only apply to agent launches in this project')
@@ -241,6 +246,8 @@ def route(args, executable, cwd=None):
                 raise ValueError('Existing employee belongs to another task; use assign explicitly')
             if selected['scopes'] and sorted(set(selected['scopes'])) != record['scopes']:
                 raise ValueError('Existing employee scope differs; use assign explicitly')
+            if record['status'] == 'creating':
+                record = coordinator.create(ROOT, record['task'], employee, record['scopes'])
         else:
             if resume_command(native):
                 raise ValueError('Resume/fork needs an already registered employee, not a newly created ID')

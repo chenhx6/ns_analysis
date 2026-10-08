@@ -18,13 +18,13 @@ codex --chx-task spectrum --chx-employee fit --chx-scope analysis/spectrum/fit/ 
 codex --chx-task spectrum --chx-employee plot --chx-scope analysis/spectrum/plot/ --chx-scope analysis/plans/2026-10-08-spectrum-plot.md
 ```
 
-恢复已有员工时明确 ID：
+普通 `codex resume`、`codex resume --last`、`codex fork` 和嵌套 `exec resume` 不再被包装器阻止：未给员工选择器时，原样调用真实 CLI，保留原 cwd 与参数，恢复的是原生历史，不将旧会话伪装成已隔离员工。恢复明确的员工时指定 ID：
 
 ```bash
 codex --chx-employee fit resume --last
 ```
 
-`exec resume` 和 `fork` 也要求已有员工；旧主目录会话不会被自动迁移。CLI `-o/--output-last-message` 只能使用员工目录内的相对输出路径，拒绝 `..`、主目录绝对路径和链接逃逸。会绕过本地边界的 cwd/sandbox、额外写目录、远端执行、任意 profile/权限配置或信任绕过参数会明确拒绝，不静默降级回主目录。
+显式员工模式的恢复要求已有登记；旧主目录会话不会被自动迁移。新建/显式员工模式的 CLI `-o/--output-last-message` 只能使用员工目录内的相对输出路径，拒绝 `..`、主目录绝对路径和链接逃逸。会绕过本地员工边界的 cwd/sandbox、额外写目录、远端执行、任意 profile/权限配置或信任绕过参数会明确拒绝；原生历史恢复按真实CLI原有语义，不声明员工隔离。
 
 已在员工目录中调用 `codex` 会复用该员工；其受管理启动器已运行时第二次明确报忙，不能同时开启两个写入者。未指定员工的项目主目录普通新启动则创建另一目录，没有固定员工数量上限。
 

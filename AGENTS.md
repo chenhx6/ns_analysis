@@ -63,7 +63,7 @@
 ## 版本管理
 
 - 2026-10-08 并行实施约定：每个员工/session 在任务开始前使用 `analysis/scripts/session_coordinator.py create` 建立独立普通 Git 克隆，再用 `launch` 或该目录的新 App session 工作；主目录作为管理及串行整合入口。一个任务可有多个员工，但每名员工有独立目录、索引、分支和文件范围；同任务的范围重叠先显式交接。session ID/登记信息仅用于协调，不代替真实权限、授权或物理隔离。
-- 2026-10-08 用户补充：实际为 Ubuntu 20.04 的 WSL、Codex CLI，日常直接运行 `codex`。`analysis/scripts/codex_shell.sh` 的项目分派函数经个人 Bash source 接入后，在本项目新启动前创建独立员工；项目外/帮助/版本转交真实 CLI。`--chx-task`、`--chx-employee`、`--chx-scope` 用于分组、明确范围和员工恢复，嵌套 exec resume/fork 也需已有员工。输出路径只能在员工目录内；危险 cwd/写范围/profile/远端或信任绕过参数不静默接受。函数不改变宿主权限，已打开的旧 Bash/Codex 会话不会回溯加载或迁移；直接调用原始可执行文件则不属于自动隔离入口。
+- 2026-10-08 用户补充：实际为 Ubuntu 20.04 的 WSL、Codex CLI，日常直接运行 `codex`。`analysis/scripts/codex_shell.sh` 的项目分派函数经个人 Bash source 接入后，在本项目新启动前创建独立员工；项目外/帮助/版本转交真实 CLI。未指定员工选择器的普通 resume/fork（含exec嵌套和原生全局参数）原样恢复真实CLI历史，不要求员工ID，不声明旧会话隔离；显式 `--chx-employee` 才恢复已有员工。`--chx-task`、`--chx-employee`、`--chx-scope` 用于分组和明确范围；管理模式输出路径限员工目录，危险 cwd/写范围/profile/远端或信任绕过参数不静默接受。工具编译资产读主安装绝对路径，不创建数据盘符号链接。用户注释source时保持关闭，不擅自重启；函数不改变宿主权限，既有会话不自动迁移，直接调用原始可执行文件不属于自动隔离入口。
 - 员工用 `project_sync.py sync --check "<可重复验收命令>"` 冻结本地提交与 outbox；由启动器或管理 session 的 `session_coordinator.py collect` 串行整合。员工不得直接推送主分支。控制端重新核对冻结提交、在候选目录专用真实沙箱验收，并使用可信 Git 检查/hooks。合并冲突保留双方提交和独立冲突目录，释放整合锁；其他员工继续工作。无可用沙箱、网络/认证或宿主审批失败时保留状态，用 `integrate --submission <id>` 恢复，不降级为扩大权限执行。
 - Stop 仅跟进当前员工的未交付工作，不因其他员工或实时记录本的未提交内容阻塞管理 session。根目录维护及记录本例行同步使用 `--files <明确文件列表>`，避免收集其他任务改动。根工作区有重叠编辑时保留编辑并记刷新待处理；员工成果的真实远端交付与根目录刷新分开记录。
 - 隔离适用于经上述入口创建的新工作区；SessionStart 上下文不能重绑定已打开的宿主 cwd/沙箱，hook 也不构成所有工具的完整写入边界。既有 App session 用新员工目录或官方 Hand off/Worktree 功能重新隔离，不伪称已自动迁移。CLI 启动器使用 workspace-write，不把主目录或其他员工目录追加为可写范围。

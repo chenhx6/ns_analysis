@@ -109,7 +109,7 @@ def main():
             }.items():
                 if (executable / product).is_file():
                     env[key] = str(executable / product)
-        cli = ROOT / "analysis/vendor/oh-my-codex/dist/cli/omx.js"
+        cli = INSTALL_ROOT / "analysis/vendor/oh-my-codex/dist/cli/omx.js"
         if not cli.is_file():
             raise RuntimeError("OMX build is missing; see analysis/third_party/INSTALL.md")
         os.chdir(ROOT)

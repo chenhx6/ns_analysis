@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "12 real-process routing regressions including native resume, ENOSYS and interrupted-create baseline",
+      "command": [
+        "python3",
+        "analysis/wsl_codex_entry/test_entry.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "18 real process/Git/bubblewrap concurrency regressions",
+      "command": [
+        "python3",
+        "analysis/session_coordination/test_coordination.py"
+      ],
+      "returncode": 0,
+      "host_boundary": "Approved real namespace execution; no real remote push or model calls"
+    },
+    {
+      "name": "User-reported employee recovered on the real data filesystem with unchanged directory/base",
+      "employee": "cli-73974d2b461d4c45",
+      "returncode": 0,
+      "canonical_assets_exist": true,
+      "symlink_required": false
+    },
+    {
+      "name": "Original Codex source-function resume help and actual repaired employee help launch",
+      "returncode": 0,
+      "limit": "Help/launch path only; interactive paid-model session was not opened"
+    }
+  ],
+  "sources_sha256": {
+    "analysis/scripts/codex_entry.py": "ce4b964de0a4617150032fd683f6b18c2dff2faf332e4f0236b77f7bf2788854",
+    "analysis/scripts/session_coordinator.py": "e2be26705d3a6749788259b20ffe682e8be4039ad8262a864edd832eeac8cc98",
+    "analysis/scripts/project_runtime.py": "e17a3cb352f962feffb33dab0541ed85aef6b2718252ab51d20b6a1f16cb74d3",
+    "analysis/wsl_codex_entry/test_entry.py": "c1cb69cb1bc069af8452b7dfc5da6d076b2800780dc9b41effe2122b3dc5d965",
+    "analysis/session_coordination/test_coordination.py": "3fd78eec9d510476148ff1343e8c0af461c36f65309418ae75098dfa480c58bb"
+  },
+  "limits": [
+    "Native unbound resume keeps original history/cwd and is not an isolated-employee promise",
+    "The user-commented Bash source is not automatically re-enabled",
+    "Other session policy edits and live notebook edits are retained"
+  ]
+}
