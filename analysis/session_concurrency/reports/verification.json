@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Production candidates collects both sessions in a shared worktree",
+      "returncode": 0,
+      "observed_candidates": [
+        "analysis/session_a/evidence.json",
+        "analysis/session_a/owned.md",
+        "analysis/session_b/evidence.json",
+        "analysis/session_b/owned.md"
+      ]
+    },
+    {
+      "name": "Production Stop decision does not distinguish session_id",
+      "returncode": 0,
+      "decision": "block for both sessions"
+    },
+    {
+      "name": "Production Stop suppresses a repeated active hook invocation",
+      "returncode": 0
+    },
+    {
+      "name": "Second production prepare overwrites the shared pending receipt",
+      "returncode": 0,
+      "before": "session_a",
+      "after": "session_b"
+    }
+  ],
+  "command": "python3 analysis/session_concurrency/audit.py",
+  "method": "Actual production functions with only repository/Git adapters redirected to /tmp",
+  "limit": "Passing checks confirm isolation gaps; production synchronization was not executed or fixed",
+  "sources_sha256": {
+    "analysis/scripts/project_sync.py": "9fb7ef1da9df5384455e6f02c33f398681d9b55e36fc598536df642eac51ec06",
+    "analysis/scripts/task_delivery.py": "9f784bf363d18a6c6d9d5d5e19a19038c4720ed0ef0d3f8ec9cf025ca6c7bfc0",
+    "analysis/scripts/project_git.sh": "0226dbde130b6301c813901c4267b255115d945db54d3d63d1e8eb9fd6598f47",
+    ".codex/hooks.json": "8eff54fb1a7a7d6bfbab72e98394f24e1e035a30b11d3a2f7f09fe69c03ba0ff"
+  }
+}
