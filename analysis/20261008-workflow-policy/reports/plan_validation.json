@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "scope": "Plan document only; policy implementation and session review not performed",
+  "checks": [
+    {
+      "name": "plan_has_review_boundary",
+      "returncode": 0
+    },
+    {
+      "name": "covers_three_requested_changes",
+      "returncode": 0
+    },
+    {
+      "name": "names_report_parent_and_legacy_policy",
+      "returncode": 0
+    },
+    {
+      "name": "includes_validation_and_no_unverified_session_claim",
+      "returncode": 0
+    },
+    {
+      "name": "ascii_filename_and_reasonable_size",
+      "returncode": 0
+    },
+    {
+      "name": "referenced_maintenance_sources_exist",
+      "returncode": 0
+    }
+  ]
+}
