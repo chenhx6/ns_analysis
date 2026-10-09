@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "strict_cpp_root_mission",
+      "command": "bash analysis/20261008-time-offset-design/validate_execution.sh --mission",
+      "returncode": 0,
+      "output": "Final repeat: C++ warning-clean build, 24 engineering+73 numerical checks and A/B/C recomputation passed. Mission completion JSON records 3 sets and 103 group-channel rows."
+    },
+    {
+      "name": "reviewed_source_hashes",
+      "command": "sha256sum time_offset/time_offset.cc time_offset/time_offset.hh",
+      "returncode": 0,
+      "output": "{\"time_offset.cc\": \"efff88f30da1362969a3f70222572af9ad4a23e50829a340938557c72b1f9941\", \"time_offset.hh\": \"febd8b8130884d36afd7bfb5b9b27b4f63fb15063d057ea9539fc668ed3dacf3\"}"
+    },
+    {
+      "name": "protected_inputs",
+      "command": "Check 8 decoder/config/binary SHA256+size and 14 ROOT size/mtime metadata",
+      "returncode": 0,
+      "output": "8 SHA256+size pass; 14 ROOT size/mtime pass. ROOT files were not full-hashed."
+    },
+    {
+      "name": "root_inspection_copies",
+      "command": "Check all saved ROOT copy sizes and SHA256 against retained generated artifacts",
+      "returncode": 0,
+      "output": "163 ROOT inspection files; byte-identical. They remain excluded from Git."
+    },
+    {
+      "name": "sandbox_integration_receipts",
+      "command": "Read three controller-created pushed delivery receipts",
+      "returncode": 0,
+      "output": "[{\"submission\": \"9d886ba26af349b4938ec170a6028eee\", \"tag\": \"chx6-时差标定\", \"status\": \"pushed\", \"root_refresh_pending\": false}, {\"submission\": \"82bcb5bdf44547bf9fa86c2063cdfdff\", \"tag\": \"chx6-时间对齐最终QA\", \"status\": \"pushed\", \"root_refresh_pending\": false}, {\"submission\": \"1ee529d1f4034448ae282ee38406e8b5\", \"tag\": \"chx6-时间校准执行文档\", \"status\": \"pushed\", \"root_refresh_pending\": false}]"
+    },
+    {
+      "name": "live_gitee_refs",
+      "command": "bash analysis/scripts/project_git.sh ls-remote origin",
+      "returncode": 0,
+      "output": "{\"observed_main\": \"792029e0aff1ead93ccdef1a4baac18b3d73544c\", \"local_head\": \"792029e0aff1ead93ccdef1a4baac18b3d73544c\", \"peeled_delivery_tags\": {\"refs/tags/chx6-时差标定^{}\": \"bc864277ba163b9bf4ff4ad21c6129533c7746ca\", \"refs/tags/chx6-时间对齐最终QA^{}\": \"30015abb13aaad46724e3b5a040d2bfc9ab5fbfc\", \"refs/tags/chx6-时间校准执行文档^{}\": \"792029e0aff1ead93ccdef1a4baac18b3d73544c\"}}"
+    },
+    {
+      "name": "independent_QA_and_reviews",
+      "command": "Read immutable QA evidence and independent reviewer/architect verdicts",
+      "returncode": 0,
+      "output": "QA 27 commands/48 assertions; code review APPROVE; architecture CLEAR; 24 engineering+73 numerical checks."
+    },
+    {
+      "name": "documents_and_root_refresh",
+      "command": "Check documented KaTeX/link verification, exact remote plan bytes and live-notebook preservation",
+      "returncode": 0,
+      "output": "Previously executed KaTeX 0.16.47 validation passed: 13 links, original 18 formulas preserved, 22 rendered; root refresh preserved the live notebook hash."
+    }
+  ],
+  "scientific_result": {
+    "run_group_ranges": {
+      "A": "6015-6029",
+      "B": "6030-6051",
+      "C": "6052-6079"
+    },
+    "validated_group_channel_rows": {
+      "A": 24,
+      "B": 44,
+      "C": 35
+    },
+    "cid0_gamma": 92,
+    "cid1_CsI": 11,
+    "calibrated_channels_total": 103,
+    "used_slice": "[8000000,12000000)",
+    "legacy_108_rows_merged": false,
+    "uncalibrated_template_values": "original offsets and limits preserved"
+  },
+  "reviewed_source_sha256": {
+    "time_offset.cc": "efff88f30da1362969a3f70222572af9ad4a23e50829a340938557c72b1f9941",
+    "time_offset.hh": "febd8b8130884d36afd7bfb5b9b27b4f63fb15063d057ea9539fc668ed3dacf3"
+  },
+  "gitee_main_at_audit": "792029e0aff1ead93ccdef1a4baac18b3d73544c",
+  "verified_delivery_tags": {
+    "refs/tags/chx6-时差标定^{}": "bc864277ba163b9bf4ff4ad21c6129533c7746ca",
+    "refs/tags/chx6-时间对齐最终QA^{}": "30015abb13aaad46724e3b5a040d2bfc9ab5fbfc",
+    "refs/tags/chx6-时间校准执行文档^{}": "792029e0aff1ead93ccdef1a4baac18b3d73544c"
+  },
+  "input_hash_limit": "14 decode ROOT files were checked by size and mtime only; no full byte hashes were computed.",
+  "artifact_location_note": "ROOT inspection copies are under time_offset; frozen absolute manifests still refer to the retained employee artifact directory."
+}

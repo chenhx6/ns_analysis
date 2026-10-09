@@ -1,7 +1,7 @@
 # 执行计划：time offset第一阶段
 
 - 创建日期：2026-10-09（Asia/Shanghai）；承接原任务和 `time_offset/`，不另建科学产物目录。
-- 状态：Deep Interview交接完成，Ralplan第二轮Planner→Architect→Critic已批准；Ultragoal G001工程基础和G002历史有限标定完成；G003为review_blocked，G004新版真实批次strict mission通过，得到103条组—通道记录；最终报告序列化回归、Code Reviewer APPROVE及Architect CLEAR已通过；整合与版本交付仍进行中。旧108条历史记录不并入新版。
+- 状态：科学阶段、代码／架构审查、独立QA和三组沙箱整合均已完成；A/B/C新版strict mission通过，共103条组—通道记录；三个员工提交已推送Gitee并核对标签，主工作区已快进到最终计划提交。G003初轮review_blocked由G004证据解决；当前只剩Ultragoal严格收尾checkpoint。旧108条不并入新版。
 - 实际授权：用户本轮明确 `$autopilot $autoresearch 开始执行计划analysis/plans/process/20261008-time-offset.md`。此指令解除此前“暂不实现”的阶段限制，仅授权执行该计划的第一阶段；下一阶段批量decode仍不执行。
 
 ## 目标与边界
@@ -40,12 +40,12 @@
 - 可复跑编译／自检和研究结果验证器明确，不使用TODO或虚构command作为通过证据；ROOT与CSV／crate逐项一致，参考offset为0。
 - 跨run不配对，异常时间不推进正常缓存；未知／弱信号不作为已证实0 offset；原始输入及原decoder／crate不变。
 - 各group闭区间可追溯且覆盖目标编号范围，异常／缺失run的实际处理状态单列；不预设哪机箱一定稳定。
-- 历史交付故障：前一文档提交356b72c曾因三次push超时未同步，当时远端为048c3e5；该状态仅是历史检查点。主代理已确认后续政策小成果996bb58实际推送且根目录刷新完成。本科学任务尚未冻结交付，不以政策同步代替本任务远端核验。
+- 历史交付故障：早期文档提交曾因网络超时未同步，该问题已解决。当前代码、独立QA及更新后的计划各自通过控制端沙箱并推送；远端main和三枚对应标签已实际查询，主目录也已刷新。
 - 无可用工作流／真实沙箱／网络时保留真实状态与成果，使用受支持恢复路径，不伪造权限、角色、验证或完成。
 - 实际用户边界确认：无可靠峰／背景通道保留原配置并标记未校准，继续其余通道；只把独立验证通过的通道称为校准成果。用户已选择按此边界启动，并多次要求继续。
 - 工作流恢复：官方宿主doctor确认会话pointer usable，坏selector为CODEX_SESSION_ID；仅在官方状态命令中清除该selector。保留pointer，不凭隔离PID视图清理会话。Deep Interview完整spec／用户答复已存，补齐gate.status／spec_path字段，不伪造宿主权限。
 - 共识进度：Planner三份文件位于.omx/plans；Architect初两次因模型容量失败，后续完成真实顺序审查。第二轮Architect与Critic均为APPROVE，交接证据为`.omx/plans/time-offset-consensus-handoff.json`；该文件仅是流程证据，不代替宿主权限。
-- 当前下一步：由主控安全更新员工基线、冻结并串行整合成果，再核验本任务远端交付。新版[8M,12M)批次、最终回归与独立审查已通过；只读重算，不重开已消费留出，不改统计／参数。
+- 当前最后检查点：本计划和交付验证记录完成主控文件范围同步后，运行Ultragoal G004严格checkpoint并结束Autoresearch／Autopilot状态。科学统计和留出已冻结；ROOT本地副本与实施副本逐字节一致，冻结manifest仍记录实施副本绝对路径。
 
 ## 本轮文档与工程检查点
 
@@ -53,7 +53,7 @@
 - G001依据代码员工的 `time_offset/report.md`：ROOT 6.34.08、g++ 9.4.0编译通过，`-O2 -Wall -Wextra -Wpedantic`无警告；`bash analysis/20261008-time-offset-design/validate_execution.sh`通过24项合成自检。覆盖混合tick、正负量化、chunk等价、跨run／slice隔离、异常整块拒绝、保护区、最新tree周期及诊断ROOT篡改拒绝。测试输入是synthetic，不是实验结果。
 - G001诊断验收只证明谱结构、整数计数、细粗谱重算和invalid零贡献。后续G002历史批次已有数值／模板重算，但G003审查发现双峰候选比较及时间桶组织未覆盖原合同，故旧验收不能代替G004最终验收。
 - 数字质控、冻结留出和完整模板保护以科学处理计划新增执行规则为准。初值来自批准的代理方案，不是永久实验参数；探索调整先记理由，首次留出前冻结。未校准保留原配置，至少一个非参考目标独立通过才可称部分可用，全部unknown仅诊断。
-- G004新批次及最终审查结论已由主代理回传；本lane验证后停止，等待主控安全更新基线并协调冻结、串行整合和远端核验，不自行提交范围外文件。
+- 主控已安全更新员工基线、串行整合并推送本任务范围；代码、QA、文档的Gitee标签见下方交付验证记录。三个employee目录与绝对ROOT源产物保留，以支持manifest回查。
 - 文档验收：三份文档本地相对链接逐项检查；18个既有数学块与主目录原文逐字一致；加入G004的4个公式后，全部22个数学块均使用主项目KaTeX严格解析渲染；`git diff --check`检查空白。实际命令、返回码与三文档内容摘要保存在上述独立验证记录，代码lane证据不改。该检查只验证文档链接、公式可渲染和范围，不验证科学结果。
 
 ## G004恢复检查点（实现前历史记录）
@@ -72,4 +72,4 @@ G004方案与公式见[科学计划](process/20261008-time-offset.md)新增章�
 
 最终源码摘要：cc `efff88f30da1362969a3f70222572af9ad4a23e50829a340938557c72b1f9941`，hh `febd8b8130884d36afd7bfb5b9b27b4f63fb15063d057ea9539fc668ed3dacf3`；真实数据由cc `ccc6edbf7cbb2e3b4e4f7ed81aecb833418cde0af08fb2d41b3af2553e11647c`生成，最终版本只修JSON序列化，不改统计／参数、不重开留出，已只读复算同一成果。文档算法已对照实际源码；机器验证证据保存所核对源码摘要。
 
-限制与交付：结论仅覆盖本轮有限样本和通过质控的组—通道，不代表全部run／CsI或被拒绝slice完成对齐。未观测和未校准模板项保留原值。ROOT、freeze及manifest仍依赖员工绝对产物目录 `/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009/time_offset/final-candidates/`；整合后不能仅因源码已提交就声称产物可迁移重算。主控负责安全基线更新及后续整合，文档lane保留四文件验证完成状态，按本次指令不自行提交范围外政策或抢写远端成功。
+限制与交付：103条是通过质控的组—通道记录，覆盖有限有效slice，不代表全部run、全部CsI或被拒绝slice已完成对齐；未知项保留原模板值。ROOT、freeze及manifest继续引用实施副本绝对目录 `/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009/time_offset/final-candidates/`，尽管163个ROOT检查副本已按字节复制到项目`time_offset/`。本阶段已交付并推送；批量decode、矩阵及CsI波形拟合仍在下一阶段范围。

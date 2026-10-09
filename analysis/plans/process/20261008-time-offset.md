@@ -1,7 +1,7 @@
 # 第一阶段处理计划：寻找 time offset
 
 - 开始日期：2026-10-08（Asia/Shanghai）；跨日续作沿用本文件。
-- 当前状态：用户后续明确调用autopilot＋autoresearch开始执行，并确认弱通道可保留原配置、标为未校准。此前暂不实现限制已解除；现已完成需求交接与第二轮顺序共识审查；G001工程基础及G002历史有限标定完成；G004已实现双峰候选及绝对时间桶，新版strict mission通过103条组—通道；旧108条不混入新版。最终序列化回归、Code Reviewer APPROVE及Architect CLEAR均通过；整合与版本交付仍进行中。
+- 当前状态：G004真实标定和最终质量门已通过；代码、QA与本计划分别经控制端沙箱整合、推送Gitee，远端标签和分支已核对，项目主工作区已刷新。新版strict mission通过103条组—通道；旧108条仅作历史记录，不与新版合并。G003初轮审查缺项已由G004修复证据解决；主控正在提交Ultragoal最终checkpoint。
 - 授权沿革：此前用户要求保存／移动计划、增加sr及继续规划；随后明确调用autopilot＋autoresearch开始本计划，并允许弱通道未校准不阻塞其余成果。当前授权执行第一阶段实现与研究验证；下一阶段解码不包含在内，具体执行检查点见[执行计划](../2026-10-09-time-offset-execution.md)。
 - 已接受条件：[初始约定](../../../decisions/20261008-time-offset.md)、[方法修订](../../../decisions/20261008-time-offset-method.md)及[单程序／ROOT回查](../../../decisions/20261009-time-offset-program.md)。用户最新明确本任务一个编译C++程序完成读取、填谱、ROOT拟合与导出，不再拆Python分析／绘图，不导出SVG；具体分组、取样及峰定位仍由真实谱决定。
 
@@ -303,7 +303,7 @@ $$
 
 ## G004补充实施算法：双峰候选与绝对时间桶
 
-本节为G003审查后已实现的补齐算法，已只读核对实际cc；新版留出及strict mission通过，最终Code Reviewer为APPROVE、Architect为CLEAR；版本整合尚未完成，科学验收不等于远端交付。既有18个算法公式及用户确认方法保留，以下明确实现应如何满足原双峰比较与时间稳定性要求。
+本节为G003审查后实际实现并验收的补齐算法，已只读核对cc；新版留出及strict mission通过，Code Reviewer为APPROVE、Architect为CLEAR；源码和结果已整合并推送，根目录回查副本逐字节匹配源产物。既有18个算法公式及用户确认方法保留。
 
 ### 真正的main与weighted候选
 
@@ -399,6 +399,6 @@ g++ -O2 time_offset/time_offset.cc -o time_offset/time_offset $(root-config --cf
 - 历史结果：G002有限批次生成108条组—通道记录（96 gamma、12 CsI），有冻结留出及模板重算证据；不是108个独立地址。G003审查发现科学合同缺项，不能据旧批次宣称整个任务完成。
 - 新版结果：G004已完成main／weighted候选和绝对时间16桶；[8M,12M)批次strict mission通过103条组—通道（A 24 gamma；B 36 gamma＋8 CsI；C 32 gamma＋3 CsI），总92 gamma＋11 CsI，旧108不并入。训练双峰解析A 7 gamma、B 10 gamma＋2 CsI、C 10 gamma，其余single_or_unresolved；解析数不等于成功数。
 - 质量门已通过：最终24项工程＋73项数值自检、独立QA27命令48断言、JSON五特殊字符roundtrip、Code Reviewer APPROVE、Architect实际源码CLEAR及三组只读重算；29个解析双峰加权代数最大误差2.14e-14ns。主控独立重编译、自检和103条mission重算也通过。
-- 尚未完成：安全基线更新、串行整合与本任务远端版本交付。有限样本不代表全run／全CsI，未知通道保留原模板值；ROOT／freeze仍引用员工绝对产物目录，不能假设换目录后自动可用。批量decode及矩阵仍在本阶段范围外。
-- 下一步：按[执行计划](../2026-10-09-time-offset-execution.md)由主控完成安全基线更新与整合交付；真实计数与ccc6edbf生成版本→efff88f3序列化修复版本链以`time_offset/report.md`和`time_offset/final-candidates/`为准，不重开留出或混合旧结果。原decoder／crate继续只读，批量解码仍属于下一阶段。
+- 已完成交付：员工基线更新、三份冻结提交的真实候选沙箱验收、Gitee推送及远端main／标签核对。163个ROOT回查副本位于项目`time_offset/`，与员工科学产物逐字节一致；当前freeze及manifest仍使用员工绝对目录。
+- 最终范围：G004严格checkpoint结束本Ultragoal／Autoresearch／Autopilot后，第一阶段没有其他待做事项。报告和候选以`time_offset/report.md`及`time_offset/final-candidates/`为准；科学数据由`ccc6edbf…`版本生成，最终源码`efff88f3…`只修JSON失败报告序列化，不重开留出、不改变统计／参数或合并历史结果。下一阶段批量decode、矩阵及CsI波形拟合需另按计划处理，原decoder／crate在本阶段保持未改。
 - 第一阶段最终验收：配套cc和hh可编译为一个程序并完成读数据、填谱、ROOT拟合及导出；实现与计划中的LaTeX公式逐项对应。ROOT对象可打开回查，bin宽／单位／参考／符号和结果核对正确，参数／来源／组范围明确，参考offset为零、生效修正及未确定项如实记录。按用户要求不导出SVG，不设SVG视觉审查门槛；实际谱形观察与数值／结构检查分别记录。原始数据只读，原decoder源码／编译文件不改。
