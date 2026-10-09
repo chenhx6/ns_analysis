@@ -2,7 +2,7 @@
 
 ## 当前正式成果：G004 v2
 
-**主交付为 `final-candidates/`，实施及数值验收通过，等待主控完成独立QA、架构复审和版本整合。** 本批次在训练前固定weighted策略，使用此前未读取的entry [8M,12M)，没有把历史87或108项中的较好通道混入新结果。
+**主交付为 `final-candidates/`，实施、数值验收、独立代码审查、QA和架构复审均通过；版本交付进行中，尚未宣称远端推送完成。** 本批次在训练前固定weighted策略，使用此前未读取的entry [8M,12M)，没有把历史87或108项中的较好通道混入新结果。
 
 | 组 | 训练run → 独立比较run | cid0通过 | cid1通过 | 已观测但未通过 | 未观测模板行 | 参考 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -34,7 +34,7 @@ C采用80个预先固定的50k-entry slice：先全体只读预检，从有效co
 
 真实生成程序的cc hash为 `ccc6edbf7cbb2e3b4e4f7ed81aecb833418cde0af08fb2d41b3af2553e11647c`（构建 `/tmp/time-offset-build.ivFgLt/`）。之后独立review发现失败reason需要JSON转义，当前cc hash为 `efff88f30da1362969a3f70222572af9ad4a23e50829a340938557c72b1f9941`；hh hash为 `febd8b8130884d36afd7bfb5b9b27b4f63fb15063d057ea9539fc668ed3dacf3`。后续变更仅为JSON序列化与3项失败报告测试，没有改科学算法、参数或重新读取真实holdout；主控已转达独立code-reviewer确认移除该差异后恢复原科学hash，并给出APPROVE。
 
-最新实际验收：ROOT6.34.08/g++9.4.0无警告编译，24项工程与73项数值/模板/安全/候选测试通过；含引号、反斜杠、tab、CR、LF路径的失败报告经`python3 -m json.tool`独立解析通过；严格v2使命只读重算三组103项通过。构建 `/tmp/time-offset-build.IZEY2E/`，日志 `g004_json_fix_verification.log`。机器证据位于 `analysis/20261008-time-offset-design/completion.json` 和 `execution_verification.json`。本员工未提交outbox、未推送，也不自批最终QA/架构审查。
+最新实际验收：ROOT6.34.08/g++9.4.0无警告编译，24项工程与73项数值/模板/安全/候选测试通过；含引号、反斜杠、tab、CR、LF路径的失败报告经`python3 -m json.tool`独立解析通过；严格v2使命只读重算三组103项通过。构建 `/tmp/time-offset-build.IZEY2E/`，日志 `g004_json_fix_verification.log`。机器证据位于 `analysis/20261008-time-offset-design/completion.json` 和 `execution_verification.json`。独立code-reviewer已APPROVE、architect已CLEAR；主控确认最终QA的27条命令、48项断言以及24+73项程序自检均通过，主控独立编译和使命重算仍为103项。已通过官方流程整合政策基线；现按task-tag冻结员工outbox，之后由主控在候选沙箱重新验收并完成远端交付，当前不写“已推送”。
 
 ```bash
 # 已有成果只读重算：
@@ -227,3 +227,14 @@ bash analysis/20261008-time-offset-design/run_execution.sh /tmp/time-offset-buil
 ## G004 独立审查 LOW 修复计划（实施前）
 
 独立code-reviewer已只读重算新版三个组通过，但指出mission失败reason直接嵌入JSON：含引号、反斜杠或控制字符的错误路径会破坏completion.json。仅补JSON字符串转义并回归安全/tmp路径错误；不改任何统计、候选、冻结参数或已消费holdout。真实103项由旧生成hash `ccc6edbf...` 产生，新hash只修失败报告序列化，重新编译/合成测试后只读重算同一成果，版本链如实保留。
+
+
+## 版本交付状态更新与冻结计划
+
+独立审查证据只读核对：主项目 `.omx/reviews/time-offset-code-review-v3.json` 为APPROVE、`.omx/reviews/time-offset-architecture-v2.json` 为CLEAR，均核对当前cc/hh hash和A24/B44/C35，架构剩余问题为空。最终QA 27命令/48断言及主控独立编译重算通过由主控交接确认；本员工不代替独立审查者自批。
+
+原源码和小产物已保留本地提交，当前基线合并head为f0931db，员工注册base为996bb58；txt/md5与LICENSE完整树政策已通过控制端真实沙箱并进入本克隆。此次只更新报告和验证JSON，不改cc/hh、科学表、参数、ROOT或消费记录。按原验收命令再次编译、自检并只读重算现有v2使命，再检查diff/完整索引，通过project_sync员工入口冻结outbox；远端交付由主控继续，冻结收据不等于已推送。
+
+员工数据盘noexec造成原Git hooks不能执行，主控已直接调用可信root `analysis/scripts/check_git_content.py`检查完整索引通过；本轮再次直接检查，后续控制候选hooks在/tmp运行。保留科学生成版本ccc6edbf到JSON-only修复efff88f3的链，以及绝对员工产物路径依赖，不以政策整合或文档更新冒充重新读取真实holdout。
+
+冻结前再次实际执行原验收命令退出0：24工程+73数值自检、JSON失败报告解析和现有三组103项只读重算均通过，编译无warning。日志 `time_offset/delivery_freeze_verification.log`，构建目录 `/tmp/time-offset-build.lkHp76`。本次没有改科学源码或结果表。

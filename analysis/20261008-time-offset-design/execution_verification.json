@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "passed": true,
-  "stage": "G004 v2 implementation and strict mission; independent final QA/architecture/delivery pending",
+  "stage": "G004 v2 scientific verification and independent reviews passed; employee delivery in progress, not pushed",
   "scientific_calibration_complete": true,
   "checks": [
     {
@@ -23,6 +23,18 @@
     {
       "name": "small_delivery_file_size",
       "command": "assert allowed source/table/metadata files under assigned directories are each below 25MiB",
+      "returncode": 0
+    },
+    {
+      "name": "pre_outbox_compile_self_tests_and_current_mission",
+      "command": "bash analysis/20261008-time-offset-design/validate_execution.sh --mission",
+      "returncode": 0,
+      "log": "time_offset/delivery_freeze_verification.log",
+      "build_directory": "/tmp/time-offset-build.lkHp76"
+    },
+    {
+      "name": "trusted_full_index_and_staged_diff",
+      "command": "python3 /home/ys/data_401/data/chx_20260622/analysis/scripts/check_git_content.py; git diff --cached --check",
       "returncode": 0
     }
   ],
@@ -195,11 +207,36 @@
   "report": "time_offset/report.md",
   "candidate_policy": "weighted selected before training; both resolved main/weighted candidates frozen and independently checked without heldout selection",
   "chronology": "all valid grid slices share one absolute-time ordered 16-bucket axis; invalid slices and slice/bucket guard references excluded from statistical contributions",
-  "root_reported_independent_code_review": "APPROVE after JSON-only patch; final QA/architecture and version integration remain controller work",
+  "root_reported_independent_code_review": "APPROVE: root .omx/reviews/time-offset-code-review-v3.json, verified current source hashes and A24/B44/C35",
   "remaining": [
-    "independent final QA and architecture review",
-    "controller policy baseline integration and employee submission",
-    "real sandbox integration and remote delivery"
+    "freeze immutable employee outbox",
+    "controller real sandbox candidate integration and remote delivery"
   ],
-  "scope_note": "No employee submission or remote push claimed. Original inputs opened READ; no whole-file pre/post hash baseline. Primary delivery is v2 final-candidates only, never mixed with historical 87/108 subsets."
+  "scope_note": "Independent code review, architecture review and final QA passed. Version delivery remains in progress; no remote push claimed. Original inputs opened READ; no whole-file pre/post hash baseline. Primary delivery is v2 final-candidates only, preserving absolute employee ROOT dependencies and generation-source version chain.",
+  "independent_architecture": {
+    "status": "CLEAR",
+    "artifact": "/home/ys/data_401/data/chx_20260622/.omx/reviews/time-offset-architecture-v2.json",
+    "remaining_findings": [],
+    "raw_holdouts_reopened": false
+  },
+  "independent_qa": {
+    "status": "passed",
+    "commands": 27,
+    "assertions": 48,
+    "engineering_self_tests": 24,
+    "numerical_self_tests": 73,
+    "basis": "Controller final handoff confirms independent QA and independent compile/mission results; no invented local QA artifact path."
+  },
+  "controller_independent_mission": {
+    "status": "passed",
+    "calibrated_group_channel_rows": 103,
+    "basis": "Controller final handoff; source and v2 artifacts unchanged"
+  },
+  "delivery": {
+    "status": "in_progress_not_pushed",
+    "baseline_merge_head": "f0931db",
+    "registered_base": "996bb58",
+    "policy_baseline_integrated": true,
+    "employee_hooks_note": "data volume noexec prevents original hooks; trusted root full-index checker used directly, controller candidate hooks run in /tmp"
+  }
 }
