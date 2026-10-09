@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "analysis/20261008-time-offset-qa/qa.py",
+        "--source",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009",
+        "--cc-sha256",
+        "efff88f30da1362969a3f70222572af9ad4a23e50829a340938557c72b1f9941",
+        "--hh-sha256",
+        "febd8b8130884d36afd7bfb5b9b27b4f63fb15063d057ea9539fc668ed3dacf3"
+      ],
+      "returncode": 0,
+      "output": ""
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "82bcb5bdf44547bf9fa86c2063cdfdff",
+  "employee_head": "0d6c205a391ce3d118d864d8132638de201d29aa",
+  "employee_evidence_sha256": "dee3249f2ffa450bd77bb97245ac12e6663d49263587dea0aa837f8d3624328a"
+}
