@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "bash",
+        "analysis/20261008-time-offset-design/validate_execution.sh",
+        "--mission"
+      ],
+      "returncode": 0,
+      "output": "Evidence directory: /tmp/time-offset-build.T8kmsN\nPASS 24 synthetic checks; scientific calibration not claimed\nfrozen /tmp/time-offset-build.T8kmsN/self-test/calibration/frozen candidates=1; holdout not opened\n{\n  \"group\": \"synthetic\",\n  \"template_count\": 5,\n  \"observed_template_count\": 3,\n  \"reference_count\": 1,\n  \"calibrated_count\": 1,\n  \"unobserved_count\": 2,\n  \"unknown_observed_count\": 1,\n  \"non_template_count\": 0,\n  \"synthetic\": true,\n  \"status\": \"partial_usable\",\n  \"scientific_calibration_complete\": false\n}\n{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"mission requires combined cross-run group artifacts\"\n}\n{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"mission requires combined cross-run group artifacts\"\n}\n{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"cannot checksum: /tmp/time-offset-build.T8kmsN/self-test/calibration/json-failure/quote\\\"backslash\\\\tab\\treturn\\r/missing\\nfrozen/frozen.root\"\n}\nfrozen /tmp/time-offset-build.T8kmsN/self-test/calibration/dual_frozen candidates=1; holdout not opened\n{\n  \"group\": \"synthetic\",\n  \"template_count\": 5,\n  \"observed_template_count\": 3,\n  \"reference_count\": 1,\n  \"calibrated_count\": 1,\n  \"unobserved_count\": 2,\n  \"unknown_observed_count\": 1,\n  \"non_template_count\": 0,\n  \"synthetic\": true,\n  \"status\": \"partial_usable\",\n  \"scientific_calibration_complete\": false\n}\nfrozen /tmp/time-offset-build.T8kmsN/self-test/calibration/main_policy_frozen candidates=1; holdout not opened\nPASS 73 numerical/template synthetic checks\nPASS artifact recomputation\nPASS artifact recomputation\n{\n  \"status\": \"passed\",\n  \"passed\": true,\n  \"scientific_calibration_complete\": true,\n  \"verified_artifact_sets\": 3,\n  \"calibrated_rows_across_artifacts\": 103,\n  \"reason\": \"\"\n}\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "9d886ba26af349b4938ec170a6028eee",
+  "employee_head": "445a1b139c0717f50724362ff8c6e59aa70ce8cd",
+  "employee_evidence_sha256": "dd52115b7a677e34edb0fdee06b344ef1aece80d14aee95c51c03cfcaf4525d1"
+}

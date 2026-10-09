@@ -1,0 +1,13 @@
+{
+  "group": "C",
+  "template_count": 416,
+  "observed_template_count": 154,
+  "reference_count": 1,
+  "calibrated_count": 40,
+  "unobserved_count": 262,
+  "unknown_observed_count": 113,
+  "non_template_count": 0,
+  "synthetic": false,
+  "status": "partial_usable",
+  "scientific_calibration_complete": true
+}

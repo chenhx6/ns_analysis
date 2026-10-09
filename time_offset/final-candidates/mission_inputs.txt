@@ -1,0 +1,3 @@
+/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009/time_offset/final-candidates/group_A
+/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009/time_offset/final-candidates/group_B
+/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009/time_offset/final-candidates/group_C
