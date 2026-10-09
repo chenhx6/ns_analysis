@@ -2,6 +2,7 @@
 /*
 !/AGENTS.md
 !/README.md
+!/LICENSE
 !/.gitignore
 !/analysis/
 
@@ -22,6 +23,12 @@
 !/time_offset/**/*.json
 !/time_offset/**/*.dat
 !/time_offset/**/*.svg
+!/time_offset/**/*.txt
+!/time_offset/**/*.md5
+/time_offset/**/secrets*.txt
+/time_offset/**/secrets*.md5
+/time_offset/**/credentials*.txt
+/time_offset/**/credentials*.md5
 
 !/.githooks/
 !/.agents/

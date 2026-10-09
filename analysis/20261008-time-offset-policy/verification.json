@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "-c",
+        "import ast,runpy,subprocess\nfrom pathlib import Path\np=runpy.run_path(\"analysis/scripts/check_git_content.py\")\nassert p[\"MAX_BYTES\"] == 25 * 1024 * 1024\nast.parse(Path(\"analysis/scripts/check_git_content.py\").read_text())\nyes=[\"comparisons_A.txt\",\"mission_inputs.txt\",\"output_groups.txt\",\"frozen_identities.txt\",\"source.md5\",\"offset.csv\",\"manifest.json\",\"crate.dat\",\"time_offset.cc\"]\nno=[\"data.root\",\"data.bin\",\"time_offset\",\"time_offset.o\",\"auth.json\",\"secrets.txt\",\"secrets.md5\",\"credentials.txt\",\"credentials.md5\",\".env\",\".env.local\",\"build/manifest.txt\"]\nfor prefix in (\"time_offset/\", \"time_offset/results/frozen/\"):\n for names,expected in ((yes,True),(no,False)):\n  for name in names:\n   path=prefix+name\n   assert p[\"permitted\"](path) == expected, (path,\"permitted\")\n   r=subprocess.run([\"git\",\"check-ignore\",\"--no-index\",\"-v\",path],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)\n   assert r.returncode in (0,1), (path,r.stderr)\n   pattern=r.stdout.split(\"\\t\",1)[0].split(\":\",2)[-1] if r.stdout else \"\"\n   ignored=bool(pattern and not pattern.startswith(\"!\"))\n   assert ignored == (not expected), (path,pattern)\nassert not p[\"permitted\"](\"elsewhere/metadata.txt\")\nassert not p[\"permitted\"](\"elsewhere/source.md5\")\nsubprocess.run([\"git\",\"diff\",\"--check\"],check=True)\nprint(\"PASS: 42 path cases, effective Git ignore patterns, out-of-scope suffixes, 25 MiB limit, Python syntax, diff whitespace\")\n\nassert p[\"permitted\"](\"LICENSE\")\nsubprocess.run([\"python3\",\"-B\",\"analysis/scripts/check_git_content.py\"],check=True)\nprint(\"PASS: existing LICENSE and full index content check\")\n"
+      ],
+      "returncode": 0,
+      "output": "PASS: 42 path cases, effective Git ignore patterns, out-of-scope suffixes, 25 MiB limit, Python syntax, diff whitespace\nPASS: existing LICENSE and full index content check\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "2720138095774b448a62e159f2e06287",
+  "employee_head": "2f7cbe7eac92ab75b109d8790cc3e5caa3973640",
+  "employee_evidence_sha256": "2a8b81dec2be34d6ab258658f897340322d4c25c295481b66700185261d24bb7"
+}
