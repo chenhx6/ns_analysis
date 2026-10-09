@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "plan": {
+    "parent": "analysis/plans/2026-10-09-time-offset-execution.md",
+    "scope": [
+      ".gitignore",
+      "analysis/scripts/check_git_content.py",
+      "analysis/20261008-time-offset-policy/verification.json"
+    ],
+    "goal": "Permit small time_offset txt/md5 metadata; preserve data, build, credential and size exclusions.",
+    "steps": [
+      "Extend suffix allowlists and protect new credential suffixes.",
+      "Check permitted() and effective git ignore patterns without writing fixture data.",
+      "Record command, results and source hashes; await root review before employee freeze."
+    ],
+    "statistics": "Not applicable: maintenance configuration only.",
+    "authorization": "Root delegated bounded maintenance lane under user-authorized time-offset execution.",
+    "completed_steps": [
+      "Scoped configuration updated",
+      "42 path cases plus out-of-scope suffixes, size constant, Python syntax and diff whitespace passed",
+      "Root-approved existing LICENSE allowlist repaired; full index and shlex-parsed repeatability check run"
+    ],
+    "next_step": "Root review, then employee freeze and controller collection.",
+    "scope_update": "Root approved adding existing tracked MIT LICENSE to root allowlists to resolve full-index failure; do not edit LICENSE."
+  },
+  "checks": [
+    {
+      "name": "metadata_boundaries_and_full_index",
+      "command": "python3 -B -c 'import ast,runpy,subprocess\nfrom pathlib import Path\np=runpy.run_path(\"analysis/scripts/check_git_content.py\")\nassert p[\"MAX_BYTES\"] == 25 * 1024 * 1024\nast.parse(Path(\"analysis/scripts/check_git_content.py\").read_text())\nyes=[\"comparisons_A.txt\",\"mission_inputs.txt\",\"output_groups.txt\",\"frozen_identities.txt\",\"source.md5\",\"offset.csv\",\"manifest.json\",\"crate.dat\",\"time_offset.cc\"]\nno=[\"data.root\",\"data.bin\",\"time_offset\",\"time_offset.o\",\"auth.json\",\"secrets.txt\",\"secrets.md5\",\"credentials.txt\",\"credentials.md5\",\".env\",\".env.local\",\"build/manifest.txt\"]\nfor prefix in (\"time_offset/\", \"time_offset/results/frozen/\"):\n for names,expected in ((yes,True),(no,False)):\n  for name in names:\n   path=prefix+name\n   assert p[\"permitted\"](path) == expected, (path,\"permitted\")\n   r=subprocess.run([\"git\",\"check-ignore\",\"--no-index\",\"-v\",path],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)\n   assert r.returncode in (0,1), (path,r.stderr)\n   pattern=r.stdout.split(\"\\t\",1)[0].split(\":\",2)[-1] if r.stdout else \"\"\n   ignored=bool(pattern and not pattern.startswith(\"!\"))\n   assert ignored == (not expected), (path,pattern)\nassert not p[\"permitted\"](\"elsewhere/metadata.txt\")\nassert not p[\"permitted\"](\"elsewhere/source.md5\")\nsubprocess.run([\"git\",\"diff\",\"--check\"],check=True)\nprint(\"PASS: 42 path cases, effective Git ignore patterns, out-of-scope suffixes, 25 MiB limit, Python syntax, diff whitespace\")\n\nassert p[\"permitted\"](\"LICENSE\")\nsubprocess.run([\"python3\",\"-B\",\"analysis/scripts/check_git_content.py\"],check=True)\nprint(\"PASS: existing LICENSE and full index content check\")\n'",
+      "returncode": 0,
+      "stdout": "PASS: 42 path cases, effective Git ignore patterns, out-of-scope suffixes, 25 MiB limit, Python syntax, diff whitespace\nPASS: existing LICENSE and full index content check\n",
+      "stderr": ""
+    }
+  ],
+  "source_hashes": {
+    ".gitignore": "70936180b44cd6aea6534e3525eae794df89347701ccac7938356f03f00b801a",
+    "analysis/scripts/check_git_content.py": "5a122a5c5d8d96c6f1b44b1043afb43a300f5feee3b3b5cbca3fd5b69b03b49a"
+  },
+  "baseline_blockers": [],
+  "existing_license": {
+    "index_entry": "100644 d83f5f6fa368fe850cd7c3cef34aa1bdd1057341 0\tLICENSE",
+    "bytes": 1081,
+    "sha256": "14b95c8f313c233774ed622eda2c11a11da9ab5746f77f0b773cae61a9d8135b",
+    "unchanged": true,
+    "size_limit_bytes": 26214400
+  }
+}
