@@ -5,7 +5,7 @@ import sys
 from pathlib import PurePosixPath
 
 MAX_BYTES = 25 * 1024 * 1024
-ROOT_FILES = {"AGENTS.md", "README.md", ".gitignore", ".omx/setup-scope.json", ".omx/hud-config.json"}
+ROOT_FILES = {"AGENTS.md", "README.md", "LICENSE", ".gitignore", ".omx/setup-scope.json", ".omx/hud-config.json"}
 DATA_SUFFIXES = {
     ".root", ".bin", ".h5", ".hdf5", ".npy", ".npz", ".parquet",
     ".arrow", ".zip", ".tar", ".gz", ".7z",
@@ -14,7 +14,7 @@ BUILD_SUFFIXES = {".pyc", ".o", ".so", ".a", ".exe"}
 SOURCE_SUFFIXES = {".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".md", ".go", ".rs", ".sh"}
 DECODER_SOURCE_FILES = {'decode_data/DecodeAndSortAll/test.cc', 'decode_data/DecodeAndSortAll/run.sh', 'decode_data/DecodeAndSortAll/decoder.hh', 'decode_data/DecodeAndSortAll/decoder.cc', 'decode_data/DecodeAndSortAll/crate1.dat', 'decode_data/DecodeAndSortAll/crate0.dat', 'decode_data/DecodeAndSortAll/crate3.dat', 'decode_data/DecodeAndSortAll/r2root.cc', 'decode_data/DecodeAndSortAll/Makefile', 'decode_data/DecodeAndSortAll/UserDefine.hh', 'decode_data/DecodeAndSortAll/main.cc', 'decode_data/DecodeAndSortAll/crate2.dat', 'decode_data/DecodeAndSortAll/crate.dat', 'decode_data/DecodeAndSortAll/r2root.hh'}
 SOURCE_ENV_EXAMPLES = {"analysis/vendor/ponytail/.env.example"}
-TIME_OFFSET_SUFFIXES = {".py", ".cc", ".cpp", ".hh", ".h", ".md", ".csv", ".json", ".dat", ".svg"}
+TIME_OFFSET_SUFFIXES = {".py", ".cc", ".cpp", ".hh", ".h", ".md", ".csv", ".json", ".dat", ".svg", ".txt", ".md5"}
 RUN_LOG_FILES = {
     'run_log/run_log.py', 'run_log/test_run_log.py', 'run_log/runs.csv',
     'run_log/reports/run_log.md', 'run_log/reports/data_verification.json',
