@@ -1,7 +1,7 @@
 # 执行计划：time offset第一阶段
 
 - 创建日期：2026-10-09（Asia/Shanghai）；承接原任务和 `time_offset/`，不另建科学产物目录。
-- 状态：科学阶段、代码／架构审查、独立QA和三组沙箱整合均已完成；A/B/C新版strict mission通过，共103条组—通道记录；三个员工提交已推送Gitee并核对标签，主工作区已快进到最终计划提交。G003初轮review_blocked由G004证据解决；当前只剩Ultragoal严格收尾checkpoint。旧108条不并入新版。
+- 状态：科学阶段、代码／架构审查、独立QA和三组沙箱整合均已完成；A/B/C新版strict mission通过，共103条组—通道记录；三个员工提交已推送Gitee并核对标签，主工作区已快进到最终计划提交。G003初轮review_blocked由G004证据解决；Ultragoal官方strict checkpoint已返回ok，summary为4/4 complete。旧108条不并入新版。
 - 实际授权：用户本轮明确 `$autopilot $autoresearch 开始执行计划analysis/plans/process/20261008-time-offset.md`。此指令解除此前“暂不实现”的阶段限制，仅授权执行该计划的第一阶段；下一阶段批量decode仍不执行。
 
 ## 目标与边界
@@ -45,7 +45,7 @@
 - 实际用户边界确认：无可靠峰／背景通道保留原配置并标记未校准，继续其余通道；只把独立验证通过的通道称为校准成果。用户已选择按此边界启动，并多次要求继续。
 - 工作流恢复：官方宿主doctor确认会话pointer usable，坏selector为CODEX_SESSION_ID；仅在官方状态命令中清除该selector。保留pointer，不凭隔离PID视图清理会话。Deep Interview完整spec／用户答复已存，补齐gate.status／spec_path字段，不伪造宿主权限。
 - 共识进度：Planner三份文件位于.omx/plans；Architect初两次因模型容量失败，后续完成真实顺序审查。第二轮Architect与Critic均为APPROVE，交接证据为`.omx/plans/time-offset-consensus-handoff.json`；该文件仅是流程证据，不代替宿主权限。
-- 当前最后检查点：本计划和交付验证记录完成主控文件范围同步后，运行Ultragoal G004严格checkpoint并结束Autoresearch／Autopilot状态。科学统计和留出已冻结；ROOT本地副本与实施副本逐字节一致，冻结manifest仍记录实施副本绝对路径。
+- 最后检查点已完成：Ultragoal官方strict checkpoint返回ok，summary为4/4 complete，G003的blocked已由G004解除；原任务流程质量门全部通过。代码／QA／文档三项提交及最后的计划／交付验证提交均已实际推送。科学统计和留出已冻结；ROOT本地副本与实施副本逐字节一致，冻结manifest仍记录实施副本绝对路径。
 
 ## 本轮文档与工程检查点
 
