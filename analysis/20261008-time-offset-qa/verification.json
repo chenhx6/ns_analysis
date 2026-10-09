@@ -1,0 +1,660 @@
+{
+  "passed": true,
+  "commands": [
+    {
+      "argv": [
+        "root-config",
+        "--cflags",
+        "--libs"
+      ],
+      "timeout_seconds": 120,
+      "exit": 0,
+      "output": "-pthread -std=c++17 -m64 -I/home/ys/opt/physics/root-6.34.08/include -L/home/ys/opt/physics/root-6.34.08/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib -pthread -lm -ldl -rdynamic\n"
+    },
+    {
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009/time_offset/time_offset.cc",
+        "-pthread",
+        "-std=c++17",
+        "-m64",
+        "-I/home/ys/opt/physics/root-6.34.08/include",
+        "-L/home/ys/opt/physics/root-6.34.08/lib",
+        "-lCore",
+        "-lImt",
+        "-lRIO",
+        "-lNet",
+        "-lHist",
+        "-lGraf",
+        "-lGraf3d",
+        "-lGpad",
+        "-lROOTVecOps",
+        "-lTree",
+        "-lTreePlayer",
+        "-lRint",
+        "-lPostscript",
+        "-lMatrix",
+        "-lPhysics",
+        "-lMathCore",
+        "-lThread",
+        "-lMultiProc",
+        "-lROOTDataFrame",
+        "-Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib",
+        "-pthread",
+        "-lm",
+        "-ldl",
+        "-rdynamic",
+        "-o",
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset"
+      ],
+      "timeout_seconds": 180,
+      "exit": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--self-test",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture"
+      ],
+      "timeout_seconds": 180,
+      "exit": 0,
+      "output": "PASS 24 synthetic checks; scientific calibration not claimed\nfrozen /tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen candidates=1; holdout not opened\n{\n  \"group\": \"synthetic\",\n  \"template_count\": 5,\n  \"observed_template_count\": 3,\n  \"reference_count\": 1,\n  \"calibrated_count\": 1,\n  \"unobserved_count\": 2,\n  \"unknown_observed_count\": 1,\n  \"non_template_count\": 0,\n  \"synthetic\": true,\n  \"status\": \"partial_usable\",\n  \"scientific_calibration_complete\": false\n}\n{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"mission requires combined cross-run group artifacts\"\n}\n{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"mission requires combined cross-run group artifacts\"\n}\n{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"cannot checksum: /tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/json-failure/quote\\\"backslash\\\\tab\\treturn\\r/missing\\nfrozen/frozen.root\"\n}\nfrozen /tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/dual_frozen candidates=1; holdout not opened\n{\n  \"group\": \"synthetic\",\n  \"template_count\": 5,\n  \"observed_template_count\": 3,\n  \"reference_count\": 1,\n  \"calibrated_count\": 1,\n  \"unobserved_count\": 2,\n  \"unknown_observed_count\": 1,\n  \"non_template_count\": 0,\n  \"synthetic\": true,\n  \"status\": \"partial_usable\",\n  \"scientific_calibration_complete\": false\n}\nfrozen /tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/main_policy_frozen candidates=1; holdout not opened\nPASS 73 numerical/template synthetic checks\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/diagnostic.root"
+      ],
+      "timeout_seconds": 120,
+      "exit": 0,
+      "output": "PASS artifact recomputation\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/invalid.root"
+      ],
+      "timeout_seconds": 120,
+      "exit": 0,
+      "output": "PASS artifact recomputation\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 0,
+      "output": "PASS artifact recomputation\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--scan"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: required --input\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--scan",
+        "--input",
+        "one",
+        "--input",
+        "two"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: unknown/duplicate/missing option\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/bad.root"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "Error in <TFile::ReadBuffer>: error reading all requested bytes from file /tmp/time-offset-adversarial-gfmwutgd/bad.root, got 54 of 300\nError in <TFile::Init>: /tmp/time-offset-adversarial-gfmwutgd/bad.root failed to read the file type data.\nERROR: invalid artifact ROOT\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--scan",
+        "--input",
+        "/tmp/time-offset-adversarial-gfmwutgd/bad.root",
+        "--output",
+        "/tmp/time-offset-adversarial-gfmwutgd/bad-output.root",
+        "--ge-run",
+        "1",
+        "--csi-run",
+        "1",
+        "--group",
+        "synthetic",
+        "--slice",
+        "bad",
+        "--begin",
+        "0",
+        "--end",
+        "10",
+        "--core-begin",
+        "1",
+        "--core-end",
+        "9"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "Error in <TFile::ReadBuffer>: error reading all requested bytes from file /tmp/time-offset-adversarial-gfmwutgd/bad.root, got 54 of 300\nError in <TFile::Init>: /tmp/time-offset-adversarial-gfmwutgd/bad.root failed to read the file type data.\nERROR: cannot read ROOT: /tmp/time-offset-adversarial-gfmwutgd/bad.root\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--mission",
+        "/tmp/time-offset-adversarial-gfmwutgd/manifest.txt",
+        "/tmp/time-offset-adversarial-gfmwutgd/completion.json"
+      ],
+      "timeout_seconds": 120,
+      "exit": 3,
+      "output": "{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"mission requires combined cross-run group artifacts\"\n}\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--mission",
+        "/tmp/time-offset-adversarial-gfmwutgd/manifest.txt",
+        "/tmp/time-offset-adversarial-gfmwutgd/completion.json"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: completion output must be a regular file with exactly one link\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--mission",
+        "/tmp/time-offset-adversarial-gfmwutgd/manifest.txt",
+        "/tmp/time-offset-adversarial-gfmwutgd/completion.json"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: completion output must be a regular file with exactly one link\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--mission",
+        "/tmp/time-offset-adversarial-gfmwutgd/manifest.txt",
+        "/tmp/time-offset-adversarial-gfmwutgd/completion.json"
+      ],
+      "timeout_seconds": 120,
+      "exit": 3,
+      "output": "{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"mission requires combined cross-run group artifacts\"\n}\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--mission",
+        "/tmp/time-offset-adversarial-gfmwutgd/manifest.txt",
+        "/tmp/time-offset-adversarial-gfmwutgd/completion.json"
+      ],
+      "timeout_seconds": 120,
+      "exit": 3,
+      "output": "{\n  \"status\": \"failed\",\n  \"passed\": false,\n  \"scientific_calibration_complete\": false,\n  \"verified_artifact_sets\": 0,\n  \"calibrated_rows_across_artifacts\": 0,\n  \"reason\": \"cannot checksum: /tmp/time-offset-adversarial-gfmwutgd/quote\\\"backslash\\\\tab\\treturn\\r/missing\\nfrozen/frozen.root\"\n}\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: malformed or truncated validation ledger line 1 (quoted path required)\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--validate",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen",
+        "/tmp/time-offset-adversarial-gfmwutgd/rejected_bad_before"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: malformed or truncated validation ledger line 1 (quoted path required)\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: malformed or truncated validation ledger line 2 (missing newline)\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--validate",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen",
+        "/tmp/time-offset-adversarial-gfmwutgd/rejected_truncated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: malformed or truncated validation ledger line 2 (missing newline)\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--validate",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen",
+        "/tmp/time-offset-adversarial-gfmwutgd/retry"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: holdout already consumed; use untouched range\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--validate",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen",
+        "/tmp/time-offset-adversarial-gfmwutgd/partial"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: validation output already exists\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: frozen parameter digest mismatch\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: offset CSV numerical/status recomputation mismatch\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: training physical candidate recomputation mismatch\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 1,
+      "output": "ERROR: holdout physical candidate recomputation mismatch\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 0,
+      "output": "PASS artifact recomputation\n"
+    },
+    {
+      "argv": [
+        "/tmp/time-offset-adversarial-gfmwutgd/time_offset",
+        "--verify-artifacts",
+        "/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/dual_validated"
+      ],
+      "timeout_seconds": 120,
+      "exit": 0,
+      "output": "PASS artifact recomputation\n"
+    }
+  ],
+  "assertions": [
+    {
+      "name": "stable_source_before",
+      "passed": true
+    },
+    {
+      "name": "exit:['--cflags', '--libs']",
+      "passed": true
+    },
+    {
+      "name": "exit:['-std=c++17', '-O2', '-Wall', '-Wextra', '-Wpedantic', PosixPath('/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009/time_offset/time_offset.cc'), '-pthread', '-std=c++17', '-m64', '-I/home/ys/opt/physics/root-6.34.08/include', '-L/home/ys/opt/physics/root-6.34.08/lib', '-lCore', '-lImt', '-lRIO', '-lNet', '-lHist', '-lGraf', '-lGraf3d', '-lGpad', '-lROOTVecOps', '-lTree', '-lTreePlayer', '-lRint', '-lPostscript', '-lMatrix', '-lPhysics', '-lMathCore', '-lThread', '-lMultiProc', '-lROOTDataFrame', '-Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib', '-pthread', '-lm', '-ldl', '-rdynamic', '-o', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/time_offset')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--self-test', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture')]",
+      "passed": true
+    },
+    {
+      "name": "expected_73_numerical_regressions",
+      "passed": true
+    },
+    {
+      "name": "required_scientific_regression:slow_drift_folded_buckets_hide_ordered_buckets_detect",
+      "passed": true
+    },
+    {
+      "name": "required_scientific_regression:training_double_peak_resolves_disjoint_physical_regions",
+      "passed": true
+    },
+    {
+      "name": "required_scientific_regression:main_vs_area_weighted_distinct_centers_same_halfwidth_gates",
+      "passed": true
+    },
+    {
+      "name": "required_scientific_regression:both_physical_candidates_frozen_and_independently_validated",
+      "passed": true
+    },
+    {
+      "name": "required_scientific_regression:changing_policy_after_training_rejected",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/diagnostic.root')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/invalid.root')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--scan']",
+      "passed": true
+    },
+    {
+      "name": "exit:['--scan', '--input', 'one', '--input', 'two']",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/bad.root')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--scan', '--input', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/bad.root'), '--output', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/bad-output.root'), '--ge-run', '1', '--csi-run', '1', '--group', 'synthetic', '--slice', 'bad', '--begin', '0', '--end', '10', '--core-begin', '1', '--core-end', '9']",
+      "passed": true
+    },
+    {
+      "name": "malformed_event_input_no_output",
+      "passed": true
+    },
+    {
+      "name": "exit:['--mission', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/manifest.txt'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/completion.json')]",
+      "passed": true
+    },
+    {
+      "name": "fake_success_overwritten_with_failure",
+      "passed": true
+    },
+    {
+      "name": "exit:['--mission', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/manifest.txt'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/completion.json')]",
+      "passed": true
+    },
+    {
+      "name": "symlink_target_unchanged",
+      "passed": true
+    },
+    {
+      "name": "exit:['--mission', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/manifest.txt'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/completion.json')]",
+      "passed": true
+    },
+    {
+      "name": "hardlink_target_unchanged",
+      "passed": true
+    },
+    {
+      "name": "exit:['--mission', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/manifest.txt'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/completion.json')]",
+      "passed": true
+    },
+    {
+      "name": "missing_artifact_cannot_pass",
+      "passed": true
+    },
+    {
+      "name": "exit:['--mission', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/manifest.txt'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/completion.json')]",
+      "passed": true
+    },
+    {
+      "name": "special_character_mission_fails_with_valid_json",
+      "passed": true
+    },
+    {
+      "name": "quote_backslash_tab_cr_lf_roundtrip",
+      "passed": true
+    },
+    {
+      "name": "stdout_and_file_json_agree",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--validate', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/rejected_bad_before')]",
+      "passed": true
+    },
+    {
+      "name": "bad_before_no_consumption_or_output",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--validate', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/rejected_truncated')]",
+      "passed": true
+    },
+    {
+      "name": "truncated_no_consumption_or_output",
+      "passed": true
+    },
+    {
+      "name": "exit:['--validate', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/retry')]",
+      "passed": true
+    },
+    {
+      "name": "consumed_holdout_retry_no_output",
+      "passed": true
+    },
+    {
+      "name": "exit:['--validate', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/frozen'), PosixPath('/tmp/time-offset-adversarial-gfmwutgd/partial')]",
+      "passed": true
+    },
+    {
+      "name": "partial_output_preserved",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/validated')]",
+      "passed": true
+    },
+    {
+      "name": "exit:['--verify-artifacts', PosixPath('/tmp/time-offset-adversarial-gfmwutgd/fixture/calibration/dual_validated')]",
+      "passed": true
+    },
+    {
+      "name": "stable_source_after",
+      "passed": true
+    },
+    {
+      "name": "temporary_cleanup",
+      "passed": true
+    }
+  ],
+  "source": "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009",
+  "source_sha256": {
+    "cc": "efff88f30da1362969a3f70222572af9ad4a23e50829a340938557c72b1f9941",
+    "hh": "febd8b8130884d36afd7bfb5b9b27b4f63fb15063d057ea9539fc668ed3dacf3"
+  },
+  "temporary_directory": "/tmp/time-offset-adversarial-gfmwutgd",
+  "engineering": {
+    "scope": "G001 engineering synthetic only",
+    "passed": true,
+    "tests": [
+      "sampling_rate_mapping",
+      "timestamp_checked_conversion",
+      "signed_quantization",
+      "signed16_rejection",
+      "all_pairs_and_chunk_equivalence",
+      "delta_sign_mixed_tick",
+      "cross_run_slice_cache_reset",
+      "future_outlier_no_watermark_or_counts",
+      "regression_invalidates_slice",
+      "overflow_invalidates_slice",
+      "unknown_rate_no_guessed_tick",
+      "insufficient_edge_guard_excluded",
+      "guard_reference_never_counted",
+      "all_pairs_bruteforce_c0_s3_ch1",
+      "all_pairs_bruteforce_c1_s3_ch2",
+      "arbitrary_chunk_partition_invariance",
+      "new_slice_recovers_after_rejected_slice",
+      "mixed_sr_same_tick_retained",
+      "reachable_window_boundaries",
+      "latest_cycle_and_scalar_schema",
+      "root_rebin_recomputation",
+      "invalid_slice_artifact_zero_counts",
+      "existing_input_output_protection",
+      "artifact_tampering_detected"
+    ],
+    "scientific_calibration_complete": false
+  },
+  "numerical": {
+    "scope": "synthetic numerical and template tests",
+    "passed": true,
+    "tests": [
+      "inclusive_net_snr_threshold_and_nan_rejection",
+      "inclusive_validation_drift_threshold",
+      "validation_drift_over_threshold_rejected",
+      "fixed_grid_chunk_invariance_and_slice_ledger",
+      "grid_contribution_recomputation",
+      "slow_drift_folded_buckets_hide_ordered_buckets_detect",
+      "grid_shared_absolute_time_axis_is_frozen",
+      "lattice_net_centroid_shared_hit_covariance",
+      "zero_signal_never_calibrated",
+      "unreachable_bin_rejected",
+      "all_boundary_perturbations_and_subcores",
+      "equidistant_quantization_preserves_both_candidates",
+      "freeze_precedes_holdout_consumption",
+      "scientific_numerical_artifact_recomputation",
+      "complete_template_unknown_mixed_sr_energy_preservation",
+      "synthetic_not_scientific_completion",
+      "holdout_reuse_rejected",
+      "cross_batch_holdout_reuse_rejected",
+      "csv_status_tampering_rejected",
+      "changed_frozen_parameters_rejected",
+      "training_validation_read_overlap_rejected",
+      "duplicate_template_rejected",
+      "nonzero_reference_rejected",
+      "template_signed16_rejected",
+      "template_output_overwrite_rejected",
+      "restored_fixture_valid",
+      "diagnostic_or_synthetic_cannot_satisfy_mission",
+      "failed_mission_symlink_output_rejected",
+      "symlink_target_bytes_unchanged",
+      "failed_mission_hardlink_output_rejected",
+      "hardlink_target_bytes_unchanged",
+      "nonregular_completion_output_rejected",
+      "ordinary_completion_atomic_replace",
+      "failed_mission_regular_report_atomic_write",
+      "special_path_failure_writes_escaped_json",
+      "json_error_quotes_backslash_and_controls_escaped",
+      "json_remaining_control_bytes_escaped",
+      "strict_ledger_parser_bad-before",
+      "malformed_ledger_before_holdout_bad-before",
+      "verifier_reads_all_ledger_bad-before",
+      "ledger_failure_has_no_consumption_bad-before",
+      "strict_ledger_parser_bad-after",
+      "malformed_ledger_before_holdout_bad-after",
+      "verifier_reads_all_ledger_bad-after",
+      "ledger_failure_has_no_consumption_bad-after",
+      "strict_ledger_parser_truncated",
+      "malformed_ledger_before_holdout_truncated",
+      "verifier_reads_all_ledger_truncated",
+      "ledger_failure_has_no_consumption_truncated",
+      "strict_ledger_parser_extra-field",
+      "malformed_ledger_before_holdout_extra-field",
+      "verifier_reads_all_ledger_extra-field",
+      "ledger_failure_has_no_consumption_extra-field",
+      "strict_ledger_parser_bad-digest",
+      "malformed_ledger_before_holdout_bad-digest",
+      "verifier_reads_all_ledger_bad-digest",
+      "ledger_failure_has_no_consumption_bad-digest",
+      "strict_ledger_parser_bad-range",
+      "malformed_ledger_before_holdout_bad-range",
+      "verifier_reads_all_ledger_bad-range",
+      "ledger_failure_has_no_consumption_bad-range",
+      "strict_ledger_parser_unquoted-path",
+      "malformed_ledger_before_holdout_unquoted-path",
+      "verifier_reads_all_ledger_unquoted-path",
+      "ledger_failure_has_no_consumption_unquoted-path",
+      "unreadable_missing_ledger_rejected",
+      "valid_ledger_and_artifact_restored",
+      "training_double_peak_resolves_disjoint_physical_regions",
+      "main_vs_area_weighted_distinct_centers_same_halfwidth_gates",
+      "both_physical_candidates_frozen_and_independently_validated",
+      "main_policy_recorded_before_training_changes_selected_candidate",
+      "changing_policy_after_training_rejected",
+      "physical_candidate_table_tampering_rejected"
+    ],
+    "scientific_calibration_complete": false
+  },
+  "temporary_cleanup_passed": true,
+  "status": "passed",
+  "checks": [
+    {
+      "command": "python3 analysis/20261008-time-offset-qa/qa.py --source /home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl-20261009 --cc-sha256 efff88f30da1362969a3f70222572af9ad4a23e50829a340938557c72b1f9941 --hh-sha256 febd8b8130884d36afd7bfb5b9b27b4f63fb15063d057ea9539fc668ed3dacf3",
+      "returncode": 0,
+      "scope": "entire bounded QA harness; individual expected failures retain actual exits"
+    }
+  ]
+}
