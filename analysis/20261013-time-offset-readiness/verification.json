@@ -1,0 +1,273 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "run_log_series",
+      "returncode": 0,
+      "runs": 63,
+      "end_status_counts": {
+        "normal": 62,
+        "unknown": 1
+      }
+    },
+    {
+      "name": "decoded_ROOT_metadata",
+      "returncode": 0,
+      "files": 14,
+      "tree_entries": {
+        "6015": {
+          "entries": 266414896,
+          "cycle": 254
+        },
+        "6019": {
+          "entries": 469922681,
+          "cycle": 899
+        },
+        "6024": {
+          "entries": 219927184,
+          "cycle": 263
+        },
+        "6028": {
+          "entries": 649373488,
+          "cycle": 868
+        },
+        "6035": {
+          "entries": 603984800,
+          "cycle": 866
+        },
+        "6041": {
+          "entries": 492587596,
+          "cycle": 708
+        },
+        "6045": {
+          "entries": 308977534,
+          "cycle": 404
+        },
+        "6050": {
+          "entries": 586306728,
+          "cycle": 757
+        },
+        "6054": {
+          "entries": 734066501,
+          "cycle": 1095
+        },
+        "6061": {
+          "entries": 596101861,
+          "cycle": 827
+        },
+        "6065": {
+          "entries": 586659941,
+          "cycle": 880
+        },
+        "6071": {
+          "entries": 554009495,
+          "cycle": 781
+        },
+        "6075": {
+          "entries": 807165301,
+          "cycle": 1133
+        },
+        "6078": {
+          "entries": 813072043,
+          "cycle": 1244
+        }
+      }
+    },
+    {
+      "name": "candidate_group_templates_and_validation",
+      "returncode": 0,
+      "used_runs": [
+        6015,
+        6019,
+        6024,
+        6028,
+        6035,
+        6045,
+        6050,
+        6054,
+        6061,
+        6065,
+        6075,
+        6078
+      ],
+      "decoded_but_unvalidated": [
+        6041,
+        6071
+      ],
+      "run_log_without_decoded_ROOT": [
+        6016,
+        6018,
+        6020,
+        6021,
+        6022,
+        6023,
+        6025,
+        6026,
+        6027,
+        6030,
+        6031,
+        6032,
+        6033,
+        6034,
+        6036,
+        6037,
+        6038,
+        6039,
+        6040,
+        6042,
+        6043,
+        6044,
+        6046,
+        6047,
+        6048,
+        6049,
+        6051,
+        6052,
+        6053,
+        6055,
+        6056,
+        6057,
+        6058,
+        6059,
+        6060,
+        6062,
+        6063,
+        6064,
+        6066,
+        6067,
+        6068,
+        6069,
+        6070,
+        6072,
+        6073,
+        6074,
+        6076,
+        6077,
+        6079
+      ],
+      "groups": {
+        "A": {
+          "training_runs": [
+            6015
+          ],
+          "validation_runs": [
+            6019,
+            6024,
+            6028
+          ],
+          "calibrated_group_channel_rows": 24,
+          "calibrated_by_crate_id": {
+            "0": 24,
+            "1": 0
+          },
+          "observed_template_rows": 145,
+          "uncalibrated_observed_rows": 120,
+          "unobserved_template_rows": 271,
+          "status": "partial_usable",
+          "C_grid_slices": {}
+        },
+        "B": {
+          "training_runs": [
+            6035
+          ],
+          "validation_runs": [
+            6045,
+            6050
+          ],
+          "calibrated_group_channel_rows": 44,
+          "calibrated_by_crate_id": {
+            "0": 36,
+            "1": 8
+          },
+          "observed_template_rows": 141,
+          "uncalibrated_observed_rows": 96,
+          "unobserved_template_rows": 275,
+          "status": "partial_usable",
+          "C_grid_slices": {}
+        },
+        "C": {
+          "training_runs": [
+            6054
+          ],
+          "validation_runs": [
+            6061,
+            6065,
+            6075,
+            6078
+          ],
+          "calibrated_group_channel_rows": 35,
+          "calibrated_by_crate_id": {
+            "0": 32,
+            "1": 3
+          },
+          "observed_template_rows": 154,
+          "uncalibrated_observed_rows": 118,
+          "unobserved_template_rows": 262,
+          "status": "partial_usable",
+          "C_grid_slices": {
+            "6054": {
+              "valid": 61,
+              "invalid": 19,
+              "entry_range": [
+                8000000,
+                12000000
+              ]
+            },
+            "6061": {
+              "valid": 60,
+              "invalid": 20,
+              "entry_range": [
+                8000000,
+                12000000
+              ]
+            },
+            "6065": {
+              "valid": 60,
+              "invalid": 20,
+              "entry_range": [
+                8000000,
+                12000000
+              ]
+            },
+            "6075": {
+              "valid": 63,
+              "invalid": 17,
+              "entry_range": [
+                8000000,
+                12000000
+              ]
+            },
+            "6078": {
+              "valid": 63,
+              "invalid": 17,
+              "entry_range": [
+                8000000,
+                12000000
+              ]
+            }
+          }
+        }
+      },
+      "crate_template_line_counts_including_header": {
+        "A": {
+          "0": 209,
+          "1": 209
+        },
+        "B": {
+          "0": 209,
+          "1": 209
+        },
+        "C": {
+          "0": 209,
+          "1": 209
+        }
+      }
+    }
+  ],
+  "assessment": {
+    "group_crates_exist_for_decoder_input": true,
+    "all_planned_run_ids_and_channels_demonstrated_time_aligned": false,
+    "reason": "Only 12 of 14 existing decoded ROOT runs enter v2 training/validation; 49 run_log IDs have no current decoded ROOT; each group retains uncalibrated/unobserved template rows.",
+    "no_decoder_was_run": true
+  }
+}
