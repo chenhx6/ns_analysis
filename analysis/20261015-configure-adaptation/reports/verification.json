@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Actual merged candidate sandbox: configure-profile-20261015",
+      "returncode": 0,
+      "submission": "b5cac208fd764555894a87ec81f1f8b7",
+      "head": "7cfb150b039238dc0bb118a978bf2b3246c3dd66",
+      "validation": [
+        {
+          "command": [
+            "python3",
+            "analysis/20261015-configure-adaptation/test_prompt_hooks.py"
+          ],
+          "returncode": 0,
+          "output": "PASS: actual startup injection/deduplication; clear/resume/fork/compact restoration; per-prompt reminders; outside/unused events; malformed/oversized/missing/empty failure; skill mirrors and source fingerprints.\n"
+        }
+      ]
+    },
+    {
+      "name": "Actual merged candidate sandbox: configure-launcher-20261015",
+      "returncode": 0,
+      "submission": "707fd68222b74f8282f32e6316808edd",
+      "head": "93421525e552b252d8836ed9d571b95200c987b2",
+      "validation": [
+        {
+          "command": [
+            "python3",
+            "analysis/wsl_codex_entry/test_entry.py"
+          ],
+          "returncode": 0,
+          "output": "PASS: 14 real-process Bash/CLI routing checks, without model invocation\nchx employee: cli-a580ce9e3a16459b\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/cli-a580ce9e3a16459b\nchx employee: cli-e97f863fa4014d13\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/cli-e97f863fa4014d13\nchx employee: cli-32483e48b4784557\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/cli-32483e48b4784557\nchx employee: interrupted\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/interrupted\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: two\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/two\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: cli-0cd5056314024889\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/cli-0cd5056314024889\nchx employee: cli-0be66bf454784426\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/cli-0be66bf454784426\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-f2fn6nko/project/.omx/coordination/workspaces/one\n"
+        }
+      ]
+    },
+    {
+      "name": "Installed co profile/hash agrees with actual native hook startup and restoration output",
+      "returncode": 0,
+      "profile_sha256": "43ac33ca755b028e011e274a8c0963581db2dc77aa1de4ef05fc2968108c6908",
+      "model_called": false
+    },
+    {
+      "name": "Installed co function invokes real Codex help",
+      "command": [
+        "bash",
+        "--noprofile",
+        "--norc",
+        "-c",
+        "source analysis/scripts/co_shell.sh\ntype -t co\nco --help"
+      ],
+      "returncode": 0,
+      "output": "function; Codex CLI help returned",
+      "stderr": "WARNING: proceeding, even though we could not create PATH aliases: Read-only file system (os error 30)",
+      "model_called": false
+    },
+    {
+      "name": "Actual Bash install has one co-only block and preserves disabled codex source",
+      "command": [
+        "bash",
+        "-n",
+        "/home/ys/.bashrc"
+      ],
+      "returncode": 0,
+      "private_file_contents_retained": false
+    },
+    {
+      "name": "Final scoped documentation whitespace",
+      "command": [
+        "git",
+        "--git-dir=.project-git",
+        "--work-tree=.",
+        "diff",
+        "--check",
+        "--",
+        "README.md",
+        "analysis/20261015-configure-adaptation/reports/adaptation.md"
+      ],
+      "returncode": 0
+    }
+  ],
+  "limitations": [
+    "No real model session or scientific processing executed.",
+    "Hook script output verified; host trust remains managed by host.",
+    "stdin prompt co exec - and non-session apply/sandbox operations use original CLI."
+  ],
+  "conflict_recovery": {
+    "old_preserved_submission": "4cfbf050a725456194afcea7471f415c",
+    "repaired_delivered_submission": "707fd68222b74f8282f32e6316808edd"
+  }
+}

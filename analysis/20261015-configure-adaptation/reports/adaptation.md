@@ -45,7 +45,7 @@
 
 ## 使用与验证
 
-当前终端可 source `analysis/scripts/co_shell.sh` 后使用 co；新 Bash 终端的独立安装命令为 `python3 analysis/scripts/codex_entry.py --install-co-shell`。新会话首次文本输入自动加入研究正文；普通 resume/fork 和 review 管理路径保留原生语义，`co exec -` 的 stdin 形式暂用原始 codex。
+当前终端可 source `analysis/scripts/co_shell.sh` 后使用 co；新 Bash 终端的独立安装命令为 `python3 analysis/scripts/codex_entry.py --install-co-shell`。新会话首次文本输入自动加入研究正文；普通 resume/fork 和实际支持的管理命令原样转交；review 保留子命令参数并遵循员工隔离。apply、sandbox 等非会话操作使用原始 CLI；`co exec -` 的 stdin 形式暂用原始 codex。
 
 可重复检查：
 
@@ -54,7 +54,11 @@ python3 analysis/20261015-configure-adaptation/test_prompt_hooks.py
 python3 analysis/wsl_codex_entry/test_entry.py
 ```
 
-前者实际运行 Node hook，验证正文注入、同哈希去重、恢复时重注入、逐次提示、项目外不注入、损坏输入/缺失正文报错、技能镜像及来源指纹。后者用本地 fake CLI 捕获实际 argv/cwd/env，核对 co 前置文本、员工隔离、管理/历史/参数语义、权限拒绝及只 co 安装行为；没有调用模型服务。员工各自的验证记录位于本任务目录。串行整合后的真实沙箱复测、推送状态以协调收据为准，不提前声明。
+前者实际运行 Node hook，验证正文注入、同哈希去重、恢复时重注入、逐次提示、项目外不注入、损坏输入/缺失正文报错、技能镜像及来源指纹。后者用本地 fake CLI 捕获实际 argv/cwd/env，核对 co 前置文本、员工隔离、管理/历史/参数语义、权限拒绝及只 co 安装行为；没有调用模型服务。两路成果均在控制端候选目录的真实沙箱重跑登记验收后推送，root_refresh_pending 均为 false。入口验证共 14 组，包含空白正文拒绝和当前 CLI 管理命令精确转交。
+
+已实际执行 `python3 analysis/scripts/codex_entry.py --install-co-shell`，在个人 Bash 配置中安装唯一独立 co 块并保存私有备份；原有 codex source 注释保持原样，Bash 语法检查通过。实际 source 项目 co 函数后执行 `co --help` 返回 0，确认使用真实 CLI；当前受限工具环境有 PATH alias 缓存只读提示，不影响该帮助命令。没有启动真实模型会话，也没有运行科学数据处理。
+
+一次后续提交的验证 JSON 与控制端重生成的证据出现冲突。使用项目官方 resolve 合并双方历史，重跑测试并以新冻结提交完成交付；旧冲突候选和不可变 outbox 保留供回查，没有强推或丢弃成果。最终合并、实际安装及联合注入检查集中于本目录 `verification.json`。
 
 限制：自动选择技能仍由模型在任务上下文中执行；仅有清单不能证明所有技能已执行。Node 回归证明脚本输出，不能代替宿主的 hook 信任。真实模型生成行为和科研数据处理不属于本次测试。
 

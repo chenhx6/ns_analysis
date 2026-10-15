@@ -38,7 +38,7 @@ co "阅读当前任务代码并解释实现"
 co exec "核对指定代码的输入输出边界"
 ```
 
-需要新终端保留时，可用 `python3 analysis/scripts/codex_entry.py --install-co-shell` 安装独立的 co source 块。它不启用旧的 codex source，也不修改模型、供应商或登录配置。新会话复用项目独立员工克隆；首条输入包含共享提示词与实际员工技能路径。帮助、管理命令与历史恢复保留原生语义；`co resume --last` 不会把旧会话重新声明为隔离会话或补造已注入状态。`co exec -` 的 stdin 输入暂用原始 `codex`，避免启动器隐式消费输入流。
+需要新终端保留时，可用 `python3 analysis/scripts/codex_entry.py --install-co-shell` 安装独立的 co source 块。它不启用旧的 codex source，也不修改模型、供应商或登录配置。新会话复用项目独立员工克隆；首条输入包含共享提示词与实际员工技能路径。帮助、登录、插件、doctor 等管理命令与历史恢复原样转交；`co resume --last` 不会把旧会话重新声明为隔离会话或补造已注入状态。review 保留其子命令参数并遵循员工隔离；apply、sandbox 等非会话操作使用原始 CLI。`co exec -` 的 stdin 输入暂用原始 `codex`，避免启动器隐式消费输入流。
 
 已注册的 SessionStart 与 UserPromptSubmit hooks 复用同一专业正文和项目路由规则；co 首次启动避免重复正文，清空或恢复时重新注入。宿主信任仍由宿主处理。技能按实际需要读取，插件不会因目录出现而自动安装或取得信任。来源、全部上游技能的复用对应与验证见 [采用说明](analysis/20261015-configure-adaptation/reports/adaptation.md)。
 
