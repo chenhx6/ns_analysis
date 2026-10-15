@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "analysis/20261015-configure-adaptation/test_prompt_hooks.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: actual startup injection/deduplication; clear/resume/fork/compact restoration; per-prompt reminders; outside/unused events; malformed/oversized/missing/empty failure; skill mirrors and source fingerprints."
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "analysis/scripts/skill-routing-hook.mjs"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "python3",
+        "/home/ys/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        ".agents/skills/chx-data-analysis"
+      ],
+      "returncode": 0,
+      "output": "Skill is valid!"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    }
+  ],
+  "scope": "Nuclear structure profile, native hook output, skill mirror and provenance; no model or science-data processing."
+}

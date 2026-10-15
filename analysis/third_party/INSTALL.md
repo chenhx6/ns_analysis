@@ -90,3 +90,11 @@ Nature 的 OpenRouter、Scopus、图像服务等按所用工作流需要相应�
 ## 交付标签
 
 实际检查结果保存在 `analysis/` 下的 JSON 证据中。暂存交付内容后运行 `task_delivery.py prepare`，下一次通过项目 Git 脚本的提交由 `post-commit` 自动创建本地 annotated tag。代码 tree 或证据不匹配时不产生标签；没有准备证据的普通提交也不产生标签。推送按照用户的同步要求执行。
+
+## configure 工作机制的核结构适配
+
+参考公开仓库 `zhangxin8069/configure` 的固定提交，采用共享专业提示词、首条输入注入、按需技能发现和证据核对；领域改为原子核结构、能级纲图、gamma 强度及 ADO/P、集体激发。全部 28 个上游技能按现有能力映射复用，不重复安装另一套工作流。许可和指纹见 `sources.lock.json` 的 `sources.configure` 及 `licenses/configure/LICENSE`。
+
+`analysis/scripts/agent-prompt.txt` 是 co 与 SessionStart 共用正文。已有项目 hook 保留注册与宿主信任；首次 co 注入按正文哈希去重，清空和恢复事件可重新输出正文。UserPromptSubmit 保留路由和正文位置提醒；未新增插件或信任绕过。co 复用独立员工启动与验证交付，安装只 co 的 Bash 块，不重启用户关闭的旧 codex source。
+
+调用、采用边界和可复跑检查见 [采用说明](../20261015-configure-adaptation/reports/adaptation.md)。本次只适配研究上下文和工具机制，不开发核谱分析程序，不自动生成 plan，不修改既有模型、供应商、登录或沙箱边界。
