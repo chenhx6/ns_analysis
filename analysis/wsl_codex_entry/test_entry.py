@@ -46,7 +46,7 @@ def main():
         git(root, 'remote', 'add', 'origin', str(remote))
         scripts = root / 'analysis/scripts'
         scripts.mkdir(parents=True)
-        for name in ['codex_entry.py', 'codex_shell.sh', 'session_coordinator.py', 'project_sync.py',
+        for name in ['codex_entry.py', 'codex_shell.sh', 'co_shell.sh', 'codex_prompt.py', 'session_coordinator.py', 'project_sync.py',
                      'project_git.sh', 'task_delivery.py', 'check_git_content.py', 'project_runtime.py']:
             shutil.copyfile(SOURCE / 'analysis/scripts' / name, scripts / name)
         shutil.copytree(SOURCE / '.githooks', root / '.githooks')
@@ -56,6 +56,10 @@ def main():
         (root / '.codex/hooks.json').write_text(json.dumps({'command': 'node ' + str(root) +
                                                         '/analysis/vendor/oh-my-codex/dist/scripts/codex-native-hook.js',
                                                         'state': str(root / '.omx/state')}))
+        (scripts / 'agent-prompt.txt').write_text('原子核结构：能级纲图、γ强度、ADO、P与集体激发。\n')
+        skill = root / '.agents/skills/fixture/SKILL.md'
+        skill.parent.mkdir(parents=True)
+        skill.write_text('Fixture skill')
         git(root, 'add', '.')
         git(root, 'commit', '-m', 'Fixture baseline')
         (root / '.git').rename(root / '.project-git')
@@ -69,14 +73,14 @@ def main():
         executable.write_text('#!' + sys.executable + '\nimport json,os,sys\n'
                               "from pathlib import Path\n"
                               "Path(os.environ['CHX_ENTRY_TEST_LOG']).write_text(json.dumps("
-                              "{'cwd':os.getcwd(),'argv':sys.argv[1:]}))\n")
+                              "{'cwd':os.getcwd(),'argv':sys.argv[1:],'profile':os.environ.get('CHX_CO_PROMPT_SHA256')}))\n")
         executable.chmod(0o700)
         env = dict(os.environ, CHX_ENTRY_TEST_LOG=str(log))
         with patch.object(entry, 'ROOT', root), patch.object(project_sync, 'REMOTE', str(remote)), \
                 patch.dict(os.environ, env):
             args = ['--model', 'fixture', 'prompt with spaces; $(never-executed)']
             assert entry.route(args, str(executable), outside) == 0
-            assert json.loads(log.read_text()) == {'cwd': str(outside), 'argv': args}
+            assert json.loads(log.read_text()) == {'cwd': str(outside), 'argv': args, 'profile': None}
             assert not coordinator.read_state(root)['employees']
             checks.append({'name': 'Other projects preserve exact argv and cwd without employee registration', 'returncode': 0})
             for args in [['--help'], ['--version'], ['login'], ['mcp', 'list']]:
@@ -91,7 +95,7 @@ def main():
                          ['--sandbox', 'read-only', 'resume', '--last'],
                          ['exec', '--thread-source', 'cli', 'resume', '--last']]:
                 assert entry.route(args, str(executable), root) == 0
-                assert json.loads(log.read_text()) == {'cwd': str(root), 'argv': args}
+                assert json.loads(log.read_text()) == {'cwd': str(root), 'argv': args, 'profile': None}
             assert coordinator.read_state(root) == before_resume
             checks.append({'name': 'Native resume/fork including valued global options retain exact argv/cwd without registration', 'returncode': 0})
             assert entry.route(['--', '--help'], str(executable), root) == 0
@@ -200,18 +204,83 @@ def main():
             assert shell.returncode == 0, shell.stdout + shell.stderr
             assert json.loads(log.read_text())['argv'] == ['--version']
             checks.append({'name': 'Sourced codex Bash function invokes the original executable without recursion', 'returncode': 0})
+            # Exercise co through the real Bash wrapper and actual coordinator launch.
+            commented = '# . /old/analysis/scripts/codex_shell.sh\ncodex() { printf existing; }\n'
+            co_bashrc = base / 'co.bashrc'
+            co_bashrc.write_text(commented)
+            entry.install_shell(co_bashrc, co=True)
+            co_bytes = co_bashrc.read_bytes()
+            entry.install_shell(co_bashrc, co=True)
+            assert co_bashrc.read_bytes() == co_bytes and co_bytes.startswith(commented.encode())
+            subprocess.run(['bash', '-n', str(co_bashrc)], check=True)
+            assert co_bytes.count(b'# >>> chx co prompt sessions >>>') == 1
+            co_args = ['--model', 'fixture', '--', 'spaces $(touch should-not-exist); $HOME']
+            shell = subprocess.run(['bash', '--noprofile', '--norc', '-c',
+                                    '. "$1"; shift; co "$@"', 'bash', str(scripts / 'co_shell.sh'), '--chx-employee', 'one', *co_args],
+                                   cwd=root, env=dict(env, PATH=str(base) + ':' + env['PATH']),
+                                   capture_output=True, text=True, timeout=30)
+            assert shell.returncode == 0, shell.stdout + shell.stderr
+            first_co = json.loads(log.read_text())
+            assert first_co['argv'][-1].endswith(co_args[-1])
+            assert '原子核结构' in first_co['argv'][-1]
+            assert first_co['argv'][-2] == '--'
+            assert not (root / 'should-not-exist').exists()
+            assert first_co['profile'] == hashlib.sha256((scripts / 'agent-prompt.txt').read_bytes()).hexdigest()
+            assert first_co['cwd'] in first_co['argv'][-1]
+            assert 'CHX_CO_PROMPT_SHA256' not in os.environ
+            assert entry.route(['exec', '--model', 'fixture', 'analyze'], str(executable), root, project_prompt=True) == 0
+            second_co = json.loads(log.read_text())
+            assert second_co['cwd'] != first_co['cwd']
+            assert second_co['argv'][-1].endswith('analyze') and second_co['argv'][-4:-1] == ['exec', '--model', 'fixture']
+            assert entry.route([], str(executable), root, project_prompt=True) == 0
+            assert '原子核结构' in json.loads(log.read_text())['argv'][-1]
+            for native in [['plugin', 'list'], ['login'], ['--help'], ['--version'],
+                           ['--model', 'fixture', 'resume', '--last'], ['exec', 'resume', '--last'],
+                           ['fork', 'thread']]:
+                assert entry.route(native, str(executable), root, project_prompt=True) == 0
+                assert json.loads(log.read_text()) == {'cwd': str(root), 'argv': native, 'profile': None}
+            assert entry.route(co_args, str(executable), outside, project_prompt=True) == 0
+            assert json.loads(log.read_text()) == {'cwd': str(outside), 'argv': co_args, 'profile': None}
+            assert entry.route(['--chx-employee', 'one', 'exec', 'resume', '--last', 'continue'],
+                               str(executable), root, project_prompt=True) == 0
+            assert json.loads(log.read_text())['argv'][-4:] == ['exec', 'resume', '--last', 'continue']
+            assert json.loads(log.read_text())['profile'] is None
+            for forbidden in [['--yolo'], ['--add-dir', str(root)], ['--profile', 'unsafe']]:
+                rejected(lambda: entry.route(forbidden, str(executable), root, project_prompt=True))
+            for native in [['review', '--uncommitted'], ['exec', 'review', '--uncommitted']]:
+                assert entry.route(['--chx-employee', 'one', *native], str(executable), root, project_prompt=True) == 0
+                assert json.loads(log.read_text())['argv'][-len(native):] == native
+                assert json.loads(log.read_text())['profile'] is None
+            # The selected employee may have a newer profile than the control clone.
+            employee_profile = Path(one['workspace']) / 'analysis/scripts/agent-prompt.txt'
+            employee_profile.write_text('员工本地核结构约定\n')
+            assert entry.route(['--chx-employee', 'one', 'exec', '--', '--literal'],
+                               str(executable), root, project_prompt=True) == 0
+            local = json.loads(log.read_text())
+            assert '员工本地核结构约定' in local['argv'][-1] and local['argv'][-1].endswith('--literal')
+            assert local['profile'] == hashlib.sha256(employee_profile.read_bytes()).hexdigest()
+            rejected(lambda: entry.route(['--chx-employee', 'one', 'exec', '-'],
+                                         str(executable), root, project_prompt=True))
+            # A failed launcher must not leak the profile marker into its parent.
+            with patch.dict(os.environ, {'CHX_CO_PROMPT_SHA256': 'parent-marker'}):
+                with patch.object(coordinator, 'launch', side_effect=RuntimeError('fixture')):
+                    rejected(lambda: entry.route(['--chx-employee', 'one'], str(executable), root, project_prompt=True))
+                assert os.environ['CHX_CO_PROMPT_SHA256'] == 'parent-marker'
+            checks.append({'name': 'co injects literal nuclear profile in distinct workspaces and exec, preserves history/management/outside calls and rejects unsafe overrides', 'returncode': 0})
+            checks.append({'name': 'co-only Bash install is idempotent and retains commented codex source and existing codex function', 'returncode': 0})
             bashrc.write_text('codex() { printf existing; }\n')
             rejected(lambda: entry.install_shell(bashrc))
             assert bashrc.read_text() == 'codex() { printf existing; }\n'
             compiled = compile((SOURCE / 'analysis/scripts/codex_entry.py').read_text(), 'codex_entry.py', 'exec')
             assert compiled
     paths = ['analysis/scripts/codex_entry.py', 'analysis/scripts/codex_shell.sh',
+             'analysis/scripts/co_shell.sh', 'analysis/scripts/codex_prompt.py',
              'analysis/scripts/session_coordinator.py', 'analysis/wsl_codex_entry/test_entry.py']
     report = {'status': 'passed', 'checks': checks,
               'command': 'python3 analysis/wsl_codex_entry/test_entry.py',
               'sources_sha256': {name: hashlib.sha256((SOURCE / name).read_bytes()).hexdigest() for name in paths},
               'limit': 'The fake CLI proves real process cwd/argv routing; native model calls/login were not executed'}
-    output = Path(__file__).resolve().parent / 'reports/entry_checks.json'
+    output = SOURCE / 'analysis/20261015-configure-adaptation/launcher-verification.json'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print('PASS:', len(checks), 'real-process Bash/CLI routing checks, without model invocation')

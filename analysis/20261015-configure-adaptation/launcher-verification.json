@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Other projects preserve exact argv and cwd without employee registration",
+      "returncode": 0
+    },
+    {
+      "name": "Read-only help/version and explicit CLI management do not allocate workers",
+      "returncode": 0
+    },
+    {
+      "name": "Native resume/fork including valued global options retain exact argv/cwd without registration",
+      "returncode": 0
+    },
+    {
+      "name": "ENOSYS symlink filesystem still launches with canonical static code and local state",
+      "returncode": 0
+    },
+    {
+      "name": "Employee runtime launches canonical shared OMX entry with employee cwd and no dist link",
+      "returncode": 0
+    },
+    {
+      "name": "Two normal codex launches create distinct physical workspaces and preserve options",
+      "returncode": 0
+    },
+    {
+      "name": "Failed creating employee retries in place and preserves its original base after root advancement",
+      "returncode": 0
+    },
+    {
+      "name": "Explicit teammates and registered resume reuse the correct employee workspace",
+      "returncode": 0
+    },
+    {
+      "name": "Managed write escapes, remote/profile overrides and unknown explicit employee resume are rejected",
+      "returncode": 0
+    },
+    {
+      "name": "A second managed launcher cannot acquire an employee already running",
+      "returncode": 0
+    },
+    {
+      "name": "Bash installation preserves existing bytes and is idempotent and syntactically valid",
+      "returncode": 0
+    },
+    {
+      "name": "Sourced codex Bash function invokes the original executable without recursion",
+      "returncode": 0
+    },
+    {
+      "name": "co injects literal nuclear profile in distinct workspaces and exec, preserves history/management/outside calls and rejects unsafe overrides",
+      "returncode": 0
+    },
+    {
+      "name": "co-only Bash install is idempotent and retains commented codex source and existing codex function",
+      "returncode": 0
+    }
+  ],
+  "command": "python3 analysis/wsl_codex_entry/test_entry.py",
+  "sources_sha256": {
+    "analysis/scripts/codex_entry.py": "bf5c445fef8eeabdb33d53e2013010e003452e00d942881030eb38e35a002e2d",
+    "analysis/scripts/codex_shell.sh": "a429b45f7368acd16fb73313edd0f99a8a58765fd178e63914716b6ad89c17c1",
+    "analysis/scripts/co_shell.sh": "9b7cd3c822b26aedb99ff0a52b772a4c678ce741686998defeb1b1acc7121624",
+    "analysis/scripts/codex_prompt.py": "3b7af7bba57123b4464602da2ad14649438e0a4092781f483c96cc28219d1a4d",
+    "analysis/scripts/session_coordinator.py": "e2be26705d3a6749788259b20ffe682e8be4039ad8262a864edd832eeac8cc98",
+    "analysis/wsl_codex_entry/test_entry.py": "8754bbd13fcdbbe2318859157a96e14a6fc6a6ce6be4ff680cddd0b3add70e4d"
+  },
+  "limit": "The fake CLI proves real process cwd/argv routing; native model calls/login were not executed"
+}
