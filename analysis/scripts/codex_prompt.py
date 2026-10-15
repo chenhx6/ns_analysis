@@ -8,6 +8,9 @@ def build(workspace):
     """Read the profile verbatim and list paths as JSON data, never shell code."""
     workspace = Path(workspace).resolve()
     raw = (workspace / 'analysis/scripts/agent-prompt.txt').read_bytes()
+    profile = raw.decode('utf-8').rstrip()
+    if not profile.strip():
+        raise ValueError('co project profile is empty: ' + str(workspace / 'analysis/scripts/agent-prompt.txt'))
     skills = {}
     # Prefer the maintenance source when both native skill entry points exist.
     for directory in ('.agents/skills', '.codex/skills'):
@@ -19,7 +22,7 @@ def build(workspace):
     context = {'workspace': str(workspace), 'skill_paths': list(skills.values()),
                'configuration_paths': configs,
                'native_skill_entry': str(workspace / '.codex/skills')}
-    prefix = raw.decode('utf-8').rstrip() + '\n\n项目路径清单（JSON 数据，按任务读取）：\n'
+    prefix = profile + '\n\n项目路径清单（JSON 数据，按任务读取）：\n'
     return prefix + json.dumps(context, ensure_ascii=False, indent=2), hashlib.sha256(raw).hexdigest()
 
 

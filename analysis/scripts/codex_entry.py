@@ -19,9 +19,11 @@ import codex_prompt
 ROOT = Path(__file__).resolve().parents[2]
 BEGIN = '# >>> chx isolated codex sessions >>>'
 END = '# <<< chx isolated codex sessions <<<'
-NON_AGENT = {'login', 'logout', 'mcp', 'completion', 'features', 'help', 'plugin'}
+NON_AGENT = {'login', 'logout', 'mcp', 'completion', 'features', 'help', 'plugin',
+             'agents', 'doctor', 'update', 'queue', 'archive', 'delete',
+             'migrate-rollouts', 'unarchive'}
 NON_LOCAL = {'app', 'app-server', 'exec-server', 'debug', 'cloud', 'cloud-tasks',
-             'remote-control', 'mcp-server'}
+             'remote-control', 'mcp-server', 'apply', 'a', 'sandbox'}
 SAFE_WORKER_CONFIG = {'model', 'model_reasoning_effort', 'model_reasoning_summary',
                       'model_verbosity', 'model_provider', 'preferred_auth_method'}
 VALUE_OPTIONS = {'-m', '--model', '-p', '--profile', '-a', '--ask-for-approval', '-c', '--config',
@@ -243,7 +245,7 @@ def route(args, executable, cwd=None, project_prompt=False):
     validate_launch(native)
     outputs = output_paths(native)
     if command in NON_LOCAL:
-        raise ValueError('Remote/daemon commands are outside managed employee launch; use the original executable explicitly')
+        raise ValueError('This command is outside managed employee launch; use the original executable explicitly')
     if selected['employee']:
         employee = coordinator.identifier(selected['employee'])
         record = coordinator.read_state(ROOT)['employees'].get(employee)

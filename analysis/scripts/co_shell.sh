@@ -1,5 +1,6 @@
 # Source this independently; existing codex customizations remain untouched.
 _CHX_CO_ENTRY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)/codex_entry.py"
+# Launch a new isolated project session with its research prompt, preserving argv.
 co() {
     local chx_co_binary
     chx_co_binary="$(type -P codex)" || return

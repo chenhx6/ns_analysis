@@ -239,6 +239,16 @@ def main():
                            ['fork', 'thread']]:
                 assert entry.route(native, str(executable), root, project_prompt=True) == 0
                 assert json.loads(log.read_text()) == {'cwd': str(root), 'argv': native, 'profile': None}
+            management_state = coordinator.read_state(root)
+            for command in ['agents', 'doctor', 'update', 'queue', 'archive', 'delete',
+                            'migrate-rollouts', 'unarchive']:
+                native = ['--model', 'fixture', command, 'literal-argument']
+                assert entry.route(native, str(executable), root, project_prompt=True) == 0
+                assert json.loads(log.read_text()) == {'cwd': str(root), 'argv': native, 'profile': None}
+                assert coordinator.read_state(root) == management_state
+            for command in ['apply', 'a', 'sandbox']:
+                rejected(lambda: entry.route([command], str(executable), root, project_prompt=True))
+                assert coordinator.read_state(root) == management_state
             assert entry.route(co_args, str(executable), outside, project_prompt=True) == 0
             assert json.loads(log.read_text()) == {'cwd': str(outside), 'argv': co_args, 'profile': None}
             assert entry.route(['--chx-employee', 'one', 'exec', 'resume', '--last', 'continue'],
@@ -261,6 +271,13 @@ def main():
             assert local['profile'] == hashlib.sha256(employee_profile.read_bytes()).hexdigest()
             rejected(lambda: entry.route(['--chx-employee', 'one', 'exec', '-'],
                                          str(executable), root, project_prompt=True))
+            for blank in ['', ' \t\n', '\u3000\n']:
+                employee_profile.write_text(blank)
+                with patch.object(coordinator, 'launch') as launch:
+                    rejected(lambda: entry.route(['--chx-employee', 'one'], str(executable), root, project_prompt=True))
+                    launch.assert_not_called()
+                assert 'CHX_CO_PROMPT_SHA256' not in os.environ
+            employee_profile.write_text('员工本地核结构约定\n')
             # A failed launcher must not leak the profile marker into its parent.
             with patch.dict(os.environ, {'CHX_CO_PROMPT_SHA256': 'parent-marker'}):
                 with patch.object(coordinator, 'launch', side_effect=RuntimeError('fixture')):
