@@ -12,7 +12,7 @@ description: 项目文件更改完成后自动验证、commit、push；交付标
 
 # 自动提交、推送与交付标签
 
-用户已持续授权本项目文件更改完成后自动 commit 和 push，包括代码、计划、规范、技能、hooks、记录和小型结果。先保存任务计划，执行并验证，然后连续完成同步，不再询问是否提交或推送；用户的暂停、取消或更新范围仍优先。
+用户已持续授权本项目文件更改完成后自动 commit 和 push，包括代码、计划、规范、技能、hooks、记录和小型结果。执行并验证后连续完成同步，不再询问是否提交或推送；计划按 AGENTS.md 的用户主动要求规则处理，未要求时不制作或输出。用户的暂停、取消或更新范围仍优先。
 
 1. 员工任务从 `session_coordinator.py create` 返回的独立工作区开始，使用 `launch` 启动 CLI，或在该目录新开 App session。同一任务多员工分别分配文件范围；原始 Ge/CsI 只读。主目录作为管理与整合入口，不在其中并发编辑任务源码。
 2. 保存实际验证 JSON：`status: passed`、非空 `checks`、每项实际 `returncode: 0`。有报告的任务放在 `analysis/YYYYMMDD-topic/reports/`；无需报告时优先复用有效证据，否则保存最小的 `analysis/YYYYMMDD-topic/verification.json`，不强制 reports 目录或叙述性报告。日期为任务开始日（Asia/Shanghai），跨日和旧任务沿用原目录。代码或输入变更后重新检查，不把过期检查视为新行为通过。

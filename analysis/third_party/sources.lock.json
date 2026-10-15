@@ -1497,7 +1497,7 @@
     },
     {
       "directory": ".agents/skills/task-tag",
-      "entry_sha256": "ef2460e037983b205aaaf1a58cf73d687ea21b762f41d80f15dc3c4dc2c0d40f",
+      "entry_sha256": "afd34083a0a2cf11709edb1cc00f56886d37ebac219f7eb245dbb8e9a7a33391",
       "project_extension": "Isolated employee delivery with explicit scope; verification evidence independent of prose reports"
     },
     {
@@ -1506,10 +1506,10 @@
     },
     {
       "directory": ".agents/skills/python-svg-qa",
-      "entry_sha256": "d1160f67c9e134da17e89dd5451c280d54af5175b1f3ae7b0ef675934b1f8ef9",
+      "entry_sha256": "44b6e1744dd8d4c1b80ce18c3af6b8de023835691ffee028f98be6caf17ac78d",
       "source": "project",
       "files_sha256": {
-        "SKILL.md": "d1160f67c9e134da17e89dd5451c280d54af5175b1f3ae7b0ef675934b1f8ef9",
+        "SKILL.md": "44b6e1744dd8d4c1b80ce18c3af6b8de023835691ffee028f98be6caf17ac78d",
         "scripts/audit_svg.py": "af20953a178d549e46b1053fc951a944571d165e1a7fbfed4828b0b6dc89ac84"
       },
       "basis": "Project Python/SVG conventions and installed Nature figure QA principles; locally authored helper"

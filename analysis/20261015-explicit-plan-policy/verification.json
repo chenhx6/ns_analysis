@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "SessionStart actual routing hook",
+      "command": [
+        "node",
+        "analysis/scripts/skill-routing-hook.mjs"
+      ],
+      "input_event": "SessionStart",
+      "returncode": 0,
+      "result": "Injected explicit-request-only plan policy; removed mandatory plan policy."
+    },
+    {
+      "name": "UserPromptSubmit actual routing hook",
+      "command": [
+        "node",
+        "analysis/scripts/skill-routing-hook.mjs"
+      ],
+      "input_event": "UserPromptSubmit",
+      "returncode": 0,
+      "result": "Injected explicit-request-only plan policy; removed mandatory plan policy."
+    },
+    {
+      "name": "task-tag skill validation, mirrors and fingerprints",
+      "command": [
+        "python3",
+        "/home/ys/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/home/ys/data_401/data/chx_20260622/.agents/skills/task-tag"
+      ],
+      "returncode": 0,
+      "output": "Skill is valid!"
+    },
+    {
+      "name": "python-svg-qa skill validation, mirrors and fingerprints",
+      "command": [
+        "python3",
+        "/home/ys/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/home/ys/data_401/data/chx_20260622/.agents/skills/python-svg-qa"
+      ],
+      "returncode": 0,
+      "output": "Skill is valid!"
+    },
+    {
+      "name": "Installer guidance matches installed task-tag skill; unnecessary plan removed",
+      "returncode": 0
+    },
+    {
+      "name": "Scoped diff whitespace check",
+      "command": [
+        "git",
+        "--git-dir=.project-git",
+        "--work-tree=.",
+        "diff",
+        "--check",
+        "--",
+        "AGENTS.md",
+        "analysis/plans/_template.md",
+        "analysis/plans/2026-10-15-decoder-id-mapping.md",
+        "analysis/scripts/install_project_sync.py",
+        "analysis/third_party/sources.lock.json",
+        ".agents/skills/task-tag/SKILL.md",
+        ".codex/skills/task-tag/SKILL.md",
+        ".agents/skills/python-svg-qa/SKILL.md",
+        ".codex/skills/python-svg-qa/SKILL.md"
+      ],
+      "returncode": 0
+    }
+  ]
+}
