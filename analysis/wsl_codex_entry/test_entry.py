@@ -239,6 +239,16 @@ def main():
                            ['fork', 'thread']]:
                 assert entry.route(native, str(executable), root, project_prompt=True) == 0
                 assert json.loads(log.read_text()) == {'cwd': str(root), 'argv': native, 'profile': None}
+            management_state = coordinator.read_state(root)
+            for command in ['agents', 'doctor', 'update', 'queue', 'archive', 'delete',
+                            'migrate-rollouts', 'unarchive']:
+                native = ['--model', 'fixture', command, 'literal-argument']
+                assert entry.route(native, str(executable), root, project_prompt=True) == 0
+                assert json.loads(log.read_text()) == {'cwd': str(root), 'argv': native, 'profile': None}
+                assert coordinator.read_state(root) == management_state
+            for command in ['apply', 'a', 'sandbox']:
+                rejected(lambda: entry.route([command], str(executable), root, project_prompt=True))
+                assert coordinator.read_state(root) == management_state
             assert entry.route(co_args, str(executable), outside, project_prompt=True) == 0
             assert json.loads(log.read_text()) == {'cwd': str(outside), 'argv': co_args, 'profile': None}
             assert entry.route(['--chx-employee', 'one', 'exec', 'resume', '--last', 'continue'],

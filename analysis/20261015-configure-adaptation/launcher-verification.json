@@ -60,12 +60,12 @@
   ],
   "command": "python3 analysis/wsl_codex_entry/test_entry.py",
   "sources_sha256": {
-    "analysis/scripts/codex_entry.py": "bf5c445fef8eeabdb33d53e2013010e003452e00d942881030eb38e35a002e2d",
+    "analysis/scripts/codex_entry.py": "561117de0f32f4d0fce3fa6ba6cdde685c0d9666afb0e7af755b657c12e3882d",
     "analysis/scripts/codex_shell.sh": "a429b45f7368acd16fb73313edd0f99a8a58765fd178e63914716b6ad89c17c1",
     "analysis/scripts/co_shell.sh": "46c1ad7d9cf78b8378e4e9aee74667dc4c1a0f2639e606ffe24d890330baeedd",
     "analysis/scripts/codex_prompt.py": "b39c4393da49d8c71bc4e1dd1c034bcd994f4082283541265212e0d18059a389",
     "analysis/scripts/session_coordinator.py": "e2be26705d3a6749788259b20ffe682e8be4039ad8262a864edd832eeac8cc98",
-    "analysis/wsl_codex_entry/test_entry.py": "7136736dc9448ece3c7e6744a40df897c6a27d77bd22287eb8d5def3a5ff8452"
+    "analysis/wsl_codex_entry/test_entry.py": "df8688f98979e3deefec6e074403f1ea55b545fadc2b9ac9374aad284b9fefae"
   },
   "limit": "The fake CLI proves real process cwd/argv routing; native model calls/login were not executed"
 }
