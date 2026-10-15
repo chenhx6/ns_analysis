@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Pinned source checkout",
+      "command": [
+        "git",
+        "-C",
+        "/tmp/chx-configure-read-20261015",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "output": "43c216e8a2e755975633c163b38ad79bac7042d7"
+    },
+    {
+      "name": "Source checkout unchanged and co symlink verified",
+      "command": [
+        "git",
+        "-C",
+        "/tmp/chx-configure-read-20261015",
+        "status",
+        "--porcelain",
+        "--untracked-files=no"
+      ],
+      "returncode": 0,
+      "output": "Clean source checkout; bin/co points to agent.sh."
+    },
+    {
+      "name": "Static source review of launcher, skill directives, explicit hooks and plugin registration",
+      "returncode": 0,
+      "files_sha256": {
+        "env.sh": "e0fdda6d24a4baa2c7ffd4343ac5aab668ecc5c7861109dcc34f343e0778e92b",
+        "bin/agent.sh": "8a5036f478ce2ed5116147d177c9e384ca1465e6fc2b7da7e570cad9b9434d3f",
+        "bin/agent-runtime.sh": "db4f699bcec9af4af2fca9ad1f01b67c8291f19b2fe79f7bc6221a9a4ba56eeb",
+        "bin/agent-prompt.txt": "5e803ef13323627c75aaa87cb240bc6d23ac4a0773a6f1ffc4063759dcd43540",
+        "skills/auto/SKILL.md": "64995d067a0d897ab0caa3aa68f836c3a4f997da20ed0a337ac36e5c340abc65",
+        "skills/all/SKILL.md": "bdea1e26b1c833bfd2234ff1789cc047fd126572ec0ddbdce47ef95f1899b771",
+        "hooks/README.md": "40c7fec2671567ab574d7239644f2ef3acb6cdfee41aa517461c62f2595f0b02",
+        "hooks/codex-hook.sh": "11aac09be9e3ae80aadeb0838eeefa79e3f2e34131bd2031ca7790bc7820afa4",
+        "plugins/README.md": "8aa02d8623f4244b256db26134980400b942ac77cee522b9771f36d489db0925",
+        "plugins/install-recommended.sh": "4689de72e421e12484b5443ee1ef3ce4f49a73f8513d3970b6c7b3ccc4c2d45e",
+        "lib/_codex/config.sh": "8494e6a3f7e3b7afc968399a01a6b4707b4da8c8d4a3ebce8c832e1ecdf077a7",
+        "lib/_codex/install.sh": "912d4fe1f7b094db1f8b24bd03007ce301d50132fdde210cbc572045ffce8245"
+      },
+      "scope": "Read-only code and caller review; no target scripts or plugins executed."
+    },
+    {
+      "name": "Official documentation text actually retrieved and reviewed",
+      "returncode": 0,
+      "topics": {
+        "agents-md": {
+          "sha256": "d213866ee69ce17a5af368d83dec78f43f1eca1c4d7face458e4b0c12f776748",
+          "verified_text": "instruction chain"
+        },
+        "skills": {
+          "sha256": "9bab021640591112657b6a0fc4dc181d473ddf6b89767031eefe37d9e4f74b60",
+          "verified_text": "Implicit invocation"
+        },
+        "hooks": {
+          "sha256": "b48f0a77e48cb80822ceffda4508f84ac123851a4e18cbcc31bc4bd7740131b2",
+          "verified_text": "additionalContext"
+        },
+        "plugins": {
+          "sha256": "70fbfabb4ea23af633721234fcff393352d6be7e8319bfd2aa0c6e1bdd109fda",
+          "verified_text": "/plugins"
+        }
+      }
+    },
+    {
+      "name": "Scoped documentation whitespace check",
+      "command": [
+        "git",
+        "--git-dir=.project-git",
+        "--work-tree=.",
+        "diff",
+        "--check",
+        "--",
+        "analysis/20261015-configure-startup/reports/startup-mechanism.md"
+      ],
+      "returncode": 0
+    }
+  ],
+  "limitations": [
+    "Static source inspection; external scripts were not executed.",
+    "Author machine installation and trust state not observable.",
+    "No plan generated; no local runtime configuration changed."
+  ]
+}
