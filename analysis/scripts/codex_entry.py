@@ -14,11 +14,12 @@ import tempfile
 import uuid
 
 import session_coordinator as coordinator
+import codex_prompt
 
 ROOT = Path(__file__).resolve().parents[2]
 BEGIN = '# >>> chx isolated codex sessions >>>'
 END = '# <<< chx isolated codex sessions <<<'
-NON_AGENT = {'login', 'logout', 'mcp', 'completion', 'features', 'help'}
+NON_AGENT = {'login', 'logout', 'mcp', 'completion', 'features', 'help', 'plugin'}
 NON_LOCAL = {'app', 'app-server', 'exec-server', 'debug', 'cloud', 'cloud-tasks',
              'remote-control', 'mcp-server'}
 SAFE_WORKER_CONFIG = {'model', 'model_reasoning_effort', 'model_reasoning_summary',
@@ -178,24 +179,29 @@ def save_backup(bashrc, original):
     return backup
 
 
-def install_shell(bashrc):
+def install_shell(bashrc, co=False):
+    """Install one independent shell function, preserving the other launcher block."""
+    begin = '# >>> chx co prompt sessions >>>' if co else BEGIN
+    end = '# <<< chx co prompt sessions <<<' if co else END
+    shell = 'co_shell.sh' if co else 'codex_shell.sh'
     bashrc = Path(bashrc).expanduser().absolute()
     if bashrc.is_symlink() or any(parent.is_symlink() for parent in bashrc.parents):
         raise ValueError('Bash configuration must not be a symlink')
     original = bashrc.read_bytes() if bashrc.exists() else b''
-    block = (BEGIN + '\n' + '. ' + shlex.quote(str(ROOT / 'analysis/scripts/codex_shell.sh')) +
-             '\n' + END + '\n').encode()
-    if original.count(BEGIN.encode()) != original.count(END.encode()) or original.count(BEGIN.encode()) > 1:
+    block = (begin + '\n' + '. ' + shlex.quote(str(ROOT / 'analysis/scripts' / shell)) +
+             '\n' + end + '\n').encode()
+    if original.count(begin.encode()) != original.count(end.encode()) or original.count(begin.encode()) > 1:
         raise ValueError('Existing chx shell marker needs explicit repair; no automatic rewrite')
-    if BEGIN.encode() in original:
-        start = original.index(BEGIN.encode())
-        stop = original.index(END.encode(), start) + len(END)
+    if begin.encode() in original:
+        start = original.index(begin.encode())
+        stop = original.index(end.encode(), start) + len(end)
         while stop < len(original) and original[stop:stop + 1] == b'\n':
             stop += 1
         candidate = original[:start] + block + original[stop:]
     else:
-        if re.search(rb'(?m)^\s*(alias\s+codex\b|(?:function\s+)?codex\s*\(\))', original):
-            raise ValueError('Existing codex customization found; preserve it and review before installing')
+        name = b'co' if co else b'codex'
+        if re.search(rb'(?m)^\s*(alias\s+' + name + rb'\b|(?:function\s+)?' + name + rb'\s*\(\))', original):
+            raise ValueError('Existing ' + name.decode() + ' customization found; preserve it and review before installing')
         candidate = original + (b'\n' if original and not original.endswith(b'\n') else b'') + b'\n' + block
     if candidate != original:
         save_backup(bashrc, original)
@@ -212,10 +218,10 @@ def install_shell(bashrc):
             if temporary.exists():
                 temporary.unlink()
     return {'status': 'installed', 'bashrc': str(bashrc), 'project': str(ROOT),
-            'source': str(ROOT / 'analysis/scripts/codex_shell.sh')}
+            'source': str(ROOT / 'analysis/scripts' / shell)}
 
 
-def route(args, executable, cwd=None):
+def route(args, executable, cwd=None, project_prompt=False):
     cwd = Path(cwd or Path.cwd()).resolve()
     binary = Path(executable).resolve()
     if not binary.is_file() or not os.access(str(binary), os.X_OK):
@@ -276,24 +282,41 @@ def route(args, executable, cwd=None):
         if workspace not in target.resolve().parents or any(
                 path.is_symlink() for path in [target, *target.parents] if path != workspace):
             raise ValueError('CLI output path escapes the employee workspace: ' + output)
-    return coordinator.launch(ROOT, record['employee'], cli_args=native, executable=str(binary))
+    # Review subcommands have their own argument grammar, not an initial text prompt.
+    position = positional_index(native)
+    review = command == 'review' or (command in {'exec', 'e'} and
+                                    first_positional(native[position + 1:]) == 'review')
+    # Only new co sessions receive the profile; history keeps the original prompt.
+    previous = os.environ.pop('CHX_CO_PROMPT_SHA256', None)
+    try:
+        if project_prompt and not resume_command(native) and not review:
+            prefix, digest = codex_prompt.build(workspace)
+            native = codex_prompt.inject(native, prefix, positional_index, VALUE_OPTIONS)
+            os.environ['CHX_CO_PROMPT_SHA256'] = digest
+        return coordinator.launch(ROOT, record['employee'], cli_args=native, executable=str(binary))
+    finally:
+        os.environ.pop('CHX_CO_PROMPT_SHA256', None)
+        if previous is not None:
+            os.environ['CHX_CO_PROMPT_SHA256'] = previous
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--executable')
     parser.add_argument('--install-shell', action='store_true')
+    parser.add_argument('--install-co-shell', action='store_true')
+    parser.add_argument('--project-prompt', action='store_true')
     parser.add_argument('--bashrc', default=str(Path.home() / '.bashrc'))
     parser.add_argument('arguments', nargs=argparse.REMAINDER)
     args = parser.parse_args()
-    if args.install_shell:
-        print(json.dumps(install_shell(args.bashrc), ensure_ascii=False))
+    if args.install_shell or args.install_co_shell:
+        print(json.dumps(install_shell(args.bashrc, co=args.install_co_shell), ensure_ascii=False))
     else:
         native = args.arguments[1:] if args.arguments[:1] == ['--'] else args.arguments
         binary = args.executable or shutil.which('codex')
         if not binary:
             raise ValueError('Original Codex executable not found')
-        raise SystemExit(route(native, binary))
+        raise SystemExit(route(native, binary, project_prompt=args.project_prompt))
 
 
 if __name__ == '__main__':

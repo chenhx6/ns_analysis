@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "analysis/wsl_codex_entry/test_entry.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: 14 real-process Bash/CLI routing checks, without model invocation\nchx employee: cli-8a67c5cb44f14b4a\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/cli-8a67c5cb44f14b4a\nchx employee: cli-2642f13f91ae4ab7\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/cli-2642f13f91ae4ab7\nchx employee: cli-eaf5468c5b0342f7\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/cli-eaf5468c5b0342f7\nchx employee: interrupted\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/interrupted\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: two\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/two\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: cli-4fe1b81c0aa14766\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/cli-4fe1b81c0aa14766\nchx employee: cli-595ffa5ca5124016\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/cli-595ffa5ca5124016\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\nchx employee: one\nworkspace: /tmp/chx-wsl-entry-ie90ed81/project/.omx/coordination/workspaces/one\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "c64e447dea014a99a8350e74f802c563",
+  "employee_head": "db55e047cba98990917cf36f6df67e4cb9f05bcd",
+  "employee_evidence_sha256": "c9fc7374884b4b59739fbdcda731344a9b07b0a7fc7412003a5fd656874487a9"
+}
