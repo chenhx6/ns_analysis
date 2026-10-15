@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "scope": "Planning documents only; no source edits, compilation or time-offset execution",
+  "checks": [
+    {
+      "name": "Plan content checked against requested structure, reusable configuration, weighted-area offset, algorithms and nonexecution boundary; math delimiters paired",
+      "returncode": 0
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "analysis/20261015-configure-adaptation/test_prompt_hooks.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: actual startup injection/deduplication; clear/resume/fork/compact restoration; per-prompt reminders; outside/unused events; malformed/oversized/missing/empty failure; skill mirrors and source fingerprints.\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "b5cac208fd764555894a87ec81f1f8b7",
+  "employee_head": "dc8670dd816a5a60cd3ea0bb237b2829d93ab400",
+  "employee_evidence_sha256": "96f130177b4335982209940eee0cc25d96866b64639737ffce6831da8f9dba9c"
+}

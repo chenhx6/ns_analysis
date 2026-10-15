@@ -29,6 +29,60 @@
     "nature-skills": {
       "url": "https://github.com/Yuan1z0825/nature-skills.git",
       "commit": "50851efc109c981be6cdc1ed5171a2eaa739d20a"
+    },
+    "configure": {
+      "url": "https://gitee.com/zhangxin8069/configure.git",
+      "commit": "43c216e8a2e755975633c163b38ad79bac7042d7",
+      "license": "MIT",
+      "license_file": "analysis/third_party/licenses/configure/LICENSE",
+      "adoption": "Adapted startup profile and capability mapping; reuse existing isolated co entry and native hooks",
+      "source_files_sha256": {
+        "LICENSE": "eeb4836b85b7eaa017b5ee8da966aa912999c52231b7b50ec571890b215871ab",
+        "bin/agent-prompt.txt": "5e803ef13323627c75aaa87cb240bc6d23ac4a0773a6f1ffc4063759dcd43540",
+        "bin/agent.sh": "8a5036f478ce2ed5116147d177c9e384ca1465e6fc2b7da7e570cad9b9434d3f",
+        "bin/agent-runtime.sh": "db4f699bcec9af4af2fca9ad1f01b67c8291f19b2fe79f7bc6221a9a4ba56eeb",
+        "skills/AGENTS.md": "1a48a062fb7c6081ea5368a255e77adfd2bd9ce36ec6d7ae944f3a3b62a737d0",
+        "skills/phys-model/SKILL.md": "a718feee91f17fe941f1062d51a5fb7e7dcf1d0c3bcae3f4a0ba89339884c5cd",
+        "hooks/codex-hook.sh": "11aac09be9e3ae80aadeb0838eeefa79e3f2e34131bd2031ca7790bc7820afa4",
+        "plugins/install-recommended.sh": "4689de72e421e12484b5443ee1ef3ce4f49a73f8513d3970b6c7b3ccc4c2d45e",
+        "tools/configure-check.sh": "d8f69ab002589066ae5d1bfe887e6f78a17268d52631c037da2ef7f49b986abe"
+      },
+      "installed_files_sha256": {
+        "analysis/scripts/agent-prompt.txt": "43ac33ca755b028e011e274a8c0963581db2dc77aa1de4ef05fc2968108c6908",
+        "analysis/scripts/skill-routing-hook.mjs": "7701a259040665775a0cd52deaf7786000acba311951df59ce7274bd2fbbb761",
+        "analysis/third_party/licenses/configure/LICENSE": "846be0036c89404e8132fa4f558cdf33b0b9e9d1b8980bd8115fef878dad061a"
+      },
+      "reviewed_skills": [
+        "all",
+        "analy",
+        "auto",
+        "brainstorm",
+        "debug",
+        "diff",
+        "dispatch",
+        "doctor",
+        "fast",
+        "follow-up",
+        "form",
+        "go-on",
+        "init",
+        "make",
+        "md-tex-sync",
+        "optim",
+        "phys-model",
+        "plan",
+        "pure",
+        "report",
+        "research-notes",
+        "review",
+        "skill-creator",
+        "tag",
+        "tdd",
+        "team",
+        "test",
+        "up"
+      ],
+      "license_normalization": "Upstream CRLF normalized to LF; wording unchanged"
     }
   },
   "skills": [
@@ -1502,7 +1556,8 @@
     },
     {
       "directory": ".agents/skills/chx-data-analysis",
-      "entry_sha256": "5e97e001155b936abf784537989aa01c7d55856e53eba94b1bc8cc7ea3409272"
+      "entry_sha256": "7d8c2870121f91e1a709fe8635828182302aa18432123660361062881071e31c",
+      "project_extension": "Nuclear structure evidence and workflow context; no new spectrum-analysis programs"
     },
     {
       "directory": ".agents/skills/python-svg-qa",

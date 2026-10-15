@@ -21,9 +21,26 @@ This product includes software developed by UncleCode (https://x.com/unclecode) 
 
 具体规则见 [AGENTS.md](AGENTS.md)，实验记录见 [analysis/experiment_log/record_analysis.md](analysis/experiment_log/record_analysis.md)。技能维护源为 `.agents/skills/`，OMX 入口为 `.codex/skills/`；根 `skills/` 冗余副本已清理。技能与 hooks 按任务自动触发，报告和代码都应用 Ponytail，报告再配合语言和科研技能。安装没有写入全局技能目录。
 
-新任务先在 `analysis/plans/` 写计划，随后在明确任务范围内连续执行非危害操作，无需额外确认；原始数据与宿主权限边界继续适用。绘图统一使用 Python，保留可查看的程序和来源数据表，只保存 SVG，并实际查看最终渲染以检查重叠、裁切、缺字和数据关系。
+只有用户主动要求时才制作或输出 plan，包括计划文件；明确任务范围内的非危害操作直接连续执行，无需额外确认。原始数据与宿主权限边界继续适用。绘图统一使用 Python，保留可查看的程序和来源数据表，只保存 SVG，并实际查看最终渲染以检查重叠、裁切、缺字和数据关系。
 
 新建文件和文件夹使用英文 ASCII 命名，计划采用 `YYYY-MM-DD-short-task-name.md`，内容可写中文。`analysis/experiment_log/record_analysis.md` 是用户实时编辑的记录本；保留其编辑，按既有授权例行同步，普通差异不另行展开审查或反复追问。
+
+## 核结构研究的 co 入口
+
+项目参考公开的 `zhangxin8069/configure`，将专业提示词适配为原子核结构、能级纲图、gamma 强度及 ADO/P、集体激发研究。正文维护于 [agent-prompt.txt](analysis/scripts/agent-prompt.txt)，常规物理判断按任务自主核对并报告证据与不确定性；本次没有增加核谱计算程序。
+
+在 Bash 当前终端启用项目快捷入口：
+
+```bash
+source /home/ys/data_401/data/chx_20260622/analysis/scripts/co_shell.sh
+co
+co "阅读当前任务代码并解释实现"
+co exec "核对指定代码的输入输出边界"
+```
+
+需要新终端保留时，可用 `python3 analysis/scripts/codex_entry.py --install-co-shell` 安装独立的 co source 块。它不启用旧的 codex source，也不修改模型、供应商或登录配置。新会话复用项目独立员工克隆；首条输入包含共享提示词与实际员工技能路径。帮助、管理命令与历史恢复保留原生语义；`co resume --last` 不会把旧会话重新声明为隔离会话或补造已注入状态。`co exec -` 的 stdin 输入暂用原始 `codex`，避免启动器隐式消费输入流。
+
+已注册的 SessionStart 与 UserPromptSubmit hooks 复用同一专业正文和项目路由规则；co 首次启动避免重复正文，清空或恢复时重新注入。宿主信任仍由宿主处理。技能按实际需要读取，插件不会因目录出现而自动安装或取得信任。来源、全部上游技能的复用对应与验证见 [采用说明](analysis/20261015-configure-adaptation/reports/adaptation.md)。
 
 ## Git 使用
 
