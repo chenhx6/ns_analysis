@@ -11,6 +11,15 @@
 /decisions/*
 !/decisions/*.md
 !/time_offset/
+!/timeOffset/
+/timeOffset/**
+!/timeOffset/time_offset/
+!/timeOffset/time_offset/*.cc
+!/timeOffset/time_offset/*.hh
+!/timeOffset/time_offset/Makefile
+!/timeOffset/time_offset/*.md
+!/timeOffset/time_offset/*.csv
+!/timeOffset/time_offset/*.json
 /time_offset/**
 !/time_offset/**/
 !/time_offset/**/*.py

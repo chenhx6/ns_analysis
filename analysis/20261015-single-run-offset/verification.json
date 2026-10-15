@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "scope": "Implementation and output integrity; not blanket scientific acceptance of fits",
+  "checks": [
+    {"command": "make -C timeOffset/time_offset check", "returncode": 0, "result": "Warnings-enabled build and deterministic pairing/binning/synthetic double-Gaussian fit self-check passed"},
+    {"command": "timeOffset/time_offset/time_offset 6015 decode_data/data_C2_6015_6015_wave.root timeOffset/sample 1000000", "returncode": 0, "result": "Finite-sample run passed before full processing; 735548 events, 36958 reference events"},
+    {"command": "timeOffset/time_offset/time_offset 6015 decode_data/data_C2_6015_6015_wave.root timeOffset/time_offset", "returncode": 0, "result": "266414896 entries processed; 179145148 events; 10144330 reference events; zero regressions and address rejections"},
+    {"name": "Read back ROOT and CSV with PyROOT", "returncode": 0, "result": "145 paired histograms; exact 2/24 ns bin widths and ranges; matching pair counts including flow bins; 144 saved time_fit functions matching CSV model, range and mu1; zero reference self-pairs; full input coverage"},
+    {"command": "python3 analysis/20261008-time-offset-design/test_processing_paths.py", "returncode": 0, "result": "17 allowed and 19 excluded paths; ROOT files and executable remain local"}
+  ],
+  "scientific_limits": {
+    "nonreference_channels": 144,
+    "converged_parameter_checks": 144,
+    "double_gaussian": 22,
+    "deviance_per_ndf_above_3": 125,
+    "visual_review": "Not claimed; automatic model and range selection requires spectrum review for flagged channels",
+    "offset_definition": "t_reference-t_channel; double peaks use higher fitted amplitude; no crate writes"
+  }
+}

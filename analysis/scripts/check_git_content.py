@@ -31,6 +31,7 @@ def git(*args):
 
 
 def permitted(path):
+    """Allow project sources and small results while excluding data and secrets."""
     p = PurePosixPath(path)
     allowed = (
         path in ROOT_FILES or p.parts[0] in {"analysis", ".githooks", ".codex"}
@@ -38,6 +39,9 @@ def permitted(path):
         or path in DECODER_SOURCE_FILES
         or path in RUN_LOG_FILES
         or (p.parts[0] == "time_offset" and p.suffix.lower() in TIME_OFFSET_SUFFIXES)
+        # New single-run task: only direct source, report and table files.
+        or (len(p.parts) == 3 and p.parts[:2] == ("timeOffset", "time_offset")
+            and (p.suffix.lower() in {".cc", ".hh", ".md", ".csv", ".json"} or p.name == "Makefile"))
         or (len(p.parts) == 2 and p.parts[0] == "decisions" and p.suffix == ".md")
         or (len(p.parts) == 3 and p.parts[:2] == ("plans", "process") and p.suffix == ".md")
     )
