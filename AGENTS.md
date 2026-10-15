@@ -1,5 +1,7 @@
 # chx_20260622 项目约定
 
+- 2026-10-15 用户确定：本项目研究方向为原子核结构，包括能级纲图、gamma 线强度、ADO、P 等参数和集体激发；借鉴 `zhangxin8069/configure` 的工作机制时，专业表述按本方向适配，不照搬 LQCD 或个人环境。本轮只适配提示词与工具工作流，不新增核谱分析程序。常规物理判断参照其自主、有证据、如实说明不确定性的边界，不额外增加逐项用户审批；本项目已有明确约定和宿主权限继续优先。
+
 - 2026-10-15 用户要求：以后编写代码时，在相关函数处添加简要的功能注释，在重要算法程序行附近说明算法含义、关键条件或单位；注释保持简洁，与实际实现一致。
 - 2026-10-15 time offset 新实现位于 `timeOffset/time_offset/`，单文件 C++/ROOT 分析范围和本轮方法见 `decisions/20261015-time-offset-single-run.md`；旧 `time_offset/` 保留作参考，本轮不删除、不沿用其多 run 流程。
 
@@ -93,6 +95,8 @@
 
 ## 项目工具与技能入口
 
+- 专业与行为提示词单一来源为 `analysis/scripts/agent-prompt.txt`。`co` 通过既有员工入口为新会话前置该正文和技能路径；原生 SessionStart 也读取该正文，co 首次启动按内容哈希避免重复，clear/resume 等恢复事件重新补入。UserPromptSubmit 保留自动路由规则和正文位置提醒。哈希只用于减少重复，不表示授权或 hook 信任。快捷入口安装只定义 `co`，不恢复用户关闭的旧 `codex` source。采用依据、技能对应与实际验证见 `analysis/20261015-configure-adaptation/reports/adaptation.md`。
+
 - 安装清单与来源版本：`analysis/third_party/sources.lock.json`；调用、恢复和外部依赖说明：`analysis/third_party/INSTALL.md`。上游固定源码位于 `analysis/vendor/`，其中的 AGENTS 是上游源码说明，不能覆盖本项目的数据边界。
 - 代码和报告自动应用 Ponytail 的精简原则；中文报告/公开文本自动使用 `.agents/skills/shuorenhua/SKILL.md`，英文文本自动使用 `.agents/skills/humanizer/SKILL.md`。代码、配置、数据和命令输出不套用写作改写规则。
 - 科研任务按需读取 Nature 对应技能和 `manifest.yaml`，保留 `nature-shared` 共享依赖。其 `core/` 简写按 manifest 解析，常见真实位置为 `static/core/`。输出仍按本项目目录约定存放。
@@ -108,6 +112,8 @@
 ## 自动技能与 hooks 规则
 
 每次任务自动依据当前意图和已安装技能的 name/description 选择适用技能，先读取对应 SKILL.md 再执行；用户无需输入技能名。显式指令、范围和暂停/取消优先。自动调用只处理任务相关部分，不为了调用而扩展任务。
+
+研究背景为原子核结构：能级纲图、gamma 线强度、ADO、P 等参数与集体激发。专业与行为正文在 `analysis/scripts/agent-prompt.txt`，按任务采用核结构物理、工程或联合视角；常规物理判断在已有授权内自主核对并报告证据和不确定性，不新增逐项人工审批。`{~skill-name}` 按实际已安装技能或采用说明中的对应关系理解，不假装缺失能力已安装，不由此自动生成 plan 或启用原生 goal。
 
 2026-10-15 用户更正：只有用户主动要求制作计划时，才制作或输出 plan，包括计划文件和回复中的计划；不因任务复杂或技能、hooks 自动触发而生成。此条替代旧的“所有任务先写计划”要求。范围明确的非危害操作直接连续执行，无需额外用户确认；原始数据只读和宿主权限边界保持适用。用户已持续授权文件变更完成并验证后自动 commit/push 到本项目 Gitee 仓库：自动调用 `task-tag`，复用 `project_sync.py` 和结束检查，核对远端真实结果；不扩大为其他对外发布授权。新建任务产物集中于 `analysis/YYYYMMDD-topic/`（Asia/Shanghai 任务开始日）；程序、小表、`figures/` 和必要的 `reports/` 按需建立。跨日沿用原目录，旧任务原地续作；通用工具入口统一为 `analysis/scripts/`。
 
