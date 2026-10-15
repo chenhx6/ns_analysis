@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "rg",
+        "-n",
+        "sid = \\(buff\\[0\\].*kMasksid|cid = \\(buff\\[0\\].*kMaskcid",
+        "decode_data/DecodeAndSortAll/decoder.cc"
+      ],
+      "returncode": 0,
+      "output": "118:      sid = (buff[0] & kMasksidh) >> kShiftsidh;\n119:      cid = (buff[0] & kMaskcidh) >> kShiftcidh;\n124:      sid = (buff[0] & kMasksid) >> kShiftsid;\n125:      cid = (buff[0] & kMaskcid) >> kShiftcid;"
+    },
+    {
+      "command": [
+        "rg",
+        "-n",
+        "M%02d.bin|mapvalue.sid = rawdec|mapvalue.cid = rawdec|cid = itkey->second.cid|sid = itkey->second.sid",
+        "decode_data/DecodeAndSortAll/r2root.cc"
+      ],
+      "returncode": 0,
+      "output": "80:\t  sprintf(tempfilename,\"%s%04d/%s_R%04d_M%02d.bin\",Crate0RAWFILEPATH,run[craten],Crate0RAWFILENAME,run[craten],i);\n131:\t  sprintf(tempfilename,\"%s%04d/%s_R%04d_M%02d.bin\",Crate1RAWFILEPATH,run[craten],Crate1RAWFILENAME,run[craten],i);\n181:\t  sprintf(tempfilename,\"%s%04d/%s_R%04d_M%02d.bin\",Crate2RAWFILEPATH,run[craten],Crate2RAWFILENAME,run[craten],i);\n232:\t  sprintf(tempfilename,\"%s%04d/%s_R%04d_M%02d.bin\",Crate3RAWFILEPATH,run[craten],Crate3RAWFILENAME,run[craten],i);\n358:\t\t  mapvalue.sid = rawdec[mark].getsid();\n359:\t\t  mapvalue.cid = rawdec[mark].getcid();\n462:\t  cid = itkey->second.cid;\n463:\t  sid = itkey->second.sid;\n526:\t      cid = itkey->second.cid;\n527:\t      sid = itkey->second.sid;"
+    },
+    {
+      "command": [
+        "git",
+        "--git-dir=.project-git",
+        "--work-tree=.",
+        "diff",
+        "--check",
+        "--",
+        "analysis/plans/2026-10-15-decoder-id-mapping.md"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "plan_scope_and_evidence_review",
+      "returncode": 0,
+      "details": "已核对用户授权、范围、无统计、源码结论与未读取原始数据的限制；未修改解码源码。"
+    }
+  ],
+  "scope": "source-code lookup only; no decoder execution or raw-data reads",
+  "result": "cid and sid are decoded independently from event headers; module file index is not converted into sid or cid by a +2 expression; actual module-to-slot mapping requires acquisition configuration or data."
+}
