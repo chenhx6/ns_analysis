@@ -3,7 +3,7 @@
   "scope": "Document verification and read-only inspection of existing spectra/CSV; no analysis source edits, compilation or new fits",
   "checks": [
     {
-      "name": "2026-10-16 plan-only revision checked: 2001x2 and 168x24 ranges, fit toggle, at most two Gaussians, adaptive ranges, existing four-channel values and outstanding event-window boundary",
+      "name": "2026-10-16 plan-only revision checked: 2001x2 and 168x24 ranges, fit toggle, at most two Gaussians, adaptive ranges, existing four-channel values and confirmed configurable 1999 ns event window; histogram expansion only",
       "returncode": 0
     }
   ]
