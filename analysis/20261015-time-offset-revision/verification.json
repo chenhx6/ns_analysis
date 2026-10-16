@@ -1,9 +1,9 @@
 {
   "status": "passed",
-  "scope": "Document verification and read-only inspection of existing spectra/CSV; no analysis source edits, compilation or new fits",
+  "scope": "Plan document changes only; no implementation, compilation or time-offset processing",
   "checks": [
     {
-      "name": "2026-10-16 plan-only revision checked: 2001x2 and 168x24 ranges, fit toggle, at most two Gaussians, adaptive ranges, existing four-channel values and confirmed configurable 1999 ns event window; histogram expansion only",
+      "name": "Checked ROOT three-parameter bins, mandatory run, explicit reference and cut errors, integer MIN/MAX proposal, nonempty histogram output, tick explanation and optional manual overrides; removed conflicting prior proposals",
       "returncode": 0
     }
   ]
