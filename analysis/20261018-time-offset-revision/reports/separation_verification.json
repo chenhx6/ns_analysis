@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "make",
+        "-C",
+        "time_offset/time_offset"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-tests/time_offset/time_offset'\nmake: Nothing to be done for 'all'.\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-tests/time_offset/time_offset'\n"
+    },
+    {
+      "command": [
+        "make",
+        "-C",
+        "analysis/20261018-time-offset-revision/tests",
+        "check"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-tests/analysis/20261018-time-offset-revision/tests'\n./build/verify self\nSelf-check passed: cuts, fixed anchor, +/-W, Ge/CsI, final packet, flow, area/covariance, ROOT fit\ninput=/tmp/chx-time-offset-io-11/good.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=2 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-11/off/time_offset_1.{root,csv,md}\nOutput checks passed: 2 CSV channels, 2 nonempty histograms\ninput=/tmp/chx-time-offset-io-11/no_ref.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-11/sr.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-11/mixed.root entries=3 process=3 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=3 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-11/mixed-out/time_offset_1.{root,csv,md}\nI/O checks passed: branch/sr/reference errors, no overwrite, FIT=false, mixed ticks\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-tests/analysis/20261018-time-offset-revision/tests'\n"
+    },
+    {
+      "command": [
+        "analysis/20261018-time-offset-revision/tests/build/verify",
+        "check",
+        "analysis/20261018-time-offset-revision/tests/build/sample/time_offset_6015",
+        "1",
+        "10000000"
+      ],
+      "returncode": 0,
+      "output": "Output checks passed: 145 CSV channels, 288 nonempty histograms\nProcessed entry count confirmed: 10000000\n"
+    },
+    {
+      "command": [
+        "analysis/20261018-time-offset-revision/tests/build/verify",
+        "compare",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/sample-final-fit/time_offset_6015.root",
+        "analysis/20261018-time-offset-revision/tests/build/sample/time_offset_6015.root"
+      ],
+      "returncode": 0,
+      "output": "FIT on/off spectra agree bin by bin, including flow\n"
+    },
+    {
+      "command": [
+        "analysis/20261018-time-offset-revision/tests/build/verify",
+        "check",
+        "/home/ys/data_401/data/chx_20260622/time_offset/time_offset_6015",
+        "1",
+        "266414896"
+      ],
+      "returncode": 0,
+      "output": "Output checks passed: 145 CSV channels, 288 nonempty histograms\nProcessed entry count confirmed: 266414896\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "formal_source_directory_only_six_required_files_and_sample_CSV_unchanged",
+      "returncode": 0,
+      "files": [
+        "Makefile",
+        "README.md",
+        "UserDefine.hh",
+        "main.cc",
+        "time_offset.cc",
+        "time_offset.hh"
+      ],
+      "sample_csv_sha256": "1d9768b7a8c5db64e0e0ec729f0d019d7ccb58a3a34d9466faa30c0c6880d915"
+    }
+  ],
+  "scope": "Move developer tests and evidence out of formal program; no production algorithm changes"
+}

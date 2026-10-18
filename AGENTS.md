@@ -1,5 +1,7 @@
 # chx_20260622 项目约定
 
+- 2026-10-18 用户明确：正式源码目录只放今后分析所需的程序、配置及必要使用说明。冒烟测试、开发核查程序和验收记录存放于对应的 `analysis/` 任务目录，由代理在开发和交付时执行，不列入用户日常操作流程。本次时间对齐源码为 `time_offset/time_offset/`，开发核查与记录为 `analysis/20261018-time-offset-revision/`，ROOT/CSV/简要MD结果位于 `time_offset/`。
+
 - 2026-10-18 用户将本次时间对齐实现的项目一级目录 `timeOffset/` 重命名为 `time_offset/`。当前源码使用 `time_offset/time_offset/`，结果输出使用 `time_offset/`；此前实施计划中的当前路径已对应更新，历史运行证据及 `archive/20261018-time-offset/` 内旧路径保留原样。此条替代下文关于当前实现使用 `timeOffset/` 的路径约定。
 
 - 2026-10-18 用户明确归档旧 `time_offset/` 与 `timeOffset/`：已整体移至本地 `archive/20261018-time-offset/`。后续时间对齐程序以 `analysis/plans/process/2026-10-15-time-offset-revision.md` 为实施依据，重新建立 `timeOffset/time_offset/`；旧实现和结果仅为归档参考，不作为现行方法。归档不等于授权删除其中内容，本轮未启动新实现。

@@ -23,18 +23,4 @@ CSV中 `final_mean` 是完整高斯净面积加权中心，误差按联合协方
 
 `reference` 行均值和偏移为0；`not_fitted/no_peak/fit_failed` 的结果数值留空；`review` 是需回查候选；`ok` 只表示当前工程检查通过。固定事件包跨包损失、分箱/量化、模型选择、范围变化及run内漂移不包含在统计误差中。双峰加权中心归零不能使两个峰合并，拟合收敛也不等于全部通道校准通过。
 
-验证入口（真实样本不截断或改写源ROOT）：
-
-```bash
-make check
-./verify sample 6015 /home/ys/data_401/data/chx_20260622/decode_data/data_C2_6015_6015_wave.root ../sample-final-fit 10000000 1
-./verify sample 6015 /home/ys/data_401/data/chx_20260622/decode_data/data_C2_6015_6015_wave.root ../sample-final-off 10000000 0
-./verify check ../sample-final-fit/time_offset_6015 1
-./verify check ../sample-final-off/time_offset_6015 0
-./verify compare ../sample-final-fit/time_offset_6015.root ../sample-final-off/time_offset_6015.root
-./verify check ../time_offset_6015 1
-```
-
-`verify self` 覆盖cut、固定事件包、正负W、重复命中、末包、flow、面积权重/协方差、合成双峰及输入错误/FIT关闭/不覆盖等检查。`verify inspect <root> <hist-prefix>` 可只读诊断已有2ns/24ns谱；归档旧谱前缀为 `c0_s2_ch6` 等，新谱为 `cid0_sid2_ch6`，旧谱仅作可选方法回查。
-
-完整运行的ROOT及编译产物留本地；源码、验证、CSV/MD同步Git。本次输出CSV/MD的相同副本保存在源码目录，用于现有版本白名单下留存；正常运行输出仍在UserDefine目录。实际命令、样本范围、代表通道与限制见 `execution.md`；机器证据见 `verification.json`。新程序依据最终实施计划；旧目录与结果保持归档原样。
+结果按 UserDefine 写入输出目录，包含同名 ROOT、CSV 和简要 MD；ROOT 和编译文件保留本地。正式源码目录只保留分析程序、配置、Makefile 和本说明。

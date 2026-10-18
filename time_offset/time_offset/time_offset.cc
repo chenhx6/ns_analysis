@@ -10,7 +10,6 @@
 #include <TROOT.h>
 #include <TMatrixDSym.h>
 #include <algorithm>
-#include <cassert>
 #include <cmath>
 #include <filesystem>
 #include <fstream>
@@ -511,101 +510,4 @@ void TimeOffset::Write(int run,const std::string &input,const std::string &outpu
       <<" double="<<doubles<<" max_range_span_ns="<<worst_span<<std::endl;
     for(const auto &p:statuses) std::cout<<p.first<<'='<<p.second<<' ';
     std::cout<<'\n'<<base<<".{root,csv,md}"<<std::endl;
-}
-
-// 确定性算法检查；合成数据只存在于测试内存，不混入实验结果。
-void TimeOffset::SelfCheck() {
-    Validate();
-    assert(Cut(0,0,1) && Cut(1,0,1) && !Cut(2,0,1));
-    assert(Cut(100,-1,-1) && Cut(2,2,-1) && !Cut(1,2,-1));
-    assert(Cut(16,-1,16) && !Cut(17,-1,16) && Cut(5,5,5) && !Cut(4,5,5));
-    bool bad=false; try { CheckCut(2,1); } catch(...) { bad=true; } assert(bad);
-    assert(Tick(125)==8 && Tick(250)==8 && Tick(100)==10 && Tick(500)==10);
-    bad=false; try { Tick(123); } catch(...) { bad=true; } assert(bad);
-    TimeOffset t;
-    Address ref=Ref(),g{UserDefine::GE_CID,2,10},c{UserDefine::CSI_CID,3,7};
-    t.ProcessEntry(g,10000,8); t.ProcessEntry(g,10080,8);
-    t.ProcessEntry(c,10100,10); t.ProcessEntry(c,10120,10);
-    t.ProcessEntry(ref,10200,8); t.ProcessEntry(ref,10240,8);
-    t.ProcessEntry(g,11999,8); // |dt到固定起点|恰好W，仍在同包。
-    t.ProcessEntry(g,12000,8); // 新包，前包Ge末次11999，对应Delta-t=-1759。
-    t.ProcessEntry(ref,12080,8); t.EndEvent(); // 末包保留。
-    assert(t.events==2 && t.reference_events==2);
-    assert(t.spectra[g].fine->GetEntries()==2 && t.spectra[c].fine->GetEntries()==2);
-    assert(t.spectra[g].fine->GetBinContent(t.spectra[g].fine->FindBin(-1759))==1);
-    assert(t.spectra[c].fine->GetBinContent(t.spectra[c].fine->FindBin(120))==1);
-    assert(t.spectra[ref].fine->GetEntries()==0);
-    TimeOffset reverse;
-    reverse.ProcessEntry(ref,10000,8); reverse.ProcessEntry(g,8001,8); reverse.ProcessEntry(g,8000,8); reverse.EndEvent();
-    assert(reverse.events==2 && reverse.spectra[g].fine->GetEntries()==1); // 绝对值W边界。
-    t.Fill(g,2000); t.Fill(g,-2000); t.Fill(g,9000);
-    auto &h=*t.spectra[g].fine;
-    assert(h.FindBin(-2000)>0 && h.FindBin(2000)<=h.GetNbinsX());
-    assert(h.GetBinContent(h.GetNbinsX()+1)==1);
-    assert(h.Integral(0,h.GetNbinsX()+1)==t.spectra[g].coarse->Integral(0,t.spectra[g].coarse->GetNbinsX()+1));
-    assert(Offset(22.7,8)==16 && Offset(-22.7,8)==-16 && Offset(29.9,10)==20 && Offset(-29.9,10)==-20);
-    std::vector<double> p{10,-20,5,10,60,5,2,2},cov(64,0);
-    for(int i=0;i<8;++i) cov[i*8+i]=0.01;
-    assert(std::abs(Center(p,cov,2).first-20)<1e-10);
-    p[5]=15; assert(std::abs(Center(p,cov,2).first-40)<1e-10);
-    auto a=Center(p,cov,2);
-    for(int i=0;i<3;++i) std::swap(p[i],p[i+3]);
-    assert(std::abs(Center(p,cov,2).first-a.first)<1e-10);
-    for(int i:{0,3}) p[i]*=100;
-    assert(std::abs(Center(p,cov,2).first-a.first)<1e-10);
-    p={10,-20,5,0,60,5,2,2}; assert(Center(p,cov,2).first==-20);
-    p={10,-20,5,8,60,15,2,2};
-    // 独立中心差分核对JCJ^T，包含非零协方差项。
-    cov[1*8+4]=cov[4*8+1]=0.002;
-    std::vector<double> gradient(8);
-    for(int i=0;i<8;++i) {
-        auto lo=p,hi=p; double step=1e-5; lo[i]-=step; hi[i]+=step;
-        gradient[i]=(Center(hi,cov,2).first-Center(lo,cov,2).first)/(2*step);
-    }
-    double variance=0;
-    for(int i=0;i<8;++i) for(int j=0;j<8;++j) variance+=gradient[i]*cov[i*8+j]*gradient[j];
-    assert(std::abs(std::pow(Center(p,cov,2).second,2)-variance)<1e-7);
-    Spectrum synthetic;
-    synthetic.fine.reset(new TH1D("synthetic_fine","",HIST_BIN_NUMBER,HIST_X_MIN,HIST_X_MAX));
-    synthetic.coarse.reset(new TH1D("synthetic_coarse","",FIT_HIST_BIN_NUMBER,FIT_HIST_X_MIN,FIT_HIST_X_MAX));
-    TF1 truth("truth","gaus(0)+gaus(3)+pol1(6)",HIST_X_MIN,HIST_X_MAX);
-    truth.SetParameters(400,-180,30,250,60,40,10,0);
-    for(auto *hist:{synthetic.fine.get(),synthetic.coarse.get()}) {
-        for(int i=1;i<=hist->GetNbinsX();++i)
-            hist->SetBinContent(i,truth.Integral(hist->GetBinLowEdge(i),hist->GetBinLowEdge(i+1))/24);
-    }
-    auto shape=FindShape(*synthetic.fine); assert(shape.signal && shape.two);
-    auto result=Analyze(synthetic,true);
-    assert(result.fit.numeric && result.fit.components==2);
-    double expected=(-180*400*30+60*250*40)/(400*30+250*40);
-    assert(std::abs(result.fit.mean-expected)<1);
-    assert(Analyze(synthetic,false).status=="not_fitted");
-    std::cout<<"Self-check passed: cuts, fixed anchor, +/-W, Ge/CsI, final packet, flow, area/covariance, ROOT fit"<<std::endl;
-}
-
-// 可选旧谱只读诊断，绝不作为新实验谱或正式offset输出。
-void TimeOffset::InspectSpectrum(const std::string &file,const std::string &name) {
-    TFile source(file.c_str(),"READ"); Require(!source.IsZombie(),"Cannot open spectrum source");
-    auto *fine=dynamic_cast<TH1D*>(source.Get((name+"_2ns").c_str()));
-    auto *coarse=dynamic_cast<TH1D*>(source.Get((name+"_24ns").c_str()));
-    Require(fine && coarse,"Missing representative spectrum");
-    Spectrum s;
-    s.fine.reset(static_cast<TH1D*>(fine->Clone("inspect_fine"))); s.fine->SetDirectory(nullptr);
-    s.coarse.reset(static_cast<TH1D*>(coarse->Clone("inspect_coarse"))); s.coarse->SetDirectory(nullptr);
-    auto shape=FindShape(*s.fine);
-    std::cout<<"seed="<<shape.peak<<" second="<<shape.second<<" two="<<shape.two<<" tails="<<shape.left<<':'<<shape.right<<'\n';
-    std::vector<std::pair<double,double>> peaks;
-    for(int i=2;i<s.fine->GetNbinsX();++i)
-        if(shape.smooth[i]>=shape.smooth[i-1] && shape.smooth[i]>shape.smooth[i+1]) peaks.emplace_back(shape.smooth[i],s.fine->GetBinCenter(i));
-    std::sort(peaks.rbegin(),peaks.rend());
-    for(size_t i=0;i<std::min(size_t(8),peaks.size());++i) std::cout<<" smooth_max="<<peaks[i].second<<':'<<peaks[i].first;
-    std::cout<<'\n';
-    auto result=Analyze(s,true);
-    std::cout<<std::setprecision(12)<<name<<" status="<<result.status<<" reason="<<result.reason
-      <<" mean="<<result.fit.mean<<" error="<<result.fit.error<<" components="<<result.fit.components
-      <<" span="<<result.sensitivity<<'\n';
-    for(const auto &f:result.trials)
-        std::cout<<"  range="<<f.range.low<<':'<<f.range.high<<" model="<<f.components<<" mean="<<f.mean
-          <<" deviance="<<f.deviance<<" ndf="<<f.ndf<<" side="<<f.side_deviance<<" peak="<<f.peak_deviance
-          <<" BIC_single="<<f.single_bic<<" BIC_double="<<f.double_bic<<'\n';
 }
