@@ -110,8 +110,12 @@ def _sync(task, message, evidence, result, basis, executor, files):
             raise ValueError('Remote history needs integration before delivery; refusing force push')
     paths = candidates(files)
     committed = False
-    if paths:
-        git('add', '--', *[':(literal)' + name for name in paths])
+    # Already staged deletions have no index path left for git add to match.
+    deleted = set(name.decode('utf-8', 'surrogateescape') for name in
+                  git('diff', '--cached', '--no-renames', '--diff-filter=D', '--name-only', '-z').stdout.split(b'\0') if name)
+    additions = [name for name in paths if name not in deleted or (ROOT/name).exists()]
+    if additions:
+        git('add', '--', *[':(literal)' + name for name in additions])
     staged = git('diff', '--cached', '--quiet', check=False)
     if staged.returncode not in (0, 1):
         raise RuntimeError('Unable to inspect staged changes: ' + staged.stderr.decode('utf-8', 'replace'))

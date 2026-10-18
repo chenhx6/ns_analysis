@@ -102,6 +102,15 @@ def check():
             assert project_sync.stop_status({'hook_event_name':'Stop', 'cwd':str(root), 'stop_hook_active':True}) == {}
             second = project_sync.sync('验证交付', 'Verify updated automatic delivery', 'analysis/check.json', '更新内容已推送')
             assert second['tags'] == ['Sync-fixture-验证交付-2']
+            # A merge can arrive with a rename already staged and the old path absent.
+            command(root, 'mv', 'analysis/example.md', 'analysis/moved.md')
+            moved = project_sync.sync('暂存改名', 'Deliver an already staged rename', 'analysis/check.json',
+                                      '暂存改名保留', files=['analysis/example.md', 'analysis/moved.md'])
+            assert moved['head'] == command(remote, 'rev-parse', 'main')
+            assert 'analysis/moved.md' in command(remote, 'ls-tree', '-r', '--name-only', 'main').splitlines()
+            command(root, 'mv', 'analysis/moved.md', 'analysis/example.md')
+            project_sync.sync('恢复样例路径', 'Restore fixture path', 'analysis/check.json',
+                              '样例路径恢复', files=['analysis/example.md', 'analysis/moved.md'])
             project_sync.git('commit', '--allow-empty', '-m', 'Unpushed fixture')
             assert project_sync.stop_status({'hook_event_name':'Stop', 'cwd':str(root)})['decision'] == 'block'
             project_sync.sync('retry', 'No new file changes', 'analysis/check.json')
