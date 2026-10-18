@@ -1,9 +1,9 @@
 {
   "status": "passed",
-  "scope": "Plan document changes only; no implementation, compilation or time-offset processing",
+  "scope": "Final implementation plan document only; no analysis code changes, compilation or analysis execution",
   "checks": [
     {
-      "name": "Plan consistency: absolute window; former one-sided condition appears only in explanation of correction; both histograms with either fit setting; three outputs, required CSV columns and signed decoder truncation. Read-only checked sort.cc/r2root.cc; no analysis execution",
+      "name": "Final plan requirements cross-check: configuration and mandatory run/reference, sort absolute window, both histograms and fit switch, models and area weights/covariance, signed truncation, three outputs, stages and acceptance criteria; no historical patch narrative; source references and math/bin arithmetic checked",
       "returncode": 0
     }
   ]
