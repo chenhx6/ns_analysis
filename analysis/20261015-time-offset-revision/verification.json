@@ -3,7 +3,7 @@
   "scope": "Plan document changes only; no implementation, compilation or time-offset processing",
   "checks": [
     {
-      "name": "Checked ROOT three-parameter bins, mandatory run, explicit reference and cut errors, integer MIN/MAX proposal, nonempty histogram output, tick explanation and optional manual overrides; removed conflicting prior proposals",
+      "name": "2026-10-18 minimal plan edit checked: no manual override table/interfaces in scope; consistent implementation and discussion clauses; Ponytail constraint with necessary correctness checks preserved",
       "returncode": 0
     }
   ]
