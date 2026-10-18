@@ -1,0 +1,182 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "make",
+        "-C",
+        "timeOffset/time_offset",
+        "check"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset'\n./verify self\nSelf-check passed: cuts, fixed anchor, +/-W, Ge/CsI, final packet, flow, area/covariance, ROOT fit\ninput=/tmp/chx-time-offset-io-10/good.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=2 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-10/off/time_offset_1.{root,csv,md}\nOutput checks passed: 2 CSV channels, 2 nonempty histograms\ninput=/tmp/chx-time-offset-io-10/no_ref.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-10/sr.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-10/mixed.root entries=3 process=3 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=3 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-10/mixed-out/time_offset_1.{root,csv,md}\nI/O checks passed: branch/sr/reference errors, no overwrite, FIT=false, mixed ticks\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset'\n"
+    },
+    {
+      "command": [
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/verify",
+        "check",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/sample-final-fit/time_offset_6015",
+        "1",
+        "10000000"
+      ],
+      "returncode": 0,
+      "output": "Output checks passed: 145 CSV channels, 288 nonempty histograms\nProcessed entry count confirmed: 10000000\n"
+    },
+    {
+      "command": [
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/verify",
+        "check",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/sample-final-off/time_offset_6015",
+        "0",
+        "10000000"
+      ],
+      "returncode": 0,
+      "output": "Output checks passed: 145 CSV channels, 288 nonempty histograms\nProcessed entry count confirmed: 10000000\n"
+    },
+    {
+      "command": [
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/verify",
+        "compare",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/sample-final-fit/time_offset_6015.root",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/sample-final-off/time_offset_6015.root"
+      ],
+      "returncode": 0,
+      "output": "FIT on/off spectra agree bin by bin, including flow\n"
+    },
+    {
+      "command": [
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/verify",
+        "check",
+        "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset_6015",
+        "1",
+        "266414896"
+      ],
+      "returncode": 0,
+      "output": "Output checks passed: 145 CSV channels, 288 nonempty histograms\nProcessed entry count confirmed: 266414896\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "./time_offset",
+        "6015"
+      ],
+      "cwd": "timeOffset/time_offset",
+      "returncode": 0,
+      "output": "input=/home/ys/data_401/data/chx_20260622/decode_data/data_C2_6015_6015_wave.root entries=266414896 process=266414896 fit=1\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nRead 10000000 / 266414896\nRead 20000000 / 266414896\nRead 30000000 / 266414896\nRead 40000000 / 266414896\nRead 50000000 / 266414896\nRead 60000000 / 266414896\nRead 70000000 / 266414896\nRead 80000000 / 266414896\nRead 90000000 / 266414896\nRead 100000000 / 266414896\nRead 110000000 / 266414896\nRead 120000000 / 266414896\nRead 130000000 / 266414896\nRead 140000000 / 266414896\nRead 150000000 / 266414896\nRead 160000000 / 266414896\nRead 170000000 / 266414896\nRead 180000000 / 266414896\nRead 190000000 / 266414896\nRead 200000000 / 266414896\nRead 210000000 / 266414896\nRead 220000000 / 266414896\nRead 230000000 / 266414896\nRead 240000000 / 266414896\nRead 250000000 / 266414896\nRead 260000000 / 266414896\nprocessed=266414896 events=179145148 ref_events=10144330 numeric_fits=144 double=59 max_range_span_ns=104.632\nok=23 reference=1 review=121 \n../time_offset_6015.{root,csv,md}\n",
+      "scope": "Completed real full input processing, captured process exit 0"
+    },
+    {
+      "name": "required_run_[]",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>"
+    },
+    {
+      "name": "required_run_['abc']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>; run must be a positive integer"
+    },
+    {
+      "name": "required_run_['0']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Invalid run"
+    },
+    {
+      "name": "required_run_['6015x']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>; run must be a positive integer"
+    },
+    {
+      "name": "required_run_['-1']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>; run must be a positive integer"
+    },
+    {
+      "name": "required_run_['6015', '6016']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>"
+    },
+    {
+      "name": "reference_cut",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Reference is unconfigured, invalid or excluded by cuts",
+      "build_returncode": 0
+    },
+    {
+      "name": "invalid_cut",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Invalid address cut",
+      "build_returncode": 0
+    },
+    {
+      "name": "invalid_axis",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Invalid fine histogram",
+      "build_returncode": 0
+    },
+    {
+      "name": "UserDefine_dependency_rebuild",
+      "returncode": 0,
+      "build_output": "g++ -O2 -Wall -Wextra -pedantic -pthread -std=c++17 -m64 -I/home/ys/opt/physics/root-6.34.08/include main.cc time_offset.cc -o time_offset -L/home/ys/opt/physics/root-6.34.08/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib -pthread -lm -ldl -rdynamic"
+    }
+  ],
+  "input": {
+    "path": "/home/ys/data_401/data/chx_20260622/decode_data/data_C2_6015_6015_wave.root",
+    "bytes": 7994690176,
+    "entries": 266414896,
+    "range": [
+      0,
+      266414896
+    ]
+  },
+  "finite_sample_range": [
+    0,
+    10000000
+  ],
+  "source_sha256": {
+    "verify.cc": "bcf60c0b8edb1b8fa5f93c4ff956efd7558b20bf2897e08c90d07327613fa2da",
+    "time_offset.hh": "a74e564995bcd200149db8154be9919c7027dddc97038a9097d4617ba03887de",
+    "time_offset.cc": "886fa543dce23b56eb436bfaa894ba68b1e816514972ff711bf21cfd5eff77d3",
+    "main.cc": "ea67c02e9ddb1e3b0b93cdae98ae741de80431bc8d0e552119ae6797cbd30c0b",
+    "UserDefine.hh": "646d622237758787f5cf7e6b94367b914384ffb8d441b44c55c0057438fec021",
+    "Makefile": "ce7e0f25ce24e007534ef96488583aaeda334d8cbd2536bfbd369b62d451f745"
+  },
+  "artifacts": {
+    "time_offset_6015.md": {
+      "bytes": 10224,
+      "sha256": "5742446e90791f72bed892bc59c86e703a7398654dbc382bbc7c14ddd8f223e9"
+    },
+    "time_offset_6015.csv": {
+      "bytes": 72139,
+      "sha256": "7ebc60b78cb605dd4a0deba52838c76a981af69a53f160971554da5b45e29eb7"
+    },
+    "time_offset_6015.root": {
+      "bytes": 572280,
+      "sha256": "cbac268269dc92f3159fc0a62666ee977c1719b2ef4c4299b070a5675333af04"
+    }
+  },
+  "fit_counts": {
+    "reference": 1,
+    "ok": 23,
+    "review": 121,
+    "single": 85,
+    "double": 59
+  },
+  "limitation": "Engineering validation passed; 121 review candidates are not certified calibration offsets."
+}
