@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "make",
+        "-C",
+        "timeOffset/time_offset",
+        "check"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/integrations/8226d0e7b27d4145956413e6754d97b7/77fd9ca493444324b76775c6045ce6ba/timeOffset/time_offset'\ng++ -O2 -Wall -Wextra -pedantic -pthread -std=c++17 -m64 -I/home/ys/opt/physics/root-6.34.08/include verify.cc time_offset.cc -o verify -L/home/ys/opt/physics/root-6.34.08/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib -pthread -lm -ldl -rdynamic\ng++ -O2 -Wall -Wextra -pedantic -pthread -std=c++17 -m64 -I/home/ys/opt/physics/root-6.34.08/include main.cc time_offset.cc -o time_offset -L/home/ys/opt/physics/root-6.34.08/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib -pthread -lm -ldl -rdynamic\n./verify self\nSelf-check passed: cuts, fixed anchor, +/-W, Ge/CsI, final packet, flow, area/covariance, ROOT fit\ninput=/tmp/chx-time-offset-io-53/good.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=2 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-53/off/time_offset_1.{root,csv,md}\nOutput checks passed: 2 CSV channels, 2 nonempty histograms\ninput=/tmp/chx-time-offset-io-53/no_ref.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-53/sr.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-53/mixed.root entries=3 process=3 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=3 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-53/mixed-out/time_offset_1.{root,csv,md}\nI/O checks passed: branch/sr/reference errors, no overwrite, FIT=false, mixed ticks\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/integrations/8226d0e7b27d4145956413e6754d97b7/77fd9ca493444324b76775c6045ce6ba/timeOffset/time_offset'\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "8226d0e7b27d4145956413e6754d97b7",
+  "employee_head": "62d2f3e49332ca481570f361075a278563ed8e24",
+  "employee_evidence_sha256": "f736a725ddfd7882a82b62e894d07ac389e553849df17c171a379fcdf7a47594"
+}

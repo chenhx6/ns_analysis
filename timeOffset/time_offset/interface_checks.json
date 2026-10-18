@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "required_run_[]",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>"
+    },
+    {
+      "name": "required_run_['abc']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>; run must be a positive integer"
+    },
+    {
+      "name": "required_run_['0']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Invalid run"
+    },
+    {
+      "name": "required_run_['6015x']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>; run must be a positive integer"
+    },
+    {
+      "name": "required_run_['-1']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>; run must be a positive integer"
+    },
+    {
+      "name": "required_run_['6015', '6016']",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Usage: ./time_offset <run>"
+    },
+    {
+      "name": "reference_cut",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Reference is unconfigured, invalid or excluded by cuts",
+      "build_returncode": 0
+    },
+    {
+      "name": "invalid_cut",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Invalid address cut",
+      "build_returncode": 0
+    },
+    {
+      "name": "invalid_axis",
+      "returncode": 0,
+      "observed_returncode": 1,
+      "output": "Error: Invalid fine histogram",
+      "build_returncode": 0
+    },
+    {
+      "name": "UserDefine_dependency_rebuild",
+      "returncode": 0,
+      "build_output": "g++ -O2 -Wall -Wextra -pedantic -pthread -std=c++17 -m64 -I/home/ys/opt/physics/root-6.34.08/include main.cc time_offset.cc -o time_offset -L/home/ys/opt/physics/root-6.34.08/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib -pthread -lm -ldl -rdynamic"
+    }
+  ]
+}
