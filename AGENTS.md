@@ -1,5 +1,7 @@
 # chx_20260622 项目约定
 
+- 2026-10-18 用户将本次时间对齐实现的项目一级目录 `timeOffset/` 重命名为 `time_offset/`。当前源码使用 `time_offset/time_offset/`，结果输出使用 `time_offset/`；此前实施计划中的当前路径已对应更新，历史运行证据及 `archive/20261018-time-offset/` 内旧路径保留原样。此条替代下文关于当前实现使用 `timeOffset/` 的路径约定。
+
 - 2026-10-18 用户明确归档旧 `time_offset/` 与 `timeOffset/`：已整体移至本地 `archive/20261018-time-offset/`。后续时间对齐程序以 `analysis/plans/process/2026-10-15-time-offset-revision.md` 为实施依据，重新建立 `timeOffset/time_offset/`；旧实现和结果仅为归档参考，不作为现行方法。归档不等于授权删除其中内容，本轮未启动新实现。
 
 - 2026-10-15 用户确定：本项目研究方向为原子核结构，包括能级纲图、gamma 线强度、ADO、P 等参数和集体激发；借鉴 `zhangxin8069/configure` 的工作机制时，专业表述按本方向适配，不照搬 LQCD 或个人环境。本轮只适配提示词与工具工作流，不新增核谱分析程序。常规物理判断参照其自主、有证据、如实说明不确定性的边界，不额外增加逐项用户审批；本项目已有明确约定和宿主权限继续优先。

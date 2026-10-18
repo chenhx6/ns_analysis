@@ -14,7 +14,7 @@
 
 ## 2. 文件与使用方式
 
-新源码建立于 `timeOffset/time_offset/`：
+新源码位于 `time_offset/time_offset/`（2026-10-18 用户将项目一级 `timeOffset/` 重命名为 `time_offset/`）：
 
 | 文件 | 职责 |
 |---|---|
@@ -28,14 +28,14 @@
 执行形式：
 
 ```bash
-cd timeOffset/time_offset
+cd time_offset/time_offset
 make
 ./time_offset <run>
 ```
 
 直接 `make`，无需附加变量；修改 UserDefine 后自动重编译。run 必须从命令行传入，缺失或无效则打印用法并退出。UserDefine 不设默认 run。
 
-本次验证输入为 `decode_data/data_C2_6015_6015_wave.root`。6015仅是验证样本，不写入算法或默认参数。输入地址、文件命名规则及输出目录由 UserDefine 配置；本实验输出目录设为项目内 `timeOffset/`。已有结果不直接覆盖。
+本次验证输入为 `decode_data/data_C2_6015_6015_wave.root`。6015仅是验证样本，不写入算法或默认参数。输入地址、文件命名规则及输出目录由 UserDefine 配置；本实验输出目录设为项目内 `time_offset/`。已有结果不直接覆盖。
 
 ## 3. UserDefine 配置
 
@@ -221,4 +221,4 @@ ROOT及编译文件不提交Git；源码、配置说明、小型CSV/MD和必要�
 
 ## 8. 交接状态
 
-用户已明确授权本计划实施。程序在独立工作区 `.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/` 建立；真实输入只读，未改原decoder/crate或归档结果。已完成第6节步骤1–5及1000万条有限样本读入/配对/保存核对，步骤6已完成全部266,414,896条处理及ROOT/CSV回读：23个ok、121个review、1个reference，拟合收敛不代表校准通过；步骤7的源码、说明、结果副本及实际验证记录已备齐，交付采用项目协调器与可信检查/hooks。执行依据、命令、工程阈值与真实结果集中记录于 `timeOffset/time_offset/execution.md`；后续更新交付和验证状态，不另建计划。旧目录继续完整保留于归档，清单见 `analysis/20261018-archive-time-offset/manifest.json`。
+用户已明确授权本计划实施。程序在独立工作区 `.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/` 建立；真实输入只读，未改原decoder/crate或归档结果。已完成第6节步骤1–5及1000万条有限样本读入/配对/保存核对，步骤6已完成全部266,414,896条处理及ROOT/CSV回读：23个ok、121个review、1个reference，拟合收敛不代表校准通过；步骤7的源码、说明、结果副本及实际验证记录已备齐，交付采用项目协调器与可信检查/hooks。执行依据、命令、工程阈值与真实结果集中记录于 `time_offset/time_offset/execution.md`；后续更新交付和验证状态，不另建计划。旧目录继续完整保留于归档，清单见 `analysis/20261018-archive-time-offset/manifest.json`。

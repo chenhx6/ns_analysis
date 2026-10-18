@@ -17,9 +17,9 @@ def check():
         "time_offset/report.md", "time_offset/offsets.csv", "time_offset/channel_map.csv",
         "time_offset/configs/group_01/crate0.dat", "time_offset/configs/group_01/crate1.dat",
         "time_offset/figures/group_01.svg", "time_offset/verification.json",
-        "timeOffset/time_offset/time_offset.cc", "timeOffset/time_offset/time_offset.hh",
-        "timeOffset/time_offset/Makefile", "timeOffset/time_offset/time_offset_6015.csv",
-        "timeOffset/time_offset/verification.json",
+        "time_offset/time_offset/time_offset.cc", "time_offset/time_offset/time_offset.hh",
+        "time_offset/time_offset/Makefile", "time_offset/time_offset/time_offset_6015.csv",
+        "time_offset/time_offset/verification.json",
     ]
     rejected = [
         "plans/process/raw.root", "decisions/raw.csv", "time_offset/time_offset.root",
@@ -27,8 +27,8 @@ def check():
         "time_offset/tool.o", "time_offset/__pycache__/helper.py", "time_offset/auth.json",
         "time_offset/secrets.json", "time_offset/.env", "time_offset/key.pem",
         "decode_data/data_C2_6015_6015_wave.root", "Ge/6015/data.bin", "CsI/6015/data.bin",
-        "timeOffset/time_offset/time_offset", "timeOffset/time_offset/time_offset_6015.root",
-        "timeOffset/time_offset/credentials.json", "timeOffset/sample/test.cc",
+        "time_offset/time_offset/time_offset", "time_offset/time_offset/time_offset_6015.root",
+        "time_offset/time_offset/credentials.json", "timeOffset/sample/test.cc",
     ]
     for path in accepted + rejected:
         expected = path in accepted

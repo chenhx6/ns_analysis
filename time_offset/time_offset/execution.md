@@ -1,5 +1,7 @@
 # run 6015实施与验证
 
+2026-10-18 用户将本次实现的项目一级目录 `timeOffset/` 重命名为 `time_offset/`。当前源码位于 `time_offset/time_offset/`，结果位于 `time_offset/`；下文实际执行命令、旧工作区路径和原始验证证据保留运行时记录。
+
 本次依据定稿于2026-10-18的 `analysis/plans/process/2026-10-15-time-offset-revision.md` 以及用户本次明确实施授权。独立员工 `time-offset-impl` 在普通Git克隆中执行；旧time_offset/timeOffset归档、原decoder和crate配置、原始数据及外部software均未修改。仅读取授权的event/sort.cc作为事件包结构参考。
 
 ## 实现与实际命令

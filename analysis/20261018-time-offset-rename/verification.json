@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "renamed_scientific_sources_results_and_original_evidence_unchanged",
+      "returncode": 0,
+      "files": [
+        {
+          "old": "timeOffset/time_offset/Makefile",
+          "new": "time_offset/time_offset/Makefile",
+          "sha256": "ce7e0f25ce24e007534ef96488583aaeda334d8cbd2536bfbd369b62d451f745"
+        },
+        {
+          "old": "timeOffset/time_offset/UserDefine.hh",
+          "new": "time_offset/time_offset/UserDefine.hh",
+          "sha256": "646d622237758787f5cf7e6b94367b914384ffb8d441b44c55c0057438fec021"
+        },
+        {
+          "old": "timeOffset/time_offset/interface_checks.json",
+          "new": "time_offset/time_offset/interface_checks.json",
+          "sha256": "5cac5aa7d39e418c623e850e46beeb3f07c3de8cab6bd8da68c85e0d3f747e35"
+        },
+        {
+          "old": "timeOffset/time_offset/main.cc",
+          "new": "time_offset/time_offset/main.cc",
+          "sha256": "ea67c02e9ddb1e3b0b93cdae98ae741de80431bc8d0e552119ae6797cbd30c0b"
+        },
+        {
+          "old": "timeOffset/time_offset/time_offset.cc",
+          "new": "time_offset/time_offset/time_offset.cc",
+          "sha256": "886fa543dce23b56eb436bfaa894ba68b1e816514972ff711bf21cfd5eff77d3"
+        },
+        {
+          "old": "timeOffset/time_offset/time_offset.hh",
+          "new": "time_offset/time_offset/time_offset.hh",
+          "sha256": "a74e564995bcd200149db8154be9919c7027dddc97038a9097d4617ba03887de"
+        },
+        {
+          "old": "timeOffset/time_offset/time_offset_6015.csv",
+          "new": "time_offset/time_offset/time_offset_6015.csv",
+          "sha256": "7ebc60b78cb605dd4a0deba52838c76a981af69a53f160971554da5b45e29eb7"
+        },
+        {
+          "old": "timeOffset/time_offset/time_offset_6015.md",
+          "new": "time_offset/time_offset/time_offset_6015.md",
+          "sha256": "5742446e90791f72bed892bc59c86e703a7398654dbc382bbc7c14ddd8f223e9"
+        },
+        {
+          "old": "timeOffset/time_offset/verification.json",
+          "new": "time_offset/time_offset/verification.json",
+          "sha256": "f736a725ddfd7882a82b62e894d07ac389e553849df17c171a379fcdf7a47594"
+        },
+        {
+          "old": "timeOffset/time_offset/verify.cc",
+          "new": "time_offset/time_offset/verify.cc",
+          "sha256": "bcf60c0b8edb1b8fa5f93c4ff956efd7558b20bf2897e08c90d07327613fa2da"
+        }
+      ]
+    },
+    {
+      "name": "new_Makefile_policy_allows_source_and_rejects_ROOT_and_binary",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "make",
+        "-C",
+        "time_offset/time_offset",
+        "check"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/time_offset/time_offset'\n./verify self\nSelf-check passed: cuts, fixed anchor, +/-W, Ge/CsI, final packet, flow, area/covariance, ROOT fit\ninput=/tmp/chx-time-offset-io-148/good.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=2 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-148/off/time_offset_1.{root,csv,md}\nOutput checks passed: 2 CSV channels, 2 nonempty histograms\ninput=/tmp/chx-time-offset-io-148/no_ref.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-148/sr.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-148/mixed.root entries=3 process=3 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=3 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-148/mixed-out/time_offset_1.{root,csv,md}\nI/O checks passed: branch/sr/reference errors, no overwrite, FIT=false, mixed ticks\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/time_offset/time_offset'\n"
+    },
+    {
+      "command": [
+        "time_offset/time_offset/verify",
+        "check",
+        "time_offset/time_offset_6015",
+        "1",
+        "266414896"
+      ],
+      "returncode": 0,
+      "output": "Output checks passed: 145 CSV channels, 288 nonempty histograms\nProcessed entry count confirmed: 266414896\n"
+    },
+    {
+      "command": [
+        "bash",
+        "analysis/scripts/project_git.sh",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "python3",
+        "analysis/20261008-time-offset-design/test_processing_paths.py"
+      ],
+      "returncode": 0,
+      "output": "Processing path checks passed: 17 allowed, 19 excluded\n"
+    }
+  ],
+  "scope": "User-renamed directory and current path references; scientific content unchanged"
+}
