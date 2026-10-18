@@ -1,3 +1,0 @@
-time_offset/final/group_A
-time_offset/final/group_B
-time_offset/final/group_C

@@ -8,13 +8,13 @@
 
 编写简单、可读、可复用的 C++/ROOT 程序：每次读取一个解码 ROOT 文件，生成各通道相对参考通道的两套时间差谱，按开关决定是否拟合第二套谱，输出 ROOT、CSV 和简要 MD。
 
-程序结构参考 `decode_data/DecodeAndSortAll/`；事件包参考 `/home/ys/data_401/data/software/event/sort.cc:304`；时间戳换算和偏移截断依据 `decode_data/DecodeAndSortAll/r2root.cc:427`。外部源码、原始数据、原 decoder 和 crate 配置只读，旧 `time_offset/` 保留。
+程序结构参考 `decode_data/DecodeAndSortAll/`；事件包参考 `/home/ys/data_401/data/software/event/sort.cc:304`；时间戳换算和偏移截断依据 `decode_data/DecodeAndSortAll/r2root.cc:427`。外部源码、原始数据、原 decoder 和 crate 配置只读，旧 `time_offset/` 和 `timeOffset/` 已归档于本地 `archive/20261018-time-offset/`，新程序按本计划重新建立。
 
-遵循 Ponytail：复用现有 TimeOffset 类，不增加配置框架、人工例外表或预留接口。函数及关键算法行附简短注释。保留缺少 run、输入不可读、参数无效、参考被 cut 等必要检查。
+遵循 Ponytail：采用简单的 TimeOffset 类，不增加配置框架、人工例外表或预留接口。函数及关键算法行附简短注释。保留缺少 run、输入不可读、参数无效、参考被 cut 等必要检查。
 
 ## 2. 文件与使用方式
 
-源码位于 `timeOffset/time_offset/`：
+新源码建立于 `timeOffset/time_offset/`：
 
 | 文件 | 职责 |
 |---|---|
@@ -190,7 +190,7 @@ ROOT及编译文件不提交Git；源码、配置说明、小型CSV/MD和必要�
 
 | 步骤 | 工作 | 完成依据 |
 |---|---|---|
-| 1 | 拆出main.cc和UserDefine.hh，整理类接口及Makefile | 直接make成功；UserDefine变更触发重编译 |
+| 1 | 建立main.cc、UserDefine.hh、TimeOffset类及Makefile | 直接make成功；UserDefine变更触发重编译 |
 | 2 | 实现整数cut、必传run、显式参考及路径配置 | 缺参/非法配置/参考被cut时明确退出 |
 | 3 | 按sort事件包生成两谱，处理最后一个事件包 | 确定性命中样例核对配对、符号和计数 |
 | 4 | 实现单/双峰及候选范围拟合 | 代表性已有谱回查与模型诊断 |
@@ -198,7 +198,7 @@ ROOT及编译文件不提交Git；源码、配置说明、小型CSV/MD和必要�
 | 6 | 有限真实样本验证，再处理完整6015 | 记录实际读取范围及完整运行命令；结果另存，不覆盖旧产物 |
 | 7 | 更新README、简要执行报告和版本白名单 | 文件范围检查后提交并推送小型产物 |
 
-验证样例优先使用现有 `timeOffset/time_offset/time_offset_6015.root`：
+已有谱仅作可选回查，归档位置为 `archive/20261018-time-offset/timeOffset/time_offset/time_offset_6015.root`；新实现使用真实输入重新填谱，以下通道作为验证样例：
 
 | 通道 | 重点 |
 |---|---|
@@ -221,4 +221,4 @@ ROOT及编译文件不提交Git；源码、配置说明、小型CSV/MD和必要�
 
 ## 8. 交接状态
 
-本轮交付为本实施计划和文档检查记录。方案适用于上述标量ROOT结构；尚无本计划对应的新实现或新分析结果。下一步在用户明确授权实施后，从第6节步骤1开始。
+本轮交付为本实施计划和文档检查记录。方案适用于上述标量ROOT结构；尚无本计划对应的新实现或新分析结果。两个旧目录已完整归档，归档清单见 `analysis/20261018-archive-time-offset/manifest.json`。下一步在用户明确授权实施后，从第6节步骤1重新建立程序；不因归档操作启动分析。

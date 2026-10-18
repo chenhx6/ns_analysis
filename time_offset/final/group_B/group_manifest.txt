@@ -1,2 +1,0 @@
-time_offset/final/validated_B_6045
-time_offset/final/validated_B_6050

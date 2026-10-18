@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Full SHA256/path/size inventories before and after same-filesystem directory moves match",
+      "returncode": 0
+    },
+    {
+      "name": "Original directories absent; archives exist; no symlinks in archived input",
+      "returncode": 0
+    },
+    {
+      "name": "Active plan and AGENTS identify archive and clean rebuild; archive excluded by Git ignore; only listed task paths selected for delivery",
+      "returncode": 0
+    }
+  ],
+  "file_count": 494,
+  "total_bytes": 106102249,
+  "tracked_paths_removed_from_active_tree": 327
+}
