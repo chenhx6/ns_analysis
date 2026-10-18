@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "make",
+        "-C",
+        "time_offset/time_offset"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-recreate/time_offset/time_offset'\nmake: Nothing to be done for 'all'.\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-recreate/time_offset/time_offset'\n"
+    },
+    {
+      "command": [
+        "make",
+        "-C",
+        "analysis/20261018-time-offset-revision/tests",
+        "check"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-recreate/analysis/20261018-time-offset-revision/tests'\n./build/verify self\nSelf-check passed: cuts, fixed anchor, +/-W, Ge/CsI, final packet, flow, area/covariance, ROOT fit\ninput=/tmp/chx-time-offset-io-11/good.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=2 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-11/off/time_offset_1.{root,csv,md}\nOutput checks passed: 2 CSV channels, 2 nonempty histograms\ninput=/tmp/chx-time-offset-io-11/good.root entries=2 process=1 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=1 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nreference=1 \n/tmp/chx-time-offset-io-11/off/time_offset_1.{root,csv,md}\nOutput checks passed: 1 CSV channels, 0 nonempty histograms\ninput=/tmp/chx-time-offset-io-11/good.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=2 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-11/off/time_offset_1.{root,csv,md}\nOutput checks passed: 2 CSV channels, 2 nonempty histograms\ninput=/tmp/chx-time-offset-io-11/no_ref.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-11/sr.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-11/mixed.root entries=3 process=3 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=3 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-11/mixed-out/time_offset_1.{root,csv,md}\nI/O checks passed: branch/sr/reference errors, RECREATE overwrite, FIT=false, mixed ticks\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/time-offset-recreate/analysis/20261018-time-offset-revision/tests'\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    }
+  ],
+  "scope": "Same-run ROOT RECREATE and CSV/MD truncation; stale objects and text removed; no full-run outputs rewritten during development checks"
+}

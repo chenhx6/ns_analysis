@@ -220,8 +220,28 @@ void IOCheck() {
     auto good=fixture("good.root",0);
     TimeOffset().Process(1,good,(dir/"off").string(),0,false);
     CheckOutputs((dir/"off/time_offset_1").string(),false);
+    // 覆盖已有结果时旧ROOT对象、旧计数和CSV/MD尾部必须全部消失。
+    {
+        TFile previous((dir/"off/time_offset_1.root").c_str(),"UPDATE");
+        TNamed("stale_test_object","previous output").Write();
+    }
+    for(const char *ext:{".csv",".md"})
+        std::ofstream((dir/(std::string("off/time_offset_1")+ext)).string(),std::ios::app)<<"STALE_TEST_SUFFIX\n";
+    TimeOffset().Process(1,good,(dir/"off").string(),1,false);
+    CheckOutputs((dir/"off/time_offset_1").string(),false);
+    {
+        TFile recreated((dir/"off/time_offset_1.root").c_str(),"READ");
+        assert(!recreated.Get("stale_test_object") && !recreated.Get("cid0_sid2_ch6_2ns"));
+        assert(Rows((dir/"off/time_offset_1.csv").string()).size()==1);
+    }
+    for(const char *ext:{".csv",".md"}) {
+        std::ifstream file(dir/(std::string("off/time_offset_1")+ext));
+        std::string content((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>());
+        assert(content.find("STALE_TEST_SUFFIX")==std::string::npos);
+    }
+    TimeOffset().Process(1,good,(dir/"off").string(),0,false);
+    CheckOutputs((dir/"off/time_offset_1").string(),false);
     bool failed=false;
-    try { TimeOffset().Process(1,good,(dir/"off").string(),0,false); } catch(...) { failed=true; } assert(failed);
     for(auto name_mode:std::vector<std::pair<const char*,int>>{{"no_ref.root",1},{"sr.root",2},{"missing.root",3}}) {
         auto input=fixture(name_mode.first,name_mode.second),output=(dir/(std::string(name_mode.first)+"-out")).string();
         failed=false; try { TimeOffset().Process(1,input,output,0,false); } catch(...) { failed=true; }
@@ -232,7 +252,7 @@ void IOCheck() {
     auto rows=Rows((dir/"mixed-out/time_offset_1.csv").string());
     for(const auto &row:rows) if(row.at("ch")=="6") assert(row.at("tick_ns").empty() && row.at("time_offset").empty());
     fs::remove_all(dir); // 只移除本测试明确创建的独立目录。
-    std::cout<<"I/O checks passed: branch/sr/reference errors, no overwrite, FIT=false, mixed ticks"<<std::endl;
+    std::cout<<"I/O checks passed: branch/sr/reference errors, RECREATE overwrite, FIT=false, mixed ticks"<<std::endl;
 }
 // 保存的有限样本入口：正式程序不添加测试命令行参数。
 int main(int argc,char **argv) {

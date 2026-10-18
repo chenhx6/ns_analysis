@@ -11,7 +11,7 @@ analysis/20261018-time-offset-revision/tests/build/verify check time_offset/time
 
 测试编译单元直接编译正式实现以调用内部算法，自检通过单个friend声明核对事件包内部状态；没有复制另一套分析算法。正式可执行文件不包含自检或旧谱检查函数。测试二进制只生成在本目录忽略的 `build/` 中。
 
-`self` 检查cut、固定事件包、正负W、Ge/CsI重复命中、参考排除、末包、flow、面积/协方差及合成双峰；临时ROOT样例检查错误输入、禁止覆盖、拟合关闭及混合tick。`check <结果文件前缀> <预期拟合0或1> [预期处理条数]` 只读核对ROOT/CSV/MD；`compare <a.root> <b.root>` 核对两套结果逐bin一致；`inspect <root> <谱名前缀>` 只读检查已有谱。
+`self` 检查cut、固定事件包、正负W、Ge/CsI重复命中、参考排除、末包、flow、面积/协方差及合成双峰；临时ROOT样例检查错误输入、RECREATE覆盖及旧内容清除、拟合关闭及混合tick。`check <结果文件前缀> <预期拟合0或1> [预期处理条数]` 只读核对ROOT/CSV/MD；`compare <a.root> <b.root>` 核对两套结果逐bin一致；`inspect <root> <谱名前缀>` 只读检查已有谱。
 
 有限真实样本验证保持源ROOT只读，输出独立目录：
 
@@ -20,4 +20,4 @@ analysis/20261018-time-offset-revision/tests/build/verify sample 6015 /home/ys/d
 analysis/20261018-time-offset-revision/tests/build/verify check analysis/20261018-time-offset-revision/tests/build/sample/time_offset_6015 1 10000000
 ```
 
-样本范围为原树零起始 `[0,10000000)`，不截断源文件。测试输出目录已存在时会拒绝覆盖。原完整执行与验证记录在同任务 `reports/`，历史命令保留执行时路径。
+样本范围为原树零起始 `[0,10000000)`，不截断源文件。重复运行会覆盖指定目录中同run的ROOT/CSV/MD结果。原完整执行与验证记录在同任务 `reports/`，历史命令保留执行时路径。

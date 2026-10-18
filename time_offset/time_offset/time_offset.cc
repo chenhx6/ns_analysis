@@ -358,8 +358,6 @@ void TimeOffset::Process(int run,const std::string &input,const std::string &out
     Validate(); Require(run>0 && limit>=0,"Invalid run or entry limit");
     Require(processed==0 && spectra.empty(),"Use a new TimeOffset instance per input");
     fs::create_directories(output);
-    for(const char *ext:{".root",".csv",".md"})
-        Require(!fs::exists(fs::path(output)/("time_offset_"+std::to_string(run)+ext)),"Output already exists; choose a new output directory");
     TFile source(input.c_str(),"READ"); Require(!source.IsZombie(),"Cannot read input: "+input);
     auto *tree=dynamic_cast<TTree*>(source.Get(UserDefine::TREE_NAME)); Require(tree,"Missing input tree");
     tree->SetBranchStatus("*",0);
@@ -398,10 +396,10 @@ void TimeOffset::Process(int run,const std::string &input,const std::string &out
     Require(reference_hits>0,"No reference hits found; no calibration outputs produced");
     Write(run,fs::canonical(input).string(),output,fit);
 }
-// 三个基础文件同名；CSV保留范围诊断，ROOT仅保存非空谱及选中总函数。
+// 同run重建三个输出文件；CSV/MD截断重写，ROOT清除旧对象后保存新结果。
 void TimeOffset::Write(int run,const std::string &input,const std::string &output,bool enabled) {
     std::string base=(fs::path(output)/("time_offset_"+std::to_string(run))).string();
-    TFile target((base+".root").c_str(),"CREATE"); Require(!target.IsZombie(),"Cannot create output ROOT");
+    TFile target((base+".root").c_str(),"RECREATE"); Require(!target.IsZombie(),"Cannot create output ROOT");
     std::ofstream csv(base+".csv"),md(base+".md"); Require(bool(csv)&&bool(md),"Cannot create CSV/MD");
     csv<<std::setprecision(12);
     csv<<"cid,sid,ch,final_mean,time_offset,status,mean_error_ns,tick_ns,hits,pairs,model,fit_status,covariance,low_ns,high_ns,A1,mu1_ns,sigma1_ns,area1,A2,mu2_ns,sigma2_ns,area2,deviance,ndf,deviance_ndf,peak_deviance_ndf,side_deviance_ndf,range_mean_span_ns,expected_residual_ns,fine_underflow,fine_overflow,fit_underflow,fit_overflow,reason,range_diagnostics\n";
