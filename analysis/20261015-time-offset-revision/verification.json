@@ -3,7 +3,7 @@
   "scope": "Plan document changes only; no implementation, compilation or time-offset processing",
   "checks": [
     {
-      "name": "2026-10-18 minimal plan edit checked: no manual override table/interfaces in scope; consistent implementation and discussion clauses; Ponytail constraint with necessary correctness checks preserved",
+      "name": "Plan consistency: absolute window; former one-sided condition appears only in explanation of correction; both histograms with either fit setting; three outputs, required CSV columns and signed decoder truncation. Read-only checked sort.cc/r2root.cc; no analysis execution",
       "returncode": 0
     }
   ]
