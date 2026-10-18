@@ -1,5 +1,7 @@
 # run 6015实施与验证
 
+2026-10-18 用户要求正式程序目录只保留后续分析所需内容，开发测试及验收记录移入本任务目录。当前验证入口见 `../tests/README.md`，原始运行证据保留运行时路径；原始CSV/MD结果集中于项目 `time_offset/`，不再在源码目录重复保存。迁移后正式编译和自检通过；再次读取前1000万条，逐bin计数与迁移前一致，CSV逐字节一致；完整266414896条旧结果回读通过，未重新运行全量分析。下文为此前实际执行记录。
+
 2026-10-18 用户将本次实现的项目一级目录 `timeOffset/` 重命名为 `time_offset/`。当前源码位于 `time_offset/time_offset/`，结果位于 `time_offset/`；下文实际执行命令、旧工作区路径和原始验证证据保留运行时记录。
 
 本次依据定稿于2026-10-18的 `analysis/plans/process/2026-10-15-time-offset-revision.md` 以及用户本次明确实施授权。独立员工 `time-offset-impl` 在普通Git克隆中执行；旧time_offset/timeOffset归档、原decoder和crate配置、原始数据及外部software均未修改。仅读取授权的event/sort.cc作为事件包结构参考。

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "make",
+        "-C",
+        "time_offset/time_offset"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/integrations/9373ccdaaa75494683ad3a6c904b79db/ead699efd554491aa74ce04214cab108/time_offset/time_offset'\ng++ -O2 -Wall -Wextra -pedantic -pthread -std=c++17 -m64 -I/home/ys/opt/physics/root-6.34.08/include main.cc time_offset.cc -o time_offset -L/home/ys/opt/physics/root-6.34.08/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib -pthread -lm -ldl -rdynamic\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/integrations/9373ccdaaa75494683ad3a6c904b79db/ead699efd554491aa74ce04214cab108/time_offset/time_offset'\n"
+    },
+    {
+      "command": [
+        "make",
+        "-C",
+        "analysis/20261018-time-offset-revision/tests",
+        "check"
+      ],
+      "returncode": 0,
+      "output": "make: Entering directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/integrations/9373ccdaaa75494683ad3a6c904b79db/ead699efd554491aa74ce04214cab108/analysis/20261018-time-offset-revision/tests'\nmkdir -p build\ng++ -O2 -Wall -Wextra -pedantic -pthread -std=c++17 -m64 -I/home/ys/opt/physics/root-6.34.08/include verify.cc -o build/verify -L/home/ys/opt/physics/root-6.34.08/lib -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/home/ys/opt/physics/root-6.34.08/lib -pthread -lm -ldl -rdynamic\n./build/verify self\nSelf-check passed: cuts, fixed anchor, +/-W, Ge/CsI, final packet, flow, area/covariance, ROOT fit\ninput=/tmp/chx-time-offset-io-27/good.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=2 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-27/off/time_offset_1.{root,csv,md}\nOutput checks passed: 2 CSV channels, 2 nonempty histograms\ninput=/tmp/chx-time-offset-io-27/no_ref.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-27/sr.root entries=2 process=2 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\ninput=/tmp/chx-time-offset-io-27/mixed.root entries=3 process=3 fit=0\nfine: -2001 .. 2001 ns, 2001 bins, 2ns\nfit: -2016 .. 2016 ns, 168 bins, 24ns\nprocessed=3 events=1 ref_events=1 numeric_fits=0 double=0 max_range_span_ns=0\nnot_fitted=1 reference=1 \n/tmp/chx-time-offset-io-27/mixed-out/time_offset_1.{root,csv,md}\nI/O checks passed: branch/sr/reference errors, no overwrite, FIT=false, mixed ticks\nmake: Leaving directory '/home/ys/data_401/data/chx_20260622/.omx/coordination/integrations/9373ccdaaa75494683ad3a6c904b79db/ead699efd554491aa74ce04214cab108/analysis/20261018-time-offset-revision/tests'\n"
+    },
+    {
+      "command": [
+        "analysis/20261018-time-offset-revision/tests/build/verify",
+        "check",
+        "/home/ys/data_401/data/chx_20260622/time_offset/time_offset_6015",
+        "1",
+        "266414896"
+      ],
+      "returncode": 0,
+      "output": "Output checks passed: 145 CSV channels, 288 nonempty histograms\nProcessed entry count confirmed: 266414896\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "9373ccdaaa75494683ad3a6c904b79db",
+  "employee_head": "331cbe1aeae44772592b385492e67fa6a8cfc019",
+  "employee_evidence_sha256": "489284f209c59aa124e62451c135fcb80cc79ae1b67e13e84019f094f44a3740"
+}

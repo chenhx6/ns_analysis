@@ -23,15 +23,14 @@ struct Spectrum {
     std::set<int> ticks;
 };
 
-// 单输入、固定起点事件包及双分箱谱；测试入口复用同一处理路径。
+// 单输入、固定起点事件包及双分箱谱。
 class TimeOffset {
 public:
     void Process(int run);
     void Process(int run, const std::string &input, const std::string &output,
                  Long64_t limit=0, bool fit=UserDefine::FIT_ENABLED);
-    static void SelfCheck();
-    static void InspectSpectrum(const std::string &file,const std::string &name);
 private:
+    friend struct TimeOffsetChecks; // 开发测试读取内部状态，不提供运行时测试接口。
     void ProcessEntry(Address address, Long64_t ns, int tick);
     void EndEvent();
     void Fill(Address address, Long64_t dt);

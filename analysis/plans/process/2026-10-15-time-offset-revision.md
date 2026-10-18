@@ -207,7 +207,7 @@ ROOT及编译文件不提交Git；源码、配置说明、小型CSV/MD和必要�
 | c0_s2_ch6 | 双峰分解及面积加权中心 |
 | c1_s3_ch7 | 变化本底下的局部拟合范围 |
 
-有限样本使用保存的验证入口或小型验证程序，不临时截断输入文件；正式程序仍采用 `./time_offset <run>`。所有实际命令、样本条目范围、参数和验证结果保留在任务记录中。开始完整数据处理前，有限样本的读取、配对、保存检查必须通过。
+有限样本使用保存在 `analysis/20261018-time-offset-revision/tests/` 的开发验证入口，不进入正式源码目录或用户日常使用流程，不临时截断输入文件；正式程序仍采用 `./time_offset <run>`。所有实际命令、样本条目范围、参数和验证结果保留在任务记录中。开始完整数据处理前，有限样本的读取、配对、保存检查必须通过。
 
 ## 7. 验收标准
 
@@ -221,4 +221,4 @@ ROOT及编译文件不提交Git；源码、配置说明、小型CSV/MD和必要�
 
 ## 8. 交接状态
 
-用户已明确授权本计划实施。程序在独立工作区 `.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/` 建立；真实输入只读，未改原decoder/crate或归档结果。已完成第6节步骤1–5及1000万条有限样本读入/配对/保存核对，步骤6已完成全部266,414,896条处理及ROOT/CSV回读：23个ok、121个review、1个reference，拟合收敛不代表校准通过；步骤7的源码、说明、结果副本及实际验证记录已备齐，交付采用项目协调器与可信检查/hooks。执行依据、命令、工程阈值与真实结果集中记录于 `time_offset/time_offset/execution.md`；后续更新交付和验证状态，不另建计划。旧目录继续完整保留于归档，清单见 `analysis/20261018-archive-time-offset/manifest.json`。
+用户已明确授权本计划实施。程序在独立工作区 `.omx/coordination/workspaces/time-offset-impl/timeOffset/time_offset/` 建立；真实输入只读，未改原decoder/crate或归档结果。已完成第6节步骤1–5及1000万条有限样本读入/配对/保存核对，步骤6已完成全部266,414,896条处理及ROOT/CSV回读：23个ok、121个review、1个reference，拟合收敛不代表校准通过；步骤7的源码、说明、结果副本及实际验证记录已备齐，交付采用项目协调器与可信检查/hooks。执行依据、命令、工程阈值与真实结果集中记录于 `analysis/20261018-time-offset-revision/reports/execution.md`；后续更新交付和验证状态，不另建计划。旧目录继续完整保留于归档，清单见 `analysis/20261018-archive-time-offset/manifest.json`。
