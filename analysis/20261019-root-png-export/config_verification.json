@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "analysis/20261019-root-png-export/test_export_histograms.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: suffix selection, TH1 filtering, latest cycles, channel order, PNG output, script directory/suffix configuration, run-only CLI, input unchanged\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "a8748127eeca4d8c912fb1bd7bc8dd96",
+  "employee_head": "5b2bea3a157ff922e9e23fceb239c883687fb78b",
+  "employee_evidence_sha256": "16e54bbaa449ee95cd67283bf86c855840bd3aca5cd9201408b2dd0f85c1aab0"
+}

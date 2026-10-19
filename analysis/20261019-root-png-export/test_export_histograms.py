@@ -1,7 +1,7 @@
 """Disposable ROOT input checks for the single-file PNG exporter."""
 from pathlib import Path
 import hashlib
-import shutil
+import re
 import struct
 import subprocess
 import sys
@@ -11,15 +11,16 @@ import ROOT
 
 ROOT.gROOT.SetBatch(True)
 PROJECT = Path(__file__).resolve().parents[2]
-TOOL = PROJECT / 'time_offset/export_histograms.py'
+TOOL = PROJECT / 'time_offset/time_offset/export_histograms.py'
 
 
 def check():
     """Check suffixes, latest ROOT cycle, natural order, PNGs and read-only input."""
     with tempfile.TemporaryDirectory(prefix='chx-root-png-') as temporary:
         folder = Path(temporary)
-        script = folder / 'export_histograms.py'
-        shutil.copyfile(TOOL, script)
+        script = folder / 'program/export_histograms.py'
+        script.parent.mkdir()
+        original_script = TOOL.read_text()
         filename = folder / 'time_offset_1.root'
         with ROOT.TFile(str(filename), 'RECREATE'):
             for name in ['cid0_sid2_ch10_24ns', 'cid0_sid2_ch2_24ns', 'cid0_sid2_ch2_2ns']:
@@ -38,7 +39,10 @@ def check():
         for suffix, expected in [('_24ns', ['0001_cid0_sid2_ch2_24ns.png', '0002_cid0_sid2_ch10_24ns.png']),
                                  ('_2ns', ['0001_cid0_sid2_ch2_2ns.png']), ('_missing', [])]:
             output = folder / suffix
-            subprocess.run([sys.executable, str(script), '1', suffix, str(output)], check=True,
+            configured = re.sub(r'^SUFFIX = .*$', lambda _: 'SUFFIX = ' + repr(suffix), original_script, flags=re.M)
+            configured = re.sub(r'^OUTPUT_DIRECTORY = .*$', lambda _: 'OUTPUT_DIRECTORY = ' + repr(str(output)), configured, flags=re.M)
+            script.write_text(configured)
+            subprocess.run([sys.executable, str(script), '1'], cwd=folder, check=True,
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             assert sorted(p.name for p in output.iterdir()) == expected
             for image in output.glob('*.png'):
@@ -46,8 +50,14 @@ def check():
                 assert data[:8] == b'\x89PNG\r\n\x1a\n'
                 width, height = struct.unpack('>II', data[16:24])
                 assert width > 1000 and height > 700
+        # 默认配置使用脚本相对目录，命令行只提供run。
+        script.write_text(original_script)
+        subprocess.run([sys.executable, str(script), '1'], cwd=folder, check=True,
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        assert sorted(p.name for p in (folder / '1/24ns').glob('*.png')) == [
+            '0001_cid0_sid2_ch2_24ns.png', '0002_cid0_sid2_ch10_24ns.png']
         assert hashlib.sha256(filename.read_bytes()).hexdigest() == before
-    print('PASS: suffix selection, TH1 filtering, latest cycles, channel order, PNG output, input unchanged')
+    print('PASS: suffix selection, TH1 filtering, latest cycles, channel order, PNG output, script directory/suffix configuration, run-only CLI, input unchanged')
 
 
 if __name__ == '__main__':
