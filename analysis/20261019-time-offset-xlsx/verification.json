@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "analysis/20261019-time-offset-xlsx/check_fill.py"
+      ],
+      "returncode": 0,
+      "output": "{\n  \"verified_cells\": 158,\n  \"summary\": [\n    {\n      \"sheet_xml\": \"xl/worksheets/sheet1.xml\",\n      \"columns\": {\n        \"D\": {\n          \"run\": \"6015\",\n          \"matched\": 32,\n          \"missing_zero\": 47,\n          \"blank_offset\": 0\n        },\n        \"E\": {\n          \"run\": \"6019\",\n          \"matched\": 32,\n          \"missing_zero\": 47,\n          \"blank_offset\": 0\n        }\n      }\n    }\n  ],\n  \"checks\": [\n    \"every CSV value and missing key\",\n    \"existing empty offsets remain blank\",\n    \"negative values\",\n    \"unchanged styles and non-target XML\",\n    \"duplicate channel and missing CSV reject before writing\",\n    \"original backup preserved\"\n  ]\n}\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "940755c1f98548828688f03bb594c39d",
+  "employee_head": "67e79f7b41b83c81928c3a8fa7b193465a95b08a",
+  "employee_evidence_sha256": "b51ac1d23a6ed548b31d9b7a4449840a54a7448fbfdac8f5328ac1af9be33d3f"
+}
