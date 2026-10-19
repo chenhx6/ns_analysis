@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": "python3 analysis/20261019-time-offset-xlsx/check_fill.py",
+      "returncode": 0,
+      "result": {
+        "verified_cells": 158,
+        "summary": [
+          {
+            "sheet_xml": "xl/worksheets/sheet1.xml",
+            "columns": {
+              "D": {
+                "run": "6015",
+                "matched": 32,
+                "missing_zero": 47,
+                "blank_offset": 0
+              },
+              "E": {
+                "run": "6019",
+                "matched": 32,
+                "missing_zero": 47,
+                "blank_offset": 0
+              }
+            }
+          }
+        ],
+        "checks": [
+          "every CSV value and missing key",
+          "existing empty offsets remain blank",
+          "negative values",
+          "unchanged styles and non-target XML",
+          "duplicate channel and missing CSV reject before writing",
+          "original backup preserved"
+        ]
+      }
+    },
+    {
+      "command": "check_fill.verify(original backup, updated workbook, live CSV directory) and input snapshot byte comparison",
+      "returncode": 0,
+      "verified_cells": 158
+    }
+  ],
+  "actual_command": "python3 .omx/coordination/workspaces/time-offset-xlsx/time_offset/time_offset/fill_xlsx.py time_offset/time_offset.xlsx",
+  "output": "time_offset/time_offset.xlsx",
+  "backup": "time_offset/time_offset.before-fill.xlsx",
+  "units": "ns",
+  "policy": "Match only existing run columns and channel rows. Missing channel keys use 0; existing empty CSV offsets remain blank. CSV status is not filtered.",
+  "sha256": {
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset.xlsx": "adb11b683c92a76f08239e46ede9bdd25812f544180a1698461fa5d1f81757b2",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6015.csv": "4b780eb09fd9aebd0a573ae37e7230f0cfec1928612ddc17f2817ad8a50ef5c9",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6019.csv": "d22624fb1429b6a57bac71b46df21376d7bf993957b94b58f4b273ce84a0cff7",
+    "analysis/20261019-time-offset-xlsx/time_offset.xlsx": "e65695855b16a03217c5d32f675b8d6e2b1fc5e6248ec313df521d52edbff8d1",
+    "time_offset/time_offset/fill_xlsx.py": "b8eb0d884809ce784b89b437a2e2cd4acf0b1d7cc28e27ee8bb7d60be8b06279"
+  }
+}
