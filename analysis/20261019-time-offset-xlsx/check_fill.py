@@ -2,6 +2,7 @@
 """Reproduce extraction and check every cell plus unchanged workbook formatting."""
 import csv
 import importlib.util
+from io import BytesIO
 import json
 from pathlib import Path
 import shutil
@@ -32,7 +33,8 @@ def verify(before, after, csv_dir):
             rows = actual.findall('s:sheetData/s:row', N)
             targets = {}
             for cell in rows[0]:
-                label = shared[int(cell.find('s:v', N).text)]
+                label = (''.join(cell.find('s:is', N).itertext()) if cell.get('t') == 'inlineStr'
+                         else shared[int(cell.find('s:v', N).text)])
                 match = module.RUN_HEADER.fullmatch(label)
                 if match:
                     with (csv_dir / ('time_offset_' + match[1] + '.csv')).open() as f:
@@ -50,7 +52,22 @@ def verify(before, after, csv_dir):
                     assert (v is None) if not raw else (module.Decimal(v.text) == module.Decimal(raw))
                     assert cell.get('t') in (None, 'n')
                     checked += 1
-            # Removing only target data cells leaves headers, addresses and layout identical.
+            old_header = original.find('s:sheetData/s:row', N)
+            new_header = actual.find('s:sheetData/s:row', N)
+            original_refs = {c.get('r') for c in old_header}
+            for cell in list(new_header):
+                if cell.get('r') not in original_refs:
+                    assert cell.get('r').rstrip('0123456789') in targets
+                    new_header.remove(cell)
+            assert actual.find('s:dimension', N).get('ref') == 'A1:Q80'
+            actual.find('s:dimension', N).attrib = dict(original.find('s:dimension', N).attrib)
+            # Exclude the required range expansion and new columns from layout comparison.
+            for old_row, new_row in zip(original.findall('s:sheetData/s:row', N), rows):
+                assert new_row.get('spans') == '1:17'
+                if old_row.get('spans') is None:
+                    new_row.attrib.pop('spans', None)
+                else:
+                    new_row.set('spans', old_row.get('spans'))
             for sheet in (original, actual):
                 for row in sheet.findall('s:sheetData/s:row', N)[1:]:
                     for cell in list(row):
@@ -73,10 +90,18 @@ def check():
         book = work / 'time_offset.xlsx'
         summary = module.fill(book)
         count = verify(TASK / 'inputs/time_offset.xlsx', book, work)
-        assert count == 158
+        assert count == 1106
+        assert [c['run'] for c in summary[0]['columns'].values()] == [
+            '6015', '6019', '6024', '6028', '6035', '6041', '6045',
+            '6050', '6054', '6061', '6065', '6071', '6075', '6078']
         if (TASK / 'time_offset.xlsx').exists():
             with ZipFile(book) as produced, ZipFile(TASK / 'time_offset.xlsx') as saved:
                 assert all(produced.read(n) == saved.read(n) for n in produced.namelist())
+        # A second fill reuses all headers and yields identical worksheet content.
+        first = book.read_bytes()
+        module.fill(book)
+        with ZipFile(BytesIO(first)) as old, ZipFile(book) as new:
+            assert all(old.read(n) == new.read(n) for n in old.namelist())
         # Synthetic CSV changes are confined to temporary files, never experimental inputs.
         path = work / 'time_offset_6015.csv'
         with path.open() as f:
@@ -112,7 +137,9 @@ def check():
         assert book.read_bytes() == stable
         assert (work / 'time_offset.before-fill.xlsx').read_bytes() == (TASK / 'inputs/time_offset.xlsx').read_bytes()
         return dict(verified_cells=count, summary=summary,
-                    checks=['every CSV value and missing key', 'existing empty offsets remain blank',
+                    checks=['all 14 runs and 1106 cells', 'new run headers and expanded range',
+                            'second fill does not duplicate headers',
+                            'every CSV value and missing key', 'existing empty offsets remain blank',
                             'negative values', 'unchanged styles and non-target XML',
                             'duplicate channel and missing CSV reject before writing', 'original backup preserved'])
 
