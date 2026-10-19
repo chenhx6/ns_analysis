@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Fill existing time offset run columns from CSV; preserve other XLSX parts.
+"""Fill time offset run columns from all sibling CSVs; preserve other XLSX parts.
 
 Usage: python3 time_offset/time_offset/fill_xlsx.py time_offset/time_offset.xlsx
 CSV files are read from the workbook directory. A .before-fill.xlsx backup
 is kept locally on the first run. Missing channels become 0; empty CSV
-offsets remain blank. No run columns or channel rows are added.
+offsets remain blank. Missing run columns are appended in run-number order;
+existing channel rows and column positions are preserved.
 """
 import argparse
 import csv
@@ -65,9 +66,13 @@ def read_offsets(path):
 
 
 def fill(workbook):
-    """Validate all inputs, update existing run columns, then replace atomically."""
+    """Discover runs, append missing columns, validate and replace atomically."""
     workbook = Path(workbook).resolve()
     original = workbook.read_bytes()
+    discovered = sorted({m.group(1) for p in workbook.parent.glob('time_offset_*.csv')
+                         for m in [re.fullmatch(r'time_offset_(\d+)\.csv', p.name)] if m}, key=int)
+    if not discovered:
+        raise ValueError('No time_offset_<run>.csv files beside workbook')
     updates, summary = {}, []
     with ZipFile(BytesIO(original)) as source:
         shared = []
@@ -87,8 +92,39 @@ def fill(workbook):
                 continue
             runs = {col: RUN_HEADER.fullmatch(header).group(1)
                     for col, header in headers.items() if RUN_HEADER.fullmatch(header)}
-            if not runs:
-                continue
+            template = next((c for c in children(rows[0], 'c')
+                             if c.getAttribute('r').rstrip('0123456789') in runs), None)
+            last_col = max(headers, key=lambda col: (len(col), col))
+            last_number = 0
+            for letter in last_col:
+                last_number = last_number * 26 + ord(letter) - ord('A') + 1
+            added = []
+            for run in discovered:
+                if run in runs.values():
+                    continue
+                last_number += 1
+                number, col = last_number, ''
+                while number:
+                    number, remainder = divmod(number - 1, 26)
+                    col = chr(ord('A') + remainder) + col
+                cell = template.cloneNode(False) if template is not None else doc.createElementNS(NS, 'c')
+                cell.setAttribute('r', col + rows[0].getAttribute('r'))
+                cell.setAttribute('t', 'inlineStr')
+                prefix = cell.prefix
+                inline = doc.createElementNS(NS, (prefix + ':' if prefix else '') + 'is')
+                label = doc.createElementNS(NS, (prefix + ':' if prefix else '') + 't')
+                label.appendChild(doc.createTextNode('time offset ' + run))
+                inline.appendChild(label)
+                cell.appendChild(inline)
+                rows[0].appendChild(cell)
+                runs[col] = run
+                added.append(col)
+            if added:
+                dimension = doc.getElementsByTagNameNS(NS, 'dimension')[0]
+                first, last = dimension.getAttribute('ref').split(':')
+                dimension.setAttribute('ref', first + ':' + added[-1] + re.search(r'\d+$', last).group())
+                for row in rows:
+                    row.setAttribute('spans', '1:' + str(last_number))
             offsets = {col: read_offsets(workbook.parent / ('time_offset_' + run + '.csv'))
                        for col, run in runs.items()}
             counts = {col: dict(run=run, matched=0, missing_zero=0, blank_offset=0)
@@ -112,6 +148,11 @@ def fill(workbook):
                         prefix = doc.documentElement.prefix
                         cell = doc.createElementNS(NS, (prefix + ':' if prefix else '') + 'c')
                         cell.setAttribute('r', ref)
+                        # Extend the original run-column style to newly created run columns.
+                        if col in added:
+                            pattern = cells.get(next(iter(runs)) + row.getAttribute('r'))
+                            if pattern is not None and pattern.hasAttribute('s'):
+                                cell.setAttribute('s', pattern.getAttribute('s'))
                         # Excel cell order is column order, including columns beyond Z.
                         order = lambda s: (len(s), s)
                         following = next((c for c in children(row, 'c')
