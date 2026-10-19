@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "analysis/20261019-root-png-export/test_export_histograms.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: suffix selection, TH1 filtering, latest cycles, channel order, PNG output, input unchanged\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "name": "python_syntax",
+      "returncode": 0
+    }
+  ],
+  "source": {
+    "path": "/home/ys/data_401/data/chx_20260622/time_offset/time_offset_6015.root",
+    "copy_sha256": "358a2a5c1163d66b4d5212b4ac83b13c196db89775817bd3514b2ae5cf163edf"
+  },
+  "real_render_commands": [
+    [
+      "python3",
+      "-B",
+      "time_offset/export_histograms.py",
+      "6015",
+      "cid0_sid2_ch10_24ns",
+      "analysis/20261019-root-png-export/build/real/cid0_sid2_ch10_24ns"
+    ],
+    [
+      "python3",
+      "-B",
+      "time_offset/export_histograms.py",
+      "6015",
+      "cid0_sid2_ch10_2ns",
+      "analysis/20261019-root-png-export/build/real/cid0_sid2_ch10_2ns"
+    ],
+    [
+      "python3",
+      "-B",
+      "time_offset/export_histograms.py",
+      "6015",
+      "cid0_sid2_ch6_24ns",
+      "analysis/20261019-root-png-export/build/real/cid0_sid2_ch6_24ns"
+    ],
+    [
+      "python3",
+      "-B",
+      "time_offset/export_histograms.py",
+      "6015",
+      "cid1_sid3_ch7_24ns",
+      "analysis/20261019-root-png-export/build/real/cid1_sid3_ch7_24ns"
+    ]
+  ],
+  "visual_reviews": [
+    {
+      "path": "analysis/20261019-root-png-export/build/real/cid0_sid2_ch10_24ns/0001_cid0_sid2_ch10_24ns.png",
+      "sha256": "ba6d39dae07453f6117d2e0eb4f3fc332d9b32e051de1b8d371f2c32a2d21194",
+      "visual_review": "passed",
+      "findings": "Axes, units, channel title and statistics readable; no cropped text or curve peak. Existing magenta fit visible on 24ns spectra; raw 2ns spectrum displayed without invented fit."
+    },
+    {
+      "path": "analysis/20261019-root-png-export/build/real/cid0_sid2_ch10_2ns/0001_cid0_sid2_ch10_2ns.png",
+      "sha256": "a8ffa98f12897a3e77edfb5278487403e64751b1d15ea928d6d348d5f7c8c0e2",
+      "visual_review": "passed",
+      "findings": "Axes, units, channel title and statistics readable; no cropped text or curve peak. Existing magenta fit visible on 24ns spectra; raw 2ns spectrum displayed without invented fit."
+    },
+    {
+      "path": "analysis/20261019-root-png-export/build/real/cid0_sid2_ch6_24ns/0001_cid0_sid2_ch6_24ns.png",
+      "sha256": "700fcff686007be2499284b2db308ca41d168dd4b8a626510871081316462622",
+      "visual_review": "passed",
+      "findings": "Axes, units, channel title and statistics readable; no cropped text or curve peak. Existing magenta fit visible on 24ns spectra; raw 2ns spectrum displayed without invented fit."
+    },
+    {
+      "path": "analysis/20261019-root-png-export/build/real/cid1_sid3_ch7_24ns/0001_cid1_sid3_ch7_24ns.png",
+      "sha256": "21e0d9818f0695322284462f0aa8a89f8ef79be25b8dec9bb8cb0b1f6821189b",
+      "visual_review": "passed",
+      "findings": "Axes, units, channel title and statistics readable; no cropped text or curve peak. Existing magenta fit visible on 24ns spectra; raw 2ns spectrum displayed without invented fit."
+    }
+  ],
+  "scope": "User-requested PNG export only; no fit recalculation or input changes; original ROOT linear count axes preserved with headroom for existing fits."
+}
