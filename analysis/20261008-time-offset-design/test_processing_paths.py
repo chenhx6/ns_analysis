@@ -19,7 +19,7 @@ def check():
         "time_offset/figures/group_01.svg", "time_offset/verification.json",
         "time_offset/time_offset/time_offset.cc", "time_offset/time_offset/time_offset.hh",
         "time_offset/time_offset/Makefile", "time_offset/time_offset/time_offset_6015.csv",
-        "time_offset/time_offset/verification.json",
+        "time_offset/time_offset/verification.json", "time_offset/time_offset/run.sh",
     ]
     rejected = [
         "plans/process/raw.root", "decisions/raw.csv", "time_offset/time_offset.root",

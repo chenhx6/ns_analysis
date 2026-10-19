@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "bash",
+        "-n",
+        "time_offset/time_offset/run.sh"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "python3",
+        "analysis/20261019-run-scheduler/test_run_scheduler.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: list/range/exclusions/missing/dedup; maximum 5, refill, wait, child failure, /dev/null; portable path/pattern; invalid run configuration\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "output": ""
+    }
+  ],
+  "scope": "Standalone scheduler only; mock executable confirms at most 5 children, refill, filtering and /dev/null; no real data processing started"
+}
