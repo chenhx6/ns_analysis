@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "command": [
+        "bash",
+        "-n",
+        "time_offset/time_offset/run.sh"
+      ],
+      "returncode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "python3",
+        "analysis/20261019-run-scheduler/test_run_scheduler.py"
+      ],
+      "returncode": 0,
+      "output": "PASS: list/range/exclusions/missing/dedup; maximum 5, refill, wait, child failure, /dev/null; portable path/pattern; invalid run configuration\n"
+    }
+  ],
+  "scope": "Actual merged candidate validation",
+  "submission": "f3da906f7b614505a30b1e448e398142",
+  "employee_head": "d243afff05437c00a6d531db2465d603d7d085bd",
+  "employee_evidence_sha256": "7d38b58f01f7e4fbb29df29c50df56dbd267358800fd3fdd0837617c494c7fae"
+}
