@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "scope": "Documentation only; no calibration implementation or fitting validated.",
+  "checks": [
+    {
+      "name": "plan_structure_and_pending_decisions",
+      "returncode": 0,
+      "details": "Python assertions passed; required sections and config example present; suggestions pending, no implementation claimed."
+    },
+    {
+      "name": "input_and_code_reference_existence",
+      "returncode": 0,
+      "paths": [
+        "decode_data/data_C1_6082_notwave.root",
+        "decode_data/DecodeAndSortAll/r2root.cc",
+        "decode_data/DecodeAndSortAll/decoder.hh",
+        "analysis/00_experiment_log/record_analysis.md"
+      ]
+    },
+    {
+      "name": "plan_whitespace_and_size_assertions",
+      "returncode": 0,
+      "bytes": 14665,
+      "git_diff_returncode": 1,
+      "details": "No whitespace diagnostics; no-index diff may return 1 for the new file."
+    }
+  ]
+}
