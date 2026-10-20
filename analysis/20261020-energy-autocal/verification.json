@@ -5,7 +5,12 @@
     {
       "name": "plan_structure_and_pending_decisions",
       "returncode": 0,
-      "details": "Python assertions passed; required sections and config example present; suggestions pending, no implementation claimed."
+      "details": "Required sections and configuration present; algorithm choices remain pending; no implementation claimed."
+    },
+    {
+      "name": "root_to_png_requirement",
+      "returncode": 0,
+      "details": "Python exports saved ROOT fit objects to figures without refitting; ROOT closed before export; re-export supported."
     },
     {
       "name": "input_and_code_reference_existence",
@@ -18,11 +23,9 @@
       ]
     },
     {
-      "name": "plan_whitespace_and_size_assertions",
+      "name": "plan_whitespace_and_size",
       "returncode": 0,
-      "bytes": 14665,
-      "git_diff_returncode": 1,
-      "details": "No whitespace diagnostics; no-index diff may return 1 for the new file."
+      "bytes": 15315
     }
   ]
 }
