@@ -2,16 +2,263 @@
   "status": "passed",
   "checks": [
     {
-      "command": [
-        "python3",
-        "analysis/20261019-time-offset-xlsx/check_fill.py"
-      ],
+      "command": "python3 analysis/20261019-time-offset-xlsx/check_fill.py",
       "returncode": 0,
-      "output": "{\n  \"verified_cells\": 1106,\n  \"summary\": [\n    {\n      \"sheet_xml\": \"xl/worksheets/sheet1.xml\",\n      \"columns\": {\n        \"D\": {\n          \"run\": \"6015\",\n          \"matched\": 32,\n          \"missing_zero\": 47,\n          \"blank_offset\": 0\n        },\n        \"E\": {\n          \"run\": \"6019\",\n          \"matched\": 32,\n          \"missing_zero\": 47,\n          \"blank_offset\": 0\n        },\n        \"F\": {\n          \"run\": \"6024\",\n          \"matched\": 32,\n          \"missing_zero\": 47,\n          \"blank_offset\": 0\n        },\n        \"G\": {\n          \"run\": \"6028\",\n          \"matched\": 30,\n          \"missing_zero\": 49,\n          \"blank_offset\": 0\n        },\n        \"H\": {\n          \"run\": \"6035\",\n          \"matched\": 30,\n          \"missing_zero\": 49,\n          \"blank_offset\": 0\n        },\n        \"I\": {\n          \"run\": \"6041\",\n          \"matched\": 30,\n          \"missing_zero\": 49,\n          \"blank_offset\": 0\n        },\n        \"J\": {\n          \"run\": \"6045\",\n          \"matched\": 31,\n          \"missing_zero\": 48,\n          \"blank_offset\": 0\n        },\n        \"K\": {\n          \"run\": \"6050\",\n          \"matched\": 31,\n          \"missing_zero\": 48,\n          \"blank_offset\": 0\n        },\n        \"L\": {\n          \"run\": \"6054\",\n          \"matched\": 31,\n          \"missing_zero\": 48,\n          \"blank_offset\": 0\n        },\n        \"M\": {\n          \"run\": \"6061\",\n          \"matched\": 31,\n          \"missing_zero\": 48,\n          \"blank_offset\": 0\n        },\n        \"N\": {\n          \"run\": \"6065\",\n          \"matched\": 30,\n          \"missing_zero\": 48,\n          \"blank_offset\": 1\n        },\n        \"O\": {\n          \"run\": \"6071\",\n          \"matched\": 31,\n          \"missing_zero\": 48,\n          \"blank_offset\": 0\n        },\n        \"P\": {\n          \"run\": \"6075\",\n          \"matched\": 31,\n          \"missing_zero\": 48,\n          \"blank_offset\": 0\n        },\n        \"Q\": {\n          \"run\": \"6078\",\n          \"matched\": 31,\n          \"missing_zero\": 47,\n          \"blank_offset\": 1\n        }\n      }\n    }\n  ],\n  \"checks\": [\n    \"all 14 runs and 1106 cells\",\n    \"new run headers and expanded range\",\n    \"second fill does not duplicate headers\",\n    \"every CSV value and missing key\",\n    \"existing empty offsets remain blank\",\n    \"negative values\",\n    \"unchanged styles and non-target XML\",\n    \"duplicate channel and missing CSV reject before writing\",\n    \"original backup preserved\"\n  ]\n}\n"
+      "result": {
+        "verified_cells": 1106,
+        "summary": [
+          {
+            "sheet_xml": "xl/worksheets/sheet1.xml",
+            "columns": {
+              "D": {
+                "run": "6015",
+                "matched": 32,
+                "missing_zero": 47,
+                "blank_offset": 0
+              },
+              "E": {
+                "run": "6019",
+                "matched": 32,
+                "missing_zero": 47,
+                "blank_offset": 0
+              },
+              "F": {
+                "run": "6024",
+                "matched": 32,
+                "missing_zero": 47,
+                "blank_offset": 0
+              },
+              "G": {
+                "run": "6028",
+                "matched": 30,
+                "missing_zero": 49,
+                "blank_offset": 0
+              },
+              "H": {
+                "run": "6035",
+                "matched": 30,
+                "missing_zero": 49,
+                "blank_offset": 0
+              },
+              "I": {
+                "run": "6041",
+                "matched": 30,
+                "missing_zero": 49,
+                "blank_offset": 0
+              },
+              "J": {
+                "run": "6045",
+                "matched": 31,
+                "missing_zero": 48,
+                "blank_offset": 0
+              },
+              "K": {
+                "run": "6050",
+                "matched": 31,
+                "missing_zero": 48,
+                "blank_offset": 0
+              },
+              "L": {
+                "run": "6054",
+                "matched": 31,
+                "missing_zero": 48,
+                "blank_offset": 0
+              },
+              "M": {
+                "run": "6061",
+                "matched": 31,
+                "missing_zero": 48,
+                "blank_offset": 0
+              },
+              "N": {
+                "run": "6065",
+                "matched": 30,
+                "missing_zero": 48,
+                "blank_offset": 1
+              },
+              "O": {
+                "run": "6071",
+                "matched": 31,
+                "missing_zero": 48,
+                "blank_offset": 0
+              },
+              "P": {
+                "run": "6075",
+                "matched": 31,
+                "missing_zero": 48,
+                "blank_offset": 0
+              },
+              "Q": {
+                "run": "6078",
+                "matched": 31,
+                "missing_zero": 47,
+                "blank_offset": 1
+              }
+            }
+          }
+        ],
+        "checks": [
+          "all 14 runs and 1106 cells",
+          "new run headers and expanded range",
+          "second fill does not duplicate headers",
+          "every CSV value and missing key",
+          "existing empty offsets remain blank",
+          "negative values",
+          "unchanged styles and non-target XML",
+          "duplicate channel and missing CSV reject before writing",
+          "original backup preserved"
+        ]
+      }
+    },
+    {
+      "command": "python3 analysis/20261019-time-offset-xlsx/check_sheet2.py",
+      "returncode": 0,
+      "result": {
+        "result": {
+          "channels": 119,
+          "runs": 14,
+          "verified_cells": 1666,
+          "matched": 1483,
+          "missing_zero": 169,
+          "blank_offset": 14
+        },
+        "summary": {
+          "sheet": "Sheet2",
+          "cid": 1,
+          "channels": 119,
+          "columns": {
+            "D": {
+              "run": "6015",
+              "matched": 105,
+              "missing_zero": 14,
+              "blank_offset": 0
+            },
+            "E": {
+              "run": "6019",
+              "matched": 95,
+              "missing_zero": 16,
+              "blank_offset": 8
+            },
+            "F": {
+              "run": "6024",
+              "matched": 80,
+              "missing_zero": 36,
+              "blank_offset": 3
+            },
+            "G": {
+              "run": "6028",
+              "matched": 103,
+              "missing_zero": 16,
+              "blank_offset": 0
+            },
+            "H": {
+              "run": "6035",
+              "matched": 104,
+              "missing_zero": 15,
+              "blank_offset": 0
+            },
+            "I": {
+              "run": "6041",
+              "matched": 104,
+              "missing_zero": 15,
+              "blank_offset": 0
+            },
+            "J": {
+              "run": "6045",
+              "matched": 102,
+              "missing_zero": 17,
+              "blank_offset": 0
+            },
+            "K": {
+              "run": "6050",
+              "matched": 103,
+              "missing_zero": 16,
+              "blank_offset": 0
+            },
+            "L": {
+              "run": "6054",
+              "matched": 115,
+              "missing_zero": 4,
+              "blank_offset": 0
+            },
+            "M": {
+              "run": "6061",
+              "matched": 115,
+              "missing_zero": 4,
+              "blank_offset": 0
+            },
+            "N": {
+              "run": "6065",
+              "matched": 115,
+              "missing_zero": 4,
+              "blank_offset": 0
+            },
+            "O": {
+              "run": "6071",
+              "matched": 115,
+              "missing_zero": 4,
+              "blank_offset": 0
+            },
+            "P": {
+              "run": "6075",
+              "matched": 115,
+              "missing_zero": 4,
+              "blank_offset": 0
+            },
+            "Q": {
+              "run": "6078",
+              "matched": 112,
+              "missing_zero": 4,
+              "blank_offset": 3
+            }
+          }
+        },
+        "checks": [
+          "all cid=1 keys and offsets",
+          "missing keys zero and empty offsets blank",
+          "Sheet1 and other unmodified ZIP parts byte-identical",
+          "headers, column widths, row format and cell styles copied",
+          "workbook relationships and content types registered",
+          "existing Sheet2 protected and original backup preserved"
+        ]
+      }
+    },
+    {
+      "command": "check_sheet2.verify(live pre-add backup, live output, live CSV directory); match saved inputs",
+      "returncode": 0,
+      "result": {
+        "channels": 119,
+        "runs": 14,
+        "verified_cells": 1666,
+        "matched": 1483,
+        "missing_zero": 169,
+        "blank_offset": 14
+      }
     }
   ],
-  "scope": "Actual merged candidate validation",
-  "submission": "e5e96447d7b248ce961045ec10e2f700",
-  "employee_head": "93f4056f964b370aa7717b5f47017d55011d4882",
-  "employee_evidence_sha256": "badfeb57108c17480c3f1d16c9e50b97a72466dfd6e61ac76d75b896b6126aab"
+  "actual_command": "python3 .omx/coordination/workspaces/time-offset-xlsx/time_offset/time_offset/fill_xlsx.py time_offset/time_offset.xlsx --add-cid1-sheet",
+  "output": "time_offset/time_offset.xlsx",
+  "backup": "time_offset/time_offset.before-cid1.xlsx",
+  "units": "ns",
+  "policy": "Sheet1 is byte-preserved; Sheet2 uses the union of all cid=1 keys from the 14 run CSVs, ordered by sid/ch. Missing keys use 0; existing unknown offsets remain blank. Values are copied regardless of CSV status.",
+  "sha256": {
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset.before-cid1.xlsx": "53943dc9554f9811de3fbc0b9601bd6ee5426283e1356e31dcdc49f9bbd841de",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset.xlsx": "adb11b683c92a76f08239e46ede9bdd25812f544180a1698461fa5d1f81757b2",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6015.csv": "4b780eb09fd9aebd0a573ae37e7230f0cfec1928612ddc17f2817ad8a50ef5c9",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6019.csv": "d22624fb1429b6a57bac71b46df21376d7bf993957b94b58f4b273ce84a0cff7",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6024.csv": "0d6de33f7c0dc51a9770ad4281576434e0ab6b744ed63403ec7625c0f48e89de",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6028.csv": "1ceaeee8841e8c782fa02bb1beeec8023418bc05942caa76bb8c73f796038c52",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6035.csv": "4a59ac2ee70d0b87bd55363020f43834e26fcbc6470dba73718e39080f1691c0",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6041.csv": "16b31763ff16bcbd425a69d0715b89a26b8b5414d36195ebfc1a6963530f3d12",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6045.csv": "64c69f712b37568a171d2d013464bd3260f47a15968d8b0ee560c1044325d81e",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6050.csv": "5a88897e641a03d673ffcdef5022262f3fabf150c2b5f55c2020e87d9a5925ea",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6054.csv": "2f84f8c74d91d40daac763163daa1df53439e0aa6ffd16a3726cc9fd0e30efae",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6061.csv": "202dd7bde05542b0e120da676de8fe9fd24d9f4baecd1203bd951d8ae634b326",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6065.csv": "245685b9a9f7b85c071134b54fb802ffa313af03d4cbc5436ee1253a1e7231d4",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6071.csv": "0a3855e5f1a50c5e893d72fa43f5c0d68db2bfa90971432eeb61dd3fbbae7ae2",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6075.csv": "39dc15bc9afd6ac31d33ba22000d7977b517aec653d337bd6a031042e5a4dcfc",
+    "analysis/20261019-time-offset-xlsx/inputs/time_offset_6078.csv": "f4e32d84473cba1b2518e3c5ae86d8a429ea158f6e02426b071fa55c91a8fb99",
+    "analysis/20261019-time-offset-xlsx/time_offset_with_cid1.xlsx": "f6cdd51cc1c4244710c6925407b4ce42b7ea4d39f48c42be75fc6612edffe627",
+    "time_offset/time_offset/fill_xlsx.py": "acc6411689dedcc7ed889fe0daf7ef8646549173f3a4e42d7e09b38888022671"
+  }
 }
