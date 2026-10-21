@@ -38,6 +38,10 @@ def permitted(path):
         or path.startswith(".agents/skills/")
         or path in DECODER_SOURCE_FILES
         or path in RUN_LOG_FILES
+        # Energy calibration sources and small outputs; generic private/data checks still apply.
+        or (path.startswith("calibration/energy/") and
+            (p.suffix.lower() in {".cc", ".cpp", ".hh", ".h", ".md", ".csv", ".json", ".png"}
+             or path == "calibration/energy/autocal/Makefile"))
         or path == "time_offset/time_offset/run.sh"
         or (p.parts[0] == "time_offset" and p.suffix.lower() in TIME_OFFSET_SUFFIXES)
         # Single-run source files; keep the former spelling valid for tracked deletions.

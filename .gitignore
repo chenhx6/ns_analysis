@@ -6,6 +6,22 @@
 !/.gitignore
 !/analysis/
 
+# 自动能量刻度：源码、配置和小型回查结果；数据与编译产物仍排除。
+!/calibration/
+/calibration/*
+!/calibration/energy/
+/calibration/energy/**
+!/calibration/energy/**/
+!/calibration/energy/autocal/Makefile
+!/calibration/energy/**/*.cc
+!/calibration/energy/**/*.cpp
+!/calibration/energy/**/*.hh
+!/calibration/energy/**/*.h
+!/calibration/energy/**/*.md
+!/calibration/energy/**/*.csv
+!/calibration/energy/**/*.json
+!/calibration/energy/**/*.png
+
 # 直接科学处理：决策／计划只收 Markdown，时间对齐只收可复现的小型产物。
 !/decisions/
 /decisions/*

@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "scope": "Employee launch prerequisites and execution handoff, not calibration results.",
+  "checks": [
+    {
+      "command": "python3 analysis/20261020-energy-autocal/check_delivery_scope.py",
+      "returncode": 0,
+      "output": "Energy delivery scope passed: sources/results allowed; binaries/data/secrets excluded."
+    },
+    {
+      "name": "selected_changes_whitespace",
+      "returncode": 0
+    },
+    {
+      "name": "handoff_authorization_model_and_boundaries",
+      "returncode": 0
+    }
+  ]
+}
