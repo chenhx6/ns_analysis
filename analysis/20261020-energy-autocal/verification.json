@@ -1,114 +1,70 @@
 {
   "status": "passed",
-  "scope": "Plan revision after user feedback; no calibration code or fitting.",
+  "scope": "Plan finalized with 3-panel PNG layout and peak requirements.",
   "checks": [
     {
-      "name": "contains_## 目标与范围",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 输入与依据",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 已确定的配置要求",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 方法与统计处理",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 预计文件与用途",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 实施步骤",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 验证与完成标准",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 已解决的讨论项",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_## 剩余待定项",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_ExcludedFitChannels = {}",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_pol2",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_peakfinder",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_LaBr3",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_Gaussian + pol1",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_TSpectrum",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_C++/ROOT",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_cid、sid、ch、evte",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_不剔除",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "contains_不实现手动锚定",
-      "returncode": 0,
-      "found": true
-    },
-    {
-      "name": "ref_exists_decode_data/data_C1_6082_notwave.root",
+      "name": "## PNG 布局",
       "returncode": 0
     },
     {
-      "name": "ref_exists_decode_data/DecodeAndSortAll/r2root.cc",
+      "name": "三面板",
       "returncode": 0
     },
     {
-      "name": "size_check",
-      "returncode": 0,
-      "bytes": 13408
+      "name": "Pearson residual",
+      "returncode": 0
+    },
+    {
+      "name": "chi2/ndf",
+      "returncode": 0
+    },
+    {
+      "name": "a0, a1, a2",
+      "returncode": 0
+    },
+    {
+      "name": "不少于 4 个",
+      "returncode": 0
+    },
+    {
+      "name": "低能区到高能区有足够跨度",
+      "returncode": 0
+    },
+    {
+      "name": "不依赖探测器类型",
+      "returncode": 0
+    },
+    {
+      "name": "可移植",
+      "returncode": 0
+    },
+    {
+      "name": "peakfinder",
+      "returncode": 0
+    },
+    {
+      "name": "Gaussian + pol1",
+      "returncode": 0
+    },
+    {
+      "name": "pol2",
+      "returncode": 0
+    },
+    {
+      "name": "TSpectrum",
+      "returncode": 0
+    },
+    {
+      "name": "## 已解决的讨论项",
+      "returncode": 0
+    },
+    {
+      "name": "探测器类型",
+      "returncode": 0
+    },
+    {
+      "name": "ref_decode_data/data_C1_6082_notwave.root",
+      "returncode": 0
     }
   ]
 }
