@@ -22,6 +22,17 @@
 !/calibration/energy/**/*.json
 !/calibration/energy/**/*.png
 
+# 能量刻度核验：源码和刻度系数；ROOT 输出由全局 *.root 排除。
+!/check/
+/check/*
+!/check/energy_calibration/
+/check/energy_calibration/*
+!/check/energy_calibration/*.cc
+!/check/energy_calibration/*.hh
+!/check/energy_calibration/*.h
+!/check/energy_calibration/*.dat
+!/check/energy_calibration/*.md
+
 # 直接科学处理：决策／计划只收 Markdown，时间对齐只收可复现的小型产物。
 !/decisions/
 /decisions/*
