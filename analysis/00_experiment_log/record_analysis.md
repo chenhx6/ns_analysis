@@ -2,18 +2,21 @@
 
 ## 1. Experimental Information
 
-### 1.1 Reaction Channel
+### Reaction Channel
 
 1. **Reaction:** $^{19}$F + $^{116}$Sn
-   - **Target:** 0.9 mg/cm² $^{116}$Sn + 5.5 mg/cm² Au
+
+   - **Target:**
+     - 0.9 mg/cm² $^{116}$Sn + 5.5 mg/cm² Au
+     - 0.92 mg/cm$^2$ $^{116}$Sn + 14.7 mg/cm² Pb
    - **Beam energy:** 85 MeV
    - **Evaporation channel:** 1p3n
 
    ![img](./figures/19F+116Sn.png)
 
-### 1.2 Experimental Setup
+### Experimental Setup
 
-#### 1.2.1 Detector Configuration
+#### Detector Configuration
 
 ##### HPGe Detectors
 
@@ -21,9 +24,13 @@
 
    ![img](<./figures/Ge map.png>)
 
+   ![](./figures/Ge%20map%20original.png)
+
 2. **Ge digitizer frequency**
 
    ![img](./figures/Ge采集卡.png)
+
+   ![](./figures/Csi%20ball%20map.jpg)
 
 ##### CsI Detectors
 
@@ -35,9 +42,9 @@
 
    ![img](<./figures/CsI 采集卡.png>)
 
-## 2. Experimental Run Log
+### Experimental Run Log
 
-### 2.1 Experiment Duration
+#### Experiment Duration
 
 1. **Start time:** 2025-06-07 17:38 — **Run 6015**
 
@@ -47,27 +54,27 @@
 
    ![](./figures/experiment_finish.png)
 
-### 2.2 Run Summary
+#### Run Summary
 
 1. **2025-06-07: Runs 6015–6030**
    - Invalid run: 6027
    - Runs shorter than 3 min: 6016, 6020–6023
 
-   ![](../run_log/figures/gantt_2025-06-07.svg)
+   ![](./figures/gantt_2025-06-07.svg)
 
 2. **2025-06-08: Runs 6031–6064**
    - Invalid runs: None
    - Runs shorter than 3 min: 6042, 6046, 6047, 6053
 
-   ![](../run_log/figures/gantt_2025-06-08.svg)
+   ![](./figures/gantt_2025-06-08.svg)
 
 3. **2025-06-09: Runs 6065–6079**
    - Invalid runs: None
    - Runs shorter than 3 min: None
 
-   ![](../run_log/figures/gantt_2025-06-09.svg)
+   ![](./figures/gantt_2025-06-09.svg)
 
-### 2.3 Significant Events
+#### Significant Events
 
 1. **2025-06-07 17:38.** <span style="background-color: #90EE90;">Routine operation</span>: Experiment started.
 
@@ -80,7 +87,7 @@
 
 4. **2025-06-07 19:46.** <span style="background-color: #90EE90;">Routine operation</span>: Liquid nitrogen (LN₂) refilled for the HPGe detectors.
 
-5. **2025-06-07 19:46.** ==Issue / intervention==: High-voltage (HV) problems were observed in CsI detector rings 1 and 6. Additional HV/PIN-related issues affected cid=1, mod=1, ch=14, 15.
+5. **2025-06-07 19:46.** ==Issue / intervention==: High-voltage (HV) problems were observed in CsI detector rings 1 and 6(mod6). Additional HV/PIN-related issues affected cid=1, mod=1, ch=14, 15.
 
 6. **2025-06-07 20:08.** ==Issue / intervention==: Errors detected in cid=1, mod=3, ch=1–3.
 
@@ -125,3 +132,123 @@
 25. **2025-06-09 09:32.** <span style="background-color: #90EE90;">Routine operation</span>: Beam delivery resumed.
 
 26. **2025-06-09 13:51.** <span style="background-color: #90EE90;">Routine operation</span>: Experiment concluded.
+
+#### Calibrational file
+
+1. **2025-06-09 15:35.** Run 6082. 133Ba & 152Eu
+2. ![](./figures/133Ba.png)
+3. ![152Eu](./figures/152Eu.jpg)
+4. ![](./figures/152Eu_133Ba.png)
+
+## 2. Analysis
+
+**sid: 6050**
+
+![](./figures/6050-sid.png)
+
+### Time offset: 20261019
+
+#### bad channel
+
+##### 6015
+
+1. c1s3ch14![](./figures/6015/cid1_sid3_ch4.png)
+2. c1s3ch15![](./figures/6015/time%20offset%201-3-15.png)
+
+##### 6019
+
+![](./figures/6019/6019%201-2-10.png)
+
+![](./figures/6019/0051_cid1_sid2_ch11_24ns.png)
+
+![0052_cid1_sid2_ch12_24ns](./figures/6019/0052_cid1_sid2_ch12_24ns.png)
+
+![0053_cid1_sid2_ch13_24ns](./figures/6019/0053_cid1_sid2_ch13_24ns.png)
+
+![0054_cid1_sid2_ch14_24ns](./figures/6019/0054_cid1_sid2_ch14_24ns.png)
+
+![0055_cid1_sid2_ch15_24ns](./figures/6019/0055_cid1_sid2_ch15_24ns.png)
+
+![](./figures/6019/0067_cid1_sid3_ch12_24ns.png)
+
+![0068_cid1_sid3_ch13_24ns](./figures/6019/0068_cid1_sid3_ch13_24ns.png)
+
+![](./figures/6019/0054_cid1_sid2_ch14_24ns.png)
+
+![0055_cid1_sid2_ch15_24ns](./figures/6019/0055_cid1_sid2_ch15_24ns.png)
+
+![](./figures/6019/0067_cid1_sid3_ch12_24ns.png)
+
+![0068_cid1_sid3_ch13_24ns](./figures/6019/0068_cid1_sid3_ch13_24ns.png)
+
+![](./figures/6019/0115_cid1_sid8_ch0_24ns.png)
+
+![0116_cid1_sid8_ch1_24ns](./figures/6019/0116_cid1_sid8_ch1_24ns.png)
+
+![0117_cid1_sid8_ch2_24ns](./figures/6019/0117_cid1_sid8_ch2_24ns.png)
+
+![0118_cid1_sid8_ch3_24ns](./figures/6019/0118_cid1_sid8_ch3_24ns.png)
+
+![0119_cid1_sid8_ch4_24ns](./figures/6019/0119_cid1_sid8_ch4_24ns.png)
+
+![0120_cid1_sid8_ch5_24ns](./figures/6019/0120_cid1_sid8_ch5_24ns.png)
+
+![0121_cid1_sid8_ch6_24ns](./figures/6019/0121_cid1_sid8_ch6_24ns.png)
+
+![0122_cid1_sid8_ch7_24ns](./figures/6019/0122_cid1_sid8_ch7_24ns.png)
+
+![0123_cid1_sid8_ch8_24ns](./figures/6019/0123_cid1_sid8_ch8_24ns.png)
+
+![0124_cid1_sid8_ch10_24ns](./figures/6019/0124_cid1_sid8_ch10_24ns.png)
+
+![0125_cid1_sid8_ch11_24ns](./figures/6019/0125_cid1_sid8_ch11_24ns.png)
+
+![0126_cid1_sid8_ch12_24ns](./figures/6019/0126_cid1_sid8_ch12_24ns.png)
+
+![0127_cid1_sid8_ch13_24ns](./figures/6019/0127_cid1_sid8_ch13_24ns.png)
+
+![0128_cid1_sid8_ch14_24ns](./figures/6019/0128_cid1_sid8_ch14_24ns.png)
+
+![0129_cid1_sid8_ch15_24ns](./figures/6019/0129_cid1_sid8_ch15_24ns.png)
+
+![](./figures/6019/0138_cid1_sid11_ch1_24ns.png)
+
+![0139_cid1_sid11_ch2_24ns](./figures/6019/0139_cid1_sid11_ch2_24ns.png)
+
+![0140_cid1_sid11_ch3_24ns](./figures/6019/0140_cid1_sid11_ch3_24ns.png)
+
+##### 6024
+
+![](./figures/6024/0050_cid1_sid2_ch10_24ns.png)
+
+![0051_cid1_sid2_ch11_24ns](./figures/6024/0051_cid1_sid2_ch11_24ns.png)
+
+![0052_cid1_sid2_ch15_24ns](./figures/6024/0052_cid1_sid2_ch15_24ns.png)
+
+![](./figures/6024/0118_cid1_sid11_ch1_24ns.png)
+
+![0119_cid1_sid11_ch2_24ns](./figures/6024/0119_cid1_sid11_ch2_24ns.png)
+
+![0120_cid1_sid11_ch3_24ns](./figures/6024/0120_cid1_sid11_ch3_24ns.png)
+
+### Energy calibration
+
+standart spectrum
+
+![]()
+
+#### bad channel
+
+1. cid=0 sid=4 ch=10, stardart radioactive source spectrum, there are more peaks than 152Eu and 133Ba.
+
+   ![](./figures/cal_evte_0-4-10.svg)
+
+2. cid =0 sid=4 ch=11, stardant radioactive source spectrum, there are abnormal peaks.
+
+   ![](./figures/cal_evte_0-4-11.svg)
+
+#### Special channel
+
+1. cid=0 sid=4 ch=11  standart radioactive source specturm, there are efficient for low energy, so it may be a small plate detector.
+
+   ![](./figures/cal_evte_0-2-12.svg)
