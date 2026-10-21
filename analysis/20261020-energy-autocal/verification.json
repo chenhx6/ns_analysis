@@ -1,69 +1,21 @@
 {
   "status": "passed",
-  "scope": "Plan finalized with 3-panel PNG layout and peak requirements.",
+  "scope": "Plan document review only. No calibration code, fit results or PNG rendering validated.",
   "checks": [
     {
-      "name": "## PNG 布局",
+      "name": "review_plot_panels_and_distinct_residual_definitions",
       "returncode": 0
     },
     {
-      "name": "三面板",
+      "name": "review_peak_recommendation_error_axes_and_detector_requirements",
       "returncode": 0
     },
     {
-      "name": "Pearson residual",
+      "name": "review_planning_only_status_and_removed_incorrect_claims",
       "returncode": 0
     },
     {
-      "name": "chi2/ndf",
-      "returncode": 0
-    },
-    {
-      "name": "a0, a1, a2",
-      "returncode": 0
-    },
-    {
-      "name": "不少于 4 个",
-      "returncode": 0
-    },
-    {
-      "name": "低能区到高能区有足够跨度",
-      "returncode": 0
-    },
-    {
-      "name": "不依赖探测器类型",
-      "returncode": 0
-    },
-    {
-      "name": "可移植",
-      "returncode": 0
-    },
-    {
-      "name": "peakfinder",
-      "returncode": 0
-    },
-    {
-      "name": "Gaussian + pol1",
-      "returncode": 0
-    },
-    {
-      "name": "pol2",
-      "returncode": 0
-    },
-    {
-      "name": "TSpectrum",
-      "returncode": 0
-    },
-    {
-      "name": "## 已解决的讨论项",
-      "returncode": 0
-    },
-    {
-      "name": "探测器类型",
-      "returncode": 0
-    },
-    {
-      "name": "ref_decode_data/data_C1_6082_notwave.root",
+      "name": "git_diff_whitespace",
       "returncode": 0
     }
   ]
