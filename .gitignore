@@ -22,6 +22,7 @@
 !/calibration/energy/**/*.json
 /calibration/energy/autocal/autocal
 /calibration/energy/**/figures/
+!/calibration/energy/**/histograms.root
 
 # 标准放射源参考资料一并纳入版本管理
 !/calibration/standard_radioactive_source/
@@ -49,6 +50,7 @@
 # 排除编译二进制及生成的图片 figures 目录
 /calibration/energy/autocal/autocal
 /calibration/energy/**/figures/
+!/calibration/energy/**/histograms.root
 
 # 标准放射源参考资料一并纳入版本管理
 !/calibration/standard_radioactive_source/
@@ -69,6 +71,7 @@
 !/time_offset/**/*.h
 !/time_offset/**/*.md
 !/time_offset/**/*.csv
+/time_offset/time_offset_*.md
 !/time_offset/**/*.json
 !/time_offset/**/*.dat
 !/time_offset/**/*.svg
@@ -109,6 +112,7 @@
 
 # 大型数据与数据容器；小型标定配置 .dat 允许跟踪。
 **/*.root
+!/calibration/energy/**/histograms.root
 **/*.bin
 **/*.h5
 **/*.hdf5

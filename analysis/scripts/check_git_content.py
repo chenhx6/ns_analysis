@@ -42,7 +42,7 @@ def permitted(path):
         # Energy calibration sources and small outputs (figures and root files not tracked in Git)
         or (path.startswith("calibration/energy/") and not "/figures/" in path and
             (p.suffix.lower() in {".cc", ".cpp", ".hh", ".h", ".md", ".csv", ".json"}
-             or path == "calibration/energy/autocal/Makefile"))
+             or p.name == "histograms.root" or path == "calibration/energy/autocal/Makefile"))
         # Standard radioactive sources reference materials
         or (path.startswith("calibration/standard_radioactive_source/") and
             p.suffix.lower() in {".png", ".jpg", ".jpeg", ".pdf", ".md", ".csv", ".json", ".txt"})
@@ -50,7 +50,7 @@ def permitted(path):
         or (path.startswith("check/energy_calibration/") and
             p.suffix.lower() in {".cc", ".hh", ".h", ".dat", ".md"})
         or path == "time_offset/time_offset/run.sh"
-        or (p.parts[0] == "time_offset" and p.suffix.lower() in TIME_OFFSET_SUFFIXES)
+        or (p.parts[0] == "time_offset" and p.suffix.lower() in TIME_OFFSET_SUFFIXES and not (p.name.startswith("time_offset_") and p.suffix.lower() == ".md"))
         # Single-run source files; keep the former spelling valid for tracked deletions.
         or (len(p.parts) == 3 and p.parts[:2] in {("timeOffset", "time_offset"), ("time_offset", "time_offset")}
             and (p.suffix.lower() in {".cc", ".hh", ".md", ".csv", ".json"} or p.name == "Makefile"))
@@ -65,8 +65,10 @@ def permitted(path):
         or name in {"auth.json", "history.jsonl"} or ".sqlite" in name
         or p.suffix.lower() in {".pem", ".key"}
     )
+    is_hist_root = (path.startswith("calibration/energy/") and p.name == "histograms.root")
     generated = (
-        p.suffix.lower() in DATA_SUFFIXES | BUILD_SUFFIXES
+        (p.suffix.lower() in DATA_SUFFIXES and not is_hist_root)
+        or p.suffix.lower() in BUILD_SUFFIXES
         or any(part in LOCAL_DIRS for part in p.parts)
         or path == "decode_data/DecodeAndSortAll/decodeandsort" or name.endswith("~")
     )
