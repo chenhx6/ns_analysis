@@ -40,7 +40,7 @@ def permitted(path):
         or path in RUN_LOG_FILES
         # Energy calibration sources and small outputs; generic private/data checks still apply.
        or (path.startswith("calibration/energy/") and
-           (p.suffix.lower() in {".cc", ".cpp", ".hh", ".h", ".md", ".csv", ".json", ".png"}
+           (p.suffix.lower() in {".cc", ".cpp", ".hh", ".h", ".md", ".csv", ".json", ".png", ".svg"}
             or path == "calibration/energy/autocal/Makefile"))
         # 能量刻度核验：源码和刻度系数
         or (path.startswith("check/energy_calibration/") and

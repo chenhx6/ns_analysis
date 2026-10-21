@@ -1,0 +1,51 @@
+Read 8275299 / 8275299 latest-tree entries; 39 channels; spectrum sum=8275299
+cid0_sid2_ch4: validation_insufficient; reliable peaks=5; limited low/mid/high energy coverage; do not extrapolate
+cid0_sid2_ch5: validation_insufficient; reliable peaks=12; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid2_ch6: validation_insufficient; reliable peaks=7; limited low/mid/high energy coverage; do not extrapolate
+cid0_sid2_ch8: validation_insufficient; reliable peaks=11; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid2_ch9: validation_insufficient; reliable peaks=11; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid2_ch10: validation_insufficient; reliable peaks=11; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid2_ch11: validation_insufficient; reliable peaks=9; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid2_ch12: validation_insufficient; reliable peaks=7; limited low/mid/high energy coverage; do not extrapolate
+cid0_sid3_ch4: validation_insufficient; reliable peaks=11; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid3_ch5: validation_insufficient; reliable peaks=8; limited low/mid/high energy coverage; do not extrapolate; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid3_ch6: validation_insufficient; reliable peaks=9; limited low/mid/high energy coverage; do not extrapolate; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid3_ch8: validation_insufficient; reliable peaks=12; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid3_ch10: validation_insufficient; reliable peaks=10; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid3_ch11: validation_insufficient; reliable peaks=11; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch0: validation_insufficient; reliable peaks=12; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch1: validation_insufficient; reliable peaks=10; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch2: success; reliable peaks=10; statistical checks passed within fitted range; systematic errors not evaluated
+cid0_sid4_ch3: validation_insufficient; reliable peaks=9; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch4: validation_insufficient; reliable peaks=12; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch5: validation_insufficient; reliable peaks=9; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch6: validation_insufficient; reliable peaks=11; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch7: validation_insufficient; reliable peaks=6; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch9: validation_insufficient; reliable peaks=4; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid4_ch10: validation_insufficient; reliable peaks=5; limited low/mid/high energy coverage; do not extrapolate
+cid0_sid4_ch11: failed_ambiguous_matching; reliable peaks=0; competing mapping: 3 vs 3 points; gains 0.206587 vs 0.0527382 keV/ADC
+cid0_sid5_ch5: validation_insufficient; reliable peaks=11; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid5_ch6: validation_insufficient; reliable peaks=11; pol2 incoWarning in <TSpectrum::SearchHighRes>: Peak buffer full
+Warning in <TSpectrum::SearchHighRes>: Peak buffer full
+Warning in <TSpectrum::SearchHighRes>: Peak buffer full
+Warning in <TSpectrum::SearchHighRes>: Peak buffer full
+Warning in <TSpectrum::SearchHighRes>: Peak buffer full
+Warning in <TSpectrum::SearchHighRes>: Peak buffer full
+Warning in <TSpectrum::SearchHighRes>: Peak buffer full
+Warning in <TSpectrum::SearchHighRes>: Peak buffer full
+nsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid5_ch7: validation_insufficient; reliable peaks=13; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid5_ch8: validation_insufficient; reliable peaks=12; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid5_ch9: validation_insufficient; reliable peaks=12; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid5_ch10: validation_insufficient; reliable peaks=7; pol2 inconsistent with stated independent statistical errors (p<0.01); model/systematics need review
+cid0_sid8_ch0: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=0
+cid0_sid8_ch1: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=0
+cid0_sid8_ch2: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=0
+cid0_sid8_ch4: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=0
+cid0_sid8_ch5: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=0
+cid0_sid8_ch6: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=1
+cid0_sid8_ch7: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=0
+cid0_sid8_ch10: failed_matching; reliable peaks=0; fewer than 3 distinct candidates or references; candidates=1
+Exported 39 PNGs from saved ROOT (no refitting)
+SUMMARY channels=39 failed_ambiguous_matching=1 failed_matching=8 success=1 validation_insufficient=29
+Output: "/home/ys/data_401/data/chx_20260622/.omx/coordination/workspaces/energy-autocal-20261021/calibration/energy/data_C1_6082_notwave"

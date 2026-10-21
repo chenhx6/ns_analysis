@@ -1,0 +1,459 @@
+                                                                                                133
+LNE – LNHB/CEA Table de Radionucl´eides                                                            56 Ba 77
+
+
+
+
+
+                               133
+                                    56 Ba  77
+
+
+
+
+
+  1  Decay Scheme
+
+      133Ba disintegrates by electron capture mainly to two 133Cs excited levels of 437 keV (85.4%) and of
+   383 keV (14.5%) with three very minor branches to the 160 keV, 81 keV excited levels and the ground state.
+      Le baryum 133 se d´esint`egre par capture ´electronique principalement vers deux niveaux excit´es de 437 keV
+   et 383 keV du c´esium 133.
+
+  2  Nuclear Data
+
+       T1/2(133Ba )    :  10,539    (6)   a
+      Q+(133Ba )     :  517,3    (10)  keV
+
+  2.1  Electron Capture Transitions
+
+
+
+              Energy     Probability
+                                            Nature            lg ft    PK       PL       PM
+               (keV)        (%)
+
+
+          ϵ0,4    80,3 (10)     85,41 (53)         Allowed          6,63     0,671 (5)    0,251 (4)    0,0777 (11)
+          ϵ0,3   133,5 (10)     14,46 (51)         Allowed           8,03   0,7727 (9)   0,1755 (7)   0,05174 (23)
+          ϵ0,2   356,7 (10)     <0,3         2nd Forbidden      >10,6     0,83         0,13        0,037
+          ϵ0,1   436,3 (10)     <0,7         2nd Forbidden      >10,9     0,84         0,13        0,037
+          ϵ0,0   517,3 (10)  <0,0005      Unique 2nd Forbidden  >13,9     0,77         0,18          0,05
+
+
+
+
+
+KRI / V.P. Chechev, N.K. Kuzmenko                1                          28/04/2015 −10/03/2016
+                                                                                                133
+LNE – LNHB/CEA Table de Radionucl´eides                                                            56 Ba 77
+
+
+  2.2 Gamma Transitions and Internal Conversion Coeﬃcients
+
+
+
+                    Energy       Pγ+ce
+                                                Multipolarity     αK         αL        αM          αT
+                     (keV)        (%)
+
+
+         γ4,3(Cs)    53,1622 (18)   14,25 (46)    M1+E2         4,78 (7)       0,70 (5)       0,144 (12)     5,66 (11)
+         γ2,1(Cs)    79,6142 (19)     7,3 (5)    M1+E2        1,495 (22)     0,217 (6)      0,0447 (13)     1,77 (3)
+         γ1,0(Cs)    80,9979 (11)   90,05 (6)    M1+E2        1,431 (20)     0,216 (4)      0,0447 (8)     1,703 (24)
+         γ2,0(Cs)   160,6121 (16)   0,826 (9)    M1+E2        0,234 (4)     0,0471 (13)     0,0099 (3)     0,294 (6)
+         γ3,2(Cs)    223,237 (2)    0,494 (6)    M1+E2       0,0836 (12)   0,01103 (16)    0,00226 (4)    0,0975 (14)
+         γ4,2(Cs)   276,3992 (21)    7,53 (6)       E2         0,0460 (7)    0,00842 (12)   0,001763 (25)   0,0566 (8)
+         γ3,1(Cs)   302,8512 (16)   19,10 (12)    M1+E2       0,0373 (6)    0,00484 (7)    0,000988 (14)   0,0434 (6)
+         γ4,1(Cs)   356,0134 (17)   63,63 (20)      E2         0,0211 (3)    0,00346 (5)    0,000721 (10)   0,0254 (4)
+         γ3,0(Cs)   383,8491 (12)    9,12 (6)       E2        0,01684 (24)   0,00270 (4)    0,000560 (8)    0,0202 (3)
+
+
+  3  Atomic Data
+
+  3.1  Cs
+
+     ωK      :  0,894   (4)
+         ¯ωL       :  0,104   (5)
+      nKL    :  0,895   (4)
+
+   3.1.1 X Radiations
+
+
+                        Energy               Relative
+                          (keV)               probability
+
+     XK
+          Kα2          30,6254                54,13
+          Kα1          30,9731               100
+          Kβ3          34,9197    
+                                Kβ1          34,9873              29,21532
+         Kβ5′′           35,252     
+
+          Kβ2           35,822     
+                      
+          Kβ4           35,907               7,12854
+            KO2,3         35,972     
+
+      XL
+           Lℓ            3,7946
+         Lα        4,2729 - 4,2866
+           Lη            4,1418
+          Lβ         4,62 - 4,9333
+          Lγ        5,1308 - 5,5525
+
+
+
+
+
+KRI / V.P. Chechev, N.K. Kuzmenko                2                          28/04/2015 −10/03/2016
+                                                                                                133
+LNE – LNHB/CEA Table de Radionucl´eides                                                            56 Ba 77
+
+
+   3.1.2  Auger Electrons
+
+
+                      Energy        Relative
+                       (keV)       probability
+
+
+         Auger K
+         KLL  24,411 - 25,804     100
+         KLX  28,991 - 30,961      47,2
+        KXY    33,55 - 35,96       5,56
+
+         Auger L  2,5777 - 5,5590
+
+
+
+  4   Electron Emissions
+
+
+                          Energy                Electrons
+                            (keV)              (per 100 disint.)
+
+       eAL      (Cs)     2,5777 - 5,5590           136,8 (8)
+
+      eAK      (Cs)
+           KLL     24,411 - 25,804  
+                       
+          KLX     28,991 - 30,961             14,1 (6)
+          KXY      33,55 - 35,96   
+
+         ec4,3 T   (Cs)    17,1776 - 53,1508          12,11 (41)
+         ec4,3 K   (Cs)    17,1776  (18)              10,23 (32)
+         ec2,1 T   (Cs)    43,6296 - 79,6028            4,66 (35)
+         ec2,1 K   (Cs)    43,6296  (19)               3,93 (29)
+         ec1,0 K   (Cs)    45,0133  (11)               47,7 (8)
+         ec1,0 T   (Cs)    45,0133 - 80,9865            56,7 (9)
+         ec4,3 L   (Cs)    47,4479 - 48,1503            1,50 (11)
+         ec4,3 M   (Cs)    51,9451 - 52,4367          0,308 (27)
+         ec4,3 N   (Cs)    52,9314 - 53,0857          0,065 (5)
+         ec2,1 L   (Cs)    73,8999 - 74,6023          0,571 (44)
+         ec1,0 L   (Cs)    75,2836 - 75,9860            7,19 (15)
+         ec2,1 M   (Cs)    78,3971 - 78,8887          0,118 (9)
+         ec2,1 N   (Cs)    79,3834 - 79,5377         0,0247 (19)
+         ec1,0 M   (Cs)    79,7808 - 80,2724          1,489 (30)
+         ec1,0 N   (Cs)    80,7671 - 80,9214          0,313 (6)
+         ec2,0 K   (Cs)   124,6275  (16)            0,1493 (29)
+         ec2,0 L   (Cs)   154,8978 - 155,6002        0,0300 (9)
+         ec3,2 K   (Cs)    187,252  (2)             0,0376 (7)
+         ec4,2 K   (Cs)   240,4146  (21)              0,328 (6)
+         ec3,1 T   (Cs)   266,8666 - 302,8398         0,795 (12)
+         ec3,1 K   (Cs)   266,8666  (16)              0,683 (12)
+         ec4,2 L   (Cs)   270,6849 - 271,3873         0,060 (1)
+         ec4,2 M   (Cs)   275,1821 - 275,6737       0,01257 (21)
+         ec3,1 L   (Cs)   297,1369 - 297,8393        0,0886 (14)
+         ec3,1 M   (Cs)   301,6341 - 302,1257       0,01809 (28)
+         ec4,1 T   (Cs)   320,0288 - 356,0020         1,576 (25)
+
+
+
+KRI / V.P. Chechev, N.K. Kuzmenko                3                          28/04/2015 −10/03/2016
+                                                                                                133
+LNE – LNHB/CEA Table de Radionucl´eides                                                            56 Ba 77
+
+
+                          Energy                Electrons
+                            (keV)              (per 100 disint.)
+
+         ec4,1 K   (Cs)   320,0288  (17)              1,309 (19)
+         ec3,0 K   (Cs)   347,8645  (12)            0,1505 (24)
+         ec4,1 L   (Cs)   350,2991 - 351,0015        0,2147 (32)
+         ec4,1 M   (Cs)   354,7963 - 355,2879        0,0447 (6)
+         ec3,0 L   (Cs)   378,1348 - 378,8372       0,02414 (39)
+
+
+
+  5  Photon Emissions
+
+  5.1  X-Ray Emissions
+
+
+
+                           Energy            Photons
+                             (keV)          (per 100 disint.)
+
+
+     XL      (Cs)     3,7946 - 5,5525       15,87 (26)
+
+     XKα2    (Cs)        30,6254            33,8 (4)
+                                             Kα
+     XKα1    (Cs)        30,9731            62,4 (7)
+     XKβ3    (Cs)        34,9197   
+                           XKβ1    (Cs)        34,9873           18,24 (29)       K′β1
+     XKβ5′′    (Cs)         35,252   
+
+     XKβ2    (Cs)         35,822   
+                           XKβ4    (Cs)         35,907             4,45 (12)       K′β2
+      XKO2,3  (Cs)         35,972   
+
+
+
+  5.2 Gamma Emissions
+
+
+                  Energy        Photons
+                   (keV)      (per 100 disint.)
+
+         γ4,3(Cs)   53,1622 (18)    2,14 (6)
+         γ2,1(Cs)   79,6142 (19)    2,63 (19)
+         γ1,0(Cs)   80,9979 (11)  33,31 (30)
+         γ2,0(Cs)  160,6121 (16)  0,638 (6)
+         γ3,2(Cs)  223,2368 (13)  0,450 (5)
+         γ4,2(Cs)  276,3989 (12)    7,13 (6)
+         γ3,1(Cs)  302,8508 (5)    18,31 (11)
+         γ4,1(Cs)  356,0129 (7)    62,05 (19)
+         γ3,0(Cs)  383,8485 (12)    8,94 (6)
+
+
+
+
+
+KRI / V.P. Chechev, N.K. Kuzmenko                4                          28/04/2015 −10/03/2016
+                                                                                                133
+LNE – LNHB/CEA Table de Radionucl´eides                                                            56 Ba 77
+
+  6  Main Production Modes
+
+       Ba −132(n,γ)Ba −133    σ : 6,5 (8) barns
+         Possible impurities: Ba −131, Ba −140
+
+       Ba −132(n,γ)Ba −133m    σ : 0,5 barns
+
+       Cs −133(p,n)Ba −133
+         Possible impurities: Cs −132
+
+
+  7   References
+
+             - E.I. Wyatt, S.A. Reynolds, T.H. Handley, W.S. Lyon, H.A. Parker. Nucl. Sci. Eng. 11 (1961) 74
+              (Half-life)
+             - P. Blasi, M. Bocciolini, P.R. Maurenzig, P. Sona, N. Taccetti. Nuovo Cim. 50B (1967) 298
+         (Gamma-ray emission probabilities)
+             - J.A. Bearden. Rev. Mod. Phys. 39 (1967) 78
+           (X-ray energies)
+             - D.P. Donnelly, J.J. Reidy, M.L. Wiedenbeck. Phys. Rev. 173 (1968) 1192
+         (Gamma-ray emission probabilities)
+             - S.A. Reynolds, J.F. Emery, E.I. Wyatt. Nucl. Sci. Eng. 32 (1968) 46
+              (Half-life)
+             - P. Alexander, J. P. Lau. Nucl. Phys. A121 (1968) 612
+         (Gamma-ray emission probabilities, ICC)
+             - V. Narang, H. Houtermans. In: Proc. Conf. Electron Capture and Higher Order Processes in Nucl. Decays,
+           Debrecen, Hungary, D. Berenyi, Ed. Eotvos Lorand Phys Soc, Budapest, (1968) 97
+           (L/K-capture ratio)
+             - A. Notea, Y. Gurfinkel. Nucl. Phys. A107 (1968) 193
+         (Gamma-ray emission probabilities)
+             - F. Lagoutine, Y. Le Gallic, J. Legrand. Int. J. Appl. Radiat. Isotop. 19 (1968) 475
+              (Half-life)
+             - H.E. Bosch, A.J. Haverfield, E. Szichman, S.M. Abecasis. Nucl. Phys. A108 (1968) 209
+          (ICC 81 keV)
+             - R. Gunnink, J.B. Niday, R.P. Anderson, R.A. Meyer. In: UCID-15439 (1969); Gunnink, R.; Nethaway, D. -
+            Priv. Comm. (1969)
+         (Gamma-ray emission probabilities)
+             - K.F. Walz, H.M. Weiss. Z. Naturforsch. 25a (1970) 921
+              (Half-life)
+             - J.F. Emery, S.A. Reynolds, E.I. Wyatt, G.I. Gleason. Nucl. Sci. Eng. 48 (1972) 319
+              (Half-life)
+             - W.D. Schmidt-Ott, R.M. Fink. Z. Physik 249 (1972) 286
+           (K-capture probability, absolute XK emission probability, gamma-ray emission probabilities, ICC)
+             - H. Inoue, Y. Yoshizawa, T. Morii. J. Phys. Soc. Jpn 34 (1973) 1437
+         (Gamma-ray emission probabilities)
+             - J. Legrand. Nucl. Instrum. Methods 112 (1973) 229
+         (Gamma-ray emission probabilities)
+             - R.D. Lloyd, C.W. Mays. Int. J. Appl. Radiat. Isotop. 24 (1973) 189
+              (Half-life)
+             - L.A. McNelles, J.L. Campbell. Nucl. Instrum. Methods 109 (1973) 241
+         (Gamma-ray emission probabilities)
+             - B.K. Das Mahapatra, P. Mukherjee. J. Phys. (London) A7 (1974) 388
+           (K-capture probability)
+             - W.F. Nicaise, A.W. Waltner. Nucl. Instrum. Methods 131 (1975) 477
+           (K-capture probability)
+             - R.J. Gehrke, R.G. Helmer, R.C. Greenwood. Nucl. Instrum. Methods 147 (1977) 405
+         (Gamma-ray emission probabilities)
+             - U. Sch¨otzig, K. Debertin, K.F. Walz. Int. J. Appl. Radiat. Isotop. 28 (1977) 503
+           (X-ray emission probabilities, Gamma-ray emission probabilities)
+
+
+
+KRI / V.P. Chechev, N.K. Kuzmenko                5                          28/04/2015 −10/03/2016
+                                                                                                133
+LNE – LNHB/CEA Table de Radionucl´eides                                                            56 Ba 77
+
+
+             - C. Vylov, B.P. Osipenko, V.G. Chumin. In: Elementarnie chastitsi and atomnie yadra (Particles and Nuclei) 9
+           (1978) 1350
+         (Gamma-ray emission probabilities)
+             - R.G. Helmer, R.C. Greenwood, R.J. Gehrke. Nucl. Instrum. Methods 155 (1978) 189
+         (Gamma-ray emission probabilities)
+             - H.H. Hansen, D. Mouchel. In: NEANDC(E) 202U; Vol III (1979) 28
+              (Half-life)
+             - B. Chauvenet, J. Morel, J. Legrand. Report ICRM-S-6(December 1980) (1980)
+           (Absolute gamma-ray emission probabilities)
+             - H. Houtermans, O. Milosevic, F. Reichel. Int. J. Appl. Radiat. Isotop. 31 (1980) 153
+              (Half-life)
+             - W.M. Roney Jr., W.A. Seale. Nucl. Instrum. Methods 171 (1980) 389
+         (Gamma-ray emission probabilities)
+             - A.R. Rutledge, L.V. Smith, J.S. Merritt. In: AECL 6692 (1980)
+              (Half-life)
+             - D.D. Hoppes, J.M.R. Hutchinson, F.J. Schima, M.P. Unterweger. In: NBS-SP-626 (1982) 85
+              (Half-life)
+             - K. Singh, H.S. Sahota. J. Phys. (London) G9 (1983) 1565
+           (K-capture probability)
+             - K. Singh, H.S. Sahota. J. Phys. Soc. Jpn 52 (1983) 2336
+           (K-capture probability)
+             - B. Chauvenet, J. Morel, J. Legrand. Int. J. Appl. Radiat. Isotop. 34 (1983) 479
+           (Absolute gamma-ray emission probabilities)
+             - J. Kits, F. Latal, M. Choc. Int. J. Appl. Radiat. Isotop. 34 (1983) 935
+              (Half-life)
+             - K.F. Walz, K. Debertin, H. Schrader. Int. J. Appl. Radiat. Isotop. 34 (1983) 1191
+              (Half-life)
+             - Y. Yoshizawa, Y. Iwata, T. Katoh, J.Z. Ruan, Y. Kawada. Nucl. Instrum. Methods 212 (1983) 249
+         (Gamma-ray emission probabilities)
+             - A.S.V. Subba Lakshmi, S. Venkataratnam, S.B. Reddy, K.V. Reddy. Curr. Sci. 56 (1987) 407
+         (Gamma-ray relative emission probabilities)
+             - R.B. Begzhanov, Sh.K. Azimov, R.D. Magrupov, Sh.A. Mirakhmedov, A. Mukhammadiev, M. Narziku-
+          lov, S.Kh. Salimov. In: Program and Theses, Proc. 38th Ann. Conf. Nucl. Spectrosc. Struct. At Nuclei, Baku
+           (1988) 93
+           (K-capture probabilities)
+             - M.C. Martins, M.I. Marques, F. Parente, J.G. Ferreira. J. Phys. (London) B22 (1989) 3167
+           (X-ray emission probabilities)
+             - A.G. Egorov, Yu.S. Egorov, V.G. Nedovesov, G.E. Shchukin, K.P. Yakovlev. In: Program and Thesis,
+           Proc. 39th Ann. Conf. Nucl. Spectrosc. Struct. At Nuclei, Leningrad (1989) 505
+           (X-ray emission probabilities)
+             - V.N. Danilenko, A.A. Konstantinov, N.V. Kurenkov, L.N. Kurchatova, A.B. Malinin, A.V. Mamelin,
+          S.V. Matveev, T.E. Sazonova, E.K. Stepanov, S.V. Serman, Yu.G. Toporov. Appl. Radiat. Isot. 40 (1989)
+          707
+         (Gamma-ray emission probabilities)
+             - B. Dasmahapatra, S. Bhattacharya, S. Sen, M. Saha, A. Goswami. J. Phys. (London) G16 (1990) 1227
+           (K-capture probability)
+             - R.B. Firestone. Nucl. Instrum. Methods Phys. Res. A286 (1990) 584
+         (Gamma-ray emission probabilities)
+             - K. Bhaskara Rao, S.S. Rao, V.S. Rao, H.C. Padhi. Nuovo Cim. 103A (1990) 683
+           (K-capture probability)
+             - R.A. Meyer. Fizika (Zagreb) 22 (1990) 153
+         (Gamma-ray emission probabilities)
+             - C. Wesselborg, D.E. Alburger. Nucl. Instrum. Methods Phys. Res. A302 (1991) 89
+        (Gamma ray energies)
+             - G.P.S. Sahota, H. Singh, H.S. Binarh, B.S. Pallan, H.S. Sahota. J. Phys. Soc. Jpn 61 (1992) 3518
+           (K-capture probability)
+             - M.P. Unterwerger, D.D. Hoppes, F.J. Schima. Nucl. Instrum. Methods Phys. Res. A312 (1992) 349
+              (Half-life)
+             - F.E. Chukreev. In: Voprosi Atomnoi Nauki i Tekhniki, Ser.: Yadernie konstanti, 1992 2 (1992) 92
+          (Decay scheme)
+
+
+KRI / V.P. Chechev, N.K. Kuzmenko                6                          28/04/2015 −10/03/2016
+                                                                                                133
+LNE – LNHB/CEA Table de Radionucl´eides                                                            56 Ba 77
+
+
+             - A.L. Nichols. AEA Technology Report AEA- RS-5449 (1993)
+          (Decay scheme)
+             - S. Rab. Nucl. Data Sheets 75 (1995) 491
+          (Decay scheme)
+             - H. Miyahara, K. Usami, C. Mori. Nucl. Instrum. Methods Phys. Res. A374 (1996) 193
+         (Gamma-ray emission probabilities)
+             - E. Sch¨onfeld, H. Janssen. Nucl. Instrum. Methods Phys. Res. A369 (1996) 527
+          (Atomic Data)
+             - R.H. Martin, K.I.W. Burns, J.G.V. Taylor. Nucl. Instrum. Methods Phys. Res. A390 (1997) 267
+              (Half-life)
+             - H.Y. Hwang, C.B. Lee, T.S. Park. Appl. Radiat. Isot. 49 (1998) 1201
+         (Gamma-ray emission probabilities)
+             - R.G. Helmer, C. van der Leun. Nucl. Instrum. Methods Phys. Res. A450 (2000) 35
+        (Gamma ray energies)
+             - M.P. Unterweger. Appl. Radiat. Isot. 56 (2002) 125
+              (Half-life)
+             - H. Schrader. Appl. Radiat. Isot. 60 (2004) 17
+              (Half-life)
+             - M.M. B´e, V. Chist´e, C. Dulieu, E. Browne, V. Chechev, N. Kuzmenko, R. Helmer, A. Nichols, E.
+           Sch¨onfeld, R. Dersch. Monographie BIPM-5 1 (2004) 263
+          (Decay data evaluation)
+             - T. Kib´edi, T.W. Burrows, M.B. Trzhaskovskaya, P.M. Davidson, C.W. Nestor Jr. Nucl. Instrum. Methods
+           Phys. Res. A589 (2008) 202
+           (BrIcc computer program)
+             - H. Schrader. Appl. Radiat. Isot. 68 (2010) 1583
+              (Half-life)
+             - Yu. Khazov, A. Rodionov, F.G. Kondev. Nucl. Data Sheets 112 (2011) 855
+          (Decay scheme)
+             - M. Wang, G. Audi, A.H. Wapstra, F.G. Kondev, M. MacCormick, X. Xu, B. Pfeiffer. Chin. Phys. C36
+           (2012) 1603
+          (Q)
+             - R. Fitzgerald. J. Res. Natl. Inst. Stand. Technol. 117 (2012) 80
+              (Half-life)
+             - G.V. Sai Manohar, K.S. Yadav, K.V. Sai, R. Gowrishankar, K. Venkataramaniah, S. Deepa, D. Rao.
+           Proceedings of the DAE Symp. on Nucl. Phys. 59 (2014) 286
+         (Gamma-ray and electron relative emission probabilities)
+             - M.P. Unterweger, R. Fitzgerald. Appl. Radiat. Isot. 87 (2014) 92
+              (Half-life)
+
+
+
+
+
+KRI / V.P. Chechev, N.K. Kuzmenko                7                          28/04/2015 −10/03/2016
+LNE-LNHB/CEA - Table de Radionucléides                                                                13356 Ba 77
+
+
+
+
+
+                                                                                                                                 1/2+ ; 0
+                                                                                                             10,539 (6) a
+                                                                                          0      133
+                                                                                                       Ba
+                                                                                                  56    77
+                                                             Emission intensities
+                                                  per 100 disintegrations
+
+                                                    2,147,1362,05                       1/2+ ; 437,0113      85,41
+                          150 ps                                       4
+                                                                                      14,46
+                                                             0,4518,318,94                                                                                     3/2+ ; 383,8491
+                           44 ps                                       3
+
+
+
+
+
+                                                                          < 0,3                                                                       2,630,638                                                                                     5/2+ ; 160,6121
+                          172 ps                                       2
+
+                                                                          < 0,7                                                                          33,31                                                                                      5/2+ ; 80,9979
+                           6,283 ns                                       1
+
+
+                                                                          < 0,0005
+                                                                                             7/2+ ; 0
+                               Stable
+                                       0                133
+                              Cs
+                                                          55    78
+                                 Q + = 517,3 keV
+                              %  = 100
+
+
+
+
+
+KRI  / Chechev V.P., Kuzmenko N.K.            Scheme page  : 1/1                        28/04/2015 - 28/05/2015

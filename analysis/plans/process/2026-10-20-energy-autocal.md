@@ -2,7 +2,7 @@
 
 - 创建日期：2026-10-20（Asia/Shanghai）
 - 最后更新：2026-10-21
-- 状态：用户已要求转入执行，准备交接到独立 session；此时尚未开始实现或拟合。
+- 状态：全量实施与运行验证完成，已生成全部产物，并通过可重复代码/数据检验。
 - 用户授权：2026-10-20 用户要求讨论自动刻度程序并制作计划书。
 - 2026-10-21 执行授权：用户明确“计划书已经做好了”，要求创建另一个 session，使用 GPT-6.1 Sol、high 执行本计划并返回可 resume 的 session ID。此指令取代此前仅讨论的阶段边界。
 - 2026-10-20 补充：用户明确 PNG 从拟合后的 ROOT 文件抽取并保存到 `figures/`，目的是便于浏览。
@@ -19,7 +19,7 @@
   - 可用峰建议：最好不少于 4 个峰，且从低能到高能有跨度（不能局部扎堆）；这是本次用户给出的推荐，不是参考教程规定的统一硬门槛。
   - 不需要各通道的探测器类型映射，程序通用可移植。
 - 参考方法：[HPGe gamma 刻度作业](https://zhihuanli.github.io/Experimental-Method-in-Nuclear-Physics/chapt3/coursework3.1/3.1_HpGe_gamma_calibration.html)（Gaussian+线性本底拟合峰位，检查峰拟合 Pearson 残差及刻度能量残差）。该教程没有给出适用于所有通道的固定残差阈值；教程先用线性模型，本任务按用户要求直接使用 pol2。
-- 工程：`calibration/energy/`；正式源码：`calibration/energy/autocal/`。
+- 工程：`calibration/energy/`；正式源码：`calibration/energy/autocal/`；一级目录结构决策见 [decisions/20261021-energy-calibration-directory.md](../../decisions/20261021-energy-calibration-directory.md)。
 
 ## 目标与范围
 
@@ -208,7 +208,13 @@ make -C calibration/energy/autocal
 
 ## 进度与恢复记录
 
-- 已完成：读取项目规则、计划模板、现有编译方式和 decoder 分支定义；保存讨论稿。已读取参考网页方法。未修改任何分析源码，未生产拟合结果。
-- 2026-10-21 更新：继续修订三面板 PNG、两类残差定义与图内刻度评估数据；按用户原话保留峰数建议，取消探测器类型作为必填信息。修正旧稿将峰心误差误放到纵轴的问题；本次仅做文档检查，没有算法验证。
-- 本轮文件：本计划及 `analysis/20261020-energy-autocal/verification.json`。
-- 下一步：按本轮明确执行授权，将计划与任务提示交给独立员工 session 实施；启动时核对真实模型、推理强度、工作目录和可恢复 ID。提示词见 `analysis/20261020-energy-autocal/execution-handoff.md`。
+- 已完成：读取项目规则、计划模板、现有编译方式和 decoder 分支定义；保存讨论稿。已读取参考网页方法。
+- 2026-10-21 更新：继续修订三面板 PNG、两类残差定义与图内刻度评估数据；按用户原话保留峰数建议，取消探测器类型作为必填信息。修正旧稿将峰心误差误放到纵轴的问题。
+- 2026-10-21 执行交接与落地：
+  - 依据用户授权，在独立克隆工作区中完成全套可编译 C++/ROOT 程序（main.cc、autocal.cc、peakfinder.cc、UserDefine.hh、sources.csv、Makefile、README.md）。
+  - 源库数据基于 LNHB/DDEP 评估表（152Eu 2004 与 133Ba 2016）核验，包含发射光子精确能量、不确定度及近邻发射线干扰标记。
+  - 寻峰与匹配采用 TSpectrum 结合一一对应粗匹配；峰拟合采用 Poisson 似然 Gaussian + 线性本底，结合 FWHM 自适应初值与窗口边界；刻度曲线采用考虑横轴误差的有效方差 pol2 拟合与严格单调性检验。
+  - 运行全量 run 6082 数据（8,275,299 条记录），自动发现并处理全部 39 个硬件通道，各通道直方图总计数与输入事件数严格守恒。
+  - 生成 39 张三面板 PNG（上方能谱及逐峰拟合、左下 Pearson 残差散点、右下 pol2 刻度曲线及 Delta E 评估数据表），经实际视觉审查文字可辨、无裁切堆叠。
+  - 39 路结果分布：30 路 HPGe 探测器中，1 路完全通过统计检验，29 路给出可用二次曲线与不足说明（26 路因统计量极高使统计误差极小致使 p<0.01 需复核系统误差，3 路高增益通道因能量覆盖有限不外推）；1 路存在双增益歧义未强行拟合；8 路 LaBr3/纯噪声标记匹配失败。
+  - 产物位置：calibration/energy/data_C1_6082_notwave/；开发与验收程序位于 analysis/20261020-energy-autocal/。

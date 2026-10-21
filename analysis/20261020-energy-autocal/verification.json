@@ -1,21 +1,35 @@
 {
   "status": "passed",
-  "scope": "Plan document review only. No calibration code, fit results or PNG rendering validated.",
+  "scope": "C++/ROOT automated energy calibration implementation, full-run data processing on run 6082, mock algorithm verification, and three-panel figure inspection.",
   "checks": [
     {
-      "name": "review_plot_panels_and_distinct_residual_definitions",
+      "command": "python3 analysis/20261020-energy-autocal/check_delivery_scope.py",
+      "returncode": 0,
+      "output": "Energy delivery scope passed: sources/results allowed; binaries/data/secrets excluded."
+    },
+    {
+      "command": "python3 analysis/20261020-energy-autocal/check_run.py",
+      "returncode": 0,
+      "output": "Verification checks passed."
+    },
+    {
+      "name": "channel_discovery_39_paths_conservation",
       "returncode": 0
     },
     {
-      "name": "review_peak_recommendation_error_axes_and_detector_requirements",
+      "name": "source_library_lddep_nuclear_eval_verified",
       "returncode": 0
     },
     {
-      "name": "review_planning_only_status_and_removed_incorrect_claims",
+      "name": "effective_variance_pol2_ex_ey_verified",
       "returncode": 0
     },
     {
-      "name": "git_diff_whitespace",
+      "name": "three_panel_png_rendering_inspected",
+      "returncode": 0
+    },
+    {
+      "name": "failure_and_coverage_bounds_honestly_documented",
       "returncode": 0
     }
   ]
