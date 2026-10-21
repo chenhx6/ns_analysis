@@ -20,21 +20,40 @@
 !/calibration/energy/**/*.md
 !/calibration/energy/**/*.csv
 !/calibration/energy/**/*.json
-!/calibration/energy/**/*.png
-!/calibration/energy/**/*.svg
+/calibration/energy/autocal/autocal
+/calibration/energy/**/figures/
 
-# 能量刻度核验：源码和刻度系数；ROOT 输出由全局 *.root 排除。
-!/check/
-/check/*
-!/check/energy_calibration/
-/check/energy_calibration/*
-!/check/energy_calibration/*.cc
-!/check/energy_calibration/*.hh
-!/check/energy_calibration/*.h
-!/check/energy_calibration/*.dat
-!/check/energy_calibration/*.md
+# 标准放射源参考资料一并纳入版本管理
+!/calibration/standard_radioactive_source/
+/calibration/standard_radioactive_source/*
+!/calibration/standard_radioactive_source/*.png
+!/calibration/standard_radioactive_source/*.jpg
+!/calibration/standard_radioactive_source/*.jpeg
+!/calibration/standard_radioactive_source/*.pdf
+!/calibration/standard_radioactive_source/*.md
+!/calibration/standard_radioactive_source/*.csv
+!/calibration/
+/calibration/*
+!/calibration/energy/
+/calibration/energy/**
+!/calibration/energy/**/
+!/calibration/energy/autocal/Makefile
+!/calibration/energy/**/*.cc
+!/calibration/energy/**/*.cpp
+!/calibration/energy/**/*.hh
+!/calibration/energy/**/*.h
+!/calibration/energy/**/*.md
+!/calibration/energy/**/*.csv
+!/calibration/energy/**/*.json
 
-# 直接科学处理：决策／计划只收 Markdown，时间对齐只收可复现的小型产物。
+# 排除编译二进制及生成的图片 figures 目录
+/calibration/energy/autocal/autocal
+/calibration/energy/**/figures/
+
+# 标准放射源参考资料一并纳入版本管理
+!/calibration/standard_radioactive_source/
+!/calibration/standard_radioactive_source/**
+
 !/decisions/
 /decisions/*
 !/decisions/*.md
