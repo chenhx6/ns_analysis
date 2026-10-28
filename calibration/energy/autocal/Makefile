@@ -3,7 +3,7 @@ CXXFLAGS := -O2 -std=c++17 -Wall -Wextra $(shell root-config --cflags)
 LIBS := $(shell root-config --libs) -lSpectrum
 
 TARGET := autocal
-SRCS := main.cc autocal.cc peakfinder.cc
+SRCS := main.cc autocal.cc peakfinder.cc plotexport.cc
 OBJS := $(SRCS:.cc=.o)
 
 all: $(TARGET)
@@ -11,7 +11,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
-%.o: %.cc UserDefine.hh autocal.hh peakfinder.hh
+%.o: %.cc UserDefine.hh autocal.hh peakfinder.hh plotexport.hh
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:

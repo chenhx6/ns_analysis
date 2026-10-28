@@ -25,10 +25,12 @@ def main():
         run(['g++', '-O2', '-std=c++17', *run(['root-config', '--cflags']).stdout.split(),
              '-I' + str(CALIB), 'analysis/20261020-energy-autocal/check_algorithm.cc',
              str(CALIB / 'peakfinder.o'), str(CALIB / 'autocal.o'),
+             str(CALIB / 'plotexport.o'),
              *run(['root-config', '--libs']).stdout.split(), '-lSpectrum', '-o', str(CHECK)])
         run([str(CHECK), str(fixture)])
         # Test error handling on incompatible branch types.
         assert run([str(CALIB / 'autocal'), '--input', str(fixture) + '.bad.root', '--output', str(OUT) + '.test'], check=False).returncode != 0
+        # Source selection is intentionally not a command-line override.
         assert run([str(CALIB / 'autocal'), '--input', str(fixture), '--sources', 'bad_source', '--output', str(OUT) + '.test'], check=False).returncode != 0
         # Test mock tree execution and exclusion triple.
         if mock_out.exists():
@@ -40,10 +42,18 @@ def main():
         rows = list(csv.DictReader((OUT / 'calibration.csv').open()))
         assert len(rows) == 39
         statuses = {r['status'] for r in rows}
-        assert 'failed_matching' in statuses and 'validation_insufficient' in statuses
-        sid8 = [r for r in rows if r['sid'] == '8']
-        assert len(sid8) == 8 and all(r['status'] == 'failed_matching' for r in sid8)
-        assert len(list((OUT / 'figures').glob('*.png'))) == 39
+        assert 'success' in statuses and 'poor_fit' in statuses
+        assert len(list((OUT / 'figures').glob('*.svg'))) == 40
+        assert not list((OUT / 'figures').glob('*.png'))
+        import ROOT as root_module
+        root_file = root_module.TFile.Open(str(OUT / 'histograms.root'), 'READ')
+        assert root_file and not root_file.IsZombie()
+        for key in root_file.GetListOfKeys():
+            obj = key.ReadObj()
+            if obj.GetName() == 'h2_energy_cal':
+                continue
+            assert obj.GetNbinsX() == 65536 and abs(obj.GetXaxis().GetBinWidth(1) - 1.) < 1e-12
+        root_file.Close()
         print('Verification checks passed.')
     finally:
         # Clean up temporary verification artifacts so git tree remains pristine

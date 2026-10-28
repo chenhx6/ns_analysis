@@ -12,10 +12,11 @@ struct ChannelID
 };
 namespace User
 {
-    inline const std::string InputFile = "/home/ys/data_401/data/chx_20260622/decode_data/data_C1_6082_notwave.root";
-    inline const std::string OutputDir = "../"; // A new input-stem subdirectory is created or reused.
-    inline const std::string SourceLibrary = "./sources.csv";
-    inline const std::vector<std::string> Sources = {"152Eu", "133Ba"}; // Single source e.g. {"152Eu"} fully supported.
+    inline const std::string InputFile = "decode_data/data_C1_6082_notwave.root";
+    inline const std::string OutputDir = "calibration/energy"; // Relative to the project root.
+    inline const std::string SourceLibrary = "calibration/energy/autocal/sources.csv";
+    // Source selection is controlled only here; there is no hidden executable default.
+    inline const std::vector<std::string> Sources = {"152Eu", "133Ba"};
     inline const std::vector<ChannelID> ExcludedFitChannels = {};
 
     // 2D Calibration Check Matrix (TH2D h2_energy_cal) parameters
@@ -27,8 +28,8 @@ namespace User
     constexpr bool EnableDithering = true;
     constexpr unsigned int RandomSeed = 42;
 
-    // Candidate rebin factors for multi-scale peak detection and fitting
-    inline const std::vector<int> CandidateRebins = {1, 2, 4, 8, 16, 32, 64, 80, 128, 150};
+    // Temporary search spectra only; saved fitting spectra remain one evte/bin.
+    inline const std::vector<int> CandidateRebins = {1, 2, 4, 8, 16, 32, 64, 128, 256};
 
     constexpr int SpectrumBins = 65536;    // Range [0, 65536).
     constexpr double NoiseCutoffADC = 50.; // Search threshold.

@@ -173,3 +173,12 @@ python3 analysis/20261020-energy-autocal/check_run.py
   - **二维刻度校验谱**：成功移植 `check_energy_cal.cc` 思想，在 `histograms.root` 中生成 4096 bins、0–2048 keV 的 `h2_energy_cal`，全阵列对齐投影显示全部 14 个特征峰在 0.25 keV 误差内垂直对齐；
   - **图表矢量化与 Recreation 模式**：旧 PNG 文件已彻底清理，导出 39 张单通道三面板矢量图及 1 张全局二维谱 `figures/h2_energy_cal.svg`；输入输出支持 Recreation 覆写重构，杜绝二次运行报错；
   - **自动化验收检验**：通过 `analysis/20261020-energy-autocal/check_run.py` 的全部单元测试、模拟数据与真实 run 6082 数据断言。
+
+
+### 2026-10-28 follow-up fixes
+
+- `UserDefine.hh::Sources` is now the only source-selection input; `--sources` was removed from the executable interface.
+- Saved spectra use exactly one bin per `evte` for every channel. `CandidateRebins` is used only for temporary TSpectrum search histograms with factors that divide 65536; fitted centroids and saved ROOT histograms remain on the same one-evte ADC coordinate.
+- `energy_pol2` remains serialized but is marked `TF1::kNotDraw`, preventing a keV-vs-ADC curve from appearing as a red line on counts-vs-ADC spectra.
+- SVG export moved to `calibration/energy/autocal/plotexport.cc/.hh`; the calibration panel uses thin curves and larger error-bar points, while the metrics table is compact and references `UserDefine.hh::Sources`.
+- Full 6082 regeneration passed count/bin checks: 8,275,299 entries, 39 channels, 39 one-evte histograms and 40 SVG files. Verification: `analysis/20261020-energy-autocal/fix-verification.json`.

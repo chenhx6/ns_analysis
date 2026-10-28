@@ -12,41 +12,53 @@
 
 std::vector<PeakCandidate> PeakFinder::SearchCandidates(const TH1D& h) const {
     std::vector<PeakCandidate> found;
-    // Multi-scale candidate search adapted to histogram bin width
-    double bin_w = h.GetBinWidth(1);
-    double base_width = (bin_w > 10.0) ? 2.5 : 4.0;
+    const double raw_bin_width = h.GetBinWidth(1);
 
-    for (double width : {base_width, base_width * 2.0, base_width * 4.0}) {
-        auto search = std::unique_ptr<TH1D>(static_cast<TH1D*>(h.Clone("search")));
-        search->SetDirectory(nullptr);
-        search->GetXaxis()->SetRangeUser(User::NoiseCutoffADC, 65535.);
-        if (bin_w <= 2.0) search->Smooth(1);
+    // Search on temporary, non-overlapping rebinnings so broad scintillator
+    // peaks are visible while the saved fitting spectrum remains one evte/bin.
+    for (int factor : User::CandidateRebins) {
+        if (factor < 1 || h.GetNbinsX() % factor != 0) continue;
+        auto base = std::unique_ptr<TH1D>(static_cast<TH1D*>(h.Clone("search_base")));
+        base->SetDirectory(nullptr);
+        std::unique_ptr<TH1D> search;
+        if (factor == 1) {
+            search = std::move(base);
+        } else {
+            auto* rebinned = dynamic_cast<TH1D*>(base->Rebin(factor, "search_rebinned"));
+            if (!rebinned) continue;
+            search.reset(rebinned);
+            search->SetDirectory(nullptr);
+        }
+        search->GetXaxis()->SetRangeUser(User::NoiseCutoffADC, 65535.0);
+        if (factor == 1) search->Smooth(1);
 
+        const double search_width = factor == 1 ? 4.0 : 3.0;
         TSpectrum spectrum(100);
-        int n = spectrum.Search(search.get(), width, "goff nodraw", User::SearchThreshold);
+        int n = spectrum.Search(search.get(), search_width, "goff nodraw", User::SearchThreshold);
         for (int i = 0; i < n; ++i) {
             double x = spectrum.GetPositionX()[i];
             if (x < User::NoiseCutoffADC || x > 65500.) continue;
             int bin = h.GetXaxis()->FindFixBin(x);
             double height = h.GetBinContent(bin);
-            int d = std::max(2, int(3 * width * bin_w));
-            double bg = (h.GetBinContent(std::max(1, bin - d)) +
-                         h.GetBinContent(std::min(h.GetNbinsX(), bin + d))) / 2.;
+            int distance = std::max(2, int(3 * search_width * search->GetBinWidth(1) / raw_bin_width));
+            double bg = (h.GetBinContent(std::max(1, bin - distance)) +
+                         h.GetBinContent(std::min(h.GetNbinsX(), bin + distance))) / 2.;
             if (height < User::MinPeakCounts) continue;
-            double sig = (height - bg) / std::sqrt(std::max(1., height + bg));
-            if (sig < User::MinProminenceSigma) continue;
+            double significance = (height - bg) / std::sqrt(std::max(1., height + bg));
+            if (significance < User::MinProminenceSigma) continue;
 
+            const double candidate_sigma = std::max(raw_bin_width,
+                search_width * search->GetBinWidth(1) * 0.5);
+            const double merge_tolerance = std::max(3.0 * raw_bin_width,
+                search_width * search->GetBinWidth(1) * 0.7);
             bool duplicate = false;
-            double tol = std::max(3.0 * bin_w, width * bin_w * 0.7);
             for (const auto& p : found) {
-                if (std::abs(p.x - x) < tol) {
+                if (std::abs(p.x - x) < merge_tolerance) {
                     duplicate = true;
                     break;
                 }
             }
-            if (!duplicate) {
-                found.push_back({x, height, std::max(1.0, width * bin_w * 0.5)});
-            }
+            if (!duplicate) found.push_back({x, height, candidate_sigma});
         }
     }
     std::sort(found.begin(), found.end(), [](auto a, auto b) { return a.height > b.height; });

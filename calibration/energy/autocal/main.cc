@@ -1,6 +1,5 @@
 #include "autocal.hh"
 #include <iostream>
-#include <sstream>
 #include <filesystem>
 #include "TROOT.h"
 #include "TError.h"
@@ -17,7 +16,8 @@ int main(int argc, char** argv) {
         for (int i = 1; i < argc; ++i) {
             std::string arg = argv[i];
             if (arg == "--help") {
-                std::cout << "Usage: ./autocal [--input FILE] [--output DIR] [--source-library CSV] [--sources NAME,NAME] [--exclude cid:sid:ch] [--max-entries N] [--export-only]\n";
+                std::cout << "Usage: ./autocal [--input FILE] [--output DIR] [--source-library CSV] [--exclude cid:sid:ch] [--max-entries N] [--export-only]\n"
+                          << "Source selection is read only from UserDefine.hh::Sources.\n";
                 return 0;
             }
             if (arg == "--export-only") { s.export_only = true; continue; }
@@ -27,10 +27,7 @@ int main(int argc, char** argv) {
             else if (arg == "--output") s.output = value;
             else if (arg == "--source-library") s.library = value;
             else if (arg == "--max-entries") s.max_entries = std::stoll(value);
-            else if (arg == "--sources") {
-                s.sources.clear(); std::istringstream in(value); std::string name;
-                while (std::getline(in, name, ',')) s.sources.push_back(name);
-            } else if (arg == "--exclude") {
+            else if (arg == "--exclude") {
                 int c = -1, d = -1, e = -1; char tail = 0;
                 if (std::sscanf(value.c_str(), "%d:%d:%d%c", &c, &d, &e, &tail) != 3)
                     throw std::runtime_error("invalid exclusion triple");
@@ -40,16 +37,27 @@ int main(int argc, char** argv) {
 
         if (s.input.empty()) s.input = User::InputFile;
         if (s.library.empty()) s.library = User::SourceLibrary;
-        if (s.output.empty()) {
-            s.output = fs::path(User::OutputDir) / fs::path(s.input).stem();
-        }
 
-        // Direct fallback: if library not found in cwd, check directly beside the executable
-        if (!fs::exists(s.library)) {
-            auto exe_dir = fs::canonical("/proc/self/exe").parent_path();
-            if (fs::exists(exe_dir / s.library)) s.library = exe_dir / s.library;
-            else if (fs::exists(exe_dir / s.library.filename())) s.library = exe_dir / s.library.filename();
+        // Resolve relative configuration paths from the project root, so the
+        // same command works from the root or from calibration/energy/autocal.
+        fs::path project_root = fs::current_path();
+        fs::path exe_dir = fs::canonical("/proc/self/exe").parent_path();
+        for (fs::path probe : {fs::current_path(), exe_dir, exe_dir.parent_path(),
+                               exe_dir.parent_path().parent_path(),
+                               exe_dir.parent_path().parent_path().parent_path()}) {
+            if (fs::exists(probe / "calibration/energy/autocal")) {
+                project_root = probe;
+                break;
+            }
         }
+        auto resolve_input = [&](fs::path value) {
+            if (value.is_absolute() || fs::exists(value)) return value;
+            return project_root / value;
+        };
+        s.input = resolve_input(s.input);
+        s.library = resolve_input(s.library);
+        if (s.output.empty()) s.output = fs::path(User::OutputDir) / fs::path(s.input).stem();
+        if (s.output.is_relative()) s.output = project_root / s.output;
 
         return Run(s);
     } catch (const std::exception& e) {

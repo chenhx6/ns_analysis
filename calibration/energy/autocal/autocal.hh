@@ -1,5 +1,6 @@
 #pragma once
 #include "peakfinder.hh"
+#include "plotexport.hh"
 #include <filesystem>
 #include <array>
 #include <map>

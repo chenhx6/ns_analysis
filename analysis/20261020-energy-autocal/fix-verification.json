@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "scope": "Energy calibration binning, ROOT function drawing, source selection and SVG layout fixes; full run 6082 regenerated.",
+  "checks": [
+    {
+      "command": "make -C calibration/energy/autocal clean all",
+      "returncode": 0,
+      "result": "compiled main/autocal/peakfinder/plotexport"
+    },
+    {
+      "command": "python3 analysis/20261020-energy-autocal/check_run.py",
+      "returncode": 0,
+      "result": "simulated fixture, branch errors, source CLI rejection, ROOT/SVG output checks passed"
+    },
+    {
+      "command": "full run 6082: ./calibration/energy/autocal/autocal --output calibration/energy/data_C1_6082_notwave",
+      "returncode": 0,
+      "result": {
+        "entries": 8275299,
+        "channels": 39,
+        "status_counts": {
+          "limited_range": 8,
+          "success": 20,
+          "poor_fit": 1,
+          "validation_insufficient": 1,
+          "failed_ambiguous_matching": 2,
+          "failed_matching": 7
+        }
+      }
+    },
+    {
+      "name": "saved_histograms_one_evte_bin",
+      "returncode": 0,
+      "result": "39 TH1D objects: 65536 bins over [0,65536), width 1; h2_energy_cal separate"
+    },
+    {
+      "name": "energy_pol2_not_auto_drawn",
+      "returncode": 0,
+      "result": "energy_pol2 has TF1::kNotDraw; only plotexport draws it in calibration panel"
+    },
+    {
+      "name": "svg_visual_review",
+      "returncode": 0,
+      "result": "Rendered and inspected cid0_sid4_ch4.svg and h2_energy_cal.svg; thin calibration curve, larger points, no red curve on spectrum, no clipping"
+    }
+  ]
+}
