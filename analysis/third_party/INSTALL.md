@@ -16,7 +16,7 @@
 
 项目 Python 环境共固定 155 个包，另安装 Mermaid/Puppeteer 与官方 LibreOffice 25.8.7 解包版，用于 Nature 的本地图表和 Office 渲染。
 
-固定提交、uv 下载版本/校验值和原生组件摘要见 [sources.lock.json](sources.lock.json)。所有上游许可证在 `licenses/`。57 个上游技能保留来源记录；用户要求的 Ponytail 报告适用范围和隐式调用配置记录在 `project_overrides`，保留原始摘要与安装后的摘要。另有既有 `chx-data-analysis` 和 4 个项目适配入口：`go-on`、`evolution`、`task-tag`、`crawl4ai`。
+固定提交、uv 下载版本/校验值和原生组件摘要见 [sources.lock.json](sources.lock.json)。所有上游许可证在 `licenses/`。57 个上游技能保留来源记录；用户要求的 Ponytail 报告适用范围和隐式调用配置记录在 `project_overrides`，保留原始摘要与安装后的摘要。另有既有 `chx-data-analysis` 和 5 个项目适配入口：`go-on`、`evolution`、`task-tag`、`crawl4ai`、`farmer`。
 
 This product includes software developed by UncleCode (https://x.com/unclecode) as part of the Crawl4AI project (https://github.com/unclecode/crawl4ai).
 
@@ -98,3 +98,11 @@ Nature 的 OpenRouter、Scopus、图像服务等按所用工作流需要相应�
 `analysis/scripts/agent-prompt.txt` 是 co 与 SessionStart 共用正文。已有项目 hook 保留注册与宿主信任；首次 co 注入按正文哈希去重，清空和恢复事件可重新输出正文。UserPromptSubmit 保留路由和正文位置提醒；未新增插件或信任绕过。co 复用独立员工启动与验证交付，安装只 co 的 Bash 块，不重启用户关闭的旧 codex source。
 
 调用、采用边界和可复跑检查见 [采用说明](../20261015-configure-adaptation/reports/adaptation.md)。本次只适配研究上下文和工具机制，不开发核谱分析程序，不自动生成 plan，不修改既有模型、供应商、登录或沙箱边界。
+
+## muIon-beam 会话监督与恢复适配（farmer）
+
+参考 `muIon-beam` 仓库提交 `c27082aa702cb93304333afe62e4b4ee641158a3` 中的 `farmer` 技能与 ADR-008。
+在保留紧急停用开关（`control.json`）、有界重试熔断（`max_attempts: 3`）、看门狗超时（`queue-stuck`）与原子锁（`recovery.lock`）的同时，适配 Linux POSIX 运行环境与本项目路径结构：
+- 项目配置默认读取 `.codex/farmer.json`（回退兼容 `.agents/skills/farmer/farmer.json` 与 `00_project/`）；
+- 项目根限定为 `/home/ys/data_401/data/chx_20260622`，排查范围仅限本项目会话；
+- 源码与配置维护于 `.agents/skills/farmer/` 并镜像同步 `.codex/skills/farmer/`；来源固定于 `analysis/third_party/muIon-beam/`，指纹记录在 `sources.lock.json`。

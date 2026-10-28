@@ -1,0 +1,4 @@
+interface:
+  display_name: "farmer"
+  short_description: "Supervise transient Codex session failures"
+  default_prompt: "Use farmer to ensure the session supervisor is running."

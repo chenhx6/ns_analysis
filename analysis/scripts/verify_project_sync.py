@@ -51,7 +51,7 @@ def main():
     except Exception as exc:
         checks.append({'name':'Current delivery integration checks', 'returncode':1, 'output':str(exc)})
     baseline = json.loads((ROOT/'analysis/project_maintenance/reports/layout_baseline.json').read_text())
-    record = ROOT/'analysis/experiment_log/record_analysis.md'
+    record = ROOT/'analysis/00_experiment_log/record_analysis.md' if (ROOT/'analysis/00_experiment_log/record_analysis.md').exists() else ROOT/'analysis/experiment_log/record_analysis.md'
     output = {'status':'passed' if all(item['returncode']==0 for item in checks) else 'failed', 'checks':checks,
               'current_experiment_record_sha256':sha(record),
               'experiment_record_updated_after_migration':record.read_text()!=baseline['experiment_text'].replace('./analysis_figure/record_analysis/','./figures/'),

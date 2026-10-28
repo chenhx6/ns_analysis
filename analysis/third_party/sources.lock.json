@@ -1568,6 +1568,21 @@
         "scripts/audit_svg.py": "af20953a178d549e46b1053fc951a944571d165e1a7fbfed4828b0b6dc89ac84"
       },
       "basis": "Project Python/SVG conventions and installed Nature figure QA principles; locally authored helper"
+    },
+    {
+      "directory": ".agents/skills/farmer",
+      "entry_sha256": "6fb33421681f874e455cc71eae7adc58eb2d68b2d507d1cab2c52837da1f12de",
+      "source": "muIon-beam",
+      "source_path": ".codex/skills/farmer",
+      "files_sha256": {
+        "SKILL.md": "6fb33421681f874e455cc71eae7adc58eb2d68b2d507d1cab2c52837da1f12de",
+        "agents/openai.yaml": "a36c9066bc1a37e1ce1da73d1402ef810cc8626040f770cf2230e202ef099b89",
+        "farmer.mjs": "818dc9fdf697a403a2452ae75023fa03b3c0d98d3653ccb53f52df433650342b",
+        "farmer-observation.mjs": "c3cd34edcecf8fdb75d9e5db7ab799a927e11015697882ec8648cc5ddade78a7",
+        "farmer-control.mjs": "865b3942402ea492f9029cfbbcf527f0c5c1cd6cd3d07ff6fe2a378dd4bcb674",
+        "farmer.json": "7f4353d819667b8e4b5f22b364e0c8d018a526ce7294b6f2f4262d7c6560ae27"
+      },
+      "project_extension": "Linux POSIX environment, project root configuration, flexible config discovery, and emergency pause circuit breaker"
     }
   ],
   "libreoffice": {

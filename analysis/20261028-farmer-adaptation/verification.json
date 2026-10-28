@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "task": "20261028-farmer-adaptation",
+  "checks": [
+    {
+      "name": "farmer unit, control, and process acceptance tests",
+      "command": "node --test analysis/20261028-farmer-adaptation/*.test.mjs",
+      "returncode": 0,
+      "output": "✔ analysis/20261028-farmer-adaptation/farmer-control.test.mjs (119.594757ms)\n✔ analysis/20261028-farmer-adaptation/farmer-process.test.mjs (117.814015ms)\n✔ analysis/20261028-farmer-adaptation/farmer-unit.test.mjs (42.8016ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 124.731862\n"
+    },
+    {
+      "name": "farmer status CLI invocation",
+      "command": "node .agents/skills/farmer/farmer.mjs status",
+      "returncode": 0,
+      "output": "{\n  \"running\": false,\n  \"owner\": {},\n  \"control\": {\n    \"schema_version\": 1,\n    \"disabled\": false\n  },\n  \"config_file\": \"/home/ys/data_401/data/chx_20260622/.codex/farmer.json\",\n  \"sessions\": {}\n}\n"
+    },
+    {
+      "name": "farmer once --dry-run real session inspection",
+      "command": "node .agents/skills/farmer/farmer.mjs once --dry-run",
+      "returncode": 0,
+      "output": "{\n  \"sessions\": 23,\n  \"states\": {\n    \"01a107fd-4cac-7ca0-b3bf-b6f5639396c3\": {\n      \"attempts\": 0,\n      \"pending\": false,\n      \"next_at\": 0,\n      \"last_started_event\": \"01a107fd-4cac-7ca0-b3bf-b6f5639396c3:01a10b2f-5157-7440-900e-cb75b79e54a6:2026-10-05T08:30:12.826Z\",\n      \"recovery_chain_active\": false,\n      \"recovery_satisfied\": false,\n      \"recovered_turn_id\": null,\n      \"status\": \"complete\",\n      \"lifecycle\": \"succeeded\",\n      \"process_health\": \"complete\",\n      \"automatic_resume..."
+    },
+    {
+      "name": "Skill directory mirror parity check (.agents vs .codex)",
+      "command": "sha256 parity check on farmer files",
+      "returncode": 0,
+      "output": "All files matched"
+    }
+  ]
+}

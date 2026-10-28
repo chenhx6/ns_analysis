@@ -142,6 +142,7 @@
 | 科研报告、论文写作或润色 | 上述报告规则，加 `nature-writing` 或 `nature-polishing`；图表加 `nature-figure`，统计证据加 `nature-statistics`，数据声明加 `nature-data` |
 | 读论文、查文献、核引文、下载全文、汇报 PPT、审稿与回复、专利 | 按任务自动选相应 `nature-*`；共享定义由 `nature-shared` 随依赖自动加载，不启动独立共享包任务 |
 | 实验记录、Ge/CsI 分析、网页抓取 | 按任务使用 `nature-experiment-log`、`chx-data-analysis`、`crawl4ai` |
+| 会话监督、中断恢复与守护管理 | `farmer`；紧急停用与熔断按 ADR-008 控制 |
 | 规划、自主长期执行、检查点续作、并行、验证与审查 | 按任务阶段使用当前 OMX 工作流及 `go-on`；普通明确任务直接完成，原生目标工具只在宿主允许的明确目标授权下调用 |
 | 技能维护、重复失败或能力缺口、安装故障、版本交付 | 按任务使用 `skill`/系统 skill-creator、`evolution`、`doctor`、`git-master`、`task-tag` |
 
